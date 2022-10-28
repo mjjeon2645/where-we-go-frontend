@@ -1,10 +1,15 @@
-import MapContainer from './MapContainer';
-
 export default function Map() {
   return (
     <div>
       Map Page
-      <MapContainer />
+      {/* <MapContainer /> */}
+      <div
+        id="map"
+        style={{
+          width: '500px',
+          height: '500px',
+        }}
+      />
     </div>
   );
 }
