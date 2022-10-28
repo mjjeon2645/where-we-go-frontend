@@ -1,6 +1,6 @@
 const { kakao } = window;
 
-export default function KakaoMap() {
+export default function kakaoMapModules() {
   const container = document.getElementById('map');
   const options = {
     center: new kakao.maps.LatLng(37.56598487731902, 126.97537315669699),

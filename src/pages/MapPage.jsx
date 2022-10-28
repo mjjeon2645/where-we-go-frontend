@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
+
 import Map from '../components/Map';
-import KakaoMap from '../modules/KakaoMapModule';
+
+import kakaoMapModules from '../modules/kakaoMapModule';
 
 export default function MapPage() {
   useEffect(() => {
-    KakaoMap();
+    kakaoMapModules();
   }, []);
 
   return (
