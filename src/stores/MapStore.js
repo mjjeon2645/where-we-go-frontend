@@ -20,7 +20,8 @@ export default class MapStore {
   }
 
   fetchAllPositions() {
-    this.positions = mapApiService.fetchAllPositions();
+    const positions = mapApiService.fetchAllPositions();
+    this.positions = positions;
     this.publish();
   }
 }

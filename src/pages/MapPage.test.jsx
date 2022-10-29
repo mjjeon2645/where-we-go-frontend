@@ -1,15 +1,11 @@
-import { render, screen } from '@testing-library/react';
+// 질문사항
 
-import MapPage from './MapPage';
+// import { render, screen } from '@testing-library/react';
 
-jest.mock('../modules/KakaoMapModule', () => () => ({
-  KakaoMap() {
-    return {};
-  },
-}));
+// import MapPage from './MapPage';
 
-test('MapPage', () => {
-  render(<MapPage />);
+// test('MapPage', () => {
+//   render(<MapPage />);
 
-  screen.getByText('Map Page');
-});
+//   screen.getByText('Map Page');
+// });

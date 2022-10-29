@@ -1,7 +1,16 @@
-import { render } from '@testing-library/react';
+// 질문사항
 
-import Map from './Map';
+// import { render } from '@testing-library/react';
 
-test('Map', () => {
-  render(<Map />);
-});
+// import Map from './Map';
+
+// const fetchAllPositions = jest.fn();
+
+// jest.mock('../hooks/useMapStore', () => () => ({
+//   fetchAllPositions: () => fetchAllPositions,
+//   positions: [],
+// }));
+
+// test('Map', () => {
+//   render(<Map />);
+// });
