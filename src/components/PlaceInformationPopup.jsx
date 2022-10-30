@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 
 const Popup = styled.div`
+    position: absolute;
+    top: 280px;
+    border: 1px solid black;
     width: 310px;
     height: 210px;
     padding: .5em .5em;
@@ -42,6 +45,7 @@ const handleBookmarkClick = () => {
 };
 
 export default function PlaceInformationPopup({ selectedPlace, setIsSelected }) {
+  console.log('PlaceInformationPopup');
   return (
     <Popup id="popUp" key={selectedPlace.id}>
       <ImagesArea>

@@ -1,11 +1,24 @@
-export default function MapContainer() {
+import styled from 'styled-components';
+
+import PlaceInformationPopup from './PlaceInformationPopup';
+
+const Container = styled.div`
+  position: relative;
+  width: 500px;
+  height: 500px;
+`;
+
+export default function MapContainer({ isSelected, selectedPlace, setIsSelected }) {
   return (
-    <div
-      id="myMap"
-      style={{
-        width: '500px',
-        height: '500px',
-      }}
-    />
+    <Container id="myMap">
+      {isSelected
+        ? (
+          <PlaceInformationPopup
+            selectedPlace={selectedPlace}
+            setIsSelected={setIsSelected}
+          />
+        )
+        : ''}
+    </Container>
   );
 }
