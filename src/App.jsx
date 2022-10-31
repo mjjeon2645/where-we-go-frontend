@@ -5,8 +5,8 @@ import { Reset } from 'styled-reset';
 
 import HomePage from './pages/HomePage';
 import MapPage from './pages/MapPage';
-import MyPage from './pages/MyPage';
 import TopThreePage from './pages/TopThreePage';
+import MyPage from './pages/MyPage';
 
 import NavigationBar from './components/NavigationBar';
 import GlobalStyle from './styles/GlobalStyle';

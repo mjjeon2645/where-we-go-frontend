@@ -6,6 +6,12 @@ import MapPage from './MapPage';
 
 jest.mock('../utils/KakaoMap');
 
+const fetchAllPositions = jest.fn();
+
+jest.mock('../hooks/useMapStore', () => () => ({
+  fetchAllPositions,
+}));
+
 describe('MapPage', () => {
   beforeEach(() => {
     loadKakaoMap.mockImplementation(() => 'KAKAO');
@@ -16,5 +22,6 @@ describe('MapPage', () => {
 
     screen.getByText('Map Page');
     expect(loadKakaoMap).toBeCalled();
+    expect(fetchAllPositions).toBeCalled();
   });
 });

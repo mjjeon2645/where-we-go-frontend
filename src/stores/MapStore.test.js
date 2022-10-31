@@ -1,3 +1,4 @@
+import { fireEvent } from '@testing-library/react';
 import MapStore from './MapStore';
 
 const context = describe;
@@ -10,7 +11,7 @@ describe('MapStore - fetchAllPositions', () => {
   });
 
   context('There is 5 elements array of positions in database', () => {
-    it('positions variable has an empty array', () => {
+    it('loads an array of positions of five places', () => {
       mapStore.fetchAllPositions();
 
       expect(mapStore.positions).toStrictEqual([
@@ -48,9 +49,30 @@ describe('MapStore - fetchAllPositions', () => {
     });
   });
 
-  // context('User clicks a marker', () => {
-  //   it('changes its state from unselected to selected', () => {
-  //     fireEvent.click()
-  //   })
-  // })
+  context('User clicks a marker its id is 4', () => {
+    it('loads pop-up about information of the cliked place', () => {
+      mapStore.fetchSelectedPlaceInformation(4);
+
+      expect(mapStore.selectedPlace).toStrictEqual({
+        id: 4,
+        title: '과천 서울랜드',
+        position: {
+          latitude: 37.434156,
+          longitude: 127.020126,
+        },
+        address: {
+          fullAddress: '경기도 과천시 광명로 181',
+          city: '경기도',
+          area: '과천시',
+        },
+        type: '자연',
+        businessHours: '토요일: 09:00~22:00',
+        imageSources: {
+          first: 'https://user-images.githubusercontent.com/104840243/198858240-ef8949d2-c294-4ab8-8a4c-fc42717bee8e.png',
+          second: 'https://user-images.githubusercontent.com/104840243/198858244-29a83802-3ebe-42c8-894a-151c0962b8da.png',
+          third: 'https://user-images.githubusercontent.com/104840243/198858249-0e5eb65b-1a68-4549-bace-b906aa550413.png',
+        },
+      });
+    });
+  });
 });

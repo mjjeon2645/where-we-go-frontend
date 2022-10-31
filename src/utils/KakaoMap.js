@@ -14,15 +14,12 @@ function makeOutListener(infowindow) {
   };
 }
 
-// const makeClickListener = (placeId) => {
-//   setIsSelected(true);
-
-//   mapStore.fetchSelectedPlaceInformation(placeId);
-//   const placeInformation = mapStore.selectedPlace;
-//   setSelectedPlace(placeInformation);
-//   console.log(isSelected);
-//   // marker.setImage(selectedMarkerImage);
-// };
+// TODO. 마커 클릭 시 이미지 바꾸는 코드이므로 추후 클릭이벤트 추가 구현 시 활용
+// const selectedMarkerImage = new kakao.maps.MarkerImage(
+//   'https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-128.png',
+//   new kakao.maps.Size(33, 38),
+//   new kakao.maps.Point(13, 34),
+// );
 
 export function loadMarkers(positions, map, makeClickListener) {
   positions.forEach((value) => {
@@ -71,10 +68,3 @@ export function loadKakaoMap(component, positions, makeClickListener) {
 
 // TODO: Delete This!
 export const xxx = '';
-
-// // 마커 클릭 시 이미지 바꾸는 코드
-// const selectedMarkerImage = new kakao.maps.MarkerImage(
-//   'https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-128.png',
-//   new kakao.maps.Size(33, 38),
-//   new kakao.maps.Point(13, 34),
-// );

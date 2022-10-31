@@ -13,6 +13,7 @@ const NaviBar = styled.nav`
 
 const List = styled.ul`
     display: flex;
+    
     li {
         margin-inline: 3em;
     }

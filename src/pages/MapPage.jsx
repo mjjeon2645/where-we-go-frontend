@@ -1,19 +1,21 @@
 import { useEffect, useRef, useState } from 'react';
 
 import styled from 'styled-components';
-import PlaceInformationPopup from '../components/PlaceInformationPopup';
+
 import useMapStore from '../hooks/useMapStore';
 
 import { loadKakaoMap } from '../utils/KakaoMap';
 
+import PlaceInformationPopup from '../components/PlaceInformationPopup';
+
 const MapArea = styled.div`
   display: relative;
+  max-width: 700px;
+  min-width: 500px;
+  max-height: 700px;
+  min-height: 500px;
   width: 50%;
   height: 50vw;
-`;
-
-const Wrapper = styled.div`
-  display: relative;
 `;
 
 export default function MapPage() {
@@ -25,14 +27,13 @@ export default function MapPage() {
 
   const makeClickListener = (placeId) => {
     mapStore.fetchSelectedPlaceInformation(placeId);
-    // mapStore.changeSelectedState(true);
     setState(true);
 
+    // TODO. 클릭 시 마커 이미지 바꿔보기
     // marker.setImage(selectedMarkerImage);
   };
 
   useEffect(() => {
-    console.log('click');
     mapStore.fetchAllPositions();
 
     const { positions } = mapStore;
@@ -52,15 +53,14 @@ export default function MapPage() {
         Map Page
       </h1>
       <p>지도</p>
-      <MapArea ref={kakaoMap} />
-      {state ? (
-        <PlaceInformationPopup
-          selectedPlace={selectedPlace}
-          handleCloseClick={handleCloseClick}
-        />
-      ) : (
-        ''
-      )}
+      <MapArea ref={kakaoMap}>
+        {state && (
+          <PlaceInformationPopup
+            selectedPlace={selectedPlace}
+            handleCloseClick={handleCloseClick}
+          />
+        )}
+      </MapArea>
     </div>
   );
 }

@@ -1,16 +1,17 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
+
 import PlaceInformationPopup from './PlaceInformationPopup';
 
 const context = describe;
 
 let selectedPlace;
-const setIsSelected = jest.fn();
+const handleCloseClick = jest.fn();
 
 describe('PlaceInformationPopup', () => {
   function renderPlaceInformationPopup() {
     render(<PlaceInformationPopup
       selectedPlace={selectedPlace}
-      setIsSelected={setIsSelected}
+      handleCloseClick={handleCloseClick}
     />);
   }
 
@@ -45,6 +46,16 @@ describe('PlaceInformationPopup', () => {
       screen.getByText('강원도 양양군');
       screen.getByText('숙박/캠핑');
       screen.getByText('연중무휴');
+    });
+  });
+
+  context('user wants to close the popup', () => {
+    it('is closed when user clicked the X button', () => {
+      renderPlaceInformationPopup();
+
+      fireEvent.click(screen.getByText('X'));
+
+      expect(handleCloseClick).toBeCalled();
     });
   });
 });
