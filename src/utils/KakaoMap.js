@@ -1,5 +1,10 @@
 const { kakao } = window;
 
+function loadZoomController(map) {
+  const zoomControl = new kakao.maps.ZoomControl();
+  map.addControl(zoomControl, kakao.maps.ControlPosition.Right);
+}
+
 // 인포윈도우를 표시하는 클로저를 만드는 함수입니다
 function makeOverListener(map, marker, infowindow) {
   return () => {
@@ -60,6 +65,8 @@ export function loadKakaoMap(component, positions, makeClickListener) {
   };
 
   const map = new kakao.maps.Map(component, options);
+
+  loadZoomController(map);
 
   loadMarkers(positions, map, makeClickListener);
 
