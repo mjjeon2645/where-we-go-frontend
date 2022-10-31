@@ -5,6 +5,8 @@ export default class MapStore {
     this.listeners = new Set();
 
     this.positions = [];
+
+    this.selectedPlace = {};
   }
 
   subscribe(listener) {
@@ -22,6 +24,12 @@ export default class MapStore {
   fetchAllPositions() {
     const positions = mapApiService.fetchAllPositions();
     this.positions = positions;
+    this.publish();
+  }
+
+  fetchSelectedPlaceInformation(id) {
+    const place = mapApiService.fetchPlaceInformation(id);
+    this.selectedPlace = place;
     this.publish();
   }
 }

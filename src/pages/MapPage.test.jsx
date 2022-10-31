@@ -1,11 +1,27 @@
-// 질문사항
+import { render, screen } from '@testing-library/react';
 
-// import { render, screen } from '@testing-library/react';
+import { loadKakaoMap } from '../utils/KakaoMap';
 
-// import MapPage from './MapPage';
+import MapPage from './MapPage';
 
-// test('MapPage', () => {
-//   render(<MapPage />);
+jest.mock('../utils/KakaoMap');
 
-//   screen.getByText('Map Page');
-// });
+const fetchAllPositions = jest.fn();
+
+jest.mock('../hooks/useMapStore', () => () => ({
+  fetchAllPositions,
+}));
+
+describe('MapPage', () => {
+  beforeEach(() => {
+    loadKakaoMap.mockImplementation(() => 'KAKAO');
+  });
+
+  it('renders title', () => {
+    render(<MapPage />);
+
+    screen.getByText('Map Page');
+    expect(loadKakaoMap).toBeCalled();
+    expect(fetchAllPositions).toBeCalled();
+  });
+});
