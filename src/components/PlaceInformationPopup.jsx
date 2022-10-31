@@ -2,7 +2,9 @@ import styled from 'styled-components';
 
 const Popup = styled.div`
     position: absolute;
-    top: 280px;
+    top: 350px;
+    z-index: 10;
+
     border: 1px solid black;
     width: 310px;
     height: 210px;
@@ -36,15 +38,11 @@ const Information = styled.div`
     }
 `;
 
-const handleCloseClick = (setIsSelected) => {
-  setIsSelected(false);
-};
-
 const handleBookmarkClick = () => {
   //
 };
 
-export default function PlaceInformationPopup({ selectedPlace, setIsSelected }) {
+export default function PlaceInformationPopup({ selectedPlace, handleCloseClick }) {
   console.log('PlaceInformationPopup');
   return (
     <Popup id="popUp" key={selectedPlace.id}>
@@ -71,7 +69,7 @@ export default function PlaceInformationPopup({ selectedPlace, setIsSelected }) 
       </Information>
       <button
         type="button"
-        onClick={() => handleCloseClick(setIsSelected)}
+        onClick={handleCloseClick}
       >
         X
       </button>

@@ -1,16 +1,10 @@
-// 질문사항
-
 // import { render } from '@testing-library/react';
+// import React from 'react';
 
 // import Map from './Map';
 
-// const fetchAllPositions = jest.fn();
-
-// jest.mock('../hooks/useMapStore', () => () => ({
-//   fetchAllPositions: () => fetchAllPositions,
-//   positions: [],
-// }));
+// const kakaoMap = jest.spyOn(React, 'useRef');
 
 // test('Map', () => {
-//   render(<Map />);
+//   render(<Map ref={kakaoMap} />);
 // });

@@ -2,7 +2,7 @@ import MapStore from './MapStore';
 
 const context = describe;
 
-describe('MapStore', () => {
+describe('MapStore - fetchAllPositions', () => {
   let mapStore;
 
   beforeEach(() => {

@@ -5,7 +5,9 @@ export default class MapStore {
     this.listeners = new Set();
 
     this.positions = [];
+
     this.selectedPlace = {};
+    this.selectedState = false;
   }
 
   subscribe(listener) {
@@ -29,6 +31,11 @@ export default class MapStore {
   fetchSelectedPlaceInformation(id) {
     const place = mapApiService.fetchPlaceInformation(id);
     this.selectedPlace = place;
+    this.publish();
+  }
+
+  changeSelectedState(state) {
+    this.selectedState = state;
     this.publish();
   }
 }
