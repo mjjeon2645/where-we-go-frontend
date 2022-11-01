@@ -107,13 +107,13 @@ export default function LocationFilter(
           </option>
         ))}
       </select>
-      <select className="sigungu" onChange={handleSigunguChange}>
+      {/* <select className="sigungu" onChange={handleSigunguChange}>
         {sigungu[selectedCityCode].sigunguLists.map((value) => (
           <option key={value.id}>
             {value.name}
           </option>
         ))}
-      </select>
+      </select> */}
     </div>
   );
 }
