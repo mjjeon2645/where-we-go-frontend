@@ -7,6 +7,8 @@ import useMapStore from '../hooks/useMapStore';
 import { loadKakaoMap } from '../utils/KakaoMap';
 
 import PlaceInformationPopup from '../components/PlaceInformationPopup';
+import FilterBar from '../components/FilterBar';
+import Filters from '../components/Filters';
 
 const MapArea = styled.div`
   display: relative;
@@ -19,7 +21,12 @@ const MapArea = styled.div`
 `;
 
 export default function MapPage() {
-  const [state, setState] = useState(false);
+  const [filterPageOn, setFilterPageOn] = useState(true);
+  const [isPlaceSelected, setIsPlaceSelected] = useState(false);
+
+  const handleFilterClick = () => {
+    setFilterPageOn(false);
+  };
 
   const mapStore = useMapStore();
 
@@ -27,7 +34,7 @@ export default function MapPage() {
 
   const makeClickListener = (placeId) => {
     mapStore.fetchSelectedPlaceInformation(placeId);
-    setState(true);
+    setIsPlaceSelected(true);
 
     // TODO. 클릭 시 마커 이미지 바꿔보기
     // marker.setImage(selectedMarkerImage);
@@ -44,23 +51,30 @@ export default function MapPage() {
   const { selectedPlace } = mapStore;
 
   const handleCloseClick = () => {
-    setState(false);
+    setIsPlaceSelected(false);
   };
 
   return (
     <div>
-      <h1>
-        Map Page
-      </h1>
-      <p>지도</p>
-      <MapArea ref={kakaoMap}>
-        {state && (
-          <PlaceInformationPopup
-            selectedPlace={selectedPlace}
-            handleCloseClick={handleCloseClick}
-          />
-        )}
-      </MapArea>
+      {filterPageOn ? (
+        <div>
+          <h1>
+            Map Page
+          </h1>
+          <p>지도</p>
+          <FilterBar handleFilterClick={handleFilterClick} />
+          <MapArea ref={kakaoMap}>
+            {isPlaceSelected && (
+              <PlaceInformationPopup
+                selectedPlace={selectedPlace}
+                handleCloseClick={handleCloseClick}
+              />
+            )}
+          </MapArea>
+        </div>
+      ) : (
+        <Filters />
+      )}
     </div>
   );
 }

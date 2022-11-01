@@ -3,6 +3,11 @@ module.exports = {
   setupFilesAfterEnv: [
     '@testing-library/jest-dom/extend-expect',
   ],
+
+  moduleNameMapper: {
+    '^.+.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
+  },
+
   transform: {
     '^.+\\.jsx?$': ['@swc/jest', {
       jsc: {
@@ -16,5 +21,6 @@ module.exports = {
         },
       },
     }],
+    '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
   },
 };

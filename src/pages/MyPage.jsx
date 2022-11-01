@@ -1,7 +1,11 @@
+import Test from '../components/Test';
+
 export default function MyPage() {
   return (
-    <p>
+    <div>
       My Page
-    </p>
+      <Test />
+    </div>
+
   );
 }
