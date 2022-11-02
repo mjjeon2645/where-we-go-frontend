@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 
 // import FilterIcon from '../images/filter.png';
@@ -25,8 +24,9 @@ export default function FilterBar({ handleFilterClick }) {
   return (
     <Wrapper>
       <p>필터 조건을 설정해주세요</p>
-      <Button id="filter" type="button" onClick={handleFilterClick}>
-        <Image src="https://user-images.githubusercontent.com/104840243/199137682-691f67c0-af83-4eba-981d-f722257d2921.png" alt="" />
+      <Button name="filter" type="button" onClick={handleFilterClick}>
+        필터
+        {/* <Image src="https://user-images.githubusercontent.com/104840243/199137682-691f67c0-af83-4eba-981d-f722257d2921.png" alt="" /> */}
       </Button>
     </Wrapper>
   );

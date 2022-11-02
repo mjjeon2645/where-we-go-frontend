@@ -3,7 +3,7 @@ import MapStore from './MapStore';
 
 const context = describe;
 
-describe('MapStore - fetchAllPositions', () => {
+describe('MapStore', () => {
   let mapStore;
 
   beforeEach(() => {
@@ -73,6 +73,21 @@ describe('MapStore - fetchAllPositions', () => {
           third: 'https://user-images.githubusercontent.com/104840243/198858249-0e5eb65b-1a68-4549-bace-b906aa550413.png',
         },
       });
+    });
+  });
+
+  context('A user filtered places he wanted to go', () => {
+    it('loads filtered positions of places', () => {
+      mapStore.fetchFilteredPositions('서울', '자연');
+
+      expect(mapStore.positions).toStrictEqual([
+        {
+          id: 2,
+          title: '서울숲 공원',
+          latitude: 37.544387,
+          longitude: 127.037442,
+        },
+      ]);
     });
   });
 });

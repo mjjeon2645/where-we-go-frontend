@@ -21,12 +21,9 @@ const MapArea = styled.div`
 `;
 
 export default function MapPage() {
-  const [filterPageOn, setFilterPageOn] = useState(true);
-  const [isPlaceSelected, setIsPlaceSelected] = useState(false);
+  const [filterPageOn, setFilterPageOn] = useState(false);
 
-  const handleFilterClick = () => {
-    setFilterPageOn(false);
-  };
+  const [isPlaceSelected, setIsPlaceSelected] = useState(false);
 
   const mapStore = useMapStore();
 
@@ -48,7 +45,34 @@ export default function MapPage() {
     loadKakaoMap(kakaoMap.current, positions, makeClickListener);
   }, []);
 
-  const { selectedPlace } = mapStore;
+  const {
+    selectedPlace, sido, sigungu, placeType,
+  } = mapStore;
+
+  const setFilteredPositions = (selectedFilterData) => {
+    mapStore.fetchFilteredPositions(selectedFilterData);
+    mapStore.clearFilterState();
+  };
+
+  const setSido = (data) => {
+    mapStore.changeSido(data);
+  };
+
+  const setSigungu = (data) => {
+    mapStore.changeSigungu(data);
+  };
+
+  const setPlaceType = (data) => {
+    mapStore.changePlaceType(data);
+  };
+
+  const handleFilterClick = () => {
+    setFilterPageOn(true);
+  };
+
+  const handleFilterCloseClick = () => {
+    setFilterPageOn(false);
+  };
 
   const handleCloseClick = () => {
     setIsPlaceSelected(false);
@@ -56,7 +80,7 @@ export default function MapPage() {
 
   return (
     <div>
-      {filterPageOn ? (
+      {!filterPageOn ? (
         <div>
           <h1>
             Map Page
@@ -73,7 +97,16 @@ export default function MapPage() {
           </MapArea>
         </div>
       ) : (
-        <Filters />
+        <Filters
+          setFilteredPositions={setFilteredPositions}
+          handleFilterCloseClick={handleFilterCloseClick}
+          setSido={setSido}
+          setSigungu={setSigungu}
+          setPlaceType={setPlaceType}
+          sido={sido}
+          sigungu={sigungu}
+          placeType={placeType}
+        />
       )}
     </div>
   );

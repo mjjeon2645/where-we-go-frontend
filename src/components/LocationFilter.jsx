@@ -1,7 +1,7 @@
-export default function LocationFilter(
-  { selectedCityCode, handleCityChange, handleSigunguChange },
-) {
-  const sido = [
+export default function LocationFilter({
+  setSido, setSigungu, sido, sigungu,
+}) {
+  const sidoArray = [
     { id: 0, en: 'seoul', ko: '서울' },
     { id: 1, en: 'kyoungki', ko: '경기' },
     { id: 2, en: 'incheon', ko: '인천' },
@@ -13,10 +13,10 @@ export default function LocationFilter(
     { id: 8, en: 'jeju', ko: '제주' },
   ];
 
-  const sigungu = [
+  const sigunguArray = [
     {
       id: 0,
-      city: 'seoul',
+      city: '서울',
       sigunguLists: [
         { id: 0, name: '전체' },
         { id: 1, name: '양천구' },
@@ -25,7 +25,7 @@ export default function LocationFilter(
     },
     {
       id: 1,
-      city: 'kyoungki',
+      city: '경기',
       sigunguLists: [
         { id: 0, name: '전체' },
         { id: 1, name: '양주시' },
@@ -34,7 +34,7 @@ export default function LocationFilter(
     },
     {
       id: 2,
-      city: 'incheon',
+      city: '인천',
       sigunguLists: [
         { id: 0, name: '전체' },
         { id: 1, name: '계양구' },
@@ -43,7 +43,7 @@ export default function LocationFilter(
     },
     {
       id: 3,
-      city: 'kyeongsang',
+      city: '경상',
       sigunguLists: [
         { id: 0, name: '전체' },
         { id: 1, name: '구미시' },
@@ -52,7 +52,7 @@ export default function LocationFilter(
     },
     {
       id: 4,
-      city: 'chungcheong',
+      city: '충청',
       sigunguLists: [
         { id: 0, name: '전체' },
         { id: 1, name: '대전시' },
@@ -61,7 +61,7 @@ export default function LocationFilter(
     },
     {
       id: 5,
-      city: 'jeonla',
+      city: '전라',
       sigunguLists: [
         { id: 0, name: '전체' },
         { id: 1, name: '목포시' },
@@ -70,7 +70,7 @@ export default function LocationFilter(
     },
     {
       id: 6,
-      city: 'kangwon',
+      city: '강원',
       sigunguLists: [
         { id: 0, name: '전체' },
         { id: 1, name: '춘천시' },
@@ -79,16 +79,17 @@ export default function LocationFilter(
     },
     {
       id: 7,
-      city: 'busan',
+      city: '부산',
       sigunguLists: [
         { id: 0, name: '전체' },
         { id: 1, name: '해운대구' },
         { id: 2, name: '동래구' },
+        { id: 3, name: '111' },
       ],
     },
     {
       id: 8,
-      city: 'jeju',
+      city: '제주',
       sigunguLists: [
         { id: 0, name: '전체' },
         { id: 1, name: '제주시' },
@@ -98,22 +99,38 @@ export default function LocationFilter(
     },
   ];
 
+  const handleSidoChange = (event) => {
+    setSido(event.target.value);
+    setSigungu('');
+  };
+
+  const handleSigunguChange = (event) => {
+    setSigungu(event.target.value);
+  };
+
   return (
     <div>
-      <select className="sido" onChange={handleCityChange}>
-        {sido.map((value) => (
-          <option key={value.id} value={value.id}>
-            {value.ko}
+      <select onChange={handleSidoChange}>
+        <option selected="true">선택</option>
+        {sidoArray.map((el) => (
+          <option key={el.id} value={el.ko}>
+            {el.ko}
           </option>
         ))}
       </select>
-      {/* <select className="sigungu" onChange={handleSigunguChange}>
-        {sigungu[selectedCityCode].sigunguLists.map((value) => (
-          <option key={value.id}>
-            {value.name}
-          </option>
-        ))}
-      </select> */}
+      <select onChange={handleSigunguChange}>
+        <option selected={sigungu === ''}>선택</option>
+        {sigunguArray.find((el) => el.city === sido)
+          ? (sigunguArray.find((el) => el.city === sido).sigunguLists.map((el) => (
+            <option
+              key={el.id}
+              value={el.name}
+            >
+              {el.name}
+            </option>
+          )))
+          : ('')}
+      </select>
     </div>
   );
 }

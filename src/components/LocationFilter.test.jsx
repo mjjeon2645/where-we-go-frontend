@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import LocationFilter from './LocationFilter';
+import LocationFilter from './Test2';
 
 const context = describe;
 

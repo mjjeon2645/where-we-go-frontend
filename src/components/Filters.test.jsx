@@ -1,9 +1,18 @@
 import { render, screen } from '@testing-library/react';
+import { mapStore } from '../stores/MapStore';
 import Filters from './Filters';
 
-describe('Filter', () => {
+jest.mock('react-router-dom', () => ({
+  useNavigate() {
+    return {};
+  },
+}));
+
+describe('Filters', () => {
   function renderFilter() {
-    render(<Filters />);
+    render(
+      <Filters mapStore={mapStore} />,
+    );
   }
 
   beforeEach(() => {

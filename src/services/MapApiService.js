@@ -1,39 +1,13 @@
 /* eslint-disable class-methods-use-this */
 
+import axios from 'axios';
+
 export default class MapApiService {
   fetchAllPositions() {
-    return [
-      {
-        id: 0,
-        title: '덕수궁',
-        latitude: 37.565804,
-        longitude: 126.975146,
-      },
-      {
-        id: 1,
-        title: '국립중앙박물관',
-        latitude: 37.523850,
-        longitude: 126.980470,
-      },
-      {
-        id: 2,
-        title: '서울숲 공원',
-        latitude: 37.544387,
-        longitude: 127.037442,
-      },
-      {
-        id: 3,
-        title: '양양 쏠비치',
-        latitude: 38.086867,
-        longitude: 128.665343,
-      },
-      {
-        id: 4,
-        title: '과천 서울랜드',
-        latitude: 37.434156,
-        longitude: 127.020126,
-      },
-    ];
+    const url = 'http://localhost:8000/map';
+    const data = axios.get(url);
+
+    return data;
   }
 
   fetchPlaceInformation(id) {
@@ -141,6 +115,17 @@ export default class MapApiService {
     ];
 
     return places.filter((place) => place.id === id)[0];
+  }
+
+  fetchFilteredPositions(sido, sigungu, placetype) {
+    return [
+      {
+        id: 2,
+        title: '서울숲 공원',
+        latitude: 37.544387,
+        longitude: 127.037442,
+      },
+    ];
   }
 }
 

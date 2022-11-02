@@ -7,6 +7,10 @@ export default class MapStore {
     this.positions = [];
 
     this.selectedPlace = {};
+
+    this.sido = '기본값';
+    this.sigungu = '';
+    this.placeType = '';
   }
 
   subscribe(listener) {
@@ -31,6 +35,33 @@ export default class MapStore {
     const place = mapApiService.fetchPlaceInformation(id);
     this.selectedPlace = place;
     this.publish();
+  }
+
+  fetchFilteredPositions({ sido, sigungu, placetype }) {
+    const positions = mapApiService.fetchFilteredPositions(sido, sigungu, placetype);
+    this.positions = positions;
+    this.publish();
+  }
+
+  changeSido(sido) {
+    this.sido = sido;
+    this.publish();
+  }
+
+  changeSigungu(sigungu) {
+    this.sigungu = sigungu;
+    this.publish();
+  }
+
+  changePlaceType(placeType) {
+    this.placeType = placeType;
+    this.publish();
+  }
+
+  clearFilterState() {
+    this.sido = '';
+    this.sigungu = '';
+    this.placeType = '';
   }
 }
 
