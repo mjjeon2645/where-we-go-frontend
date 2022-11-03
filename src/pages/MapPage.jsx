@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import useMapStore from '../hooks/useMapStore';
 
-import { loadKakaoMap } from '../utils/KakaoMap';
+import { loadKakaoMap, loadMarkers } from '../utils/KakaoMap';
 
 import PlaceInformationPopup from '../components/PlaceInformationPopup';
 import FilterBar from '../components/FilterBar';
@@ -37,21 +37,25 @@ export default function MapPage() {
     // marker.setImage(selectedMarkerImage);
   };
 
-  useEffect(() => {
-    mapStore.fetchAllPositions();
-
-    const { positions } = mapStore;
-
-    loadKakaoMap(kakaoMap.current, positions, makeClickListener);
-  }, []);
-
   const {
-    selectedPlace, sido, sigungu, placeType,
+    selectedPlace, sido, sigungu, category,
   } = mapStore;
 
-  const setFilteredPositions = (selectedFilterData) => {
-    mapStore.fetchFilteredPositions(selectedFilterData);
-    mapStore.clearFilterState();
+  useEffect(() => {
+    const fetchData = async () => {
+      // await mapStore.fetchAllPositions();
+      await mapStore.fetchFilteredPositions(sido, sigungu, category);
+      const { positions } = mapStore;
+      loadKakaoMap(kakaoMap.current, positions, makeClickListener);
+    };
+
+    fetchData();
+    setIsPlaceSelected(false);
+  }, [filterPageOn]);
+
+  const setFilteredPositions = (data1, data2, data3) => {
+    mapStore.fetchFilteredPositions(data1, data2, data3);
+    // mapStore.clearFilterState();
   };
 
   const setSido = (data) => {
@@ -62,8 +66,8 @@ export default function MapPage() {
     mapStore.changeSigungu(data);
   };
 
-  const setPlaceType = (data) => {
-    mapStore.changePlaceType(data);
+  const setPlaceCategory = (data) => {
+    mapStore.changePlaceCategory(data);
   };
 
   const handleFilterClick = () => {
@@ -102,10 +106,11 @@ export default function MapPage() {
           handleFilterCloseClick={handleFilterCloseClick}
           setSido={setSido}
           setSigungu={setSigungu}
-          setPlaceType={setPlaceType}
+          setPlaceCategory={setPlaceCategory}
+          setFilterPageOn={setFilterPageOn}
           sido={sido}
           sigungu={sigungu}
-          placeType={placeType}
+          category={category}
         />
       )}
     </div>

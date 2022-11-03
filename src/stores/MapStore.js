@@ -5,12 +5,13 @@ export default class MapStore {
     this.listeners = new Set();
 
     this.positions = [];
+    this.filteredPositions = [];
 
     this.selectedPlace = {};
 
     this.sido = '기본값';
     this.sigungu = '';
-    this.placeType = '';
+    this.category = '';
   }
 
   subscribe(listener) {
@@ -25,20 +26,20 @@ export default class MapStore {
     this.listeners.forEach((listener) => listener());
   }
 
-  fetchAllPositions() {
-    const positions = mapApiService.fetchAllPositions();
+  async fetchAllPositions() {
+    const positions = await mapApiService.fetchAllPositions();
     this.positions = positions;
     this.publish();
   }
 
   fetchSelectedPlaceInformation(id) {
-    const place = mapApiService.fetchPlaceInformation(id);
-    this.selectedPlace = place;
+    // const place = mapApiService.fetchPlaceInformation(id);
+    this.selectedPlace = this.positions.find((value) => value.placeId === id);
     this.publish();
   }
 
-  fetchFilteredPositions({ sido, sigungu, placetype }) {
-    const positions = mapApiService.fetchFilteredPositions(sido, sigungu, placetype);
+  async fetchFilteredPositions(sido, sigungu, category) {
+    const positions = await mapApiService.fetchFilteredPositions(sido, sigungu, category);
     this.positions = positions;
     this.publish();
   }
@@ -53,15 +54,15 @@ export default class MapStore {
     this.publish();
   }
 
-  changePlaceType(placeType) {
-    this.placeType = placeType;
+  changePlaceCategory(category) {
+    this.category = category;
     this.publish();
   }
 
   clearFilterState() {
     this.sido = '';
     this.sigungu = '';
-    this.placeType = '';
+    this.category = '';
   }
 }
 

@@ -2,20 +2,28 @@ export default function LocationFilter({
   setSido, setSigungu, sido, sigungu,
 }) {
   const sidoArray = [
-    { id: 0, en: 'seoul', ko: '서울' },
-    { id: 1, en: 'kyoungki', ko: '경기' },
-    { id: 2, en: 'incheon', ko: '인천' },
-    { id: 3, en: 'kyeongsang', ko: '경상' },
-    { id: 4, en: 'chungcheong', ko: '충청' },
-    { id: 5, en: 'jeonla', ko: '전라' },
-    { id: 6, en: 'kangwon', ko: '강원' },
-    { id: 7, en: 'busan', ko: '부산' },
-    { id: 8, en: 'jeju', ko: '제주' },
+    { id: 0, en: 'total', ko: '전체' },
+    { id: 1, en: 'seoul', ko: '서울' },
+    { id: 2, en: 'kyoungki', ko: '경기' },
+    { id: 3, en: 'incheon', ko: '인천' },
+    { id: 4, en: 'kyeongsang', ko: '경상' },
+    { id: 5, en: 'chungcheong', ko: '충청' },
+    { id: 6, en: 'jeonla', ko: '전라' },
+    { id: 7, en: 'kangwon', ko: '강원' },
+    { id: 8, en: 'busan', ko: '부산' },
+    { id: 9, en: 'jeju', ko: '제주' },
   ];
 
   const sigunguArray = [
     {
       id: 0,
+      city: '전체',
+      sigunguLists: [
+        { id: 0, name: '전체' },
+      ],
+    },
+    {
+      id: 1,
       city: '서울',
       sigunguLists: [
         { id: 0, name: '전체' },
@@ -24,7 +32,7 @@ export default function LocationFilter({
       ],
     },
     {
-      id: 1,
+      id: 2,
       city: '경기',
       sigunguLists: [
         { id: 0, name: '전체' },
@@ -33,7 +41,7 @@ export default function LocationFilter({
       ],
     },
     {
-      id: 2,
+      id: 3,
       city: '인천',
       sigunguLists: [
         { id: 0, name: '전체' },
@@ -42,7 +50,7 @@ export default function LocationFilter({
       ],
     },
     {
-      id: 3,
+      id: 4,
       city: '경상',
       sigunguLists: [
         { id: 0, name: '전체' },
@@ -51,7 +59,7 @@ export default function LocationFilter({
       ],
     },
     {
-      id: 4,
+      id: 5,
       city: '충청',
       sigunguLists: [
         { id: 0, name: '전체' },
@@ -60,7 +68,7 @@ export default function LocationFilter({
       ],
     },
     {
-      id: 5,
+      id: 6,
       city: '전라',
       sigunguLists: [
         { id: 0, name: '전체' },
@@ -69,7 +77,7 @@ export default function LocationFilter({
       ],
     },
     {
-      id: 6,
+      id: 7,
       city: '강원',
       sigunguLists: [
         { id: 0, name: '전체' },
@@ -78,7 +86,7 @@ export default function LocationFilter({
       ],
     },
     {
-      id: 7,
+      id: 8,
       city: '부산',
       sigunguLists: [
         { id: 0, name: '전체' },
@@ -88,7 +96,7 @@ export default function LocationFilter({
       ],
     },
     {
-      id: 8,
+      id: 9,
       city: '제주',
       sigunguLists: [
         { id: 0, name: '전체' },

@@ -56,24 +56,24 @@ export default function PlaceInformationPopup({ selectedPlace, handleCloseClick 
         </button>
       </p>
       <ImagesArea>
-        <img src={selectedPlace.imageSources.first} alt="" />
-        <img src={selectedPlace.imageSources.second} alt="" />
-        <img src={selectedPlace.imageSources.third} alt="" />
+        <img src={selectedPlace.firstImage} alt="" />
+        <img src={selectedPlace.secondImage} alt="" />
+        <img src={selectedPlace.thirdImage} alt="" />
       </ImagesArea>
       <PlaceTitle>
-        {selectedPlace.title}
+        {selectedPlace.name}
       </PlaceTitle>
       <Information>
         <span>
-          {selectedPlace.address.city}
+          {selectedPlace.sido}
           {' '}
-          {selectedPlace.address.area}
+          {selectedPlace.sigungu}
         </span>
         <span>
-          {selectedPlace.type}
+          {selectedPlace.category}
         </span>
         <span>
-          {selectedPlace.businessHours}
+          {selectedPlace.monday}
         </span>
       </Information>
       <button type="button" onClick={handleBookmarkClick}>
