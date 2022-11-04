@@ -12,13 +12,14 @@ const Wrapper = styled.div`
 `;
 
 const Button = styled.button`
+  //TODO.
 `;
 
-const Image = styled.img`
-  width: 10px;
-  height: 10px;
-  object-fit: cover;
-`;
+// const Image = styled.img`
+//   width: 10px;
+//   height: 10px;
+//   object-fit: cover;
+// `;
 
 export default function FilterBar({
   handleFilterClick, sido, sigungu, category,

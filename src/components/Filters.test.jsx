@@ -1,5 +1,7 @@
 import { render, screen } from '@testing-library/react';
+
 import { mapStore } from '../stores/MapStore';
+
 import Filters from './Filters';
 
 jest.mock('react-router-dom', () => ({
