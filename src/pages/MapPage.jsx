@@ -1,9 +1,10 @@
 /* eslint-disable no-nested-ternary */
 import { useEffect, useRef, useState } from 'react';
 
+import { useNavigate } from 'react-router-dom';
+
 import styled from 'styled-components';
 
-import { useNavigate } from 'react-router-dom';
 import useMapStore from '../hooks/useMapStore';
 
 import { loadKakaoMap } from '../utils/KakaoMap';

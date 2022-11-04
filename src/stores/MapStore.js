@@ -34,7 +34,6 @@ export default class MapStore {
 
   fetchSelectedPlaceInformation(id) {
     this.selectedPlace = this.positions.find((value) => value.placeId === id);
-    console.log(this.selectedPlace);
     this.publish();
   }
 

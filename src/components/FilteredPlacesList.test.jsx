@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+
 import FilteredPlacesList from './FilteredPlacesList';
 
 let positions;

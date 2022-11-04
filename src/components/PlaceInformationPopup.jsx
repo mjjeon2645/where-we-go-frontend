@@ -47,6 +47,7 @@ const Information = styled.div`
 const handleBookmarkClick = () => {
   // TODO. 즐겨찾기 기능 구현
 };
+
 export default function PlaceInformationPopup(
   { selectedPlace, handlePlaceInformationPopupCloseClick },
 ) {

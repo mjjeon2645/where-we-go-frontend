@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+
 import FilterResultBar from './FilterResultBar';
 
 const handleFilterResultClick = jest.fn();

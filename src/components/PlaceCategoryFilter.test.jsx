@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+
 import PlaceCategoryFilter from './PlaceCategoryFilter';
 
 const handlePlaceCategoryClick = jest.fn();

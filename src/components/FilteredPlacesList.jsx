@@ -1,8 +1,7 @@
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const List = styled.ul`
-    //
+    //TODO.
 `;
 
 const Place = styled.button`
