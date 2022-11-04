@@ -30,12 +30,12 @@ export function loadMarkers(positions, map, makeClickListener) {
   positions.forEach((value) => {
     const marker = new kakao.maps.Marker({
       map,
-      id: value.id,
+      id: value.placeId,
       position: new kakao.maps.LatLng(value.latitude, value.longitude),
     });
 
     const infowindow = new kakao.maps.InfoWindow({
-      content: value.title,
+      content: value.name,
     });
 
     kakao.maps.event.addListener(
@@ -53,7 +53,7 @@ export function loadMarkers(positions, map, makeClickListener) {
     kakao.maps.event.addListener(
       marker,
       'click',
-      () => makeClickListener(value.id),
+      () => makeClickListener(value.placeId),
     );
   });
 }
@@ -61,7 +61,7 @@ export function loadMarkers(positions, map, makeClickListener) {
 export function loadKakaoMap(component, positions, makeClickListener) {
   const options = {
     center: new kakao.maps.LatLng(37.565804, 126.975146),
-    level: 8,
+    level: 10,
   };
 
   const map = new kakao.maps.Map(component, options);

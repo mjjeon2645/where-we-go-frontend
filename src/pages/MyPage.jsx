@@ -1,7 +1,7 @@
 export default function MyPage() {
   return (
-    <p>
+    <div>
       My Page
-    </p>
+    </div>
   );
 }
