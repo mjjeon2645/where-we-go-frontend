@@ -1,15 +1,15 @@
 import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 
 import { loadKakaoMap } from '../utils/KakaoMap';
 
 import MapPage from './MapPage';
 
 jest.mock('../utils/KakaoMap');
-
-const fetchAllPositions = jest.fn();
+const fetchFilteredPositions = jest.fn();
 
 jest.mock('../hooks/useMapStore', () => () => ({
-  fetchAllPositions,
+  fetchFilteredPositions,
 }));
 
 describe('MapPage', () => {
@@ -18,10 +18,14 @@ describe('MapPage', () => {
   });
 
   it('renders title', () => {
-    render(<MapPage />);
+    render(
+      <MemoryRouter>
+        <MapPage />
+      </MemoryRouter>,
+    );
 
     screen.getByText('Map Page');
     expect(loadKakaoMap).toBeCalled();
-    expect(fetchAllPositions).toBeCalled();
+    expect(fetchFilteredPositions).toBeCalled();
   });
 });

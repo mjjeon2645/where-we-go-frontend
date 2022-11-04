@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import LocationFilter from './Test2';
+import PlaceLocationFilter from './PlaceLocationFilter';
 
 const context = describe;
 
@@ -8,8 +8,8 @@ const handleCityChange = jest.fn();
 const handleSigunguChange = jest.fn();
 
 describe('LocationFilter', () => {
-  function renderLocationFilter() {
-    render(<LocationFilter
+  function renderPlaceLocationFilter() {
+    render(<PlaceLocationFilter
       code={selectedCityCode}
       handleCityChange={handleCityChange}
       handleSigunguChange={handleSigunguChange}
@@ -19,7 +19,7 @@ describe('LocationFilter', () => {
   context('When a filter menu loaded', () => {
     beforeEach(() => {
       selectedCityCode = 0;
-      renderLocationFilter();
+      renderPlaceLocationFilter();
       const sigungu = [
         {
           id: 0,

@@ -1,22 +1,23 @@
 import { useNavigate } from 'react-router-dom';
 
-import LocationFilter from './LocationFilter';
-import PlaceTypeFilter from './PlaceTypeFilter';
+import LocationFilter from './PlaceLocationFilter';
+import PlaceTypeFilter from './PlaceCategoryFilter';
 
 export default function Filters({
   setFilteredPositions, handleFilterCloseClick, setSido, setSigungu,
-  setPlaceCategory, setFilterPageOn, sido, sigungu, category,
+  setPlaceCategory, setFilterPageOn, setFilterResultBarOn, sido, sigungu, category,
 }) {
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     setFilterPageOn(false);
+    setFilterResultBarOn(true);
     setFilteredPositions(sido, sigungu, category);
     navigate(`/map?sido=${sido}&sigungu=${sigungu}&type=${category}`);
   };
 
-  const handlePlaceTypeClick = (data) => {
+  const handlePlaceCategoryClick = (data) => {
     setPlaceCategory(data);
   };
 
@@ -35,7 +36,7 @@ export default function Filters({
         <div className="placetype">
           <h2>어떤 곳을 원하세요?</h2>
           <PlaceTypeFilter
-            handlePlaceTypeClick={handlePlaceTypeClick}
+            handlePlaceCategoryClick={handlePlaceCategoryClick}
           />
         </div>
         <button type="submit">

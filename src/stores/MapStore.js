@@ -9,7 +9,7 @@ export default class MapStore {
 
     this.selectedPlace = {};
 
-    this.sido = '기본값';
+    this.sido = '전체';
     this.sigungu = '';
     this.category = '';
   }
@@ -26,15 +26,15 @@ export default class MapStore {
     this.listeners.forEach((listener) => listener());
   }
 
-  async fetchAllPositions() {
-    const positions = await mapApiService.fetchAllPositions();
-    this.positions = positions;
-    this.publish();
-  }
+  // async fetchAllPositions() {
+  //   const positions = await mapApiService.fetchAllPositions();
+  //   this.positions = positions;
+  //   this.publish();
+  // }
 
   fetchSelectedPlaceInformation(id) {
-    // const place = mapApiService.fetchPlaceInformation(id);
     this.selectedPlace = this.positions.find((value) => value.placeId === id);
+    console.log(this.selectedPlace);
     this.publish();
   }
 

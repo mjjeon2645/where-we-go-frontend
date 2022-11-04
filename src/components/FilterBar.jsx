@@ -20,10 +20,26 @@ const Image = styled.img`
   object-fit: cover;
 `;
 
-export default function FilterBar({ handleFilterClick }) {
+export default function FilterBar({
+  handleFilterClick, sido, sigungu, category,
+}) {
   return (
     <Wrapper>
-      <p>필터 조건을 설정해주세요</p>
+      {sido && sigungu && category ? (
+        <p>
+          {sido}
+          {' '}
+          -
+          {' '}
+          {sigungu}
+          {' '}
+          -
+          {' '}
+          {category}
+        </p>
+      ) : (
+        <p>필터 조건을 설정해주세요</p>
+      )}
       <Button name="filter" type="button" onClick={handleFilterClick}>
         필터
         {/* <Image src="https://user-images.githubusercontent.com/104840243/199137682-691f67c0-af83-4eba-981d-f722257d2921.png" alt="" /> */}

@@ -47,35 +47,41 @@ const Information = styled.div`
 const handleBookmarkClick = () => {
   // TODO. 즐겨찾기 기능 구현
 };
-export default function PlaceInformationPopup({ selectedPlace, handleCloseClick }) {
+export default function PlaceInformationPopup(
+  { selectedPlace, handlePlaceInformationPopupCloseClick },
+) {
+  const url = `http://localhost:8080/place/${selectedPlace.placeId}`;
+
   return (
-    <Popup id="popUp" key={selectedPlace.id}>
+    <Popup id="popUp" key={selectedPlace.placeId}>
       <p className="close">
-        <button type="button" onClick={handleCloseClick}>
+        <button type="button" onClick={handlePlaceInformationPopupCloseClick}>
           X
         </button>
       </p>
-      <ImagesArea>
-        <img src={selectedPlace.firstImage} alt="" />
-        <img src={selectedPlace.secondImage} alt="" />
-        <img src={selectedPlace.thirdImage} alt="" />
-      </ImagesArea>
-      <PlaceTitle>
-        {selectedPlace.name}
-      </PlaceTitle>
-      <Information>
-        <span>
-          {selectedPlace.sido}
-          {' '}
-          {selectedPlace.sigungu}
-        </span>
-        <span>
-          {selectedPlace.category}
-        </span>
-        <span>
-          {selectedPlace.monday}
-        </span>
-      </Information>
+      <a href={url}>
+        <ImagesArea>
+          <img src={selectedPlace.firstImage} alt="" />
+          <img src={selectedPlace.secondImage} alt="" />
+          <img src={selectedPlace.thirdImage} alt="" />
+        </ImagesArea>
+        <PlaceTitle>
+          {selectedPlace.name}
+        </PlaceTitle>
+        <Information>
+          <span>
+            {selectedPlace.sido}
+            {' '}
+            {selectedPlace.sigungu}
+          </span>
+          <span>
+            {selectedPlace.category}
+          </span>
+          <span>
+            {selectedPlace.monday}
+          </span>
+        </Information>
+      </a>
       <button type="button" onClick={handleBookmarkClick}>
         즐겨찾기
       </button>

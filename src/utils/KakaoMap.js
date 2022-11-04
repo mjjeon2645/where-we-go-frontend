@@ -27,7 +27,6 @@ function makeOutListener(infowindow) {
 // );
 
 export function loadMarkers(positions, map, makeClickListener) {
-  console.log('kakaomap loadmarkers');
   positions.forEach((value) => {
     const marker = new kakao.maps.Marker({
       map,
@@ -60,11 +59,9 @@ export function loadMarkers(positions, map, makeClickListener) {
 }
 
 export function loadKakaoMap(component, positions, makeClickListener) {
-  console.log(positions);
-  console.log('kakaomap loadmap');
   const options = {
     center: new kakao.maps.LatLng(37.565804, 126.975146),
-    level: 8,
+    level: 10,
   };
 
   const map = new kakao.maps.Map(component, options);

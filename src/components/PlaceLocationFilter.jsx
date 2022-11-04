@@ -1,4 +1,10 @@
-export default function LocationFilter({
+import styled from 'styled-components';
+
+const Container = styled.div`
+  z-index: 15;
+`;
+
+export default function PlaceLocationFilter({
   setSido, setSigungu, sido, sigungu,
 }) {
   const sidoArray = [
@@ -108,7 +114,7 @@ export default function LocationFilter({
   ];
 
   const handleSidoChange = (event) => {
-    setSido(event.target.value);
+    setSido(event.ko);
     setSigungu('');
   };
 
@@ -117,28 +123,38 @@ export default function LocationFilter({
   };
 
   return (
-    <div>
-      <select onChange={handleSidoChange}>
-        <option selected="true">선택</option>
-        {sidoArray.map((el) => (
-          <option key={el.id} value={el.ko}>
-            {el.ko}
+    <Container>
+      {/* <select onChange={handleSidoChange}>
+        <option selected disabled hidden>선택</option>
+        {sidoArray.map((value) => (
+          <option key={value.id} value={value.ko}>
+            {value.ko}
           </option>
         ))}
-      </select>
+      </select> */}
+      {sidoArray.map((value) => (
+        <button
+          key={value.id}
+          type="button"
+          value={value.ko}
+          onClick={() => handleSidoChange(value)}
+        >
+          {value.ko}
+        </button>
+      ))}
       <select onChange={handleSigunguChange}>
         <option selected={sigungu === ''}>선택</option>
-        {sigunguArray.find((el) => el.city === sido)
-          ? (sigunguArray.find((el) => el.city === sido).sigunguLists.map((el) => (
+        {sigunguArray.find((value) => value.city === sido)
+          ? (sigunguArray.find((value) => value.city === sido).sigunguLists.map((value) => (
             <option
-              key={el.id}
-              value={el.name}
+              key={value.id}
+              value={value.name}
             >
-              {el.name}
+              {value.name}
             </option>
           )))
           : ('')}
       </select>
-    </div>
+    </Container>
   );
 }
