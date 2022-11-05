@@ -4,7 +4,7 @@ import styled from 'styled-components';
 // const FilterIcon = require('../images/filter.png');
 
 const Wrapper = styled.div`
-  width: 45%;
+  width: 100%;
   display: flex;
   justify-content: center;
   background-color: #EEE;
@@ -12,7 +12,6 @@ const Wrapper = styled.div`
 `;
 
 const Button = styled.button`
-  //TODO.
 `;
 
 // const Image = styled.img`
@@ -43,8 +42,9 @@ export default function FilterBar({
       )}
       <Button name="filter" type="button" onClick={handleFilterClick}>
         필터
-        {/* <Image src="https://user-images.githubusercontent.com/104840243/199137682-691f67c0-af83-4eba-981d-f722257d2921.png" alt="" /> */}
       </Button>
     </Wrapper>
   );
 }
+
+{ /* <Image src="https://user-images.githubusercontent.com/104840243/199137682-691f67c0-af83-4eba-981d-f722257d2921.png" alt="" /> */ }

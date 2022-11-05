@@ -1,23 +1,85 @@
 import styled from 'styled-components';
 
-const Container = styled.div`
-  z-index: 15;
+const Container = styled.article`
+  margin: 3em 1em;
+`;
+
+const Title = styled.h2`
+  font-size: 1.3em;
+  font-weight: bold;
+  margin-bottom: 1em;
+`;
+
+const SidoSection = styled.section`
+  background-color: #f6f6f6;
+  padding: 1em;
+  margin: 1em 0;
+  border-radius: 8px;
+`;
+
+const SidoList = styled.ul`
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+`;
+
+const SigunguSection = styled.section`
+  background-color: #f6f6f6;
+  padding: 1em;
+  margin: 1em 0;
+  border-radius: 8px;
+
+  select {
+    margin-left: 2em;
+    width: 10em;
+    padding: .5em;
+    border-radius: 4px;
+  }
+`;
+
+const SidoOption = styled.button`
+  background-color: #FFF;
+  border: 1px solid #DDD;
+  border-radius: 15px;
+  padding: .6em 3em;
+  margin: .3em 1em;
+
+  
 `;
 
 export default function PlaceLocationFilter({
   setSido, setSigungu, sido, sigungu,
 }) {
   const sidoArray = [
-    { id: 0, en: 'total', ko: '전체' },
-    { id: 1, en: 'seoul', ko: '서울' },
-    { id: 2, en: 'kyoungki', ko: '경기' },
-    { id: 3, en: 'incheon', ko: '인천' },
-    { id: 4, en: 'kyeongsang', ko: '경상' },
-    { id: 5, en: 'chungcheong', ko: '충청' },
-    { id: 6, en: 'jeonla', ko: '전라' },
-    { id: 7, en: 'kangwon', ko: '강원' },
-    { id: 8, en: 'busan', ko: '부산' },
-    { id: 9, en: 'jeju', ko: '제주' },
+    {
+      id: 0, en: 'total', ko: '전체', selected: false,
+    },
+    {
+      id: 1, en: 'seoul', ko: '서울', selected: false,
+    },
+    {
+      id: 2, en: 'kyoungki', ko: '경기', selected: false,
+    },
+    {
+      id: 3, en: 'incheon', ko: '인천', selected: false,
+    },
+    {
+      id: 4, en: 'kyeongsang', ko: '경상', selected: false,
+    },
+    {
+      id: 5, en: 'chungcheong', ko: '충청', selected: false,
+    },
+    {
+      id: 6, en: 'jeonla', ko: '전라', selected: false,
+    },
+    {
+      id: 7, en: 'kangwon', ko: '강원', selected: false,
+    },
+    {
+      id: 8, en: 'busan', ko: '부산', selected: false,
+    },
+    {
+      id: 9, en: 'jeju', ko: '제주', selected: false,
+    },
   ];
 
   const sigunguArray = [
@@ -124,6 +186,7 @@ export default function PlaceLocationFilter({
 
   return (
     <Container>
+      <Title>어디로 갈까요?</Title>
       {/* <select onChange={() => handleSidoChange(this)}>
         <option selected disabled hidden>선택</option>
         {sidoArray.map((value) => (
@@ -132,29 +195,40 @@ export default function PlaceLocationFilter({
           </option>
         ))}
       </select> */}
-      {sidoArray.map((value) => (
-        <button
-          key={value.id}
-          type="button"
-          value={value.ko}
-          onClick={() => handleSidoChange(value)}
-        >
-          {value.ko}
-        </button>
-      ))}
-      <select form="filter" onChange={handleSigunguChange}>
-        <option selected={sigungu === ''} disabled hidden>선택</option>
-        {sigunguArray.find((value) => value.city === sido)
-          ? (sigunguArray.find((value) => value.city === sido).sigunguLists.map((value) => (
-            <option
-              key={value.id}
-              value={value.name}
-            >
-              {value.name}
-            </option>
-          )))
-          : ('')}
-      </select>
+      <SidoSection>
+        <p>시/도</p>
+        <SidoList>
+          {sidoArray.map((value) => (
+            <li key={value.id}>
+              <SidoOption
+                type="button"
+                value={value.ko}
+                onClick={() => handleSidoChange(value)}
+                isSelected={value.selected}
+                style={sido === value.ko ? { color: '#FFF', background: '#FFA200' } : { backgroundColor: '#FFF' }}
+              >
+                {value.ko}
+              </SidoOption>
+            </li>
+          ))}
+        </SidoList>
+      </SidoSection>
+      <SigunguSection>
+        <label htmlFor="filter">시/군/구</label>
+        <select id="filter" onChange={handleSigunguChange}>
+          <option selected={sigungu === ''} disabled hidden>선택</option>
+          {sigunguArray.find((value) => value.city === sido)
+            ? (sigunguArray.find((value) => value.city === sido).sigunguLists.map((value) => (
+              <option
+                key={value.id}
+                value={value.name}
+              >
+                {value.name}
+              </option>
+            )))
+            : ('')}
+        </select>
+      </SigunguSection>
     </Container>
   );
 }

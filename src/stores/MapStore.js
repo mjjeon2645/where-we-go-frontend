@@ -11,7 +11,7 @@ export default class MapStore {
 
     this.sido = '전체';
     this.sigungu = '';
-    this.category = '';
+    this.category = '전체';
   }
 
   subscribe(listener) {
@@ -55,6 +55,7 @@ export default class MapStore {
 
   changePlaceCategory(category) {
     this.category = category;
+    console.log(category);
     this.publish();
   }
 

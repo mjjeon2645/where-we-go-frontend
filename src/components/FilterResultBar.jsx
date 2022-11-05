@@ -1,19 +1,28 @@
 import styled from 'styled-components';
 
 const WithResult = styled.button`
+    color: #FFF;
     position: absolute;
     bottom: 3%;
     left: 50%;
     transform: translate(-50%, 0);
     z-index: 11;
+    padding: .8em 7em;
+    border: 2px solid #FFF;
+    border-radius: 8px;
+    background-color: #FFA200;
 `;
 
 const WithoutResult = styled.button`
+    color: #000;
     position: absolute;
     bottom: 3%;
     left: 50%;
     transform: translate(-50%, 0);
     z-index: 11;
+    padding: .8em 4em;
+    border: 2px solid #FFF;
+    border-radius: 8px;
     background-color: #EEE;
 `;
 

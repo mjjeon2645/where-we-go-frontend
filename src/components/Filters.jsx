@@ -1,7 +1,26 @@
 import { useNavigate } from 'react-router-dom';
 
-import LocationFilter from './PlaceLocationFilter';
-import PlaceTypeFilter from './PlaceCategoryFilter';
+import styled from 'styled-components';
+import PlaceLocationFilter from './PlaceLocationFilter';
+import PlaceCategoryFilter from './PlaceCategoryFilter';
+
+const BackButton = styled.button`
+  color: #AAA;
+  font-size: 1em;
+  background-color: #FFF;
+  border: none;
+  margin: 3em .5em 0 .5em;
+`;
+
+const FilterButton = styled.button`
+  color: #FFF;
+  border: none;
+  border-radius: 10px;
+  display: block;
+  padding: 1em 5em;
+  margin: auto;
+  background-color: #ffae00;
+`;
 
 export default function Filters({
   setFilteredPositions, handleFilterCloseClick, setSido, setSigungu,
@@ -29,30 +48,28 @@ export default function Filters({
   };
 
   const handlePlaceCategoryClick = (data) => {
-    setPlaceCategory(data);
+    setPlaceCategory(data.category);
   };
 
   return (
     <div>
-      <button type="button" onClick={handleFilterCloseClick}>뒤로가기</button>
-      <p>필터 조건</p>
+      <BackButton type="button" onClick={handleFilterCloseClick}> &lt; 돌아가기</BackButton>
       <form id="filter" onSubmit={handleSubmit}>
-        <h2>어디로 갈까요?</h2>
-        <LocationFilter
+        <PlaceLocationFilter
           setSido={setSido}
           setSigungu={setSigungu}
           sido={sido}
           sigungu={sigungu}
         />
         <div className="placetype">
-          <h2>어떤 곳을 원하세요?</h2>
-          <PlaceTypeFilter
+          <PlaceCategoryFilter
             handlePlaceCategoryClick={handlePlaceCategoryClick}
+            category={category}
           />
         </div>
-        <button type="submit">
+        <FilterButton type="submit">
           필터 적용하기
-        </button>
+        </FilterButton>
       </form>
     </div>
   );

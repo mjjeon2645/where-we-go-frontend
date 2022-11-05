@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import NavigationBar from './NavigationBar';
+import Header from './Header';
 
 jest.mock('react-router-dom', () => ({
   Link({ to, children }) {
@@ -12,8 +12,8 @@ jest.mock('react-router-dom', () => ({
   },
 }));
 
-test('Navigation Bar', () => {
-  render(<NavigationBar />);
+test('Header', () => {
+  render(<Header />);
 
   screen.getByText('지도 검색');
   screen.getByText('Top 3');
