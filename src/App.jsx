@@ -14,7 +14,7 @@ import GlobalStyle from './styles/GlobalStyle';
 const Container = styled.div`
   background-color: #F0F2F5;
   padding-inline: calc((100% - 600px) / 2);
-
+  padding-bottom: 3em;
 `;
 
 const Wrapper = styled.div`
