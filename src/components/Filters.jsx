@@ -4,6 +4,10 @@ import styled from 'styled-components';
 import PlaceLocationFilter from './PlaceLocationFilter';
 import PlaceCategoryFilter from './PlaceCategoryFilter';
 
+const Wrapper = styled.article`
+  padding-bottom: 5em;
+`;
+
 const BackButton = styled.button`
   color: #AAA;
   font-size: 1em;
@@ -52,7 +56,7 @@ export default function Filters({
   };
 
   return (
-    <div>
+    <Wrapper>
       <BackButton type="button" onClick={handleFilterCloseClick}> &lt; 돌아가기</BackButton>
       <form id="filter" onSubmit={handleSubmit}>
         <PlaceLocationFilter
@@ -71,6 +75,6 @@ export default function Filters({
           필터 적용하기
         </FilterButton>
       </form>
-    </div>
+    </Wrapper>
   );
 }
