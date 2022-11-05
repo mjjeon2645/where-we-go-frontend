@@ -11,6 +11,17 @@ export default function Filters({
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    if (sigungu === '선택' || !sigungu) {
+      alert('가고싶은 지역을 선택해주세요!');
+      return;
+    }
+
+    if (!category) {
+      alert('가고싶은 장소의 유형을 선택해주세요!');
+      return;
+    }
+
     setFilterPageOn(false);
     setFilterResultBarOn(true);
     setFilteredPositions(sido, sigungu, category);
@@ -25,7 +36,7 @@ export default function Filters({
     <div>
       <button type="button" onClick={handleFilterCloseClick}>뒤로가기</button>
       <p>필터 조건</p>
-      <form onSubmit={handleSubmit}>
+      <form id="filter" onSubmit={handleSubmit}>
         <h2>어디로 갈까요?</h2>
         <LocationFilter
           setSido={setSido}

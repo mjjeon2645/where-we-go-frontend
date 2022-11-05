@@ -124,7 +124,7 @@ export default function PlaceLocationFilter({
 
   return (
     <Container>
-      {/* <select onChange={handleSidoChange}>
+      {/* <select onChange={() => handleSidoChange(this)}>
         <option selected disabled hidden>선택</option>
         {sidoArray.map((value) => (
           <option key={value.id} value={value.ko}>
@@ -142,8 +142,8 @@ export default function PlaceLocationFilter({
           {value.ko}
         </button>
       ))}
-      <select onChange={handleSigunguChange}>
-        <option selected={sigungu === ''}>선택</option>
+      <select form="filter" onChange={handleSigunguChange}>
+        <option selected={sigungu === ''} disabled hidden>선택</option>
         {sigunguArray.find((value) => value.city === sido)
           ? (sigunguArray.find((value) => value.city === sido).sigunguLists.map((value) => (
             <option
