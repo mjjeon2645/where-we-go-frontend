@@ -17,12 +17,17 @@ import FilteredPlacesList from '../components/FilteredPlacesList';
 
 const MapArea = styled.div`
   display: relative;
-  max-width: 700px;
+  width: 100%;
+  max-width: 600px;
+  max-height: 600px;
+  min-width: 400px;
+  min-height: 500px;
+  /* max-width: 700px;
   min-width: 500px;
   max-height: 700px;
   min-height: 500px;
   width: 50%;
-  height: 50vw;
+  height: 50vw; */
 `;
 
 export default function MapPage() {
@@ -112,10 +117,6 @@ export default function MapPage() {
     <div>
       {!filterPageOn && !filteredListsPageOn ? (
         <div>
-          <h1>
-            Map Page
-          </h1>
-          <p>지도</p>
           <FilterBar
             handleFilterClick={handleFilterClick}
             sido={sido}

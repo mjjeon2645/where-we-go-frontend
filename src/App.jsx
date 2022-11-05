@@ -8,25 +8,39 @@ import MapPage from './pages/MapPage';
 import TopThreePage from './pages/TopThreePage';
 import MyPage from './pages/MyPage';
 
-import NavigationBar from './components/NavigationBar';
+import Header from './components/Header';
 import GlobalStyle from './styles/GlobalStyle';
+
+const Container = styled.div`
+  background-color: #F0F2F5;
+  padding-inline: calc((100% - 600px) / 2);
+
+`;
 
 const Wrapper = styled.div`
   min-height: 100vh;
+  width: 100%;
+  height: 100%;
+  padding-top: 4em;
+  background-color: #ffffff;
 `;
 
 export default function App() {
   return (
-    <Wrapper>
+    <div>
       <Reset />
       <GlobalStyle />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/map" element={<MapPage />} />
-        <Route path="/top3" element={<TopThreePage />} />
-        <Route path="/myaccount" element={<MyPage />} />
-      </Routes>
-      <NavigationBar />
-    </Wrapper>
+      <Header />
+      <Container>
+        <Wrapper>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/map" element={<MapPage />} />
+            <Route path="/top3" element={<TopThreePage />} />
+            <Route path="/myaccount" element={<MyPage />} />
+          </Routes>
+        </Wrapper>
+      </Container>
+    </div>
   );
 }

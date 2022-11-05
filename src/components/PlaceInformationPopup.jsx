@@ -2,38 +2,44 @@ import styled from 'styled-components';
 
 const Popup = styled.div`
     position: absolute;
+    display: flex;
+    flex-direction: column;
     bottom: 3%;
     left: 50%;
     transform: translate(-50%, 0);
     z-index: 10;
 
-    border: 1px solid black;
-    width: 310px;
-    height: 230px;
+    border-radius: 8px;
+    width: 280px;
+    height: 200px;
     padding: .5em .5em;
 
-    background-color: #EEE;
+    background-color: #ffffff;
+`;
 
-    .close {
-      display: flex;
-      justify-content: end;
-      margin-bottom: 3px;
-    }
+const CloseButton = styled.button`
+  color: #AAA;
+  align-self: end;
+  background: transparent;
+  border: none;
 `;
 
 const ImagesArea = styled.div`
+    width: 100%;
     display: flex;
+    justify-content: space-between;
 
     img {
-        width: 100px;
-        height: 100px;
+        width: 85px;
+        height: 85px;
+        border-radius: 3px;
     }
 `;
 
 const PlaceTitle = styled.h2`
-    font-size: 1.2em;
+    font-size: 1.1em;
     font-weight: bold;
-    margin: 1em 0em;
+    margin: .5em 0em;
 `;
 
 const Information = styled.div`
@@ -55,17 +61,15 @@ export default function PlaceInformationPopup(
 
   return (
     <Popup id="popUp" key={selectedPlace.placeId}>
-      <p className="close">
-        <button type="button" onClick={handlePlaceInformationPopupCloseClick}>
-          X
-        </button>
-      </p>
+      <CloseButton className="close" type="button" onClick={handlePlaceInformationPopupCloseClick}>
+        X
+      </CloseButton>
+      <ImagesArea>
+        <img src={selectedPlace.firstImage} alt="" />
+        <img src={selectedPlace.secondImage} alt="" />
+        <img src={selectedPlace.thirdImage} alt="" />
+      </ImagesArea>
       <a href={url}>
-        <ImagesArea>
-          <img src={selectedPlace.firstImage} alt="" />
-          <img src={selectedPlace.secondImage} alt="" />
-          <img src={selectedPlace.thirdImage} alt="" />
-        </ImagesArea>
         <PlaceTitle>
           {selectedPlace.name}
         </PlaceTitle>
