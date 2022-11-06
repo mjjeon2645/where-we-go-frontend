@@ -55,7 +55,6 @@ export default class MapStore {
 
   changePlaceCategory(category) {
     this.category = category;
-    console.log(category);
     this.publish();
   }
 

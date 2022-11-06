@@ -59,6 +59,14 @@ export default function PlaceInformationPopup(
 ) {
   const url = `http://localhost:8080/place/${selectedPlace.placeId}`;
 
+  const date = new Date();
+
+  const dayOfWeekArray = [
+    'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday',
+  ];
+
+  const dayOfWeek = dayOfWeekArray[date.getDay()];
+
   return (
     <Popup id="popUp" key={selectedPlace.placeId}>
       <CloseButton className="close" type="button" onClick={handlePlaceInformationPopupCloseClick}>
@@ -83,7 +91,7 @@ export default function PlaceInformationPopup(
             {selectedPlace.category}
           </span>
           <span>
-            {selectedPlace.monday}
+            {selectedPlace[dayOfWeek]}
           </span>
         </Information>
       </a>
