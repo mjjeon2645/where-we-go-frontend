@@ -32,7 +32,6 @@ const CategoryOption = styled.button`
 `;
 
 export default function PlaceCagetoryFilter({ handlePlaceCategoryClick, category }) {
-  console.log(category);
   const categories = [
     { id: 1, category: '전체', selected: false },
     { id: 2, category: '스포츠/레저', selected: false },

@@ -40,7 +40,7 @@ describe('FilteredPlacesList', () => {
     });
 
     it('render filteredPlacesList with positions', () => {
-      screen.getByText('총 2개 장소');
+      screen.getByText('2개 장소를 찾았어요! 어디로 가볼까요?');
       screen.getByText(/과천 서울랜드/);
       screen.getByText('경기도 과천시 광명로 181');
       screen.getByText('자연');
@@ -48,7 +48,7 @@ describe('FilteredPlacesList', () => {
       screen.getByText('경기도 가평군 설악면 미사리 320-1');
       screen.getByText('숙박/캠핑');
 
-      fireEvent.click(screen.getByRole('button', { name: '뒤로가기' }));
+      fireEvent.click(screen.getByRole('button', { name: /돌아가기/ }));
       expect(handleListPageCloseClick).toBeCalled();
 
       fireEvent.click(screen.getByText('과천 서울랜드'));

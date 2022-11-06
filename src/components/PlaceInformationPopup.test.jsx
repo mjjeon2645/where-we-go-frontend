@@ -27,7 +27,13 @@ describe('PlaceInformationPopup', () => {
         sido: '강원도',
         sigungu: '양양군',
         category: '숙박/캠핑',
+        sunday: '연중무휴',
         monday: '연중무휴',
+        tuesday: '연중무휴',
+        wednesday: '연중무휴',
+        thursday: '연중무휴',
+        friday: '연중무휴',
+        saturday: '연중무휴',
         imageSources: {
           firstImage: 'https://user-images.githubusercontent.com/104840243/198858240-ef8949d2-c294-4ab8-8a4c-fc42717bee8e.png',
           secondImage: 'https://user-images.githubusercontent.com/104840243/198858244-29a83802-3ebe-42c8-894a-151c0962b8da.png',

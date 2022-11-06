@@ -85,14 +85,14 @@ export default function PlaceLocationFilter({
   const sigunguArray = [
     {
       id: 0,
-      city: '전체',
+      sido: '전체',
       sigunguLists: [
         { id: 0, name: '전체' },
       ],
     },
     {
       id: 1,
-      city: '서울',
+      sido: '서울',
       sigunguLists: [
         { id: 0, name: '전체' },
         { id: 1, name: '양천구' },
@@ -101,7 +101,7 @@ export default function PlaceLocationFilter({
     },
     {
       id: 2,
-      city: '경기',
+      sido: '경기',
       sigunguLists: [
         { id: 0, name: '전체' },
         { id: 1, name: '양주시' },
@@ -110,7 +110,7 @@ export default function PlaceLocationFilter({
     },
     {
       id: 3,
-      city: '인천',
+      sido: '인천',
       sigunguLists: [
         { id: 0, name: '전체' },
         { id: 1, name: '계양구' },
@@ -119,7 +119,7 @@ export default function PlaceLocationFilter({
     },
     {
       id: 4,
-      city: '경상',
+      sido: '경상',
       sigunguLists: [
         { id: 0, name: '전체' },
         { id: 1, name: '구미시' },
@@ -128,7 +128,7 @@ export default function PlaceLocationFilter({
     },
     {
       id: 5,
-      city: '충청',
+      sido: '충청',
       sigunguLists: [
         { id: 0, name: '전체' },
         { id: 1, name: '대전시' },
@@ -137,7 +137,7 @@ export default function PlaceLocationFilter({
     },
     {
       id: 6,
-      city: '전라',
+      sido: '전라',
       sigunguLists: [
         { id: 0, name: '전체' },
         { id: 1, name: '목포시' },
@@ -146,7 +146,7 @@ export default function PlaceLocationFilter({
     },
     {
       id: 7,
-      city: '강원',
+      sido: '강원',
       sigunguLists: [
         { id: 0, name: '전체' },
         { id: 1, name: '춘천시' },
@@ -155,7 +155,7 @@ export default function PlaceLocationFilter({
     },
     {
       id: 8,
-      city: '부산',
+      sido: '부산',
       sigunguLists: [
         { id: 0, name: '전체' },
         { id: 1, name: '해운대구' },
@@ -165,7 +165,7 @@ export default function PlaceLocationFilter({
     },
     {
       id: 9,
-      city: '제주',
+      sido: '제주',
       sigunguLists: [
         { id: 0, name: '전체' },
         { id: 1, name: '제주시' },
@@ -217,8 +217,8 @@ export default function PlaceLocationFilter({
         <label htmlFor="filter">시/군/구</label>
         <select id="filter" onChange={handleSigunguChange}>
           <option selected={sigungu === ''} disabled hidden>선택</option>
-          {sigunguArray.find((value) => value.city === sido)
-            ? (sigunguArray.find((value) => value.city === sido).sigunguLists.map((value) => (
+          {sigunguArray.find((value) => value.sido === sido)
+            ? (sigunguArray.find((value) => value.sido === sido).sigunguLists.map((value) => (
               <option
                 key={value.id}
                 value={value.name}
