@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { loadCategoryOptions } from '../utils/FilterOptions';
 
 const Container = styled.article`
   margin: 3em 1em;
@@ -32,17 +33,7 @@ const CategoryOption = styled.button`
 `;
 
 export default function PlaceCagetoryFilter({ handlePlaceCategoryClick, category }) {
-  const categories = [
-    { id: 1, category: '전체', selected: false },
-    { id: 2, category: '스포츠/레저', selected: false },
-    { id: 3, category: '교육/체험', selected: false },
-    { id: 4, category: '숙박/캠핑', selected: false },
-    { id: 5, category: '전시/공연', selected: false },
-    { id: 6, category: '자연', selected: false },
-    { id: 7, category: '키즈카페', selected: false },
-    { id: 8, category: '키즈존 맛집', selected: false },
-    { id: 9, category: '유적지', selected: false },
-  ];
+  const categories = loadCategoryOptions();
 
   return (
     <Container>
