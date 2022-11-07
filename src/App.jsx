@@ -10,6 +10,7 @@ import MyPage from './pages/MyPage';
 
 import Header from './components/Header';
 import GlobalStyle from './styles/GlobalStyle';
+import PlaceDetailPage from './pages/PlaceDetailPage';
 
 const Container = styled.div`
   background-color: #F0F2F5;
@@ -36,6 +37,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/map" element={<MapPage />} />
+            <Route path="place/:id" element={<PlaceDetailPage />} />
             <Route path="/top3" element={<TopThreePage />} />
             <Route path="/myaccount" element={<MyPage />} />
           </Routes>
