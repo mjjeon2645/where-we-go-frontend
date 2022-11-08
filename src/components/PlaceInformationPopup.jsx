@@ -57,7 +57,7 @@ const handleBookmarkClick = () => {
 export default function PlaceInformationPopup(
   { selectedPlace, handlePlaceInformationPopupCloseClick },
 ) {
-  const url = `http://localhost:8080/place/${selectedPlace.placeId}`;
+  const url = `http://localhost:8080/places/${selectedPlace.placeId}`;
 
   const date = new Date();
 
