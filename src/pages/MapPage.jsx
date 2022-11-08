@@ -108,7 +108,7 @@ export default function MapPage() {
   ];
 
   const handleOnePlaceClick = (id) => {
-    navigate(`/place/${id}`);
+    navigate(`/places/${id}`);
   };
 
   const { positions } = mapStore;

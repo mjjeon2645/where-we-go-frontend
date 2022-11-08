@@ -94,11 +94,11 @@ export default function FilteredPlacesList({
               <Place type="button" onClick={() => handleOnePlaceClick(value.placeId)}>
                 <ContentArea>
                   <p className="place_name">{value.name}</p>
-                  <p className="address">{value.fullAddress}</p>
+                  <p className="address">{value.address.fullAddress}</p>
                   <p className="category">{value.category}</p>
                 </ContentArea>
                 <ImageArea>
-                  <img src={value.firstImage} alt="" />
+                  <img src={value.imageSource.firstImage} alt="" />
                 </ImageArea>
               </Place>
             </li>
