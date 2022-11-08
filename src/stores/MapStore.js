@@ -4,8 +4,8 @@ export default class MapStore {
   constructor() {
     this.listeners = new Set();
 
-    this.positions = [];
-    this.filteredPositions = [];
+    this.places = [];
+    this.filteredPlaces = [];
 
     this.selectedPlace = {};
 
@@ -32,14 +32,14 @@ export default class MapStore {
   //   this.publish();
   // }
 
-  fetchSelectedPlaceInformation(id) {
-    this.selectedPlace = this.positions.find((value) => value.placeId === id);
+  async fetchSelectedPlace(id) {
+    this.selectedPlace = await mapApiService.fetchSelectedPlace(id);
     this.publish();
   }
 
-  async fetchFilteredPositions(sido, sigungu, category) {
-    const positions = await mapApiService.fetchFilteredPositions(sido, sigungu, category);
-    this.positions = positions;
+  async fetchFilteredPlaces(sido, sigungu, category) {
+    const places = await mapApiService.fetchFilteredPlaces(sido, sigungu, category);
+    this.places = places;
     this.publish();
   }
 

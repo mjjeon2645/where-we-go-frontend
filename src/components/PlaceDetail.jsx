@@ -1,6 +1,9 @@
 export default function PlaceDetail(
-  { handlePrevImageClick, handlNextImageClick, handleAddressCopyClick },
+  {
+    handlePrevImageClick, handlNextImageClick, handleAddressCopyClick, selectedPlace,
+  },
 ) {
+  console.log(selectedPlace);
   return (
     <article>
       <div>
@@ -12,7 +15,7 @@ export default function PlaceDetail(
         <button type="button" onClick={handlNextImageClick}>다음이미지로</button>
       </div>
       <div>
-        <h2>KINTEX 뽀로로파크</h2>
+        <h2>{selectedPlace.name}</h2>
         <p>편의시설</p>
         <p>예약</p>
         <p>주차</p>

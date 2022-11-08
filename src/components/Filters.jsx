@@ -27,7 +27,7 @@ const FilterButton = styled.button`
 `;
 
 export default function Filters({
-  setFilteredPositions, handleFilterCloseClick, setSido, setSigungu,
+  setFilteredPlaces, handleFilterCloseClick, setSido, setSigungu,
   setPlaceCategory, setFilterPageOn, setFilterResultBarOn, sido, sigungu, category,
 }) {
   const navigate = useNavigate();
@@ -47,7 +47,7 @@ export default function Filters({
 
     setFilterPageOn(false);
     setFilterResultBarOn(true);
-    setFilteredPositions(sido, sigungu, category);
+    setFilteredPlaces(sido, sigungu, category);
     navigate(`/map?sido=${sido}&sigungu=${sigungu}&type=${category}`);
   };
 

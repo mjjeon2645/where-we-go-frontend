@@ -1,7 +1,18 @@
+import { useEffect } from 'react';
 import PlaceContactBar from '../components/PlaceContactBar';
 import PlaceDetail from '../components/PlaceDetail';
+import PlaceDetailTap from '../components/PlaceDetailTap';
+import useMapStore from '../hooks/useMapStore';
 
 export default function PlaceDetailPage() {
+  const mapStore = useMapStore();
+
+  const path = document.location.pathname;
+
+  useEffect(() => {
+    mapStore.fetchSelectedPlaceInformation(path.split('/')[2]);
+  }, []);
+
   const handlePlaceDetailCloseClick = () => {
     //
   };
@@ -36,15 +47,18 @@ export default function PlaceDetailPage() {
 
   return (
     <div>
-      <button type="button" onClick={handlePlaceDetailCloseClick}> &lt; 뒤로가기</button>
-      <button type="button" onClick={handleBookmarkClick}> 즐겨찾기</button>
-      <button type="button" onClick={handlePlaceDetailTapClick}>상세정보</button>
-      <button type="button" onClick={handleBlogReviewTapClick}>블로그 리뷰 11</button>
-      <button type="button" onClick={handlePlaceRatingAndReviewTapClick}>평점/리뷰</button>
+      <PlaceDetailTap
+        handlePlaceDetailCloseClick={handlePlaceDetailCloseClick}
+        handleBookmarkClick={handleBookmarkClick}
+        handlePlaceDetailTapClick={handlePlaceDetailTapClick}
+        handleBlogReviewTapClick={handleBlogReviewTapClick}
+        handlePlaceRatingAndReviewTapClick={handlePlaceRatingAndReviewTapClick}
+      />
       <PlaceDetail
         handlePrevImageClick={handlePrevImageClick}
         handlNextImageClick={handlNextImageClick}
         handleAddressCopyClick={handleAddressCopyClick}
+        selectedPlace={selectedPlace}
       />
       <PlaceContactBar />
     </div>

@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 
 import FilteredPlacesList from './FilteredPlacesList';
 
-let positions;
+let pleaces;
 
 const handleListPageCloseClick = jest.fn();
 const handleOnePlaceClick = jest.fn();
@@ -12,7 +12,7 @@ const context = describe;
 describe('FilteredPlacesList', () => {
   function renderFilteredPlacesList() {
     render(<FilteredPlacesList
-      positions={positions}
+      places={pleaces}
       handleListPageCloseClick={handleListPageCloseClick}
       handleOnePlaceClick={handleOnePlaceClick}
     />);
@@ -20,7 +20,7 @@ describe('FilteredPlacesList', () => {
 
   context('if there are two places after filtering', () => {
     beforeEach(() => {
-      positions = [
+      pleaces = [
         {
           placeId: 1,
           name: '과천 서울랜드',
