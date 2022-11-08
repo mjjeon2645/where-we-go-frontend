@@ -67,15 +67,17 @@ export default function PlaceInformationPopup(
 
   const dayOfWeek = dayOfWeekArray[date.getDay()];
 
+  const { address, businessHours, imageSource } = selectedPlace;
+
   return (
     <Popup id="popUp" key={selectedPlace.placeId}>
       <CloseButton className="close" type="button" onClick={handlePlaceInformationPopupCloseClick}>
         X
       </CloseButton>
       <ImagesArea>
-        <img src={selectedPlace.firstImage} alt="" />
-        <img src={selectedPlace.secondImage} alt="" />
-        <img src={selectedPlace.thirdImage} alt="" />
+        <img src={imageSource.firstImage} alt="" />
+        <img src={imageSource.secondImage} alt="" />
+        <img src={imageSource.thirdImage} alt="" />
       </ImagesArea>
       <a href={url}>
         <PlaceTitle>
@@ -83,15 +85,15 @@ export default function PlaceInformationPopup(
         </PlaceTitle>
         <Information>
           <span>
-            {selectedPlace.sido}
+            {address.sido}
             {' '}
-            {selectedPlace.sigungu}
+            {address.sigungu}
           </span>
           <span>
             {selectedPlace.category}
           </span>
           <span>
-            {selectedPlace[dayOfWeek]}
+            {businessHours[dayOfWeek]}
           </span>
         </Information>
       </a>
