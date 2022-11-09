@@ -6,18 +6,17 @@ import config from '../config';
 const baseUrl = config.apiBaseUrl;
 
 export default class MapApiService {
-  async fetchAllPositions() {
-    const url = `${baseUrl}/map`;
-    const { data } = await axios.get(url);
-    return data.places;
-  }
-
-  async fetchFilteredPositions(sido, sigungu, category) {
+  async fetchFilteredPlaces(sido, sigungu, category) {
     const url = `${baseUrl}/map`;
     const params = { sido, sigungu, category };
     const { data } = await axios.get(url, { params });
-    console.log(data.places);
     return data.places;
+  }
+
+  async fetchSelectedPlace(id) {
+    const url = `${baseUrl}/places/${id}`;
+    const { data } = await axios.get(url);
+    return data;
   }
 }
 

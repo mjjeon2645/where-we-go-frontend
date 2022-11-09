@@ -12,7 +12,7 @@ jest.mock('react-router-dom', () => ({
 }));
 const context = describe;
 
-const setFilteredPositions = jest.fn();
+const setFilteredPlaces = jest.fn();
 const handleFilterCloseClick = jest.fn();
 const setSido = jest.fn();
 const setSigungu = jest.fn();
@@ -28,7 +28,7 @@ describe('Filters', () => {
   function renderFilter() {
     render(
       <Filters
-        setFilteredPositions={setFilteredPositions}
+        setFilteredPlaces={setFilteredPlaces}
         handleFilterCloseClick={handleFilterCloseClick}
         setSido={setSido}
         setSigungu={setSigungu}

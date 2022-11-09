@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import FilterResultBar from './FilterResultBar';
 
 const handleFilterResultClick = jest.fn();
-let positions;
+let places;
 
 const context = describe;
 
@@ -11,13 +11,13 @@ describe('FilterResultBar', () => {
   function renderFilterResultBar() {
     render(<FilterResultBar
       handleFilterResultClick={handleFilterResultClick}
-      positions={positions}
+      places={places}
     />);
   }
 
   context('there are two places after filtering conditions', () => {
     beforeEach(() => {
-      positions = [
+      places = [
         {
           placeId: 1,
           name: '과천 서울랜드',
@@ -38,7 +38,7 @@ describe('FilterResultBar', () => {
 
   context('there is no place after filtering conditions', () => {
     beforeEach(() => {
-      positions = [];
+      places = [];
 
       renderFilterResultBar();
     });

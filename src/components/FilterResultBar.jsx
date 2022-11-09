@@ -27,11 +27,11 @@ const WithoutResult = styled.button`
 `;
 
 export default function FilterResultBar(
-  { handleFilterResultClick, positions },
+  { handleFilterResultClick, places },
 ) {
   return (
     <div>
-      {positions.length === 0
+      {places.length === 0
         ? (
           <WithoutResult
             type="button"
@@ -44,7 +44,7 @@ export default function FilterResultBar(
             type="button"
             onClick={handleFilterResultClick}
           >
-            {positions.length}
+            {places.length}
             개 장소 보러가기
           </WithResult>
         )}

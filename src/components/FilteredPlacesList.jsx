@@ -78,18 +78,18 @@ const ImageArea = styled.div`
 `;
 
 export default function FilteredPlacesList({
-  positions, handleListPageCloseClick, handleOnePlaceClick,
+  places, handleListPageCloseClick, handleOnePlaceClick,
 }) {
   return (
     <Container>
       <BackButton type="button" onClick={handleListPageCloseClick}> &lt; 돌아가기</BackButton>
       <Article>
         <Title>
-          {positions.length}
+          {places.length}
           개 장소를 찾았어요! 어디로 가볼까요?
         </Title>
         <List>
-          {positions.map((value) => (
+          {places.map((value) => (
             <li key={value.placeId}>
               <Place type="button" onClick={() => handleOnePlaceClick(value.placeId)}>
                 <ContentArea>
