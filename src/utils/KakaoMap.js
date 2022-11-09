@@ -26,19 +26,19 @@ function makeOutListener(infowindow) {
 //   new kakao.maps.Point(13, 34),
 // );
 
-export function loadMarkers(positions, map, makeClickListener) {
+export function loadMarkers(places, map, makeClickListener) {
   const markers = [];
 
-  for (let i = 0; i < positions.length; i += 1) {
+  for (let i = 0; i < places.length; i += 1) {
     const marker = new kakao.maps.Marker({
       map,
-      id: positions[i].placeId,
-      position: new kakao.maps.LatLng(positions[i].latitude, positions[i].longitude),
+      id: places[i].placeId,
+      position: new kakao.maps.LatLng(places[i].position.latitude, places[i].position.longitude),
     });
 
     // 인포 윈도우 생성
     const infowindow = new kakao.maps.InfoWindow({
-      content: positions[i].name,
+      content: places[i].name,
     });
 
     // 마커 위에 마우스 오버 시 인포 윈도우 띄우는 역할
@@ -59,7 +59,7 @@ export function loadMarkers(positions, map, makeClickListener) {
     kakao.maps.event.addListener(
       marker,
       'click',
-      () => makeClickListener(positions[i].placeId),
+      () => makeClickListener(places[i].placeId),
     );
 
     markers.push(marker);
@@ -94,7 +94,7 @@ export function loadMarkers(positions, map, makeClickListener) {
   clusterer.addMarkers(markers);
 }
 
-export function loadKakaoMap(component, positions, makeClickListener) {
+export function loadKakaoMap(component, places, makeClickListener) {
   const options = {
     center: new kakao.maps.LatLng(37.565804, 126.975146),
     level: 12,
@@ -104,7 +104,7 @@ export function loadKakaoMap(component, positions, makeClickListener) {
 
   loadZoomController(map);
 
-  loadMarkers(positions, map, makeClickListener);
+  loadMarkers(places, map, makeClickListener);
 
   return map;
 }

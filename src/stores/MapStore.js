@@ -36,7 +36,6 @@ export default class MapStore {
 
   selectedPlaceShortInformation(id) {
     this.selectedPlace = this.places.find((value) => value.placeId === id);
-    console.log(this.selectedPlace, 'selectedPlaceShort');
     this.publish();
   }
 
