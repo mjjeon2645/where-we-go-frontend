@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 
 import styled from 'styled-components';
+import { ModalProvider } from 'styled-react-modal';
 import { Reset } from 'styled-reset';
 
 import HomePage from './pages/HomePage';
@@ -34,13 +35,15 @@ export default function App() {
       <Header />
       <Container>
         <Wrapper>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/map" element={<MapPage />} />
-            <Route path="places/:id" element={<PlaceDetailPage />} />
-            <Route path="/top3" element={<TopThreePage />} />
-            <Route path="/myaccount" element={<MyPage />} />
-          </Routes>
+          <ModalProvider>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/map" element={<MapPage />} />
+              <Route path="places/:id" element={<PlaceDetailPage />} />
+              <Route path="/top3" element={<TopThreePage />} />
+              <Route path="/myaccount" element={<MyPage />} />
+            </Routes>
+          </ModalProvider>
         </Wrapper>
       </Container>
     </div>
