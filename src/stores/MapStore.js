@@ -14,6 +14,11 @@ export default class MapStore {
     this.category = '전체';
 
     this.imageNumber = 1;
+
+    this.reservationState = 'possible';
+    this.parking = 'possible';
+    this.outsideFood = 'possible';
+    this.nursingRoom = 'possible';
   }
 
   subscribe(listener) {
@@ -42,6 +47,10 @@ export default class MapStore {
   async fetchSelectedPlaceDetail(id) {
     const place = await mapApiService.fetchSelectedPlace(id);
     this.selectedPlace = place;
+    this.reservationState = place.placeServices.reservation;
+    this.parkingState = place.placeServices.parking;
+    this.outsideFoodState = place.placeServices.outsideFood;
+    this.nursingRoomState = place.placeServices.nursingRoom;
     this.publish();
   }
 
