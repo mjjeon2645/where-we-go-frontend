@@ -1,7 +1,15 @@
 /* eslint-disable no-nested-ternary */
 import { useEffect } from 'react';
+import styled from 'styled-components';
 import PlaceContactBar from '../components/PlaceContactBar';
 import useMapStore from '../hooks/useMapStore';
+
+const Container = styled.div`
+`;
+
+const Wrapper = styled.div`
+  
+`;
 
 export default function PlaceDetailPage() {
   const mapStore = useMapStore();
@@ -50,9 +58,9 @@ export default function PlaceDetailPage() {
   };
 
   return (
-    <div>
+    <Container>
       {selectedPlace && imageSource && address ? (
-        <div>
+        <Wrapper>
           <button type="button" onClick={handlePlaceDetailCloseClick}> &lt; 뒤로가기</button>
           <button type="button" onClick={handleBookmarkClick}> 즐겨찾기</button>
           <button type="button" onClick={handlePlaceDetailTapClick}>상세정보</button>
@@ -67,12 +75,15 @@ export default function PlaceDetailPage() {
               ) : (
                 <img src={imageSource.thirdImage} alt="" />
               )}
-              <button type="button" onClick={handlePrevImageClick}>이전이미지로</button>
-              <p>
-                {imageNumber}
-                /3
-              </p>
-              <button type="button" onClick={handlNextImageClick}>다음이미지로</button>
+              <div>
+                <button type="button" onClick={handlePrevImageClick}>&lt;</button>
+                <span>
+                  {imageNumber}
+                  {' '}
+                  / 3
+                </span>
+                <button type="button" onClick={handlNextImageClick}>&gt;</button>
+              </div>
             </div>
             <div>
               <h2>{selectedPlace.name}</h2>
@@ -88,10 +99,10 @@ export default function PlaceDetailPage() {
             </div>
           </article>
           <PlaceContactBar contact={contact} />
-        </div>
+        </Wrapper>
       ) : (
         <p>Now loading...</p>
       )}
-    </div>
+    </Container>
   );
 }
