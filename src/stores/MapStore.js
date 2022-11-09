@@ -12,6 +12,8 @@ export default class MapStore {
     this.sido = '전체';
     this.sigungu = '';
     this.category = '전체';
+
+    this.imageNumber = 1;
   }
 
   subscribe(listener) {
@@ -26,20 +28,21 @@ export default class MapStore {
     this.listeners.forEach((listener) => listener());
   }
 
-  // async fetchAllPositions() {
-  //   const positions = await mapApiService.fetchAllPositions();
-  //   this.positions = positions;
-  //   this.publish();
-  // }
-
-  async fetchSelectedPlace(id) {
-    this.selectedPlace = await mapApiService.fetchSelectedPlace(id);
-    this.publish();
-  }
-
   async fetchFilteredPlaces(sido, sigungu, category) {
     const places = await mapApiService.fetchFilteredPlaces(sido, sigungu, category);
     this.places = places;
+    this.publish();
+  }
+
+  selectedPlaceShortInformation(id) {
+    this.selectedPlace = this.places.find((value) => value.placeId === id);
+    console.log(this.selectedPlace, 'selectedPlaceShort');
+    this.publish();
+  }
+
+  async fetchSelectedPlaceDetail(id) {
+    const place = await mapApiService.fetchSelectedPlace(id);
+    this.selectedPlace = place;
     this.publish();
   }
 
@@ -62,6 +65,32 @@ export default class MapStore {
     this.sido = '';
     this.sigungu = '';
     this.category = '';
+  }
+
+  increaseImageNumber() {
+    if (this.imageNumber === 3) {
+      this.imageNumber = 1;
+      this.publish();
+      return;
+    }
+
+    if (this.imageNumber !== 3) {
+      this.imageNumber += 1;
+      this.publish();
+    }
+  }
+
+  decreaseImageNumber() {
+    if (this.imageNumber === 1) {
+      this.imageNumber = 3;
+      this.publish();
+      return;
+    }
+
+    if (this.imageNumber !== 1) {
+      this.imageNumber -= 1;
+      this.publish();
+    }
   }
 }
 

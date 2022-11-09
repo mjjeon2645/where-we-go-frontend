@@ -22,12 +22,6 @@ const MapArea = styled.div`
   max-height: 600px;
   min-width: 400px;
   min-height: 500px;
-  /* max-width: 700px;
-  min-width: 500px;
-  max-height: 700px;
-  min-height: 500px;
-  width: 50%;
-  height: 50vw; */
 `;
 
 export default function MapPage() {
@@ -46,11 +40,8 @@ export default function MapPage() {
   const navigate = useNavigate();
 
   const makeClickListener = (placeId) => {
-    mapStore.fetchSelectedPlaceInformation(placeId);
+    mapStore.selectedPlaceShortInformation(placeId);
     setIsPlaceSelected(true);
-
-    // TODO. 클릭 시 마커 이미지 바꿔보기
-    // marker.setImage(selectedMarkerImage);
   };
 
   const {
@@ -59,7 +50,6 @@ export default function MapPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      // await mapStore.fetchAllPositions();
       await mapStore.fetchFilteredPlaces(sido, sigungu, category);
       const { places } = mapStore;
 
