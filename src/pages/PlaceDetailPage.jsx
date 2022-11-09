@@ -13,7 +13,9 @@ export default function PlaceDetailPage() {
   }, []);
 
   const { selectedPlace, imageNumber } = mapStore;
-  const { imageSource, address } = selectedPlace;
+  const {
+    imageSource, address, placeServices, contact,
+  } = selectedPlace;
 
   const handlePlaceDetailCloseClick = () => {
     //
@@ -85,7 +87,7 @@ export default function PlaceDetailPage() {
               <p>미니 지도 영역</p>
             </div>
           </article>
-          <PlaceContactBar />
+          <PlaceContactBar contact={contact} />
         </div>
       ) : (
         <p>Now loading...</p>

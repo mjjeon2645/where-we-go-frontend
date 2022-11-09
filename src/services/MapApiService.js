@@ -10,6 +10,7 @@ export default class MapApiService {
     const url = `${baseUrl}/map`;
     const params = { sido, sigungu, category };
     const { data } = await axios.get(url, { params });
+    console.log(data);
     return data.places;
   }
 
