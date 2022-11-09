@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import PlaceContactBar from '../components/PlaceContactBar';
 import PlaceDetail from '../components/PlaceDetail';
@@ -12,6 +12,8 @@ const Wrapper = styled.div`
 `;
 
 export default function PlaceDetailPage() {
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+
   const mapStore = useMapStore();
 
   const path = document.location.pathname;
@@ -57,6 +59,14 @@ export default function PlaceDetailPage() {
     //
   };
 
+  const toggleContactModal = () => {
+    setIsContactModalOpen(!isContactModalOpen);
+  };
+
+  const handlePlaceContactClick = () => {
+    toggleContactModal();
+  };
+
   return (
     <Container>
       {selectedPlace && imageSource && address ? (
@@ -73,7 +83,12 @@ export default function PlaceDetailPage() {
             handlNextImageClick={handlNextImageClick}
             handleAddressCopyClick={handleAddressCopyClick}
           />
-          <PlaceContactBar contact={contact} />
+          <PlaceContactBar
+            contact={contact}
+            toggleContactModal={toggleContactModal}
+            isContactModalOpen={isContactModalOpen}
+            handlePlaceContactClick={handlePlaceContactClick}
+          />
         </Wrapper>
       ) : (
         <p>Now loading...</p>
