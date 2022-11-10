@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import PlaceBlogReviews from '../components/PlaceBlogReviews';
 import PlaceContactBar from '../components/PlaceContactBar';
 import PlaceDetail from '../components/PlaceDetail';
+import PlaceDetailTap from '../components/PlaceDetailTap';
+import PlaceRateAndReview from '../components/PlaceRateAndReview';
+import useBlogReviewStore from '../hooks/useBlogReviewStore';
 import useMapStore from '../hooks/useMapStore';
 
 const Container = styled.div`
@@ -12,20 +16,27 @@ const Wrapper = styled.div`
 `;
 
 export default function PlaceDetailPage() {
+  const [isPlaceDetailOpen, setIsPlaceDetailOpen] = useState(true);
+  const [isBlogReviewOpen, setIsBlogReviewOpen] = useState(false);
+  const [isRateAndReviewOpen, setIsRateAndReviewOpen] = useState(true);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
   const mapStore = useMapStore();
+  const blogReviewStore = useBlogReviewStore();
 
-  const path = document.location.pathname;
+  const placeId = document.location.pathname.split('/')[2];
 
   useEffect(() => {
-    mapStore.fetchSelectedPlaceDetail(path.split('/')[2]);
+    mapStore.fetchSelectedPlaceDetail(placeId);
+    blogReviewStore.fetchBlogReviews(placeId);
   }, []);
 
   const { selectedPlace, imageNumber } = mapStore;
   const {
     imageSource, address, placeServices, contact,
   } = selectedPlace;
+
+  const { blogReviews } = blogReviewStore;
 
   const handlePlaceDetailCloseClick = () => {
     //
@@ -36,15 +47,21 @@ export default function PlaceDetailPage() {
   };
 
   const handlePlaceDetailTapClick = () => {
-    //
+    setIsPlaceDetailOpen(true);
+    setIsBlogReviewOpen(false);
+    setIsRateAndReviewOpen(false);
   };
 
   const handleBlogReviewTapClick = () => {
-    //
+    setIsPlaceDetailOpen(false);
+    setIsBlogReviewOpen(true);
+    setIsRateAndReviewOpen(false);
   };
 
-  const handlePlaceRatingAndReviewTapClick = () => {
-    //
+  const handlePlaceRateAndReviewTapClick = () => {
+    setIsPlaceDetailOpen(false);
+    setIsBlogReviewOpen(false);
+    setIsRateAndReviewOpen(true);
   };
 
   const handlePrevImageClick = () => {
@@ -71,18 +88,29 @@ export default function PlaceDetailPage() {
     <Container>
       {selectedPlace && imageSource && address ? (
         <Wrapper>
-          <button type="button" onClick={handlePlaceDetailCloseClick}> &lt; 뒤로가기</button>
-          <button type="button" onClick={handleBookmarkClick}> 즐겨찾기</button>
-          <button type="button" onClick={handlePlaceDetailTapClick}>상세정보</button>
-          <button type="button" onClick={handleBlogReviewTapClick}>블로그 리뷰 11</button>
-          <button type="button" onClick={handlePlaceRatingAndReviewTapClick}>평점/리뷰</button>
-          <PlaceDetail
-            imageNumber={imageNumber}
-            selectedPlace={selectedPlace}
-            handlePrevImageClick={handlePrevImageClick}
-            handlNextImageClick={handlNextImageClick}
-            handleAddressCopyClick={handleAddressCopyClick}
+          <PlaceDetailTap
+            handlePlaceDetailCloseClick={handlePlaceDetailCloseClick}
+            handleBookmarkClick={handleBookmarkClick}
+            handlePlaceDetailTapClick={handlePlaceDetailTapClick}
+            handleBlogReviewTapClick={handleBlogReviewTapClick}
+            handlePlaceRateAndReviewTapClick={handlePlaceRateAndReviewTapClick}
+            size={blogReviews?.length || 0}
           />
+          {isPlaceDetailOpen && (
+            <PlaceDetail
+              imageNumber={imageNumber}
+              selectedPlace={selectedPlace}
+              handlePrevImageClick={handlePrevImageClick}
+              handlNextImageClick={handlNextImageClick}
+              handleAddressCopyClick={handleAddressCopyClick}
+            />
+          )}
+          {isBlogReviewOpen && (
+            <PlaceBlogReviews
+              blogReviews={blogReviews}
+            />
+          )}
+          {isRateAndReviewOpen && <PlaceRateAndReview />}
           <PlaceContactBar
             contact={contact}
             toggleContactModal={toggleContactModal}
