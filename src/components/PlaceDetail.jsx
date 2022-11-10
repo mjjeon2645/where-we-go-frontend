@@ -6,6 +6,18 @@ const Container = styled.article`
   padding-inline: 3em;
 `;
 
+const ImageBox = styled.div`
+  width: 500px;
+  height: 300px;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+`;
+
 const PlaceName = styled.h2`
   font-size: 2em;
   font-weight: bold;
@@ -35,6 +47,7 @@ const Services = styled.section`
 `;
 
 const Address = styled.span`
+  margin-right: 1em;
 `;
 
 const AddressAndMiniMap = styled.section`
@@ -49,13 +62,15 @@ export default function PlaceDetail({
   return (
     <Container>
       <section>
-        {imageNumber === 1 ? (
-          <img src={imageSource.firstImage} alt="" />
-        ) : imageNumber === 2 ? (
-          <img src={imageSource.secondImage} alt="" />
-        ) : (
-          <img src={imageSource.thirdImage} alt="" />
-        )}
+        <ImageBox>
+          {imageNumber === 1 ? (
+            <img src={imageSource.firstImage} alt="" />
+          ) : imageNumber === 2 ? (
+            <img src={imageSource.secondImage} alt="" />
+          ) : (
+            <img src={imageSource.thirdImage} alt="" />
+          )}
+        </ImageBox>
         <div>
           <button type="button" onClick={handlePrevImageClick}>&lt;</button>
           <span>

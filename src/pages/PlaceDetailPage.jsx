@@ -10,7 +10,6 @@ import useMapStore from '../hooks/useMapStore';
 import { loadMiniKakaoMap } from '../utils/KakaoMap';
 
 const Container = styled.div`
-  padding-bottom: 3em;
 `;
 
 const Wrapper = styled.div`
@@ -20,7 +19,6 @@ const Wrapper = styled.div`
 const MapArea = styled.div`
   width: 400px;
   height: 250px;
-  padding-inline: 3em;
 `;
 
 export default function PlaceDetailPage() {
@@ -44,7 +42,8 @@ export default function PlaceDetailPage() {
 
       const { selectedPlace } = mapStore;
 
-      loadMiniKakaoMap(kakaoMap.current, selectedPlace.position);
+      // 재확인 필요
+      // loadMiniKakaoMap(kakaoMap.current, selectedPlace.position);
     };
 
     fetchData();
@@ -133,9 +132,7 @@ export default function PlaceDetailPage() {
                 handlNextImageClick={handlNextImageClick}
                 handleAddressCopyClick={handleAddressCopyClick}
               />
-              <MapArea>
-                <div ref={kakaoMap} />
-              </MapArea>
+              <MapArea ref={kakaoMap} />
             </div>
           )}
           {isBlogReviewOpen && (
