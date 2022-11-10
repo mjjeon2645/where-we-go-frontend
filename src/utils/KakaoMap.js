@@ -109,5 +109,23 @@ export function loadKakaoMap(component, places, makeClickListener) {
   return map;
 }
 
+export function loadMiniKakaoMap(component, position) {
+  const markerPosition = new kakao.maps.LatLng(position.latitude, position.longitude);
+
+  const marker = {
+    position: markerPosition,
+  };
+
+  const staticMapOptions = {
+    center: new kakao.maps.LatLng(position.latitude, position.longitude),
+    level: 3,
+    marker,
+  };
+
+  const miniMap = new kakao.maps.StaticMap(component, staticMapOptions);
+
+  return miniMap;
+}
+
 // TODO: Delete This!
 export const xxx = '';
