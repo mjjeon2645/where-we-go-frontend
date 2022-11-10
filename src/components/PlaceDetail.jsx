@@ -6,33 +6,52 @@ const Container = styled.article`
   padding-inline: 3em;
 `;
 
-const PlaceTitle = styled.h2`
+const ImageBox = styled.div`
+  width: 500px;
+  height: 300px;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+`;
+
+const PlaceName = styled.h2`
   font-size: 2em;
   font-weight: bold;
   margin: 1em 0;
 `;
 
-const ServicesTitle = styled.p`
-  font-size: 1.3em;
+const SectionTitle = styled.p`
+  font-size: 1.2em;
   font-weight: bold;
+  margin-bottom: .8em;
 `;
 
 const Services = styled.section`
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  margin: 1em 0;
 
   div {
     text-align: center;
+    padding: 0 2em;
   }
 
   div p {
     margin: 1em 0;
   }
+`;
 
-  div p:last-child {
-    font-weight: bold;
-  }
+const Address = styled.span`
+  margin-right: 1em;
+`;
+
+const AddressAndMiniMap = styled.section`
+  margin: 1em 0;
 `;
 
 export default function PlaceDetail({
@@ -43,13 +62,15 @@ export default function PlaceDetail({
   return (
     <Container>
       <section>
-        {imageNumber === 1 ? (
-          <img src={imageSource.firstImage} alt="" />
-        ) : imageNumber === 2 ? (
-          <img src={imageSource.secondImage} alt="" />
-        ) : (
-          <img src={imageSource.thirdImage} alt="" />
-        )}
+        <ImageBox>
+          {imageNumber === 1 ? (
+            <img src={imageSource.firstImage} alt="" />
+          ) : imageNumber === 2 ? (
+            <img src={imageSource.secondImage} alt="" />
+          ) : (
+            <img src={imageSource.thirdImage} alt="" />
+          )}
+        </ImageBox>
         <div>
           <button type="button" onClick={handlePrevImageClick}>&lt;</button>
           <span>
@@ -60,8 +81,8 @@ export default function PlaceDetail({
           <button type="button" onClick={handlNextImageClick}>&gt;</button>
         </div>
       </section>
-      <PlaceTitle>{selectedPlace.name}</PlaceTitle>
-      <ServicesTitle>편의시설</ServicesTitle>
+      <PlaceName>{selectedPlace.name}</PlaceName>
+      <SectionTitle>편의시설</SectionTitle>
       <Services>
         <div>
           {placeServices.reservation === 'possible' ? (
@@ -104,12 +125,11 @@ export default function PlaceDetail({
           <p>수유실</p>
         </div>
       </Services>
-      <div>
-        <p>주소</p>
-        <p>{address.fullAddress}</p>
-        <button type="button" onClick={handleAddressCopyClick}>주소복사버튼</button>
-        <p>미니 지도 영역</p>
-      </div>
+      <AddressAndMiniMap>
+        <SectionTitle>주소</SectionTitle>
+        <Address>{address.fullAddress}</Address>
+        <button type="button" onClick={() => handleAddressCopyClick(address.fullAddress)}>복사하기</button>
+      </AddressAndMiniMap>
     </Container>
   );
 }
