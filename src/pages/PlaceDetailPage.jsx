@@ -94,6 +94,7 @@ export default function PlaceDetailPage() {
             handlePlaceDetailTapClick={handlePlaceDetailTapClick}
             handleBlogReviewTapClick={handleBlogReviewTapClick}
             handlePlaceRateAndReviewTapClick={handlePlaceRateAndReviewTapClick}
+            size={blogReviews?.length || 0}
           />
           {isPlaceDetailOpen && (
             <PlaceDetail
