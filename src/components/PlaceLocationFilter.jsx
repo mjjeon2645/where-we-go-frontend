@@ -67,14 +67,6 @@ export default function PlaceLocationFilter({
   return (
     <Container>
       <Title>어디로 갈까요?</Title>
-      {/* <select onChange={() => handleSidoChange(this)}>
-        <option selected disabled hidden>선택</option>
-        {sidoArray.map((value) => (
-          <option key={value.id} value={value.ko}>
-            {value.ko}
-          </option>
-        ))}
-      </select> */}
       <SidoSection>
         <p>시/도</p>
         <SidoList>
