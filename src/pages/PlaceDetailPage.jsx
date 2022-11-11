@@ -7,6 +7,7 @@ import PlaceDetailTap from '../components/PlaceDetailTap';
 import PlaceRateAndReview from '../components/PlaceRateAndReview';
 import useBlogReviewStore from '../hooks/useBlogReviewStore';
 import useMapStore from '../hooks/useMapStore';
+import useUserReviewStore from '../hooks/useUserReviewStore';
 import { loadMiniKakaoMap } from '../utils/KakaoMap';
 
 const Container = styled.div`
@@ -29,21 +30,29 @@ export default function PlaceDetailPage() {
 
   const mapStore = useMapStore();
   const blogReviewStore = useBlogReviewStore();
+  const userReviewStore = useUserReviewStore();
 
   const placeId = document.location.pathname.split('/')[2];
 
   const kakaoMap = useRef(null);
   const { selectedPlace, imageNumber } = mapStore;
+  const {
+    imageSource, address, placeServices, contact,
+  } = selectedPlace;
+
+  const { blogReviews } = blogReviewStore;
+  const { averageRate, userReviews } = userReviewStore;
 
   useEffect(() => {
     const fetchData = async () => {
       await mapStore.fetchSelectedPlaceDetail(placeId);
       await blogReviewStore.fetchBlogReviews(placeId);
+      await userReviewStore.fetchUserReviews(placeId);
 
       const { selectedPlace } = mapStore;
 
       // 재확인 필요
-      // loadMiniKakaoMap(kakaoMap.current, selectedPlace.position);
+      loadMiniKakaoMap(kakaoMap.current, selectedPlace.position);
     };
 
     fetchData();
@@ -52,12 +61,6 @@ export default function PlaceDetailPage() {
     setIsBlogReviewOpen(false);
     setIsRateAndReviewOpen(false);
   }, []);
-
-  const {
-    imageSource, address, placeServices, contact,
-  } = selectedPlace;
-
-  const { blogReviews } = blogReviewStore;
 
   const handlePlaceDetailCloseClick = () => {
     //
@@ -135,12 +138,19 @@ export default function PlaceDetailPage() {
               <MapArea ref={kakaoMap} />
             </div>
           )}
-          {isBlogReviewOpen && (
+          {isBlogReviewOpen
+          && (
             <PlaceBlogReviews
               blogReviews={blogReviews}
             />
           )}
-          {isRateAndReviewOpen && <PlaceRateAndReview />}
+          {isRateAndReviewOpen
+          && (
+            <PlaceRateAndReview
+              averageRate={averageRate}
+              userReviews={userReviews}
+            />
+          )}
           <PlaceContactBar
             contact={contact}
             toggleContactModal={toggleContactModal}
