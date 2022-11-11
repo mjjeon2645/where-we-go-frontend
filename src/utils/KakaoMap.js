@@ -118,7 +118,7 @@ export function loadMiniKakaoMap(component, position) {
 
   const staticMapOptions = {
     center: new kakao.maps.LatLng(position.latitude, position.longitude),
-    level: 3,
+    level: 6,
     marker,
   };
 
