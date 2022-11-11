@@ -1,20 +1,56 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import PlaceDetail from './PlaceDetail';
 
 const context = describe;
 
+let imageNumber;
+let selectedPlace;
+const handlePrevImageClick = jest.fn();
+const handleNextImageClick = jest.fn();
+const handleAddressCopyClick = jest.fn();
+
 describe('PlaceDetail', () => {
   function renderPlaceDetail() {
-    render(<PlaceDetail />);
+    render(<PlaceDetail
+      imageNumber={imageNumber}
+      selectedPlace={selectedPlace}
+      handlePrevImageClick={handlePrevImageClick}
+      handleNextImageClick={handleNextImageClick}
+      handleAddressCopyClick={handleAddressCopyClick}
+    />);
   }
 
   context('A user click the popup of place information', () => {
     beforeEach(() => {
-      renderPlaceDetail();
+      imageNumber = '1';
+
+      selectedPlace = {
+        id: 1,
+        name: 'KINTEX 뽀로로파크',
+        address: {
+          fullAddress: '경기도 고양시 일산서구 송포동 1396-43',
+          sido: '경기',
+          sigungu: '고양시',
+        },
+        imageSource: {
+          firstImage: 'url',
+          secondImage: 'image',
+          thirdImage: 'image',
+        },
+        placeServices: {
+          reservation: 'possible',
+          parking: 'possible',
+          outsideFood: 'impossible',
+          nursingRoom: 'unchecked',
+        },
+      };
     });
 
-    it('rendes PlaceDetail', () => {
+    it('renders PlaceDetail', () => {
+      renderPlaceDetail();
+
       screen.getByText('KINTEX 뽀로로파크');
+      screen.getByText('1 / 3');
       screen.getByText('편의시설');
       screen.getByText('예약');
       screen.getByText('주차');
@@ -22,6 +58,27 @@ describe('PlaceDetail', () => {
       screen.getByText('수유실');
       screen.getByText('주소');
       screen.getByText('경기도 고양시 일산서구 송포동 1396-43');
+    });
+  });
+
+  context('A user clicks copy button', () => {
+    it('copies address on clipboard', () => {
+      renderPlaceDetail();
+
+      fireEvent.click(screen.getByText('복사하기'));
+      expect(handleAddressCopyClick).toBeCalled();
+    });
+  });
+
+  context('A user clicks the button of prev & next image', () => {
+    it('changes the image', () => {
+      renderPlaceDetail();
+
+      fireEvent.click(screen.getByText('<'));
+      expect(handlePrevImageClick).toBeCalled();
+
+      fireEvent.click(screen.getByText('>'));
+      expect(handleNextImageClick).toBeCalled();
     });
   });
 });

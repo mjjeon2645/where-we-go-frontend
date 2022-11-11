@@ -1,20 +1,69 @@
 import { render, screen } from '@testing-library/react';
+
 import PlaceRateAndReview from './PlaceRateAndReview';
 
 const context = describe;
+
+let averageRate;
+let userReviews;
+
 describe('PlaceRateAndReview', () => {
   function renderPlaceRateandReview() {
-    render(<PlaceRateAndReview />);
+    render(<PlaceRateAndReview
+      averageRate={averageRate}
+      userReviews={userReviews}
+    />);
   }
 
-  context('A user clicks Rate and Review tap', () => {
+  context('A user clicks Rate and Review tap and there is no review', () => {
     beforeEach(() => {
-      renderPlaceRateandReview();
+      averageRate = '0';
+      userReviews = [];
     });
 
-    it('renders PlaceRateAndReview', () => {
+    it('renders PlaceRateAndReview without review', () => {
+      renderPlaceRateandReview();
+
+      screen.getByText('0 / 5점');
+      screen.getByText('0명 참여');
       screen.getByText('내가 남긴 리뷰');
       screen.getByText('회원님들의 리뷰');
+      screen.getByText(/아직 리뷰가 없어요/);
+      screen.getByText(/회원님들의 소중한 추억을 공유해주세요/);
+    });
+  });
+
+  context('There are two reviews and 4.38 averageRate', () => {
+    beforeEach(() => {
+      averageRate = '4.38';
+      userReviews = [
+        {
+          id: 0,
+          placeId: 4,
+          userId: 1,
+          rate: 4,
+          body: '여기 진짜 재밌어요!',
+          dateOfVisit: '2022-09-20',
+        },
+        {
+          id: 2,
+          placeId: 4,
+          userId: 2,
+          rate: 5,
+          body: '신나요!',
+          dateOfVisit: '2022-10-21',
+        },
+      ];
+    });
+
+    it('renders PlaceRateAndReview without review', () => {
+      renderPlaceRateandReview();
+
+      screen.getByText('4.38 / 5점');
+      screen.getByText('2명 참여');
+      screen.getByText('내가 남긴 리뷰');
+      screen.getByText('회원님들의 리뷰');
+      screen.getByText('(방문일: 2022-10-21)');
     });
   });
 });

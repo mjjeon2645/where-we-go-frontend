@@ -70,7 +70,7 @@ const NoneMessage = styled.p`
   margin-top: 5em;
 `;
 
-export default function PlaceBlogReviews({ blogReviews }) {
+export default function PlaceBlogReviews({ blogReviews, handleToBlogPageClick }) {
   return (
     <Container>
       <Title>
@@ -83,7 +83,7 @@ export default function PlaceBlogReviews({ blogReviews }) {
           <ul>
             {blogReviews.map((blogReview) => (
               <li key={blogReview.id}>
-                <Review type="button" onClick={() => window.open(blogReview.url, '_blank')}>
+                <Review type="button" onClick={() => handleToBlogPageClick(blogReview.url)}>
                   <ContentArea>
                     <p className="title">{blogReview.title}</p>
                     <p className="date">{blogReview.date}</p>

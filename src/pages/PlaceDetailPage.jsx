@@ -92,7 +92,7 @@ export default function PlaceDetailPage() {
     mapStore.decreaseImageNumber();
   };
 
-  const handlNextImageClick = () => {
+  const handleNextImageClick = () => {
     mapStore.increaseImageNumber();
   };
 
@@ -104,6 +104,10 @@ export default function PlaceDetailPage() {
     } catch (error) {
       alert('복사 실패');
     }
+  };
+
+  const handleToBlogPageClick = (blogReviewUrl) => {
+    window.open(blogReviewUrl, '_blank');
   };
 
   const toggleContactModal = () => {
@@ -132,7 +136,7 @@ export default function PlaceDetailPage() {
                 imageNumber={imageNumber}
                 selectedPlace={selectedPlace}
                 handlePrevImageClick={handlePrevImageClick}
-                handlNextImageClick={handlNextImageClick}
+                handleNextImageClick={handleNextImageClick}
                 handleAddressCopyClick={handleAddressCopyClick}
               />
               <MapArea ref={kakaoMap} />
@@ -142,6 +146,7 @@ export default function PlaceDetailPage() {
           && (
             <PlaceBlogReviews
               blogReviews={blogReviews}
+              handleToBlogPageClick={handleToBlogPageClick}
             />
           )}
           {isRateAndReviewOpen
