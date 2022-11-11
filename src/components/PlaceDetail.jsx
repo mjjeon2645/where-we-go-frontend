@@ -55,7 +55,7 @@ const AddressAndMiniMap = styled.section`
 `;
 
 export default function PlaceDetail({
-  imageNumber, selectedPlace, handlePrevImageClick, handlNextImageClick, handleAddressCopyClick,
+  imageNumber, selectedPlace, handlePrevImageClick, handleNextImageClick, handleAddressCopyClick,
 }) {
   const { imageSource, address, placeServices } = selectedPlace;
 
@@ -78,7 +78,7 @@ export default function PlaceDetail({
             {' '}
             / 3
           </span>
-          <button type="button" onClick={handlNextImageClick}>&gt;</button>
+          <button type="button" onClick={handleNextImageClick}>&gt;</button>
         </div>
       </section>
       <PlaceName>{selectedPlace.name}</PlaceName>

@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 
 import FilteredPlacesList from './FilteredPlacesList';
 
-let pleaces;
+let places;
 
 const handleListPageCloseClick = jest.fn();
 const handleOnePlaceClick = jest.fn();
@@ -12,7 +12,7 @@ const context = describe;
 describe('FilteredPlacesList', () => {
   function renderFilteredPlacesList() {
     render(<FilteredPlacesList
-      places={pleaces}
+      places={places}
       handleListPageCloseClick={handleListPageCloseClick}
       handleOnePlaceClick={handleOnePlaceClick}
     />);
@@ -20,26 +20,45 @@ describe('FilteredPlacesList', () => {
 
   context('if there are two places after filtering', () => {
     beforeEach(() => {
-      pleaces = [
+      places = [
         {
           placeId: 1,
           name: '과천 서울랜드',
-          fullAddress: '경기도 과천시 광명로 181',
+          address: {
+            fullAddress: '경기도 과천시 광명로 181',
+            sido: '경기',
+            sigungu: '과천시',
+          },
+          imageSource: {
+            firstImage: 'url',
+            secondImage: 'url',
+            thirdImage: 'url',
+          },
           category: '자연',
           firstImage: 'image',
         },
         {
           placeId: 2,
           name: '킹덤키즈풀빌라',
-          fullAddress: '경기도 가평군 설악면 미사리 320-1',
+          address: {
+            fullAddress: '경기도 가평군 설악면 미사리 320-1',
+            sido: '경기',
+            sigungu: '가평군',
+          },
+          imageSource: {
+            firstImage: 'url',
+            secondImage: 'url',
+            thirdImage: 'url',
+          },
           category: '숙박/캠핑',
           firstImage: 'image',
         },
       ];
-      renderFilteredPlacesList();
     });
 
     it('render filteredPlacesList with positions', () => {
+      renderFilteredPlacesList();
+
       screen.getByText('2개 장소를 찾았어요! 어디로 가볼까요?');
       screen.getByText(/과천 서울랜드/);
       screen.getByText('경기도 과천시 광명로 181');
