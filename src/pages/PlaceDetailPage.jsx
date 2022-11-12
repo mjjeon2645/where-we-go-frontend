@@ -1,10 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import PlaceBlogReviews from '../components/PlaceBlogReviews';
 import PlaceContactBar from '../components/PlaceContactBar';
 import PlaceDetail from '../components/PlaceDetail';
 import PlaceDetailTap from '../components/PlaceDetailTap';
-import PlaceRateAndReview from '../components/PlaceRateAndReview';
 import useBlogReviewStore from '../hooks/useBlogReviewStore';
 import useMapStore from '../hooks/useMapStore';
 import useUserReviewStore from '../hooks/useUserReviewStore';
@@ -13,20 +12,15 @@ import { loadMiniKakaoMap } from '../utils/KakaoMap';
 const Container = styled.div`
 `;
 
-const Wrapper = styled.div`
-  
-`;
-
 const MapArea = styled.div`
   width: 400px;
   height: 250px;
 `;
 
 export default function PlaceDetailPage() {
-  const [isPlaceDetailOpen, setIsPlaceDetailOpen] = useState(true);
-  const [isBlogReviewOpen, setIsBlogReviewOpen] = useState(false);
-  const [isRateAndReviewOpen, setIsRateAndReviewOpen] = useState(true);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   const mapStore = useMapStore();
   const blogReviewStore = useBlogReviewStore();
@@ -35,19 +29,16 @@ export default function PlaceDetailPage() {
   const placeId = document.location.pathname.split('/')[2];
 
   const kakaoMap = useRef(null);
-  const { selectedPlace, imageNumber } = mapStore;
-  const {
-    imageSource, address, placeServices, contact,
-  } = selectedPlace;
 
+  const { selectedPlace, imageNumber } = mapStore;
+  const { imageSource, contact } = selectedPlace;
   const { blogReviews } = blogReviewStore;
-  const { averageRate, userReviews } = userReviewStore;
 
   useEffect(() => {
     const fetchData = async () => {
       await mapStore.fetchSelectedPlaceDetail(placeId);
       await blogReviewStore.fetchBlogReviews(placeId);
-      await userReviewStore.fetchUserReviews(placeId);
+      await userReviewStore.fetchUsersReviews(placeId);
 
       const { selectedPlace } = mapStore;
 
@@ -56,10 +47,6 @@ export default function PlaceDetailPage() {
     };
 
     fetchData();
-
-    setIsPlaceDetailOpen(true);
-    setIsBlogReviewOpen(false);
-    setIsRateAndReviewOpen(false);
   }, []);
 
   const handlePlaceDetailCloseClick = () => {
@@ -71,21 +58,15 @@ export default function PlaceDetailPage() {
   };
 
   const handlePlaceDetailTapClick = () => {
-    setIsPlaceDetailOpen(true);
-    setIsBlogReviewOpen(false);
-    setIsRateAndReviewOpen(false);
+    navigate(`/places/${placeId}`);
   };
 
   const handleBlogReviewTapClick = () => {
-    setIsPlaceDetailOpen(false);
-    setIsBlogReviewOpen(true);
-    setIsRateAndReviewOpen(false);
+    navigate(`/places/${placeId}/blog-review`);
   };
 
-  const handlePlaceRateAndReviewTapClick = () => {
-    setIsPlaceDetailOpen(false);
-    setIsBlogReviewOpen(false);
-    setIsRateAndReviewOpen(true);
+  const handleUserReviewTapClick = () => {
+    navigate(`/places/${placeId}/user-review`);
   };
 
   const handlePrevImageClick = () => {
@@ -106,10 +87,6 @@ export default function PlaceDetailPage() {
     }
   };
 
-  const handleToBlogPageClick = (blogReviewUrl) => {
-    window.open(blogReviewUrl, '_blank');
-  };
-
   const toggleContactModal = () => {
     setIsContactModalOpen(!isContactModalOpen);
   };
@@ -120,51 +97,35 @@ export default function PlaceDetailPage() {
 
   return (
     <Container>
-      {selectedPlace && imageSource && address ? (
-        <Wrapper>
+      {selectedPlace && imageSource ? (
+        <div>
           <PlaceDetailTap
             handlePlaceDetailCloseClick={handlePlaceDetailCloseClick}
             handleBookmarkClick={handleBookmarkClick}
             handlePlaceDetailTapClick={handlePlaceDetailTapClick}
             handleBlogReviewTapClick={handleBlogReviewTapClick}
-            handlePlaceRateAndReviewTapClick={handlePlaceRateAndReviewTapClick}
+            handleUserReviewTapClick={handleUserReviewTapClick}
             size={blogReviews?.length || 0}
           />
-          {isPlaceDetailOpen && (
-            <div>
-              <PlaceDetail
-                imageNumber={imageNumber}
-                selectedPlace={selectedPlace}
-                handlePrevImageClick={handlePrevImageClick}
-                handleNextImageClick={handleNextImageClick}
-                handleAddressCopyClick={handleAddressCopyClick}
-              />
-              <MapArea ref={kakaoMap} />
-            </div>
-          )}
-          {isBlogReviewOpen
-          && (
-            <PlaceBlogReviews
-              blogReviews={blogReviews}
-              handleToBlogPageClick={handleToBlogPageClick}
+          <div>
+            <PlaceDetail
+              imageNumber={imageNumber}
+              selectedPlace={selectedPlace}
+              handlePrevImageClick={handlePrevImageClick}
+              handleNextImageClick={handleNextImageClick}
+              handleAddressCopyClick={handleAddressCopyClick}
             />
-          )}
-          {isRateAndReviewOpen
-          && (
-            <PlaceRateAndReview
-              averageRate={averageRate}
-              userReviews={userReviews}
-            />
-          )}
+            <MapArea ref={kakaoMap} />
+          </div>
           <PlaceContactBar
             contact={contact}
             toggleContactModal={toggleContactModal}
             isContactModalOpen={isContactModalOpen}
             handlePlaceContactClick={handlePlaceContactClick}
           />
-        </Wrapper>
+        </div>
       ) : (
-        <p>Now loading...</p>
+        <p>now loading...</p>
       )}
     </Container>
   );

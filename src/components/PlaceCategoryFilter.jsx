@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { loadCategoryOptions } from '../utils/FilterOptions';
+import { loadCategoryOptions } from '../utils/filterOptions';
 
 const Container = styled.article`
   margin: 3em 1em;

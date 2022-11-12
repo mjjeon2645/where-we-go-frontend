@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { loadSidoOptions, loadSigunguOptions } from '../utils/FilterOptions';
+import { loadSidoOptions, loadSigunguOptions } from '../utils/filterOptions';
 
 const Container = styled.article`
   margin: 3em 1em;

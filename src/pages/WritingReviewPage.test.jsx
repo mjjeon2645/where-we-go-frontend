@@ -1,16 +1,16 @@
 import { render, screen } from '@testing-library/react';
-import UserReviewPage from './UserReviewPage';
+import WritingReviewPage from './WritingReviewPage';
 
 const context = describe;
 
-describe('UserReviewPage', () => {
-  function renderUserReviewPage() {
-    render(<UserReviewPage />);
+describe('WritingReviewPage', () => {
+  function renderWritingReviewPage() {
+    render(<WritingReviewPage />);
   }
 
   context('A user clicks user review menu', () => {
     it('renders user review page', () => {
-      renderUserReviewPage();
+      renderWritingReviewPage();
 
       screen.getByText(/이 곳, 어떠셨나요?/);
       screen.getByText('방문일');
