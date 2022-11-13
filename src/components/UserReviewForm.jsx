@@ -1,24 +1,33 @@
-import { useState } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import { ko } from 'date-fns/esm/locale';
 import DatePicker from 'react-datepicker';
 import { addDays } from 'date-fns';
-import formatDate from '../utils/dateOfVisitFormatter';
 
-export default function UserReviewForm({ handleCancelWritingClick }) {
-  const [startDate, setStartDate] = useState(new Date());
-
+export default function UserReviewForm({
+  writeReview, setDateOfVisit, setRate, setMyReview, cancelWriting, startDate,
+}) {
   const handleUserReviewSubmit = (event) => {
     event.preventDefault();
-  };
 
-  const handleUserReviewBodyChange = (event) => {
-    console.log(event.target.value);
+    writeReview(event);
   };
 
   const handleSetStartDate = (date) => {
-    setStartDate(date);
-    const formattedDate = formatDate(date);
+    setDateOfVisit(date);
+  };
+
+  const handleRateChange = (event) => {
+    const selectedRate = event.target.value;
+    setRate(selectedRate);
+  };
+
+  const handleReviewChange = (event) => {
+    const body = event.target.value;
+    setMyReview(body);
+  };
+
+  const handleCancelWritingClick = () => {
+    cancelWriting();
   };
 
   return (
@@ -36,8 +45,9 @@ export default function UserReviewForm({ handleCancelWritingClick }) {
         </div>
         <div>
           <label htmlFor="rate-select">평점</label>
-          <select id="rate-select">
-            <option defaultValue>⭐️⭐️⭐️⭐️⭐️</option>
+          <select id="rate-select" onChange={handleRateChange}>
+            <option defaultValue hidden>선택</option>
+            <option>⭐️⭐️⭐️⭐️⭐️</option>
             <option>⭐️⭐️⭐️⭐️</option>
             <option>⭐️⭐️⭐️</option>
             <option>⭐️⭐️</option>
@@ -53,7 +63,7 @@ export default function UserReviewForm({ handleCancelWritingClick }) {
             rows="5"
             minLength="10"
             maxLength="50"
-            onChange={handleUserReviewBodyChange}
+            onChange={handleReviewChange}
           />
           <p>/ 50자</p>
         </div>
