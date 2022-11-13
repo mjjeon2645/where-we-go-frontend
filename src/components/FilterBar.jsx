@@ -7,11 +7,23 @@ const Wrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  background-color: #EEE;
+  align-items: center;
+  height: 4em;
+  background-color: #ff9d13;
   padding: .6em;
+
+  p {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #FFF;
+    margin-right: 1em;
+  }
 `;
 
 const Button = styled.button`
+  background-color: #FFF;
+  border: none;
+  margin-inline: .3em;
 `;
 
 // const Image = styled.img`
@@ -21,8 +33,16 @@ const Button = styled.button`
 // `;
 
 export default function FilterBar({
-  handleFilterClick, sido, sigungu, category,
+  goFilterPage, resetFilter, sido, sigungu, category,
 }) {
+  const handleFilterPageOnClick = () => {
+    goFilterPage();
+  };
+
+  const handleFilterResetClick = () => {
+    resetFilter();
+  };
+
   return (
     <Wrapper>
       {sido && sigungu && category ? (
@@ -40,9 +60,10 @@ export default function FilterBar({
       ) : (
         <p>필터 조건을 설정해주세요</p>
       )}
-      <Button name="filter" type="button" onClick={handleFilterClick}>
+      <Button name="filter" type="button" onClick={handleFilterPageOnClick}>
         필터
       </Button>
+      <Button name="reset-filter" type="button" onClick={handleFilterResetClick}>리셋하기</Button>
     </Wrapper>
   );
 }

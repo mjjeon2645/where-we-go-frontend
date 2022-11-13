@@ -27,10 +27,14 @@ const FilterButton = styled.button`
 `;
 
 export default function Filters({
-  setFilteredPlaces, handleFilterCloseClick, setSido, setSigungu,
+  setFilteredPlaces, goBackFromFilterPage, setSido, setSigungu,
   setPlaceCategory, setFilterPageOn, setFilterResultBarOn, sido, sigungu, category,
 }) {
   const navigate = useNavigate();
+
+  const handleBackClick = () => {
+    goBackFromFilterPage();
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -57,7 +61,7 @@ export default function Filters({
 
   return (
     <Wrapper>
-      <BackButton type="button" onClick={handleFilterCloseClick}> &lt; 돌아가기</BackButton>
+      <BackButton type="button" onClick={handleBackClick}> &lt; 돌아가기</BackButton>
       <form id="filter" onSubmit={handleSubmit}>
         <PlaceLocationFilter
           setSido={setSido}

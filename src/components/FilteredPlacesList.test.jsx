@@ -4,8 +4,8 @@ import FilteredPlacesList from './FilteredPlacesList';
 
 let places;
 
-const handleListPageCloseClick = jest.fn();
-const handleOnePlaceClick = jest.fn();
+const goBackFromPlaceListPage = jest.fn();
+const goDetailPageOfSelectedPlace = jest.fn();
 
 const context = describe;
 
@@ -13,8 +13,8 @@ describe('FilteredPlacesList', () => {
   function renderFilteredPlacesList() {
     render(<FilteredPlacesList
       places={places}
-      handleListPageCloseClick={handleListPageCloseClick}
-      handleOnePlaceClick={handleOnePlaceClick}
+      goBackFromPlaceListPage={goBackFromPlaceListPage}
+      goDetailPageOfSelectedPlace={goDetailPageOfSelectedPlace}
     />);
   }
 
@@ -68,10 +68,10 @@ describe('FilteredPlacesList', () => {
       screen.getByText('숙박/캠핑');
 
       fireEvent.click(screen.getByRole('button', { name: /돌아가기/ }));
-      expect(handleListPageCloseClick).toBeCalled();
+      expect(goBackFromPlaceListPage).toBeCalled();
 
       fireEvent.click(screen.getByText('과천 서울랜드'));
-      expect(handleOnePlaceClick).toBeCalled();
+      expect(goDetailPageOfSelectedPlace).toBeCalled();
     });
   });
 });

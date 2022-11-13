@@ -70,9 +70,9 @@ export default class MapStore {
   }
 
   clearFilterState() {
-    this.sido = '';
+    this.sido = '전체';
     this.sigungu = '';
-    this.category = '';
+    this.category = '전체';
     this.publish();
   }
 

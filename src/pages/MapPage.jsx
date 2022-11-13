@@ -77,11 +77,16 @@ export default function MapPage() {
     mapStore.changePlaceCategory(categoryCondition);
   };
 
-  const handleFilterClick = () => {
+  const goFilterPage = () => {
     setFilterPageOn(true);
   };
 
-  const handleFilterCloseClick = () => {
+  const resetFilter = () => {
+    mapStore.clearFilterState();
+  };
+
+  const goBackFromFilterPage = () => {
+    mapStore.clearFilterState();
     setFilterPageOn(false);
   };
 
@@ -93,11 +98,11 @@ export default function MapPage() {
     setFilteredListsPageOn(true);
   };
 
-  const handleListPageCloseClick = () => [
-    setFilteredListsPageOn(false),
-  ];
+  const goBackFromPlaceListPage = () => {
+    setFilteredListsPageOn(false);
+  };
 
-  const handleOnePlaceClick = (id) => {
+  const goDetailPageOfSelectedPlace = (id) => {
     navigate(`/places/${id}`);
   };
 
@@ -108,7 +113,8 @@ export default function MapPage() {
       {!filterPageOn && !filteredListsPageOn ? (
         <div>
           <FilterBar
-            handleFilterClick={handleFilterClick}
+            goFilterPage={goFilterPage}
+            resetFilter={resetFilter}
             sido={sido}
             sigungu={sigungu}
             category={category}
@@ -132,7 +138,7 @@ export default function MapPage() {
         : filterPageOn && !filteredListsPageOn ? (
           <Filters
             setFilteredPlaces={setFilteredPlaces}
-            handleFilterCloseClick={handleFilterCloseClick}
+            goBackFromFilterPage={goBackFromFilterPage}
             setSido={setSido}
             setSigungu={setSigungu}
             setPlaceCategory={setPlaceCategory}
@@ -145,8 +151,8 @@ export default function MapPage() {
         ) : (
           <FilteredPlacesList
             places={places}
-            handleListPageCloseClick={handleListPageCloseClick}
-            handleOnePlaceClick={handleOnePlaceClick}
+            goBackFromPlaceListPage={goBackFromPlaceListPage}
+            goDetailPageOfSelectedPlace={goDetailPageOfSelectedPlace}
           />
         )}
     </div>
