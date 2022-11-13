@@ -5,7 +5,7 @@ import DatePicker from 'react-datepicker';
 import { addDays } from 'date-fns';
 import formatDate from '../utils/dateOfVisitFormatter';
 
-export default function UserReviewForm() {
+export default function UserReviewForm({ handleCancelWritingClick }) {
   const [startDate, setStartDate] = useState(new Date());
 
   const handleUserReviewSubmit = (event) => {
@@ -14,10 +14,6 @@ export default function UserReviewForm() {
 
   const handleUserReviewBodyChange = (event) => {
     console.log(event.target.value);
-  };
-
-  const handleCancelWritingClick = () => {
-    //
   };
 
   const handleSetStartDate = (date) => {
