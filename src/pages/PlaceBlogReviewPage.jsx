@@ -35,34 +35,34 @@ export default function PlaceBlogReviewPage() {
     window.open(blogReviewUrl, '_blank');
   };
 
-  const handlePlaceDetailCloseClick = () => {
-    //
+  const goToPrevPage = () => {
+    navigate(-1);
   };
 
   const handleBookmarkClick = () => {
     //
   };
 
-  const handlePlaceDetailTapClick = () => {
+  const goToPlaceDetail = () => {
     navigate(`/places/${placeId}`);
   };
 
-  const handleBlogReviewTapClick = () => {
+  const goToBlogReview = () => {
     navigate(`/places/${placeId}/blog-review`);
   };
 
-  const handleUserReviewTapClick = () => {
+  const goToUserReview = () => {
     navigate(`/places/${placeId}/user-review`);
   };
 
   return (
     <Container>
       <PlaceDetailTap
-        handlePlaceDetailCloseClick={handlePlaceDetailCloseClick}
+        goToPrevPage={goToPrevPage}
         handleBookmarkClick={handleBookmarkClick}
-        handlePlaceDetailTapClick={handlePlaceDetailTapClick}
-        handleBlogReviewTapClick={handleBlogReviewTapClick}
-        handleUserReviewTapClick={handleUserReviewTapClick}
+        goToPlaceDetail={goToPlaceDetail}
+        goToBlogReview={goToBlogReview}
+        goToUserReview={goToUserReview}
         size={blogReviews?.length || 0}
       />
       {blogReviews ? (

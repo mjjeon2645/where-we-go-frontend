@@ -73,6 +73,7 @@ export default class MapStore {
     this.sido = '';
     this.sigungu = '';
     this.category = '';
+    this.publish();
   }
 
   increaseImageNumber() {
