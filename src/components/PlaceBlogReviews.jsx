@@ -4,16 +4,6 @@ const Container = styled.div`
   padding: 3em 0;
 `;
 
-const Title = styled.h2`
-  font-size: 1.5em;
-  font-weight: bold;
-  padding-left: 2em;
-
-  strong {
-    color: #08ce5b;
-  }
-`;
-
 const Wrapper = styled.article`
   padding: 0 3em;    
 `;
@@ -73,11 +63,6 @@ const NoneMessage = styled.p`
 export default function PlaceBlogReviews({ blogReviews, handleToBlogPageClick }) {
   return (
     <Container>
-      <Title>
-        <strong>네이버</strong>
-        {' '}
-        블로그 리뷰
-      </Title>
       {blogReviews.length !== 0 ? (
         <Wrapper>
           <ul>
@@ -104,7 +89,6 @@ export default function PlaceBlogReviews({ blogReviews, handleToBlogPageClick })
       ) : (
         <NoneMessage>등록된 리뷰가 없습니다 😓</NoneMessage>
       )}
-
     </Container>
   );
 }

@@ -6,7 +6,7 @@ import config from '../config';
 const baseUrl = config.apiBaseUrl;
 
 export default class UserReviewApiService {
-  async fetchUserReviews(placeId) {
+  async fetchUsersReviews(placeId) {
     const url = `${baseUrl}/user-reviews/${placeId}`;
     const { data } = await axios.get(url);
     return data;

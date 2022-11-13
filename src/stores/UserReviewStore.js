@@ -20,8 +20,8 @@ export default class UserReviewStore {
     this.listeners.forEach((listener) => listener());
   }
 
-  async fetchUserReviews(placeId) {
-    const { averageRate, userReviews } = await userReviewApiService.fetchUserReviews(placeId);
+  async fetchUsersReviews(placeId) {
+    const { averageRate, userReviews } = await userReviewApiService.fetchUsersReviews(placeId);
     this.averageRate = averageRate;
     this.userReviews = userReviews;
     this.publish();

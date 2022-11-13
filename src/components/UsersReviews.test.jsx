@@ -1,15 +1,15 @@
 import { render, screen } from '@testing-library/react';
 
-import PlaceRateAndReview from './PlaceRateAndReview';
+import UsersReviews from './UsersReviews';
 
 const context = describe;
 
 let averageRate;
 let userReviews;
 
-describe('PlaceRateAndReview', () => {
-  function renderPlaceRateandReview() {
-    render(<PlaceRateAndReview
+describe('UsersReviews', () => {
+  function renderUsersReviews() {
+    render(<UsersReviews
       averageRate={averageRate}
       userReviews={userReviews}
     />);
@@ -21,8 +21,8 @@ describe('PlaceRateAndReview', () => {
       userReviews = [];
     });
 
-    it('renders PlaceRateAndReview without review', () => {
-      renderPlaceRateandReview();
+    it('renders UserReviews without review', () => {
+      renderUsersReviews();
 
       screen.getByText('0 / 5점');
       screen.getByText('0명 참여');
@@ -56,8 +56,8 @@ describe('PlaceRateAndReview', () => {
       ];
     });
 
-    it('renders PlaceRateAndReview without review', () => {
-      renderPlaceRateandReview();
+    it('renders UserReviews without review', () => {
+      renderUsersReviews();
 
       screen.getByText('4.38 / 5점');
       screen.getByText('2명 참여');

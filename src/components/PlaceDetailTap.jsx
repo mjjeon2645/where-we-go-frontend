@@ -1,6 +1,6 @@
 export default function PlaceDetailTap({
   handlePlaceDetailCloseClick, handleBookmarkClick, handlePlaceDetailTapClick,
-  handleBlogReviewTapClick, handlePlaceRateAndReviewTapClick, size,
+  handleBlogReviewTapClick, handleUserReviewTapClick, size,
 }) {
   return (
     <nav>
@@ -12,7 +12,7 @@ export default function PlaceDetailTap({
         {' '}
         {size}
       </button>
-      <button type="button" onClick={handlePlaceRateAndReviewTapClick}>평점/리뷰</button>
+      <button type="button" onClick={handleUserReviewTapClick}>평점/리뷰</button>
     </nav>
   );
 }

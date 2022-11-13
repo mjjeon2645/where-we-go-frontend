@@ -12,6 +12,9 @@ import MyPage from './pages/MyPage';
 import Header from './components/Header';
 import GlobalStyle from './styles/GlobalStyle';
 import PlaceDetailPage from './pages/PlaceDetailPage';
+import PlaceBlogReviewPage from './pages/PlaceBlogReviewPage';
+import PlaceUserReviewPage from './pages/PlaceUserReviewPage';
+import WritingReviewPage from './pages/WritingReviewPage';
 
 const Container = styled.div`
   background-color: #F0F2F5;
@@ -40,6 +43,9 @@ export default function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/map" element={<MapPage />} />
               <Route path="places/:id" element={<PlaceDetailPage />} />
+              <Route path="places/:id/blog-review" element={<PlaceBlogReviewPage />} />
+              <Route path="places/:id/user-review" element={<PlaceUserReviewPage />} />
+              <Route path="places/:id/write" element={<WritingReviewPage />} />
               <Route path="/top3" element={<TopThreePage />} />
               <Route path="/myaccount" element={<MyPage />} />
             </Routes>
