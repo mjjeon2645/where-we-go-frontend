@@ -67,6 +67,7 @@ export default function WritingReviewPage() {
         setMyReview={setMyReview}
         cancelWriting={cancelWriting}
         startDate={startDate}
+        myReview={myReview}
       />
     </Container>
   );

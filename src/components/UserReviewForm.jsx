@@ -4,7 +4,7 @@ import DatePicker from 'react-datepicker';
 import { addDays } from 'date-fns';
 
 export default function UserReviewForm({
-  writeReview, setDateOfVisit, setRate, setMyReview, cancelWriting, startDate,
+  writeReview, setDateOfVisit, setRate, setMyReview, cancelWriting, startDate, myReview,
 }) {
   const handleUserReviewSubmit = (event) => {
     event.preventDefault();
@@ -65,7 +65,11 @@ export default function UserReviewForm({
             maxLength="50"
             onChange={handleReviewChange}
           />
-          <p>/ 50자</p>
+          <p>
+            {myReview.length || 0}
+            {' '}
+            / 50자
+          </p>
         </div>
         <button type="submit">등록하기</button>
         <button type="button" onClick={handleCancelWritingClick}>취소하기</button>
