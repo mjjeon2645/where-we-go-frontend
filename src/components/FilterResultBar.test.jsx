@@ -1,8 +1,8 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 import FilterResultBar from './FilterResultBar';
 
-const handleFilterResultClick = jest.fn();
+const goFilteredPlaceListPage = jest.fn();
 let places;
 
 const context = describe;
@@ -10,7 +10,7 @@ const context = describe;
 describe('FilterResultBar', () => {
   function renderFilterResultBar() {
     render(<FilterResultBar
-      handleFilterResultClick={handleFilterResultClick}
+      goFilteredPlaceListPage={goFilteredPlaceListPage}
       places={places}
     />);
   }
@@ -27,12 +27,13 @@ describe('FilterResultBar', () => {
           name: '킹덤키즈풀빌라',
         },
       ];
-
-      renderFilterResultBar();
     });
 
     it('renders filter result bar contained 2개 words', () => {
-      screen.getByText('2개 장소 보러가기');
+      renderFilterResultBar();
+
+      fireEvent.click(screen.getByText('2개 장소 보러가기'));
+      expect(goFilteredPlaceListPage).toBeCalled();
     });
   });
 

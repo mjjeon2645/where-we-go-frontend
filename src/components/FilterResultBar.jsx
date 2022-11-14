@@ -27,8 +27,12 @@ const WithoutResult = styled.button`
 `;
 
 export default function FilterResultBar(
-  { handleFilterResultClick, places },
+  { goFilteredPlaceListPage, places },
 ) {
+  const handleFilterResultClick = () => {
+    goFilteredPlaceListPage();
+  };
+
   return (
     <div>
       {places.length === 0

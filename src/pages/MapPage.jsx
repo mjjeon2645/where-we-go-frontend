@@ -94,7 +94,7 @@ export default function MapPage() {
     setIsPlaceSelected(false);
   };
 
-  const handleFilterResultClick = () => {
+  const goFilteredPlaceListPage = () => {
     setFilteredListsPageOn(true);
   };
 
@@ -128,7 +128,7 @@ export default function MapPage() {
             )}
             {(sigungu && category) && (
               <FilterResultBar
-                handleFilterResultClick={handleFilterResultClick}
+                goFilteredPlaceListPage={goFilteredPlaceListPage}
                 places={places}
               />
             )}
