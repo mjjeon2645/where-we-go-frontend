@@ -69,15 +69,15 @@ export default function PlaceDetailPage() {
     navigate(`/places/${placeId}/user-review`);
   };
 
-  const handlePrevImageClick = () => {
+  const seePrevImage = () => {
     mapStore.decreaseImageNumber();
   };
 
-  const handleNextImageClick = () => {
+  const seeNextImage = () => {
     mapStore.increaseImageNumber();
   };
 
-  const handleAddressCopyClick = async (text) => {
+  const copyAddress = async (text) => {
     try {
       await navigator.clipboard.writeText(text);
 
@@ -115,9 +115,9 @@ export default function PlaceDetailPage() {
             <PlaceDetail
               imageNumber={imageNumber}
               selectedPlace={selectedPlace}
-              handlePrevImageClick={handlePrevImageClick}
-              handleNextImageClick={handleNextImageClick}
-              handleAddressCopyClick={handleAddressCopyClick}
+              seePrevImage={seePrevImage}
+              seeNextImage={seeNextImage}
+              copyAddress={copyAddress}
             />
             <MapArea ref={kakaoMap} />
           </div>

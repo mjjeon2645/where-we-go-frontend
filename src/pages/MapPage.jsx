@@ -97,7 +97,7 @@ export default function MapPage() {
     navigate(`/map?sido=${sido}&sigungu=${sigungu}&type=${category}`);
   };
 
-  const handlePlaceInformationPopupCloseClick = () => {
+  const closePopup = () => {
     setIsPlaceSelected(false);
   };
 
@@ -130,7 +130,7 @@ export default function MapPage() {
             {isPlaceSelected && (
               <PlaceInformationPopup
                 selectedPlace={selectedPlace}
-                handlePlaceInformationPopupCloseClick={handlePlaceInformationPopupCloseClick}
+                closePopup={closePopup}
               />
             )}
             {(sigungu && category) && (

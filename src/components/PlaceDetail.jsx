@@ -55,9 +55,21 @@ const AddressAndMiniMap = styled.section`
 `;
 
 export default function PlaceDetail({
-  imageNumber, selectedPlace, handlePrevImageClick, handleNextImageClick, handleAddressCopyClick,
+  imageNumber, selectedPlace, seePrevImage, seeNextImage, copyAddress,
 }) {
   const { imageSource, address, placeServices } = selectedPlace;
+
+  const handlePrevImageClick = () => {
+    seePrevImage();
+  };
+
+  const handleNextImageClick = () => {
+    seeNextImage();
+  };
+
+  const handleAddressCopyClick = (text) => {
+    copyAddress(text);
+  };
 
   return (
     <Container>
@@ -128,7 +140,12 @@ export default function PlaceDetail({
       <AddressAndMiniMap>
         <SectionTitle>주소</SectionTitle>
         <Address>{address.fullAddress}</Address>
-        <button type="button" onClick={() => handleAddressCopyClick(address.fullAddress)}>복사하기</button>
+        <button
+          type="button"
+          onClick={() => handleAddressCopyClick(address.fullAddress)}
+        >
+          복사하기
+        </button>
       </AddressAndMiniMap>
     </Container>
   );
