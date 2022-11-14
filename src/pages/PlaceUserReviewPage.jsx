@@ -48,7 +48,7 @@ export default function PlaceUserReviewPage() {
     navigate(`/places/${placeId}/user-review`);
   };
 
-  const handleGoToRateClick = () => {
+  const goToReviewForm = () => {
     navigate(`/places/${placeId}/write`);
   };
 
@@ -65,7 +65,7 @@ export default function PlaceUserReviewPage() {
       {userReviews ? (
         <Wrapper>
           <PlaceAverageRate averageRate={averageRate} userReviews={userReviews} />
-          <MyReview handleGoToRateClick={handleGoToRateClick} />
+          <MyReview goToReviewForm={goToReviewForm} />
           <OthersReviews userReviews={userReviews} />
         </Wrapper>
       ) : (

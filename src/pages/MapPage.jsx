@@ -90,6 +90,13 @@ export default function MapPage() {
     setFilterPageOn(false);
   };
 
+  const runFiltering = () => {
+    setFilterPageOn(false);
+    setFilterResultBarOn(true);
+    setFilteredPlaces(sido, sigungu, category);
+    navigate(`/map?sido=${sido}&sigungu=${sigungu}&type=${category}`);
+  };
+
   const handlePlaceInformationPopupCloseClick = () => {
     setIsPlaceSelected(false);
   };
@@ -137,13 +144,11 @@ export default function MapPage() {
       )
         : filterPageOn && !filteredListsPageOn ? (
           <Filters
-            setFilteredPlaces={setFilteredPlaces}
             goBackFromFilterPage={goBackFromFilterPage}
+            runFiltering={runFiltering}
             setSido={setSido}
             setSigungu={setSigungu}
             setPlaceCategory={setPlaceCategory}
-            setFilterPageOn={setFilterPageOn}
-            setFilterResultBarOn={setFilterResultBarOn}
             sido={sido}
             sigungu={sigungu}
             category={category}

@@ -1,5 +1,3 @@
-import { useNavigate } from 'react-router-dom';
-
 import styled from 'styled-components';
 import PlaceLocationFilter from './PlaceLocationFilter';
 import PlaceCategoryFilter from './PlaceCategoryFilter';
@@ -27,11 +25,9 @@ const FilterButton = styled.button`
 `;
 
 export default function Filters({
-  setFilteredPlaces, goBackFromFilterPage, setSido, setSigungu,
-  setPlaceCategory, setFilterPageOn, setFilterResultBarOn, sido, sigungu, category,
+  goBackFromFilterPage, runFiltering, setSido, setSigungu, setPlaceCategory,
+  sido, sigungu, category,
 }) {
-  const navigate = useNavigate();
-
   const handleBackClick = () => {
     goBackFromFilterPage();
   };
@@ -49,10 +45,7 @@ export default function Filters({
       return;
     }
 
-    setFilterPageOn(false);
-    setFilterResultBarOn(true);
-    setFilteredPlaces(sido, sigungu, category);
-    navigate(`/map?sido=${sido}&sigungu=${sigungu}&type=${category}`);
+    runFiltering();
   };
 
   const handlePlaceCategoryClick = (data) => {
