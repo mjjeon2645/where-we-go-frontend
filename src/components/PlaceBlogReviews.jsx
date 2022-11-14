@@ -60,7 +60,11 @@ const NoneMessage = styled.p`
   margin-top: 5em;
 `;
 
-export default function PlaceBlogReviews({ blogReviews, handleToBlogPageClick }) {
+export default function PlaceBlogReviews({ blogReviews, goToBlogWebPage }) {
+  const handleToBlogWebPageClick = (url) => {
+    goToBlogWebPage(url);
+  };
+
   return (
     <Container>
       {blogReviews.length !== 0 ? (
@@ -68,7 +72,7 @@ export default function PlaceBlogReviews({ blogReviews, handleToBlogPageClick })
           <ul>
             {blogReviews.map((blogReview) => (
               <li key={blogReview.id}>
-                <Review type="button" onClick={() => handleToBlogPageClick(blogReview.url)}>
+                <Review type="button" onClick={() => handleToBlogWebPageClick(blogReview.url)}>
                   <ContentArea>
                     <p className="title">{blogReview.title}</p>
                     <p className="date">{blogReview.date}</p>

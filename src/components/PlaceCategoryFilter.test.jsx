@@ -2,13 +2,17 @@ import { fireEvent, render, screen } from '@testing-library/react';
 
 import PlaceCategoryFilter from './PlaceCategoryFilter';
 
-const handlePlaceCategoryClick = jest.fn();
-
 const context = describe;
+
+const onCategoryClick = jest.fn();
+let category;
 
 describe('PlaceTypesFilter', () => {
   function renderPlaceCategoryFilter() {
-    render(<PlaceCategoryFilter handlePlaceCategoryClick={handlePlaceCategoryClick} />);
+    render(<PlaceCategoryFilter
+      onCategoryClick={onCategoryClick}
+      category={category}
+    />);
   }
 
   beforeEach(() => {
@@ -33,7 +37,7 @@ describe('PlaceTypesFilter', () => {
     it('called the function related the button user clicked', () => {
       fireEvent.click(screen.getByText('스포츠/레저'));
 
-      expect(handlePlaceCategoryClick).toBeCalled();
+      expect(onCategoryClick).toBeCalled();
     });
   });
 });

@@ -87,12 +87,16 @@ export default function PlaceDetailPage() {
     }
   };
 
-  const toggleContactModal = () => {
+  const toggleModal = () => {
     setIsContactModalOpen(!isContactModalOpen);
   };
 
-  const handlePlaceContactClick = () => {
-    toggleContactModal();
+  const getContactNumber = () => {
+    toggleModal();
+  };
+
+  const openHomePage = (url) => {
+    window.open(url, '_blank');
   };
 
   return (
@@ -119,9 +123,10 @@ export default function PlaceDetailPage() {
           </div>
           <PlaceContactBar
             contact={contact}
-            toggleContactModal={toggleContactModal}
             isContactModalOpen={isContactModalOpen}
-            handlePlaceContactClick={handlePlaceContactClick}
+            toggleModal={toggleModal}
+            getContactNumber={getContactNumber}
+            openHomePage={openHomePage}
           />
         </div>
       ) : (

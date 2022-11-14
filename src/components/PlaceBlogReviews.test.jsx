@@ -6,13 +6,13 @@ const context = describe;
 
 let blogReviews;
 
-const handleToBlogPageClick = jest.fn();
+const goToBlogWebPage = jest.fn();
 
 describe('PlaceBlogReviews', () => {
   function renderPlaceBlogReviews() {
     render(<PlaceBlogReviews
       blogReviews={blogReviews}
-      handleToBlogPageClick={handleToBlogPageClick}
+      goToBlogWebPage={goToBlogWebPage}
     />);
   }
 
@@ -52,9 +52,7 @@ describe('PlaceBlogReviews', () => {
     it('renders PlaceBlogReviews', () => {
       renderPlaceBlogReviews();
 
-      screen.getByText(/네이버/);
-      screen.getByText(/블로그 리뷰/);
-      screen.getByText('내돈내산! 아기텐트 코아코아 아이스크림마켓 키즈텐트');
+      screen.getByText(/내돈내산! 아기텐트 코아코아 아이스크림마켓 키즈텐트/);
     });
   });
 
@@ -77,7 +75,7 @@ describe('PlaceBlogReviews', () => {
       renderPlaceBlogReviews();
 
       fireEvent.click(screen.getByText('내돈내산! 아기텐트 코아코아 아이스크림마켓 키즈텐트'));
-      expect(handleToBlogPageClick).toBeCalled();
+      expect(goToBlogWebPage).toBeCalled();
     });
   });
 

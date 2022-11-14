@@ -48,7 +48,7 @@ export default function Filters({
     runFiltering();
   };
 
-  const handlePlaceCategoryClick = (data) => {
+  const onCategoryClick = (data) => {
     setPlaceCategory(data.category);
   };
 
@@ -64,7 +64,7 @@ export default function Filters({
         />
         <div className="placetype">
           <PlaceCategoryFilter
-            handlePlaceCategoryClick={handlePlaceCategoryClick}
+            onCategoryClick={onCategoryClick}
             category={category}
           />
         </div>

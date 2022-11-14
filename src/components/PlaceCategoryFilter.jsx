@@ -32,8 +32,12 @@ const CategoryOption = styled.button`
   width: 90%;
 `;
 
-export default function PlaceCagetoryFilter({ handlePlaceCategoryClick, category }) {
+export default function PlaceCagetoryFilter({ onCategoryClick, category }) {
   const categories = loadCategoryOptions();
+
+  const handlePlaceCategoryClick = (value) => {
+    onCategoryClick(value);
+  };
 
   return (
     <Container>

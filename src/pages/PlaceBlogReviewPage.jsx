@@ -31,7 +31,7 @@ export default function PlaceBlogReviewPage() {
     blogReviewStore.fetchBlogReviews(placeId);
   }, []);
 
-  const handleToBlogPageClick = (blogReviewUrl) => {
+  const goToBlogWebPage = (blogReviewUrl) => {
     window.open(blogReviewUrl, '_blank');
   };
 
@@ -74,7 +74,7 @@ export default function PlaceBlogReviewPage() {
           </Title>
           <PlaceBlogReviews
             blogReviews={blogReviews}
-            handleToBlogPageClick={handleToBlogPageClick}
+            goToBlogWebPage={goToBlogWebPage}
           />
         </div>
       ) : (
