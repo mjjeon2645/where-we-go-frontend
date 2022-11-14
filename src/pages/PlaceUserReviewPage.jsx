@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import PlaceAverageRate from '../components/PlaceAverageRate';
 import MyReview from '../components/MyReview';
-import OthersReviews from '../components/UsersReviews';
+import UsersReviews from '../components/UsersReviews';
 import useUserReviewStore from '../hooks/useUserReviewStore';
 import PlaceDetailTap from '../components/PlaceDetailTap';
 import useBlogReviewStore from '../hooks/useBlogReviewStore';
@@ -66,7 +66,7 @@ export default function PlaceUserReviewPage() {
         <Wrapper>
           <PlaceAverageRate averageRate={averageRate} userReviews={userReviews} />
           <MyReview goToReviewForm={goToReviewForm} />
-          <OthersReviews userReviews={userReviews} />
+          <UsersReviews userReviews={userReviews} />
         </Wrapper>
       ) : (
         <p>now loading...</p>

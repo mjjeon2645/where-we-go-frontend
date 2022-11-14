@@ -15,7 +15,7 @@ jest.mock('react-router-dom', () => ({
 test('Header', () => {
   render(<Header />);
 
-  screen.getByText('지도 검색');
+  screen.getByText('장소 검색');
   screen.getByText('Top 3');
   screen.getByText('My메뉴');
 });

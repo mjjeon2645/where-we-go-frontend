@@ -4,7 +4,7 @@ const Popup = styled.div`
     position: absolute;
     display: flex;
     flex-direction: column;
-    bottom: 3%;
+    bottom: 10%;
     left: 50%;
     transform: translate(-50%, 0);
     z-index: 10;

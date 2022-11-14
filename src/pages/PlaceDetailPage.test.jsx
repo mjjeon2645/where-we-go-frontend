@@ -3,6 +3,14 @@ import PlaceDetailPage from './PlaceDetailPage';
 
 const context = describe;
 
+const navigate = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+  useNavigate() {
+    return navigate;
+  },
+}));
+
 describe('PlaceDetailPage', () => {
   function renderPlaceDetailPage() {
     render(<PlaceDetailPage />);

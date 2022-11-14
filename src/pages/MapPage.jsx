@@ -19,9 +19,9 @@ const MapArea = styled.div`
   display: relative;
   width: 100%;
   max-width: 600px;
-  max-height: 600px;
+  max-height: 900px;
   min-width: 400px;
-  min-height: 500px;
+  min-height: 700px;
 `;
 
 export default function MapPage() {

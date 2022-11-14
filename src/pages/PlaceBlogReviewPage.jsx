@@ -1,11 +1,18 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import styled from 'styled-components';
+
 import PlaceBlogReviews from '../components/PlaceBlogReviews';
 import PlaceDetailTap from '../components/PlaceDetailTap';
+
 import useBlogReviewStore from '../hooks/useBlogReviewStore';
 
 const Container = styled.div`
+`;
+
+const Wrapper = styled.article`
+  padding-top: 3em;
 `;
 
 const Title = styled.h2`
@@ -66,7 +73,7 @@ export default function PlaceBlogReviewPage() {
         size={blogReviews?.length || 0}
       />
       {blogReviews ? (
-        <div>
+        <Wrapper>
           <Title>
             <strong>네이버</strong>
             {' '}
@@ -76,7 +83,7 @@ export default function PlaceBlogReviewPage() {
             blogReviews={blogReviews}
             goToBlogWebPage={goToBlogWebPage}
           />
-        </div>
+        </Wrapper>
       ) : (
         <p>now loading...</p>
       )}

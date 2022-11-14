@@ -36,7 +36,7 @@ export default function Header() {
         <Navigation>
           <List>
             <li>
-              <Link to="/map">지도 검색</Link>
+              <Link to="/map">장소 검색</Link>
             </li>
             <li>
               <Link to="/top3">Top 3</Link>

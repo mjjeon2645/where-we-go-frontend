@@ -7,6 +7,7 @@ import { loadKakaoMap } from '../utils/KakaoMap';
 import MapPage from './MapPage';
 
 jest.mock('../utils/KakaoMap');
+
 const fetchFilteredPositions = jest.fn();
 
 jest.mock('../hooks/useMapStore', () => () => ({
@@ -25,7 +26,6 @@ describe('MapPage', () => {
       </MemoryRouter>,
     );
 
-    screen.getByText('Map Page');
     expect(loadKakaoMap).toBeCalled();
     expect(fetchFilteredPositions).toBeCalled();
   });

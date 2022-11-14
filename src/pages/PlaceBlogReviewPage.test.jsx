@@ -4,6 +4,14 @@ import PlaceBlogReviewPage from './PlaceBlogReviewPage';
 
 const context = describe;
 
+const navigate = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+  useNavigate() {
+    return navigate;
+  },
+}));
+
 describe('PlaceBlogReviewPage', () => {
   function renderPlaceBlogReviewPage() {
     render(<PlaceBlogReviewPage />);

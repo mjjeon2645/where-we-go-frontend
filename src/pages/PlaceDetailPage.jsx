@@ -12,6 +12,10 @@ import { loadMiniKakaoMap } from '../utils/KakaoMap';
 const Container = styled.div`
 `;
 
+const Wrapper = styled.article`
+  padding: 3em 3em 5em 3em;
+`;
+
 const MapArea = styled.div`
   width: 400px;
   height: 250px;
@@ -111,7 +115,7 @@ export default function PlaceDetailPage() {
             goToUserReview={goToUserReview}
             size={blogReviews?.length || 0}
           />
-          <div>
+          <Wrapper>
             <PlaceDetail
               imageNumber={imageNumber}
               selectedPlace={selectedPlace}
@@ -120,7 +124,7 @@ export default function PlaceDetailPage() {
               copyAddress={copyAddress}
             />
             <MapArea ref={kakaoMap} />
-          </div>
+          </Wrapper>
           <PlaceContactBar
             contact={contact}
             isContactModalOpen={isContactModalOpen}

@@ -6,7 +6,13 @@ import useUserReviewStore from '../hooks/useUserReviewStore';
 import formatDate from '../utils/dateOfVisitFormatter';
 
 const Container = styled.div`
-  padding-top: 3em;
+  padding: 3em;
+`;
+
+const Title = styled.h2`
+  font-size: 1.3em;
+  font-weight: bold;
+  margin-bottom: 2em;
 `;
 
 export default function WritingReviewPage() {
@@ -59,7 +65,7 @@ export default function WritingReviewPage() {
 
   return (
     <Container>
-      <h2>이 곳, 어떠셨나요?</h2>
+      <Title>이 곳, 어떠셨나요?</Title>
       <UserReviewForm
         writeReview={writeReview}
         setDateOfVisit={setDateOfVisit}
