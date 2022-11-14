@@ -78,11 +78,19 @@ const ImageArea = styled.div`
 `;
 
 export default function FilteredPlacesList({
-  places, handleListPageCloseClick, handleOnePlaceClick,
+  places, goBackFromPlaceListPage, goDetailPageOfSelectedPlace,
 }) {
+  const handleBackFromListPageClick = () => {
+    goBackFromPlaceListPage();
+  };
+
+  const handleOnePlaceClick = (placeId) => {
+    goDetailPageOfSelectedPlace(placeId);
+  };
+
   return (
     <Container>
-      <BackButton type="button" onClick={handleListPageCloseClick}> &lt; 돌아가기</BackButton>
+      <BackButton type="button" onClick={handleBackFromListPageClick}> &lt; 돌아가기</BackButton>
       <Article>
         <Title>
           {places.length}

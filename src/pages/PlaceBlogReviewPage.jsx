@@ -1,11 +1,18 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import styled from 'styled-components';
+
 import PlaceBlogReviews from '../components/PlaceBlogReviews';
 import PlaceDetailTap from '../components/PlaceDetailTap';
+
 import useBlogReviewStore from '../hooks/useBlogReviewStore';
 
 const Container = styled.div`
+`;
+
+const Wrapper = styled.article`
+  padding-top: 3em;
 `;
 
 const Title = styled.h2`
@@ -31,42 +38,42 @@ export default function PlaceBlogReviewPage() {
     blogReviewStore.fetchBlogReviews(placeId);
   }, []);
 
-  const handleToBlogPageClick = (blogReviewUrl) => {
+  const goToBlogWebPage = (blogReviewUrl) => {
     window.open(blogReviewUrl, '_blank');
   };
 
-  const handlePlaceDetailCloseClick = () => {
-    //
+  const goToPrevPage = () => {
+    navigate(-1);
   };
 
   const handleBookmarkClick = () => {
     //
   };
 
-  const handlePlaceDetailTapClick = () => {
+  const goToPlaceDetail = () => {
     navigate(`/places/${placeId}`);
   };
 
-  const handleBlogReviewTapClick = () => {
+  const goToBlogReview = () => {
     navigate(`/places/${placeId}/blog-review`);
   };
 
-  const handleUserReviewTapClick = () => {
+  const goToUserReview = () => {
     navigate(`/places/${placeId}/user-review`);
   };
 
   return (
     <Container>
       <PlaceDetailTap
-        handlePlaceDetailCloseClick={handlePlaceDetailCloseClick}
+        goToPrevPage={goToPrevPage}
         handleBookmarkClick={handleBookmarkClick}
-        handlePlaceDetailTapClick={handlePlaceDetailTapClick}
-        handleBlogReviewTapClick={handleBlogReviewTapClick}
-        handleUserReviewTapClick={handleUserReviewTapClick}
+        goToPlaceDetail={goToPlaceDetail}
+        goToBlogReview={goToBlogReview}
+        goToUserReview={goToUserReview}
         size={blogReviews?.length || 0}
       />
       {blogReviews ? (
-        <div>
+        <Wrapper>
           <Title>
             <strong>네이버</strong>
             {' '}
@@ -74,9 +81,9 @@ export default function PlaceBlogReviewPage() {
           </Title>
           <PlaceBlogReviews
             blogReviews={blogReviews}
-            handleToBlogPageClick={handleToBlogPageClick}
+            goToBlogWebPage={goToBlogWebPage}
           />
-        </div>
+        </Wrapper>
       ) : (
         <p>now loading...</p>
       )}

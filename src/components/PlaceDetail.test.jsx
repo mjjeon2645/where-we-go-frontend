@@ -5,18 +5,19 @@ const context = describe;
 
 let imageNumber;
 let selectedPlace;
-const handlePrevImageClick = jest.fn();
-const handleNextImageClick = jest.fn();
-const handleAddressCopyClick = jest.fn();
+
+const seePrevImage = jest.fn();
+const seeNextImage = jest.fn();
+const copyAddress = jest.fn();
 
 describe('PlaceDetail', () => {
   function renderPlaceDetail() {
     render(<PlaceDetail
       imageNumber={imageNumber}
       selectedPlace={selectedPlace}
-      handlePrevImageClick={handlePrevImageClick}
-      handleNextImageClick={handleNextImageClick}
-      handleAddressCopyClick={handleAddressCopyClick}
+      seePrevImage={seePrevImage}
+      seeNextImage={seeNextImage}
+      copyAddress={copyAddress}
     />);
   }
 
@@ -66,7 +67,7 @@ describe('PlaceDetail', () => {
       renderPlaceDetail();
 
       fireEvent.click(screen.getByText('복사하기'));
-      expect(handleAddressCopyClick).toBeCalled();
+      expect(copyAddress).toBeCalled();
     });
   });
 
@@ -75,10 +76,10 @@ describe('PlaceDetail', () => {
       renderPlaceDetail();
 
       fireEvent.click(screen.getByText('<'));
-      expect(handlePrevImageClick).toBeCalled();
+      expect(seePrevImage).toBeCalled();
 
       fireEvent.click(screen.getByText('>'));
-      expect(handleNextImageClick).toBeCalled();
+      expect(seeNextImage).toBeCalled();
     });
   });
 });

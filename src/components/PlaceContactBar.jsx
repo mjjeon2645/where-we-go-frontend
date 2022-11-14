@@ -68,15 +68,27 @@ const StyledModal = Modal.styled`
 `;
 
 export default function PlaceContactBar({
-  contact, toggleContactModal, isContactModalOpen, handlePlaceContactClick,
+  contact, isContactModalOpen, toggleModal, getContactNumber, openHomePage,
 }) {
+  const handlePlaceContactClick = () => {
+    getContactNumber();
+  };
+
+  const handlePlaceHompageOpenClick = (url) => {
+    openHomePage(url);
+  };
+
+  const toggleContactModal = () => {
+    toggleModal();
+  };
+
   return (
     <Container>
       <div>
         <Phone type="button" onClick={handlePlaceContactClick}>연락하기</Phone>
         <HomePage
           type="button"
-          onClick={() => window.open(contact.homepage, '_blank')}
+          onClick={() => handlePlaceHompageOpenClick(contact.homepage)}
         >
           홈페이지
         </HomePage>

@@ -12,6 +12,10 @@ import { loadMiniKakaoMap } from '../utils/KakaoMap';
 const Container = styled.div`
 `;
 
+const Wrapper = styled.article`
+  padding: 3em 3em 5em 3em;
+`;
+
 const MapArea = styled.div`
   width: 400px;
   height: 250px;
@@ -49,35 +53,35 @@ export default function PlaceDetailPage() {
     fetchData();
   }, []);
 
-  const handlePlaceDetailCloseClick = () => {
-    //
+  const goToPrevPage = () => {
+    navigate(-1);
   };
 
   const handleBookmarkClick = () => {
     //
   };
 
-  const handlePlaceDetailTapClick = () => {
+  const goToPlaceDetail = () => {
     navigate(`/places/${placeId}`);
   };
 
-  const handleBlogReviewTapClick = () => {
+  const goToBlogReview = () => {
     navigate(`/places/${placeId}/blog-review`);
   };
 
-  const handleUserReviewTapClick = () => {
+  const goToUserReview = () => {
     navigate(`/places/${placeId}/user-review`);
   };
 
-  const handlePrevImageClick = () => {
+  const seePrevImage = () => {
     mapStore.decreaseImageNumber();
   };
 
-  const handleNextImageClick = () => {
+  const seeNextImage = () => {
     mapStore.increaseImageNumber();
   };
 
-  const handleAddressCopyClick = async (text) => {
+  const copyAddress = async (text) => {
     try {
       await navigator.clipboard.writeText(text);
 
@@ -87,12 +91,16 @@ export default function PlaceDetailPage() {
     }
   };
 
-  const toggleContactModal = () => {
+  const toggleModal = () => {
     setIsContactModalOpen(!isContactModalOpen);
   };
 
-  const handlePlaceContactClick = () => {
-    toggleContactModal();
+  const getContactNumber = () => {
+    toggleModal();
+  };
+
+  const openHomePage = (url) => {
+    window.open(url, '_blank');
   };
 
   return (
@@ -100,28 +108,29 @@ export default function PlaceDetailPage() {
       {selectedPlace && imageSource ? (
         <div>
           <PlaceDetailTap
-            handlePlaceDetailCloseClick={handlePlaceDetailCloseClick}
+            goToPrevPage={goToPrevPage}
             handleBookmarkClick={handleBookmarkClick}
-            handlePlaceDetailTapClick={handlePlaceDetailTapClick}
-            handleBlogReviewTapClick={handleBlogReviewTapClick}
-            handleUserReviewTapClick={handleUserReviewTapClick}
+            goToPlaceDetail={goToPlaceDetail}
+            goToBlogReview={goToBlogReview}
+            goToUserReview={goToUserReview}
             size={blogReviews?.length || 0}
           />
-          <div>
+          <Wrapper>
             <PlaceDetail
               imageNumber={imageNumber}
               selectedPlace={selectedPlace}
-              handlePrevImageClick={handlePrevImageClick}
-              handleNextImageClick={handleNextImageClick}
-              handleAddressCopyClick={handleAddressCopyClick}
+              seePrevImage={seePrevImage}
+              seeNextImage={seeNextImage}
+              copyAddress={copyAddress}
             />
             <MapArea ref={kakaoMap} />
-          </div>
+          </Wrapper>
           <PlaceContactBar
             contact={contact}
-            toggleContactModal={toggleContactModal}
             isContactModalOpen={isContactModalOpen}
-            handlePlaceContactClick={handlePlaceContactClick}
+            toggleModal={toggleModal}
+            getContactNumber={getContactNumber}
+            openHomePage={openHomePage}
           />
         </div>
       ) : (

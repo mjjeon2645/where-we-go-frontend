@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import PlaceAverageRate from '../components/PlaceAverageRate';
 import MyReview from '../components/MyReview';
-import OthersReviews from '../components/UsersReviews';
+import UsersReviews from '../components/UsersReviews';
 import useUserReviewStore from '../hooks/useUserReviewStore';
 import PlaceDetailTap from '../components/PlaceDetailTap';
 import useBlogReviewStore from '../hooks/useBlogReviewStore';
@@ -28,45 +28,45 @@ export default function PlaceUserReviewPage() {
     userReviewStore.fetchUsersReviews(placeId);
   }, []);
 
-  const handlePlaceDetailCloseClick = () => {
-    //
+  const goToPrevPage = () => {
+    navigate(-1);
   };
 
   const handleBookmarkClick = () => {
     //
   };
 
-  const handlePlaceDetailTapClick = () => {
+  const goToPlaceDetail = () => {
     navigate(`/places/${placeId}`);
   };
 
-  const handleBlogReviewTapClick = () => {
+  const goToBlogReview = () => {
     navigate(`/places/${placeId}/blog-review`);
   };
 
-  const handleUserReviewTapClick = () => {
+  const goToUserReview = () => {
     navigate(`/places/${placeId}/user-review`);
   };
 
-  const handleGoToRateClick = () => {
+  const goToReviewForm = () => {
     navigate(`/places/${placeId}/write`);
   };
 
   return (
     <div>
       <PlaceDetailTap
-        handlePlaceDetailCloseClick={handlePlaceDetailCloseClick}
+        goToPrevPage={goToPrevPage}
         handleBookmarkClick={handleBookmarkClick}
-        handlePlaceDetailTapClick={handlePlaceDetailTapClick}
-        handleBlogReviewTapClick={handleBlogReviewTapClick}
-        handleUserReviewTapClick={handleUserReviewTapClick}
+        goToPlaceDetail={goToPlaceDetail}
+        goToBlogReview={goToBlogReview}
+        goToUserReview={goToUserReview}
         size={blogReviews?.length || 0}
       />
       {userReviews ? (
         <Wrapper>
           <PlaceAverageRate averageRate={averageRate} userReviews={userReviews} />
-          <MyReview handleGoToRateClick={handleGoToRateClick} />
-          <OthersReviews userReviews={userReviews} />
+          <MyReview goToReviewForm={goToReviewForm} />
+          <UsersReviews userReviews={userReviews} />
         </Wrapper>
       ) : (
         <p>now loading...</p>

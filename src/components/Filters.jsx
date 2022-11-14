@@ -1,5 +1,3 @@
-import { useNavigate } from 'react-router-dom';
-
 import styled from 'styled-components';
 import PlaceLocationFilter from './PlaceLocationFilter';
 import PlaceCategoryFilter from './PlaceCategoryFilter';
@@ -27,10 +25,12 @@ const FilterButton = styled.button`
 `;
 
 export default function Filters({
-  setFilteredPlaces, handleFilterCloseClick, setSido, setSigungu,
-  setPlaceCategory, setFilterPageOn, setFilterResultBarOn, sido, sigungu, category,
+  goBackFromFilterPage, runFiltering, setSido, setSigungu, setPlaceCategory,
+  sido, sigungu, category,
 }) {
-  const navigate = useNavigate();
+  const handleBackClick = () => {
+    goBackFromFilterPage();
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -45,19 +45,16 @@ export default function Filters({
       return;
     }
 
-    setFilterPageOn(false);
-    setFilterResultBarOn(true);
-    setFilteredPlaces(sido, sigungu, category);
-    navigate(`/map?sido=${sido}&sigungu=${sigungu}&type=${category}`);
+    runFiltering();
   };
 
-  const handlePlaceCategoryClick = (data) => {
+  const onCategoryClick = (data) => {
     setPlaceCategory(data.category);
   };
 
   return (
     <Wrapper>
-      <BackButton type="button" onClick={handleFilterCloseClick}> &lt; 돌아가기</BackButton>
+      <BackButton type="button" onClick={handleBackClick}> &lt; 돌아가기</BackButton>
       <form id="filter" onSubmit={handleSubmit}>
         <PlaceLocationFilter
           setSido={setSido}
@@ -67,7 +64,7 @@ export default function Filters({
         />
         <div className="placetype">
           <PlaceCategoryFilter
-            handlePlaceCategoryClick={handlePlaceCategoryClick}
+            onCategoryClick={onCategoryClick}
             category={category}
           />
         </div>

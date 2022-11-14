@@ -6,13 +6,13 @@ const context = describe;
 
 let selectedPlace;
 
-const handlePlaceInformationPopupCloseClick = jest.fn();
+const closePopup = jest.fn();
 
 describe('PlaceInformationPopup', () => {
   function renderPlaceInformationPopup() {
     render(<PlaceInformationPopup
       selectedPlace={selectedPlace}
-      handlePlaceInformationPopupCloseClick={handlePlaceInformationPopupCloseClick}
+      closePopup={closePopup}
     />);
   }
 
@@ -63,7 +63,7 @@ describe('PlaceInformationPopup', () => {
 
       fireEvent.click(screen.getByText('X'));
 
-      expect(handlePlaceInformationPopupCloseClick).toBeCalled();
+      expect(closePopup).toBeCalled();
     });
   });
 });

@@ -1,5 +1,4 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 
 import Filters from './Filters';
 
@@ -12,29 +11,25 @@ jest.mock('react-router-dom', () => ({
 }));
 const context = describe;
 
-const setFilteredPlaces = jest.fn();
-const handleFilterCloseClick = jest.fn();
+const goBackFromFilterPage = jest.fn();
+const runFiltering = jest.fn();
 const setSido = jest.fn();
 const setSigungu = jest.fn();
 const setPlaceCategory = jest.fn();
-const setFilterPageOn = jest.fn();
-const setFilterResultBarOn = jest.fn();
 
 let sido;
 let sigungu;
 let category;
 
 describe('Filters', () => {
-  function renderFilter() {
+  function renderFilters() {
     render(
       <Filters
-        setFilteredPlaces={setFilteredPlaces}
-        handleFilterCloseClick={handleFilterCloseClick}
+        goBackFromFilterPage={goBackFromFilterPage}
+        runFiltering={runFiltering}
         setSido={setSido}
         setSigungu={setSigungu}
         setPlaceCategory={setPlaceCategory}
-        setFilterPageOn={setFilterPageOn}
-        setFilterResultBarOn={setFilterResultBarOn}
         sido={sido}
         sigungu={sigungu}
         category={category}
@@ -44,34 +39,18 @@ describe('Filters', () => {
 
   context('renders Filters', () => {
     beforeEach(() => {
-      renderFilter();
+      renderFilters();
     });
 
     it('renders title and filter options', () => {
       screen.getByText(/돌아가기/);
+      screen.getByText(/어디로 갈까요?/);
+      screen.getByText('시/도');
+      screen.getByText('어떤 곳을 원하세요?');
       screen.getByText('필터 적용하기');
+
+      fireEvent.click(screen.getByText(/돌아가기/));
+      expect(goBackFromFilterPage).toBeCalled();
     });
   });
-
-  // context('select all filter options and submit', () => {
-  //   beforeEach(() => {
-  //     renderFilter();
-  //   });
-
-  // TODO. option(select box) 선택방법 해결안됨
-
-  // it('filters places', () => {
-  //   fireEvent.click(screen.getByText('서울'));
-  //   userEvent.selectOptions(screen.getByRole('option', { name: '전체' }));
-  //   fireEvent.click(screen.getByText('자연'));
-  //   fireEvent.click(screen.getByText('필터 적용하기'));
-
-  //   expect(setFilteredPositions).toBeCalled();
-  //   expect(handleFilterCloseClick).toBeCalled();
-  //   expect(setSido).toBeCalled();
-  //   expect(setSigungu).toBeCalled();
-  //   expect(setPlaceCategory).toBeCalled();
-  //   expect(navigate).toBeCalledWith(navigate('/map?sido=경상&sigungu=울산시&type=키즈존 맛집'));
-  // });
-  // });
 });

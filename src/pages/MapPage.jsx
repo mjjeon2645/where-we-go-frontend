@@ -19,9 +19,9 @@ const MapArea = styled.div`
   display: relative;
   width: 100%;
   max-width: 600px;
-  max-height: 600px;
+  max-height: 900px;
   min-width: 400px;
-  min-height: 500px;
+  min-height: 700px;
 `;
 
 export default function MapPage() {
@@ -77,27 +77,39 @@ export default function MapPage() {
     mapStore.changePlaceCategory(categoryCondition);
   };
 
-  const handleFilterClick = () => {
+  const goFilterPage = () => {
     setFilterPageOn(true);
   };
 
-  const handleFilterCloseClick = () => {
+  const resetFilter = () => {
+    mapStore.clearFilterState();
+  };
+
+  const goBackFromFilterPage = () => {
+    mapStore.clearFilterState();
     setFilterPageOn(false);
   };
 
-  const handlePlaceInformationPopupCloseClick = () => {
+  const runFiltering = () => {
+    setFilterPageOn(false);
+    setFilterResultBarOn(true);
+    setFilteredPlaces(sido, sigungu, category);
+    navigate(`/map?sido=${sido}&sigungu=${sigungu}&type=${category}`);
+  };
+
+  const closePopup = () => {
     setIsPlaceSelected(false);
   };
 
-  const handleFilterResultClick = () => {
+  const goFilteredPlaceListPage = () => {
     setFilteredListsPageOn(true);
   };
 
-  const handleListPageCloseClick = () => [
-    setFilteredListsPageOn(false),
-  ];
+  const goBackFromPlaceListPage = () => {
+    setFilteredListsPageOn(false);
+  };
 
-  const handleOnePlaceClick = (id) => {
+  const goDetailPageOfSelectedPlace = (id) => {
     navigate(`/places/${id}`);
   };
 
@@ -108,7 +120,8 @@ export default function MapPage() {
       {!filterPageOn && !filteredListsPageOn ? (
         <div>
           <FilterBar
-            handleFilterClick={handleFilterClick}
+            goFilterPage={goFilterPage}
+            resetFilter={resetFilter}
             sido={sido}
             sigungu={sigungu}
             category={category}
@@ -117,12 +130,12 @@ export default function MapPage() {
             {isPlaceSelected && (
               <PlaceInformationPopup
                 selectedPlace={selectedPlace}
-                handlePlaceInformationPopupCloseClick={handlePlaceInformationPopupCloseClick}
+                closePopup={closePopup}
               />
             )}
             {(sigungu && category) && (
               <FilterResultBar
-                handleFilterResultClick={handleFilterResultClick}
+                goFilteredPlaceListPage={goFilteredPlaceListPage}
                 places={places}
               />
             )}
@@ -131,13 +144,11 @@ export default function MapPage() {
       )
         : filterPageOn && !filteredListsPageOn ? (
           <Filters
-            setFilteredPlaces={setFilteredPlaces}
-            handleFilterCloseClick={handleFilterCloseClick}
+            goBackFromFilterPage={goBackFromFilterPage}
+            runFiltering={runFiltering}
             setSido={setSido}
             setSigungu={setSigungu}
             setPlaceCategory={setPlaceCategory}
-            setFilterPageOn={setFilterPageOn}
-            setFilterResultBarOn={setFilterResultBarOn}
             sido={sido}
             sigungu={sigungu}
             category={category}
@@ -145,8 +156,8 @@ export default function MapPage() {
         ) : (
           <FilteredPlacesList
             places={places}
-            handleListPageCloseClick={handleListPageCloseClick}
-            handleOnePlaceClick={handleOnePlaceClick}
+            goBackFromPlaceListPage={goBackFromPlaceListPage}
+            goDetailPageOfSelectedPlace={goDetailPageOfSelectedPlace}
           />
         )}
     </div>

@@ -4,7 +4,7 @@ const Popup = styled.div`
     position: absolute;
     display: flex;
     flex-direction: column;
-    bottom: 3%;
+    bottom: 10%;
     left: 50%;
     transform: translate(-50%, 0);
     z-index: 10;
@@ -55,7 +55,7 @@ const handleBookmarkClick = () => {
 };
 
 export default function PlaceInformationPopup(
-  { selectedPlace, handlePlaceInformationPopupCloseClick },
+  { selectedPlace, closePopup },
 ) {
   const url = `http://localhost:8080/places/${selectedPlace.placeId}`;
 
@@ -69,9 +69,17 @@ export default function PlaceInformationPopup(
 
   const { address, businessHours, imageSource } = selectedPlace;
 
+  const handlePlaceInformationPopupCloseClick = () => {
+    closePopup();
+  };
+
   return (
     <Popup id="popUp" key={selectedPlace.placeId}>
-      <CloseButton className="close" type="button" onClick={handlePlaceInformationPopupCloseClick}>
+      <CloseButton
+        className="close"
+        type="button"
+        onClick={handlePlaceInformationPopupCloseClick}
+      >
         X
       </CloseButton>
       <ImagesArea>
