@@ -3,15 +3,27 @@
 const backdoorBaseUrl = 'http://localhost:8000/backdoor';
 
 module.exports = () => actor({
-  resetAndSetupPlaces() {
+  setupPlaces() {
     this.amOnPage(`${backdoorBaseUrl}/setup-place-database`);
   },
 
-  resetAndSetupBlogReviews() {
+  setupPlaceId0() {
+    this.amOnPage(`${backdoorBaseUrl}/setup-id0-place-database`);
+  },
+
+  setupBlogReviews() {
     this.amOnPage(`${backdoorBaseUrl}/setup-blog-review-database`);
   },
 
-  resetAndSetupUserReviews() {
+  setUpBlogReviewId0() {
+    this.amOnPage(`${backdoorBaseUrl}/setup-blog-review-database-id0`);
+  },
+
+  setupUserReviews() {
     this.amOnPage(`${backdoorBaseUrl}/setup-user-review-database`);
+  },
+
+  setupUserReviewsId0() {
+    this.amOnPage(`${backdoorBaseUrl}/setup-user-review-database-id0`);
   },
 });

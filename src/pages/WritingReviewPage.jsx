@@ -41,6 +41,7 @@ export default function WritingReviewPage() {
     }
 
     await userReviewStore.postMyReview(placeId, myDateOfVisit, myRate, myReview);
+    userReviewStore.clearWritingReviewState();
     navigate(`/places/${placeId}/user-review`);
   };
 
