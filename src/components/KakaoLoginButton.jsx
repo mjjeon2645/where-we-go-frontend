@@ -3,7 +3,14 @@ import KakaoLoginImage from '../images/kakao_login.png';
 
 const Button = styled.button`
     overflow: hidden;
-    width: 300px;
+    width: 210px;
+    border: none;
+    background-color: transparent;
+
+    img {
+        width: 200px;
+        object-fit: cover;
+    }
 `;
 
 export default function KakaoLoginButton({ kakaoLogin }) {
