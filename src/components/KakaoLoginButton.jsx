@@ -6,6 +6,7 @@ const Button = styled.button`
     width: 210px;
     border: none;
     background-color: transparent;
+    margin-block: .5em;
 
     img {
         width: 200px;
