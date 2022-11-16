@@ -4,9 +4,7 @@ export default class TopThreeStore {
   constructor() {
     this.listeners = new Set();
 
-    this.firstPlace = {};
-    this.secondPlace = {};
-    this.thirdPlace = {};
+    this.topThreePlaces = [];
   }
 
   subscribe(listener) {
@@ -23,9 +21,8 @@ export default class TopThreeStore {
 
   async fetchTopThreePlaces() {
     const data = await topThreeApiService.fetchTopThreePlaces();
-    this.firstPlace = data[0];
-    this.secondPlace = data[1];
-    this.thirdPlace = data[2];
+    this.topThreePlaces = data;
+
     this.publish();
   }
 }

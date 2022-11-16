@@ -40,6 +40,43 @@ const server = setupServer(
       ],
     }),
   )),
+
+  rest.get(`${baseUrl}/top-three-places`, async (request, response, context) => response(
+    context.json({
+      topThreePlaces: [
+        {
+          placeId: 4,
+          name: '과천 서울랜드',
+          address: {
+            fullAddress: '경기도 과천시 블라블라',
+            sido: '경기',
+            sigungu: '과천시',
+          },
+          averageRate: '4.6',
+        },
+        {
+          placeId: 5,
+          name: '키즈카페 까블랑',
+          address: {
+            fullAddress: '충청 아산시 블라블라',
+            sido: '충청',
+            sigungu: '아산시',
+          },
+          averageRate: '4.17',
+        },
+        {
+          placeId: 2,
+          name: '킹덤키즈풀빌라',
+          address: {
+            fullAddress: '경기 가평군 블라블라',
+            sido: '경기',
+            sigungu: '가평군',
+          },
+          averageRate: '4.07',
+        },
+      ],
+    }),
+  )),
 );
 
 export default server;

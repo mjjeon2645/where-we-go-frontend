@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 
 import TopThreePage from './TopThreePage';
 
@@ -10,12 +10,12 @@ describe('TopThreePage', () => {
   }
 
   context('A user clicks top 3 menu', () => {
-    it('renders Top three page', () => {
+    it('renders Top three page', async () => {
       renderTopThreePage();
 
-      screen.getByText('Today\'s Top 3');
-      screen.getByText('오늘은 어디가요? TOP 3');
-      screen.getByText('Youtube로 보는 TOP 3');
+      await waitFor(() => {
+        screen.getByText('Today\'s Top 3');
+      });
     });
   });
 });
