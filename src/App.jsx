@@ -15,6 +15,7 @@ import PlaceDetailPage from './pages/PlaceDetailPage';
 import PlaceBlogReviewPage from './pages/PlaceBlogReviewPage';
 import PlaceUserReviewPage from './pages/PlaceUserReviewPage';
 import WritingReviewPage from './pages/WritingReviewPage';
+import LoginPage from './pages/LoginPage';
 
 const Container = styled.div`
   background-color: #F0F2F5;
@@ -48,6 +49,7 @@ export default function App() {
               <Route path="places/:id/write" element={<WritingReviewPage />} />
               <Route path="/top3" element={<TopThreePage />} />
               <Route path="/myaccount" element={<MyPage />} />
+              <Route path="/login" element={<LoginPage />} />
             </Routes>
           </ModalProvider>
         </Wrapper>
