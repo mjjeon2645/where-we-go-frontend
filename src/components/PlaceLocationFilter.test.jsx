@@ -51,8 +51,11 @@ describe('LocationFilter', () => {
       fireEvent.click(screen.getByText('서울'));
       expect(setSido).toBeCalled();
 
-      fireEvent.click(screen.getByText('용산구'));
-      expect(setSigungu).toBeCalled();
+      fireEvent.change(screen.getByLabelText('시/군/구'), {
+        target: { value: '용산구' },
+      });
+
+      expect(setSigungu).toBeCalledWith('용산구');
     });
   });
 });
