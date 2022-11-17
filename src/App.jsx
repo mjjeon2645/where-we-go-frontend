@@ -16,6 +16,7 @@ import PlaceBlogReviewPage from './pages/PlaceBlogReviewPage';
 import PlaceUserReviewPage from './pages/PlaceUserReviewPage';
 import WritingReviewPage from './pages/WritingReviewPage';
 import LoginPage from './pages/LoginPage';
+import KakaoLoginRedirectPage from './pages/KakaoLoginRedirectPage';
 
 const Container = styled.div`
   background-color: #F0F2F5;
@@ -50,6 +51,7 @@ export default function App() {
               <Route path="/top3" element={<TopThreePage />} />
               <Route path="/myaccount" element={<MyPage />} />
               <Route path="/login" element={<LoginPage />} />
+              <Route path="/oauth/callback/kakao" element={<KakaoLoginRedirectPage />} />
             </Routes>
           </ModalProvider>
         </Wrapper>

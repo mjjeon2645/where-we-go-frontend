@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import KakaoLoginImage from '../images/kakao_login.png';
+import kakaoLoginConfig from '../kakaoLogin.config';
 
-const Button = styled.button`
+const KakaoLogin = styled.a`
     overflow: hidden;
     width: 210px;
     border: none;
@@ -21,9 +22,12 @@ export default function KakaoLoginButton({ kakaoLogin }) {
 
   return (
     <div>
-      <Button type="button" onClick={handleKakaoLoginClick}>
+      <KakaoLogin href={kakaoLoginConfig.kakaoAuthUrl}>
         <img src={KakaoLoginImage} alt="" />
-      </Button>
+      </KakaoLogin>
+      {/* <Button type="button" onClick={handleKakaoLoginClick}>
+        <img src={KakaoLoginImage} alt="" />
+      </Button> */}
     </div>
   );
 }

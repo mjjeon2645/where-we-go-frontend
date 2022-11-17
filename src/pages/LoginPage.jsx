@@ -1,7 +1,9 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import KakaoLoginButton from '../components/KakaoLoginButton';
 import NaverLoginButton from '../components/NaverLoginButton';
 import SkipLoginButton from '../components/SkipLoginButton';
+import KAKAO_AUTH_URL from '../kakaoLogin.config';
 
 const Container = styled.div`
     padding: 5em 3em 0 3em;
@@ -43,15 +45,18 @@ const LoginButtonsArea = styled.div`
 `;
 
 export default function LoginPage() {
+  const navigate = useNavigate();
+
   const image1Url = 'https://user-images.githubusercontent.com/104840243/202307825-d3db56b2-0e2f-4192-88b9-bd334f993533.jpeg';
   const image2Url = 'https://user-images.githubusercontent.com/104840243/202307837-4d04ec6e-5fb6-4387-931e-d4a0f94551f8.jpeg';
   const image3Url = 'https://user-images.githubusercontent.com/104840243/202307841-af59dc47-cc70-4630-b137-a13d20d3d56e.jpeg';
+
   const naverLogin = () => {
     //
   };
 
   const kakaoLogin = () => {
-
+    // navigate(KAKAO_AUTH_URL);
   };
 
   const skipLogin = () => {
