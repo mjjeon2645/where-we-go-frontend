@@ -1,9 +1,13 @@
 import { useNavigate } from 'react-router-dom';
+
 import styled from 'styled-components';
-import KakaoLoginButton from '../components/KakaoLoginButton';
-import NaverLoginButton from '../components/NaverLoginButton';
+
+import kakaoLoginConfig from '../kakaoLogin.config';
+
 import SkipLoginButton from '../components/SkipLoginButton';
-import KAKAO_AUTH_URL from '../kakaoLogin.config';
+
+import KakaoLoginImage from '../images/kakao_login.png';
+import NaverLoginImage from '../images/naver_login.png';
 
 const Container = styled.div`
     padding: 5em 3em 0 3em;
@@ -44,20 +48,36 @@ const LoginButtonsArea = styled.div`
     margin-top: 3em;
 `;
 
-export default function LoginPage() {
-  const navigate = useNavigate();
+const NaverLogin = styled.a`
+    overflow: hidden;
+    width: 210px;
+    border: none;
+    background-color: transparent;
+    margin-block: .5em;
 
+    img {
+        width: 200px;
+        object-fit: cover;
+    }
+`;
+
+const KakaoLogin = styled.a`
+    overflow: hidden;
+    width: 210px;
+    border: none;
+    background-color: transparent;
+    margin-block: .5em;
+
+    img {
+        width: 200px;
+        object-fit: cover;
+    }
+`;
+
+export default function LoginPage() {
   const image1Url = 'https://user-images.githubusercontent.com/104840243/202307825-d3db56b2-0e2f-4192-88b9-bd334f993533.jpeg';
   const image2Url = 'https://user-images.githubusercontent.com/104840243/202307837-4d04ec6e-5fb6-4387-931e-d4a0f94551f8.jpeg';
   const image3Url = 'https://user-images.githubusercontent.com/104840243/202307841-af59dc47-cc70-4630-b137-a13d20d3d56e.jpeg';
-
-  const naverLogin = () => {
-    //
-  };
-
-  const kakaoLogin = () => {
-    // navigate(KAKAO_AUTH_URL);
-  };
 
   const skipLogin = () => {
     //
@@ -83,8 +103,16 @@ export default function LoginPage() {
         <p>이제 넉넉한 마음만 준비하세요 :&#41;</p>
       </Text>
       <LoginButtonsArea>
-        <NaverLoginButton naverLogin={naverLogin} />
-        <KakaoLoginButton kakaoLogin={kakaoLogin} />
+        <div>
+          <NaverLogin href="">
+            <img src={NaverLoginImage} alt="" />
+          </NaverLogin>
+        </div>
+        <div>
+          <KakaoLogin href={kakaoLoginConfig.kakaoAuthUrl}>
+            <img id="kakao-login" src={KakaoLoginImage} alt="" />
+          </KakaoLogin>
+        </div>
         <SkipLoginButton skipLogin={skipLogin} />
       </LoginButtonsArea>
     </Container>

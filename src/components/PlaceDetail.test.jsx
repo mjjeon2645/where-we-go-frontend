@@ -72,8 +72,14 @@ describe('PlaceDetail', () => {
   });
 
   context('A user clicks the button of prev & next image', () => {
+    beforeEach(() => {
+      imageNumber = 2;
+    });
+
     it('changes the image', () => {
       renderPlaceDetail();
+
+      screen.getByText('2 / 3');
 
       fireEvent.click(screen.getByText('<'));
       expect(seePrevImage).toBeCalled();

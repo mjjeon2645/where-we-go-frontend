@@ -90,7 +90,13 @@ export default function FilteredPlacesList({
 
   return (
     <Container>
-      <BackButton type="button" onClick={handleBackFromListPageClick}> &lt; 돌아가기</BackButton>
+      <BackButton
+        type="button"
+        onClick={handleBackFromListPageClick}
+      >
+        {' '}
+        &lt; 돌아가기
+      </BackButton>
       <Article>
         <Title>
           {places.length}

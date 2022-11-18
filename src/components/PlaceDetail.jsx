@@ -50,11 +50,11 @@ const Address = styled.span`
 `;
 
 const AddressAndMiniMap = styled.section`
-  margin: 1em 0;
+  margin: 1em 0 2em 0;
 `;
 
 export default function PlaceDetail({
-  imageNumber, selectedPlace, seePrevImage, seeNextImage, copyAddress,
+  imageNumber, selectedPlace, copyState, seePrevImage, seeNextImage, copyAddress,
 }) {
   const { imageSource, address, placeServices } = selectedPlace;
 
@@ -95,7 +95,7 @@ export default function PlaceDetail({
       <PlaceName>{selectedPlace.name}</PlaceName>
       <SectionTitle>편의시설</SectionTitle>
       <Services>
-        <div>
+        <div id="reservation">
           {placeServices.reservation === 'possible' ? (
             <p>⭕️</p>
           ) : placeServices.reservation === 'impossible' ? (
@@ -105,7 +105,7 @@ export default function PlaceDetail({
           )}
           <p>예약</p>
         </div>
-        <div>
+        <div id="parking">
           {placeServices.parking === 'possible' ? (
             <p>⭕️</p>
           ) : placeServices.parking === 'impossible' ? (
@@ -115,7 +115,7 @@ export default function PlaceDetail({
           )}
           <p>주차</p>
         </div>
-        <div>
+        <div id="outside-food">
           {placeServices.outsideFood === 'possible' ? (
             <p>⭕️</p>
           ) : placeServices.outsideFood === 'impossible' ? (
@@ -125,7 +125,7 @@ export default function PlaceDetail({
           )}
           <p>외부음식</p>
         </div>
-        <div>
+        <div id="nursing-room">
           {placeServices.nursingRoom === 'possible' ? (
             <p>⭕️</p>
           ) : placeServices.nursingRoom === 'impossible' ? (
@@ -145,6 +145,9 @@ export default function PlaceDetail({
         >
           복사하기
         </button>
+        {copyState && (
+          <span>복사 완료!</span>
+        )}
       </AddressAndMiniMap>
     </Container>
   );

@@ -41,6 +41,11 @@ describe('ContactBar', () => {
       fireEvent.click(screen.getByText('연락하기'));
       expect(getContactNumber).toBeCalled();
 
+      // TODO. modal test 방법 확인하기
+      // screen.getByText(/1234/);
+      // fireEvent.click(screen.getByText('X'));
+      // expect(toggleModal).toBeCalled();
+
       fireEvent.click(screen.getByText('홈페이지'));
       expect(openHomePage).toBeCalled();
     });

@@ -1,17 +1,7 @@
-import { useEffect } from 'react';
-
-import useForceUpdate from './useForceUpdate';
-
 import { mapStore } from '../stores/MapStore';
 
+import useStore from './useStore';
+
 export default function useMapStore() {
-  const forceUpdate = useForceUpdate();
-
-  useEffect(() => {
-    mapStore.subscribe(forceUpdate);
-
-    return () => mapStore.unsubscribe(forceUpdate);
-  }, [forceUpdate]);
-
-  return mapStore;
+  return useStore(mapStore);
 }

@@ -50,7 +50,6 @@ export default function PlaceCagetoryFilter({ onCategoryClick, category }) {
                 className="category"
                 type="button"
                 onClick={() => handlePlaceCategoryClick(value)}
-                isSelected={value.selected}
                 style={category === value.category ? { color: '#FFF', background: '#FFA200' } : { backgroundColor: '#FFF' }}
               >
                 {value.category}

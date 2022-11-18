@@ -1,23 +1,12 @@
 import { userApiService } from '../services/UserApiService';
+import Store from './Store';
 
 /* eslint-disable class-methods-use-this */
-export default class UserStore {
+export default class UserStore extends Store {
   constructor() {
-    this.listeners = new Set();
+    super();
 
     this.authorizationCode = '';
-  }
-
-  subscribe(listener) {
-    this.listeners.add(listener);
-  }
-
-  unsubscribe(listener) {
-    this.listeners.delete(listener);
-  }
-
-  publish() {
-    this.listeners.forEach((listener) => listener());
   }
 
   sendKakaoAuthorizationCode(code) {

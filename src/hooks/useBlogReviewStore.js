@@ -1,16 +1,7 @@
-import { useEffect } from 'react';
-import { blogReviewStore } from '../stores/BlogReveiwStore';
+import useStore from './useStore';
 
-import useForceUpdate from './useForceUpdate';
+import { blogReviewStore } from '../stores/BlogReviewStore';
 
 export default function useBlogReviewStore() {
-  const forceUpdate = useForceUpdate();
-
-  useEffect(() => {
-    blogReviewStore.subscribe(forceUpdate);
-
-    return () => blogReviewStore.unsubscribe(forceUpdate);
-  }, [forceUpdate]);
-
-  return blogReviewStore;
+  return useStore(blogReviewStore);
 }

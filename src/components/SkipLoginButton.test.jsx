@@ -15,7 +15,7 @@ describe('SkipLoginButton', () => {
       renderSkipLoginButton();
 
       screen.getByText('천천히 둘러볼래요!');
-      fireEvent.click(screen.getByText('천천히 둘러볼래요'));
+      fireEvent.click(screen.getByText('천천히 둘러볼래요!'));
       expect(skipLogin).toBeCalled();
     });
   });
