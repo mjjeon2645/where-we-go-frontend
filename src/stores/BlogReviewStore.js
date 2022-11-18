@@ -1,22 +1,12 @@
 import { blogReviewApiService } from '../services/BlogReviewApiService';
 
-export default class BlogReviewStore {
+import Store from './Store';
+
+export default class BlogReviewStore extends Store {
   constructor() {
-    this.listeners = new Set();
+    super();
 
     this.blogReveiws = [];
-  }
-
-  subscribe(listener) {
-    this.listeners.add(listener);
-  }
-
-  unsubscribe(listener) {
-    this.listeners.delete(listener);
-  }
-
-  publish() {
-    this.listeners.forEach((listener) => listener());
   }
 
   async fetchBlogReviews(id) {

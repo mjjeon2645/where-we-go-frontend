@@ -13,6 +13,17 @@ describe('TopThreePlaces', () => {
     />);
   }
 
+  context('There is no places', () => {
+    beforeEach(() => {
+      topThreePlaces = [];
+    });
+
+    it('renders now loading texts', () => {
+      renderTopThreePlaces();
+      screen.getByText(/now loading.../);
+    });
+  });
+
   context('A user clicks top 3 menu', () => {
     beforeEach(() => {
       topThreePlaces = [

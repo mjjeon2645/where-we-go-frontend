@@ -60,10 +60,20 @@ export default function FilterBar({
       ) : (
         <p>필터 조건을 설정해주세요</p>
       )}
-      <Button name="filter" type="button" onClick={handleFilterPageOnClick}>
+      <Button
+        name="filter"
+        type="button"
+        onClick={handleFilterPageOnClick}
+      >
         필터
       </Button>
-      <Button name="reset-filter" type="button" onClick={handleFilterResetClick}>리셋하기</Button>
+      <Button
+        name="reset-filter"
+        type="button"
+        onClick={handleFilterResetClick}
+      >
+        리셋하기
+      </Button>
     </Wrapper>
   );
 }

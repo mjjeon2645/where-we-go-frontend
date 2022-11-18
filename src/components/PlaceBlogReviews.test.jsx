@@ -66,7 +66,7 @@ describe('PlaceBlogReviews', () => {
           author: '작성자2',
           date: '2022-10-21',
           imageSource: 'https://',
-          url: 'https://',
+          url: 'https://blog',
         },
       ];
     });
@@ -75,7 +75,7 @@ describe('PlaceBlogReviews', () => {
       renderPlaceBlogReviews();
 
       fireEvent.click(screen.getByText('내돈내산! 아기텐트 코아코아 아이스크림마켓 키즈텐트'));
-      expect(goToBlogWebPage).toBeCalled();
+      expect(goToBlogWebPage).toBeCalledWith('https://blog');
     });
   });
 

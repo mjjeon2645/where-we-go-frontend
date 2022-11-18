@@ -1,8 +1,10 @@
 import { mapApiService } from '../services/MapApiService';
 
-export default class MapStore {
+import Store from './Store';
+
+export default class MapStore extends Store {
   constructor() {
-    this.listeners = new Set();
+    super();
 
     this.places = [];
     this.filteredPlaces = [];
@@ -19,18 +21,8 @@ export default class MapStore {
     this.parking = 'possible';
     this.outsideFood = 'possible';
     this.nursingRoom = 'possible';
-  }
 
-  subscribe(listener) {
-    this.listeners.add(listener);
-  }
-
-  unsubscribe(listener) {
-    this.listeners.delete(listener);
-  }
-
-  publish() {
-    this.listeners.forEach((listener) => listener());
+    this.copyState = false;
   }
 
   async fetchFilteredPlaces(sido, sigungu, category) {
@@ -100,6 +92,18 @@ export default class MapStore {
       this.imageNumber -= 1;
       this.publish();
     }
+  }
+
+  setCopyState() {
+    this.copyState = true;
+    this.publish();
+
+    setTimeout(() => this.setCopyStateReset(), 3000);
+  }
+
+  setCopyStateReset() {
+    this.copyState = false;
+    this.publish();
   }
 }
 

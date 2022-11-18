@@ -1,28 +1,18 @@
 /* eslint-disable class-methods-use-this */
 import { userReviewApiService } from '../services/UserReviewApiService';
+import formatDate from '../utils/dateOfVisitFormatter';
+import Store from './Store';
 
-export default class UserReviewStore {
+export default class UserReviewStore extends Store {
   constructor() {
-    this.listeners = new Set();
+    super();
 
     this.averageRate = '';
-    this.userReveiws = [];
+    this.userReviews = [];
 
-    this.myDateOfVisit = '';
+    this.myDateOfVisit = formatDate(new Date());
     this.myRate = 0;
     this.myReview = '';
-  }
-
-  subscribe(listener) {
-    this.listeners.add(listener);
-  }
-
-  unsubscribe(listener) {
-    this.listeners.delete(listener);
-  }
-
-  publish() {
-    this.listeners.forEach((listener) => listener());
   }
 
   async fetchUsersReviews(placeId) {
@@ -71,7 +61,7 @@ export default class UserReviewStore {
   }
 
   clearWritingReviewState() {
-    this.myDateOfVisit = '';
+    this.myDateOfVisit = new Date();
     this.myRate = 0;
     this.myReview = '';
     this.publish();

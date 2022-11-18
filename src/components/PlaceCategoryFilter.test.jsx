@@ -40,4 +40,20 @@ describe('PlaceTypesFilter', () => {
       expect(onCategoryClick).toBeCalled();
     });
   });
+
+  context('When a user clicks the 자연 button', () => {
+    beforeEach(() => {
+      category = '스포츠/레저';
+    });
+
+    it('called the function related the button user clicked', () => {
+      expect(screen.getByText('스포츠/레저')).toHaveStyle('background: \'#FFA200\'');
+
+      fireEvent.click(screen.getByText('자연'));
+
+      expect(onCategoryClick).toBeCalled();
+      expect(screen.getByText('스포츠/레저')).toHaveStyle('background: \'#FFF\'');
+      expect(screen.getByText('자연')).toHaveStyle('background: \'#FFA200\'');
+    });
+  });
 });

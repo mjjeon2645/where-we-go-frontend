@@ -1,22 +1,11 @@
 import { topThreeApiService } from '../services/TopThreeApiService';
+import Store from './Store';
 
-export default class TopThreeStore {
+export default class TopThreeStore extends Store {
   constructor() {
-    this.listeners = new Set();
+    super();
 
     this.topThreePlaces = [];
-  }
-
-  subscribe(listener) {
-    this.listeners.add(listener);
-  }
-
-  unsubscribe(listener) {
-    this.listeners.delete(listener);
-  }
-
-  publish() {
-    this.listeners.forEach((listener) => listener());
   }
 
   async fetchTopThreePlaces() {

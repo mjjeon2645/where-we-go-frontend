@@ -34,7 +34,7 @@ export default function PlaceDetailPage() {
 
   const kakaoMap = useRef(null);
 
-  const { selectedPlace, imageNumber } = mapStore;
+  const { selectedPlace, imageNumber, copyState } = mapStore;
   const { imageSource, contact } = selectedPlace;
   const { blogReviews } = blogReviewStore;
 
@@ -81,14 +81,9 @@ export default function PlaceDetailPage() {
     mapStore.increaseImageNumber();
   };
 
-  const copyAddress = async (text) => {
-    try {
-      await navigator.clipboard.writeText(text);
-
-      alert('복사 완료! 원하는 곳에 붙여 넣으세요~');
-    } catch (error) {
-      alert('복사 실패');
-    }
+  const copyAddress = (text) => {
+    navigator.clipboard.writeText(text);
+    mapStore.setCopyState();
   };
 
   const toggleModal = () => {
@@ -119,6 +114,7 @@ export default function PlaceDetailPage() {
             <PlaceDetail
               imageNumber={imageNumber}
               selectedPlace={selectedPlace}
+              copyState={copyState}
               seePrevImage={seePrevImage}
               seeNextImage={seeNextImage}
               copyAddress={copyAddress}
