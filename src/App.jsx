@@ -17,6 +17,7 @@ import PlaceUserReviewPage from './pages/PlaceUserReviewPage';
 import WritingReviewPage from './pages/WritingReviewPage';
 import LoginPage from './pages/LoginPage';
 import KakaoLoginRedirectPage from './pages/KakaoLoginRedirectPage';
+import NaverLoginRedirectPage from './pages/NaverLoginRedirectPage';
 
 const Container = styled.div`
   background-color: #F0F2F5;
@@ -52,6 +53,7 @@ export default function App() {
               <Route path="/myaccount" element={<MyPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/oauth/callback/kakao" element={<KakaoLoginRedirectPage />} />
+              <Route path="/oauth/callback/naver" element={<NaverLoginRedirectPage />} />
             </Routes>
           </ModalProvider>
         </Wrapper>
