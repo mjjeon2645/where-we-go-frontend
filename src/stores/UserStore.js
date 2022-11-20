@@ -6,24 +6,37 @@ export default class UserStore extends Store {
   constructor() {
     super();
 
-    this.accessToken = '';
-    this.nickName = '';
+    this.nickname = '';
   }
 
   async sendKakaoAuthorizationCode(code) {
-    const userInformation = await userApiService.sendKakaoAuthorizationCode(code);
+    try {
+      const {
+        accessToken, nickname, state,
+      } = await userApiService.sendKakaoAuthorizationCode(code);
 
-    this.accessToken = userInformation.accessToken;
-    this.nickName = userInformation.nickName;
-    this.publish();
+      this.nickname = nickname;
+      this.publish();
+
+      return { accessToken, state };
+    } catch (error) {
+      return '';
+    }
   }
 
   async sendNaverAuthorizationCode(code) {
-    const userInformation = await userApiService.sendNaverAuthorizationCode(code);
+    try {
+      const {
+        accessToken, nickname, state,
+      } = await userApiService.sendNaverAuthorizationCode(code);
 
-    this.accessToken = userInformation.accessToken;
-    this.nickName = userInformation.nickName;
-    this.publish();
+      this.nickname = nickname;
+      this.publish();
+
+      return { accessToken, state };
+    } catch (error) {
+      return '';
+    }
   }
 }
 
