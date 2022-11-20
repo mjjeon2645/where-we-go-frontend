@@ -1,4 +1,6 @@
+import { useEffect } from 'react';
 import styled from 'styled-components';
+import { useLocalStorage } from 'usehooks-ts';
 import useUserStore from '../hooks/useUserStore';
 
 const Container = styled.div`
@@ -13,7 +15,13 @@ const Title = styled.h2`
 export default function MyPage() {
   const userStore = useUserStore();
 
+  const [userId] = useLocalStorage('userId', '');
+
   const { nickname } = userStore;
+
+  useEffect(() => {
+    userStore.fetchUserInformation(userId);
+  }, [userId]);
 
   return (
     <Container>

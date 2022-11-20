@@ -50,7 +50,7 @@ export default function App() {
               <Route path="places/:id/user-review" element={<PlaceUserReviewPage />} />
               <Route path="places/:id/write" element={<WritingReviewPage />} />
               <Route path="/top3" element={<TopThreePage />} />
-              <Route path="/myaccount" element={<MyPage />} />
+              <Route path="/my/:id" element={<MyPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/oauth/callback/kakao" element={<KakaoLoginRedirectPage />} />
               <Route path="/oauth/callback/naver" element={<NaverLoginRedirectPage />} />
