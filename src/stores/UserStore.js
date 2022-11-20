@@ -7,14 +7,14 @@ export default class UserStore extends Store {
     super();
 
     this.accessToken = '';
-    this.nickName = '';
+    this.nickname = '';
   }
 
   async sendKakaoAuthorizationCode(code) {
     const userInformation = await userApiService.sendKakaoAuthorizationCode(code);
 
     this.accessToken = userInformation.accessToken;
-    this.nickName = userInformation.nickName;
+    this.nickname = userInformation.nickname;
     this.publish();
   }
 
@@ -22,7 +22,7 @@ export default class UserStore extends Store {
     const userInformation = await userApiService.sendNaverAuthorizationCode(code);
 
     this.accessToken = userInformation.accessToken;
-    this.nickName = userInformation.nickName;
+    this.nickname = userInformation.nickname;
     this.publish();
   }
 }

@@ -13,13 +13,13 @@ const Title = styled.h2`
 export default function MyPage() {
   const userStore = useUserStore();
 
-  const { nickName } = userStore;
+  const { nickname } = userStore;
 
   return (
     <Container>
-      {nickName ? (
+      {nickname ? (
         <Title>
-          {nickName}
+          {nickname}
           님, 반갑습니다!
         </Title>
       ) : (
