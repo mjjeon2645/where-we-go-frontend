@@ -1,6 +1,10 @@
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useLocalStorage } from 'usehooks-ts';
+import MyBookmarks from '../components/MyBookmarks';
+import MyChildren from '../components/MyChildren';
+import MyInformation from '../components/MyInformation';
 import useUserStore from '../hooks/useUserStore';
 
 const Container = styled.div`
@@ -8,31 +12,46 @@ const Container = styled.div`
 `;
 
 const Title = styled.h2`
-  font-size: 3em;
+  font-size: 2em;
   font-weight: bold;
+  color: #ff9d13;
+  margin-bottom: 1.5em;
 `;
 
 export default function MyPage() {
+  const navigate = useNavigate();
+
   const userStore = useUserStore();
 
   const [userId] = useLocalStorage('userId', '');
 
-  const { nickname } = userStore;
+  const { userInformation } = userStore;
 
   useEffect(() => {
+    console.log('click');
     userStore.fetchUserInformation(userId);
-  }, [userId]);
+  }, [userInformation.nickname]);
+
+  const goToModifyNickname = () => {
+    navigate(`/mypage/${userId}/nicknameform`);
+  };
 
   return (
     <Container>
-      {nickname ? (
-        <Title>
-          {nickname}
-          님, 반갑습니다!
-        </Title>
+      {userInformation.length !== 0 ? (
+        <div>
+          <Title>MyPage</Title>
+          <MyInformation
+            userInformation={userInformation}
+            goToModifyNickname={goToModifyNickname}
+          />
+          <MyChildren />
+          <MyBookmarks />
+        </div>
       ) : (
         <p>now loading...</p>
       )}
     </Container>
+
   );
 }

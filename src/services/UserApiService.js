@@ -22,6 +22,8 @@ export default class UserApiService {
   async sendNaverAuthorizationCode(code) {
     const url = `${baseUrl}/oauth/naver-token`;
     const { data } = await axios.get(url, { params: { code } });
+    console.log(data);
+
     return data;
   }
 
@@ -30,6 +32,11 @@ export default class UserApiService {
     const { data } = await axios.get(url);
 
     return data;
+  }
+
+  async requestChangingNickname(userId, nickname) {
+    const url = `${baseUrl}/users/${userId}/nickname`;
+    const data = await axios.patch(url);
   }
 }
 

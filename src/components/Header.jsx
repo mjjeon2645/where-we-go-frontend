@@ -39,13 +39,14 @@ const Logout = styled.button`
 
 export default function Header() {
   const [accessToken, setAccessToken] = useLocalStorage('accessToken', '');
-  const [userId] = useLocalStorage('userId', '');
+  const [userId, setUserId] = useLocalStorage('userId', '');
 
   const navigate = useNavigate();
   const userStore = useUserStore();
 
   const handleLogoutClick = () => {
     setAccessToken('');
+    setUserId('');
     userStore.clearUserState();
     navigate('/top3');
   };
@@ -62,7 +63,7 @@ export default function Header() {
               <Link to="/top3">Top 3</Link>
             </li>
             <li>
-              <Link to={`/my/${userId}`}>My메뉴</Link>
+              <Link to={`/mypage/${userId}`}>My메뉴</Link>
             </li>
             {!accessToken ? (
               <li>

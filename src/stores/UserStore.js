@@ -7,6 +7,7 @@ export default class UserStore extends Store {
     super();
 
     this.nickname = '';
+    this.userInformation = {};
   }
 
   async sendKakaoAuthorizationCode(code) {
@@ -40,8 +41,22 @@ export default class UserStore extends Store {
   }
 
   async fetchUserInformation(userId) {
-    const data = await userApiService.fetchUserInformation(userId);
+    const information = await userApiService.fetchUserInformation(userId);
+
+    this.userInformation = information;
+
     this.publish();
+  }
+
+  async changeNickname(userId, text) {
+    try {
+      const changedNickname = await userApiService.requestChangingNickname(userId, text);
+
+      this.nickname = changedNickname;
+      this.publish();
+    } catch (error) {
+      //
+    }
   }
 
   clearUserState() {
