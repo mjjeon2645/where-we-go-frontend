@@ -11,6 +11,13 @@ export default class UserApiService {
 
     return data;
   }
+
+  async sendNaverAuthorizationCode(code) {
+    const url = `${baseUrl}/oauth/naver-token`;
+    const { data } = await axios.get(url, { params: { code } });
+
+    return data;
+  }
 }
 
 export const userApiService = new UserApiService();

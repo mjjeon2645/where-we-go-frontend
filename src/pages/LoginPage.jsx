@@ -1,8 +1,7 @@
-import { useNavigate } from 'react-router-dom';
-
 import styled from 'styled-components';
 
 import kakaoLoginConfig from '../kakaoLogin.config';
+import naverLoginConfig from '../naverLogin.config';
 
 import SkipLoginButton from '../components/SkipLoginButton';
 
@@ -104,8 +103,8 @@ export default function LoginPage() {
       </Text>
       <LoginButtonsArea>
         <div>
-          <NaverLogin href="">
-            <img src={NaverLoginImage} alt="" />
+          <NaverLogin href={naverLoginConfig.naverAuthUrl}>
+            <img id="naver-login" src={NaverLoginImage} alt="" />
           </NaverLogin>
         </div>
         <div>

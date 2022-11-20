@@ -17,6 +17,14 @@ export default class UserStore extends Store {
     this.nickName = userInformation.nickName;
     this.publish();
   }
+
+  async sendNaverAuthorizationCode(code) {
+    const userInformation = await userApiService.sendNaverAuthorizationCode(code);
+
+    this.accessToken = userInformation.accessToken;
+    this.nickName = userInformation.nickName;
+    this.publish();
+  }
 }
 
 export const userStore = new UserStore();
