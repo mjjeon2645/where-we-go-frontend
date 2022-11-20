@@ -1,22 +1,33 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useLocalStorage } from 'usehooks-ts';
 import useUserStore from '../hooks/useUserStore';
 
 export default function KakaoLoginRedirectPage() {
+  const [, setAccessToken] = useLocalStorage('accessToken', '');
   const userStore = useUserStore();
 
   const navigate = useNavigate();
 
   const authorizationCode = new URL(window.location.href).searchParams.get('code');
 
-  const { accessToken } = userStore;
+  async function getLoginResult() {
+    const data = await userStore.sendKakaoAuthorizationCode(authorizationCode);
+    const { accessToken, state } = data;
+    if (state === 'unregistered') {
+      navigate('/signup');
+      return;
+    }
+
+    setAccessToken(accessToken);
+    navigate('/top3');
+  }
 
   useEffect(() => {
-    userStore.sendKakaoAuthorizationCode(authorizationCode);
-    navigate('/myaccount');
+    getLoginResult();
   }, []);
 
   return (
-    <p>kakao redirect!</p>
+    <p>로그인 중입니다.</p>
   );
 }
