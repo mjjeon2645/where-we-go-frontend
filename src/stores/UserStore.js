@@ -8,6 +8,8 @@ export default class UserStore extends Store {
 
     this.nickname = '';
     this.userInformation = {};
+
+    this.errorMessage = '';
   }
 
   async sendKakaoAuthorizationCode(code) {
@@ -56,9 +58,15 @@ export default class UserStore extends Store {
   }
 
   async requestSignUp(userId, nickname) {
-    const data = await userApiService.requestSignUp(userId, nickname);
-    console.log(data);
-    return data;
+    try {
+      const data = await userApiService.requestSignUp(userId, nickname);
+      return data;
+    } catch (error) {
+      this.errorMessage = error.response.data;
+      this.publish();
+      console.log(this.errorMessage);
+      return '';
+    }
   }
 
   clearUserState() {
