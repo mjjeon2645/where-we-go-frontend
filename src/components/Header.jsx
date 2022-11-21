@@ -1,6 +1,8 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useLocalStorage } from 'usehooks-ts';
 
 import styled from 'styled-components';
+import useUserStore from '../hooks/useUserStore';
 
 const Container = styled.header`
   width: 100%;
@@ -29,7 +31,26 @@ const List = styled.ul`
     align-items: center;
 `;
 
+const Logout = styled.button`
+  font-size: 1em;
+  background: none;
+  border: none;
+`;
+
 export default function Header() {
+  const [accessToken, setAccessToken] = useLocalStorage('accessToken', '');
+  const [userId, setUserId] = useLocalStorage('userId', '');
+
+  const navigate = useNavigate();
+  const userStore = useUserStore();
+
+  const handleLogoutClick = () => {
+    setAccessToken('');
+    setUserId('');
+    userStore.clearUserState();
+    navigate('/top3');
+  };
+
   return (
     <Container>
       <Wrapper>
@@ -42,8 +63,17 @@ export default function Header() {
               <Link to="/top3">Top 3</Link>
             </li>
             <li>
-              <Link to="/myaccount">My메뉴</Link>
+              <Link to={`/mypage/${userId}`}>My메뉴</Link>
             </li>
+            {!accessToken ? (
+              <li>
+                <Link to="/login">로그인</Link>
+              </li>
+            ) : (
+              <li>
+                <Logout type="button" onClick={handleLogoutClick}>로그아웃</Logout>
+              </li>
+            )}
           </List>
         </Navigation>
       </Wrapper>

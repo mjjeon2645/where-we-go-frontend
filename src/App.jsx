@@ -18,6 +18,8 @@ import WritingReviewPage from './pages/WritingReviewPage';
 import LoginPage from './pages/LoginPage';
 import KakaoLoginRedirectPage from './pages/KakaoLoginRedirectPage';
 import NaverLoginRedirectPage from './pages/NaverLoginRedirectPage';
+import MyNicknameChangePage from './pages/MyNicknameChangePage';
+import SignUpPage from './pages/SignupPage';
 
 const Container = styled.div`
   background-color: #F0F2F5;
@@ -50,8 +52,10 @@ export default function App() {
               <Route path="places/:id/user-review" element={<PlaceUserReviewPage />} />
               <Route path="places/:id/write" element={<WritingReviewPage />} />
               <Route path="/top3" element={<TopThreePage />} />
-              <Route path="/myaccount" element={<MyPage />} />
+              <Route path="/mypage/:id" element={<MyPage />} />
+              <Route path="/mypage/:id/nicknameform" element={<MyNicknameChangePage />} />
               <Route path="/login" element={<LoginPage />} />
+              <Route path="/signup/:id" element={<SignUpPage />} />
               <Route path="/oauth/callback/kakao" element={<KakaoLoginRedirectPage />} />
               <Route path="/oauth/callback/naver" element={<NaverLoginRedirectPage />} />
             </Routes>

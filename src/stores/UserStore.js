@@ -7,18 +7,19 @@ export default class UserStore extends Store {
     super();
 
     this.nickname = '';
+    this.userInformation = {};
   }
 
   async sendKakaoAuthorizationCode(code) {
     try {
       const {
-        accessToken, nickname, state,
+        userId, accessToken, nickname, state,
       } = await userApiService.sendKakaoAuthorizationCode(code);
 
       this.nickname = nickname;
       this.publish();
 
-      return { accessToken, state };
+      return { userId, accessToken, state };
     } catch (error) {
       return '';
     }
@@ -27,16 +28,42 @@ export default class UserStore extends Store {
   async sendNaverAuthorizationCode(code) {
     try {
       const {
-        accessToken, nickname, state,
+        userId, accessToken, nickname, state,
       } = await userApiService.sendNaverAuthorizationCode(code);
 
       this.nickname = nickname;
       this.publish();
 
-      return { accessToken, state };
+      return { userId, accessToken, state };
     } catch (error) {
       return '';
     }
+  }
+
+  async fetchUserInformation(userId) {
+    const information = await userApiService.fetchUserInformation(userId);
+
+    this.userInformation = information;
+
+    this.publish();
+  }
+
+  async changeNickname(userId, text) {
+    const changedNickname = await userApiService.requestChangingNickname(userId, text);
+
+    this.nickname = changedNickname;
+    this.publish();
+  }
+
+  async requestSignUp(userId, nickname) {
+    const data = await userApiService.requestSignUp(userId, nickname);
+    console.log(data);
+    return data;
+  }
+
+  clearUserState() {
+    this.nickname = '';
+    this.publish();
   }
 }
 

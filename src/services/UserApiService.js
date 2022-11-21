@@ -22,7 +22,28 @@ export default class UserApiService {
   async sendNaverAuthorizationCode(code) {
     const url = `${baseUrl}/oauth/naver-token`;
     const { data } = await axios.get(url, { params: { code } });
+    console.log(data);
+
     return data;
+  }
+
+  async fetchUserInformation(userId) {
+    const url = `${baseUrl}/users/${userId}`;
+    const { data } = await axios.get(url);
+
+    return data;
+  }
+
+  async requestChangingNickname(userId, nickname) {
+    const url = `${baseUrl}/users/${userId}`;
+    const response = await axios.patch(url, { nickname });
+    return response;
+  }
+
+  async requestSignUp(userId, nickname) {
+    const url = `${baseUrl}/users/${userId}`;
+    const response = await axios.post(url, { nickname });
+    return response.data;
   }
 }
 
