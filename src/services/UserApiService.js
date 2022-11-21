@@ -35,8 +35,15 @@ export default class UserApiService {
   }
 
   async requestChangingNickname(userId, nickname) {
-    const url = `${baseUrl}/users/${userId}/nickname`;
-    const data = await axios.patch(url);
+    const url = `${baseUrl}/users/${userId}`;
+    const response = await axios.patch(url, { nickname });
+    return response;
+  }
+
+  async requestSignUp(userId, nickname) {
+    const url = `${baseUrl}/users/${userId}`;
+    const response = await axios.post(url, { nickname });
+    return response.data;
   }
 }
 

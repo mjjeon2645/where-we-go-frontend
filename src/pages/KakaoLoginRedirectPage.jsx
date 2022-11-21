@@ -1,7 +1,18 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 import { useLocalStorage } from 'usehooks-ts';
 import useUserStore from '../hooks/useUserStore';
+
+const Container = styled.div`
+  padding: 3em 3em 0 3em;
+
+  p {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #ff9d13;
+  }
+`;
 
 export default function KakaoLoginRedirectPage() {
   const [, setAccessToken] = useLocalStorage('accessToken', '');
@@ -17,7 +28,7 @@ export default function KakaoLoginRedirectPage() {
     const data = await userStore.sendKakaoAuthorizationCode(authorizationCode);
     const { userId: id, accessToken, state } = data;
     if (state === 'unregistered') {
-      navigate('/signup');
+      navigate(`/signup/${id}`);
       return;
     }
 
@@ -31,6 +42,8 @@ export default function KakaoLoginRedirectPage() {
   }, []);
 
   return (
-    <p>로그인 중입니다.</p>
+    <Container>
+      <p>로그인 중입니다.</p>
+    </Container>
   );
 }

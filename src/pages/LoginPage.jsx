@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+import { useNavigate } from 'react-router-dom';
 import kakaoLoginConfig from '../kakaoLogin.config';
 import naverLoginConfig from '../naverLogin.config';
 
@@ -78,8 +79,10 @@ export default function LoginPage() {
   const image2Url = 'https://user-images.githubusercontent.com/104840243/202307837-4d04ec6e-5fb6-4387-931e-d4a0f94551f8.jpeg';
   const image3Url = 'https://user-images.githubusercontent.com/104840243/202307841-af59dc47-cc70-4630-b137-a13d20d3d56e.jpeg';
 
+  const navigate = useNavigate();
+
   const skipLogin = () => {
-    //
+    navigate('/top3');
   };
 
   return (

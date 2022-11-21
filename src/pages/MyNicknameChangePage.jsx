@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { useLocalStorage } from 'usehooks-ts';
 import MyNicknameForm from '../components/MyNicknameForm';
 import useUserStore from '../hooks/useUserStore';
 
@@ -14,16 +15,19 @@ const Title = styled.p`
 `;
 
 export default function MyNicknameChangePage() {
+  const [userId] = useLocalStorage('userId', '');
+
   const navigate = useNavigate();
 
   const userStore = useUserStore();
 
-  const modifyNickname = (text) => {
-    userStore.changeNickname(text);
+  const modifyNickname = async (nickname) => {
+    const data = await userStore.changeNickname(userId, nickname);
+    console.log(data, 'nicknamechangepage');
+    navigate(`/mypage/${userId}`);
   };
 
   const goPrevPage = () => {
-    userStore.clearChangedNickname();
     navigate(-1);
   };
 

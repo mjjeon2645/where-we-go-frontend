@@ -13,13 +13,13 @@ export default class UserStore extends Store {
   async sendKakaoAuthorizationCode(code) {
     try {
       const {
-        accessToken, nickname, state,
+        userId, accessToken, nickname, state,
       } = await userApiService.sendKakaoAuthorizationCode(code);
 
       this.nickname = nickname;
       this.publish();
 
-      return { accessToken, state };
+      return { userId, accessToken, state };
     } catch (error) {
       return '';
     }
@@ -49,14 +49,16 @@ export default class UserStore extends Store {
   }
 
   async changeNickname(userId, text) {
-    try {
-      const changedNickname = await userApiService.requestChangingNickname(userId, text);
+    const changedNickname = await userApiService.requestChangingNickname(userId, text);
 
-      this.nickname = changedNickname;
-      this.publish();
-    } catch (error) {
-      //
-    }
+    this.nickname = changedNickname;
+    this.publish();
+  }
+
+  async requestSignUp(userId, nickname) {
+    const data = await userApiService.requestSignUp(userId, nickname);
+    console.log(data);
+    return data;
   }
 
   clearUserState() {
