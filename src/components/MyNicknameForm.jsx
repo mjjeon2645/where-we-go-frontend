@@ -49,8 +49,7 @@ const CancelButton = styled.button`
 export default function MyNicknameForm({ modifyNickname, goPrevPage }) {
   const handleNicknameChangeSubmit = (event) => {
     event.preventDefault();
-    const { value } = event.target[0];
-    modifyNickname(value);
+    modifyNickname(event);
   };
 
   const handleCancelClick = () => {

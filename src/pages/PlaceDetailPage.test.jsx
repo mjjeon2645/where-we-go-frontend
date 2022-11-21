@@ -5,10 +5,36 @@ const context = describe;
 
 const navigate = jest.fn();
 
+jest.mock('../utils/KakaoMap');
+
 jest.mock('react-router-dom', () => ({
   useNavigate() {
     return navigate;
   },
+}));
+
+let blogReviews;
+const fetchBlogReviews = jest.fn();
+
+jest.mock('../hooks/useBlogReviewStore', () => () => ({
+  blogReviews,
+  fetchBlogReviews,
+}));
+
+let selectedPlace;
+let contact;
+const fetchSelectedPlaceDetail = jest.fn();
+
+jest.mock('../hooks/useMapStore', () => () => ({
+  selectedPlace,
+  contact,
+  fetchSelectedPlaceDetail,
+}));
+
+const fetchUsersReviews = jest.fn();
+
+jest.mock('../hooks/useUserReviewStore', () => () => ({
+  fetchUsersReviews,
 }));
 
 describe('PlaceDetailPage', () => {
@@ -18,10 +44,30 @@ describe('PlaceDetailPage', () => {
 
   context('User click the place information popup', () => {
     beforeEach(() => {
-      renderPlaceDetailPage();
+      selectedPlace = {
+        imageSource: {
+          firstImage: '',
+          secondImage: '',
+          thirdImage: '',
+        },
+        contact: {
+          number: '010-5555-5555',
+          homepage: 'url',
+        },
+        placeServices: {
+          reservation: 'possible',
+          parking: 'impossible',
+          outdoorFood: 'possible',
+        },
+        address: {
+          fullAddress: '서울시',
+        },
+      };
     });
 
     it('render PlaceDetailPage', () => {
+      renderPlaceDetailPage();
+
       screen.getByText(/뒤로가기/);
       screen.getByText('상세정보');
       screen.getByText(/블로그 리뷰/);

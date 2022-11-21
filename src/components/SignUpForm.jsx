@@ -36,8 +36,7 @@ const SubmitButton = styled.button`
 export default function SignUpForm({ signUp }) {
   const handleMakingNicknameSubmit = (event) => {
     event.preventDefault();
-    const { value } = event.target[0];
-    signUp(value);
+    signUp(event);
   };
 
   return (

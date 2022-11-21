@@ -6,9 +6,6 @@ import naverLoginConfig from '../naverLogin.config';
 
 import SkipLoginButton from '../components/SkipLoginButton';
 
-import KakaoLoginImage from '../images/kakao_login.png';
-import NaverLoginImage from '../images/naver_login.png';
-
 const Container = styled.div`
     padding: 5em 3em 0 3em;
     text-align: center;
@@ -79,6 +76,9 @@ export default function LoginPage() {
   const image2Url = 'https://user-images.githubusercontent.com/104840243/202307837-4d04ec6e-5fb6-4387-931e-d4a0f94551f8.jpeg';
   const image3Url = 'https://user-images.githubusercontent.com/104840243/202307841-af59dc47-cc70-4630-b137-a13d20d3d56e.jpeg';
 
+  const naverButton = 'https://user-images.githubusercontent.com/104840243/202971376-50fc026a-014a-4518-a615-b0da84f5b58c.png';
+  const kakaoButton = 'https://user-images.githubusercontent.com/104840243/202971385-ee1b510d-e434-4da4-832a-2de9ebb622a7.png';
+
   const navigate = useNavigate();
 
   const skipLogin = () => {
@@ -107,12 +107,12 @@ export default function LoginPage() {
       <LoginButtonsArea>
         <div>
           <NaverLogin href={naverLoginConfig.naverAuthUrl}>
-            <img id="naver-login" src={NaverLoginImage} alt="" />
+            <img id="naver-login" src={naverButton} alt="" />
           </NaverLogin>
         </div>
         <div>
           <KakaoLogin href={kakaoLoginConfig.kakaoAuthUrl}>
-            <img id="kakao-login" src={KakaoLoginImage} alt="" />
+            <img id="kakao-login" src={kakaoButton} alt="" />
           </KakaoLogin>
         </div>
         <SkipLoginButton skipLogin={skipLogin} />

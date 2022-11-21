@@ -21,9 +21,9 @@ export default function MyNicknameChangePage() {
 
   const userStore = useUserStore();
 
-  const modifyNickname = async (nickname) => {
+  const modifyNickname = async (event) => {
+    const nickname = event.target[0].value;
     const data = await userStore.changeNickname(userId, nickname);
-    console.log(data, 'nicknamechangepage');
     navigate(`/mypage/${userId}`);
   };
 
@@ -34,7 +34,10 @@ export default function MyNicknameChangePage() {
   return (
     <Container>
       <Title>닉네임 변경하기</Title>
-      <MyNicknameForm modifyNickname={modifyNickname} goPrevPage={goPrevPage} />
+      <MyNicknameForm
+        modifyNickname={modifyNickname}
+        goPrevPage={goPrevPage}
+      />
     </Container>
   );
 }

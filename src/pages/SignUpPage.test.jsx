@@ -3,6 +3,19 @@ import SignUpPage from './SignUpPage';
 
 const context = describe;
 
+const navigate = jest.fn();
+jest.mock('react-router-dom', () => ({
+  useNavigate: () => ({
+    navigate,
+  }),
+}));
+
+const requestSignUp = jest.fn();
+
+jest.mock('../hooks/useUserStore', () => () => ({
+  requestSignUp,
+}));
+
 describe('SignUpPage', () => {
   function renderSignupPage() {
     render(<SignUpPage />);
