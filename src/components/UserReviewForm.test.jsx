@@ -4,10 +4,14 @@ import {
 
 import UserReviewForm from './UserReviewForm';
 
-const context = describe;
+const ko = {};
+jest.mock('react-datepicker/dist/react-datepicker.css', () => null);
 
-// TODO. date picker 모킹방법 알아보기
-jest.mock('react-datepicker');
+jest.mock('date-fns/esm/locale', () => () => ({
+  ko,
+}));
+
+const context = describe;
 
 const writeReview = jest.fn();
 const setDateOfVisit = jest.fn();
@@ -32,6 +36,11 @@ describe('UserReviewForm', () => {
   }
 
   context('a user clicks writing a review button', () => {
+    beforeEach(() => {
+      myReview = '안녕하세요';
+      startDate = '';
+    });
+
     it('renders user review page and form', () => {
       renderUserReviewForm();
 
@@ -49,10 +58,10 @@ describe('UserReviewForm', () => {
       renderUserReviewForm();
 
       fireEvent.change(getByLabelText('평점'), {
-        target: { value: '⭐️⭐️⭐️⭐️⭐️' },
+        target: { value: '⭐️⭐️⭐️⭐️' },
       });
 
-      expect(setRate).toBeCalledWith('⭐️⭐️⭐️⭐️⭐️');
+      expect(setRate).toBeCalledWith('⭐️⭐️⭐️⭐️');
 
       fireEvent.change(getByLabelText('한 줄 리뷰'), {
         target: { value: '이렇게 재밌는 곳은 정말 처음이예요!' },

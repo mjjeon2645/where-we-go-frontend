@@ -18,13 +18,15 @@ const Title = styled.h2`
 export default function SignUpPage() {
   const [, setAccessToken] = useLocalStorage('accessToken', '');
   const [, setUserId] = useLocalStorage('userId', '');
+
   const userStore = useUserStore();
 
   const navigate = useNavigate();
 
   const userId = document.location.pathname.split('/')[2];
 
-  const signUp = async (nickname) => {
+  const signUp = async (event) => {
+    const nickname = event.target[0].value;
     const data = await userStore.requestSignUp(userId, nickname);
     if (data.accessToken) {
       setAccessToken(data.accessToken);

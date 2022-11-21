@@ -4,13 +4,13 @@ import MyInformation from './MyInformation';
 const context = describe;
 
 let userInformation;
-const modifyNickname = jest.fn();
+const goToModifyNickname = jest.fn();
 
 describe('MyInformation', () => {
   function renderMyInformation() {
     render(<MyInformation
       userInformation={userInformation}
-      modifyNickname={modifyNickname}
+      goToModifyNickname={goToModifyNickname}
     />);
   }
 
@@ -35,7 +35,7 @@ describe('MyInformation', () => {
       screen.getByText('소셜 로그인 정보');
       screen.getByText('네이버 로그인');
       fireEvent.click(screen.getByText('변경'));
-      expect(modifyNickname).toBeCalled();
+      expect(goToModifyNickname).toBeCalled();
     });
   });
 });

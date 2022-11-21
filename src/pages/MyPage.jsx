@@ -28,7 +28,6 @@ export default function MyPage() {
   const { userInformation } = userStore;
 
   useEffect(() => {
-    console.log('click');
     userStore.fetchUserInformation(userId);
   }, [userInformation.nickname]);
 
