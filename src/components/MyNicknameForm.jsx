@@ -21,12 +21,18 @@ const Description = styled.p`
 
 const Buttons = styled.div`
     text-align: right;
-    margin-top: 1em;
+    margin-top: 2em;
     width: 71%;
     
     button {
         margin: .5em;
     }
+`;
+
+const ErrorMessage = styled.p`
+  font-size: .8em;
+  color: #ff0000;
+  padding-top: 1em;
 `;
 
 const SubmitButton = styled.button`
@@ -46,7 +52,7 @@ const CancelButton = styled.button`
     border-radius: 8px;
 `;
 
-export default function MyNicknameForm({ modifyNickname, goPrevPage }) {
+export default function MyNicknameForm({ modifyNickname, goPrevPage, errorMessage }) {
   const handleNicknameChangeSubmit = (event) => {
     event.preventDefault();
     modifyNickname(event);
@@ -61,7 +67,9 @@ export default function MyNicknameForm({ modifyNickname, goPrevPage }) {
       <form onSubmit={handleNicknameChangeSubmit}>
         <Label htmlFor="nickname">원하시는 닉네임을 입력해주세요.</Label>
         <InputArea id="nickname" type="text" />
-        <Description>3글자 이상 7글자 이하 한글, 영문, 숫자 가능</Description>
+        {errorMessage ? (<ErrorMessage>{errorMessage}</ErrorMessage>) : (
+          <Description>3글자 이상 7글자 이하 한글, 영문, 숫자 가능</Description>
+        )}
         <Buttons>
           <SubmitButton type="submit">변경</SubmitButton>
           <CancelButton type="button" onClick={handleCancelClick}>취소</CancelButton>
