@@ -8,7 +8,7 @@ import MyInformation from '../components/MyInformation';
 import useUserStore from '../hooks/useUserStore';
 
 const Container = styled.div`
-  padding: 3em 3em 0 3em;
+  padding: 3em;
 `;
 
 const Title = styled.h2`
@@ -25,15 +25,24 @@ export default function MyPage() {
 
   const [userId] = useLocalStorage('userId', '');
 
-  const { userInformation } = userStore;
+  const { userInformation, bookmarks } = userStore;
 
   useEffect(() => {
     userStore.fetchUserInformation(userId);
+    userStore.fetchBookmarks();
   }, [userInformation.nickname]);
 
   const goToModifyNickname = () => {
     userStore.clearError();
     navigate(`/mypage/${userId}/nicknameform`);
+  };
+
+  const goPlaceDetailPage = (placeId) => {
+    navigate(`/places/${placeId}`);
+  };
+
+  const removeBookmark = (placeId) => {
+    userStore.toggleBookmark(placeId);
   };
 
   return (
@@ -46,7 +55,11 @@ export default function MyPage() {
             goToModifyNickname={goToModifyNickname}
           />
           <MyChildren />
-          <MyBookmarks />
+          <MyBookmarks
+            goPlaceDetailPage={goPlaceDetailPage}
+            removeBookmark={removeBookmark}
+            bookmarks={bookmarks}
+          />
         </div>
       ) : (
         <p>now loading...</p>

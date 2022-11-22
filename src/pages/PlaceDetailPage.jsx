@@ -7,6 +7,7 @@ import PlaceDetailTap from '../components/PlaceDetailTap';
 import useBlogReviewStore from '../hooks/useBlogReviewStore';
 import useMapStore from '../hooks/useMapStore';
 import useUserReviewStore from '../hooks/useUserReviewStore';
+import useUserStore from '../hooks/useUserStore';
 import { loadMiniKakaoMap } from '../utils/KakaoMap';
 
 const Container = styled.div`
@@ -29,6 +30,7 @@ export default function PlaceDetailPage() {
   const mapStore = useMapStore();
   const blogReviewStore = useBlogReviewStore();
   const userReviewStore = useUserReviewStore();
+  const userStore = useUserStore();
 
   const placeId = document.location.pathname.split('/')[2];
 
@@ -37,12 +39,14 @@ export default function PlaceDetailPage() {
   const { selectedPlace, imageNumber, copyState } = mapStore;
   const { imageSource, contact } = selectedPlace;
   const { blogReviews } = blogReviewStore;
+  const { bookmarks } = userStore;
 
   useEffect(() => {
     const fetchData = async () => {
       await mapStore.fetchSelectedPlaceDetail(placeId);
       await blogReviewStore.fetchBlogReviews(placeId);
       await userReviewStore.fetchUsersReviews(placeId);
+      await userStore.fetchBookmarks();
 
       const { selectedPlace } = mapStore;
 
@@ -57,8 +61,8 @@ export default function PlaceDetailPage() {
     navigate(-1);
   };
 
-  const handleBookmarkClick = () => {
-    //
+  const toggleBookmark = (selectedPlaceId) => {
+    userStore.toggleBookmark(selectedPlaceId);
   };
 
   const goToPlaceDetail = () => {
@@ -104,7 +108,6 @@ export default function PlaceDetailPage() {
         <div>
           <PlaceDetailTap
             goToPrevPage={goToPrevPage}
-            handleBookmarkClick={handleBookmarkClick}
             goToPlaceDetail={goToPlaceDetail}
             goToBlogReview={goToBlogReview}
             goToUserReview={goToUserReview}
@@ -115,8 +118,10 @@ export default function PlaceDetailPage() {
               imageNumber={imageNumber}
               selectedPlace={selectedPlace}
               copyState={copyState}
+              bookmarks={bookmarks}
               seePrevImage={seePrevImage}
               seeNextImage={seeNextImage}
+              toggleBookmark={toggleBookmark}
               copyAddress={copyAddress}
             />
             <MapArea ref={kakaoMap} />

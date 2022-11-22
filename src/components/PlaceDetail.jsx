@@ -17,10 +17,30 @@ const ImageBox = styled.div`
   }
 `;
 
+const PlaceNameSection = styled.div`
+  display: flex;
+  align-items: center;
+  margin-block: 3em;
+
+  button {
+    background: none;
+    border: none;
+  }
+
+  img {
+    width: 35px;
+    height: 35px;
+  }
+
+  h2 {
+
+  }
+`;
+
 const PlaceName = styled.h2`
   font-size: 2em;
   font-weight: bold;
-  margin: 1em 0;
+  /* margin: 1em 0; */
 `;
 
 const SectionTitle = styled.p`
@@ -54,8 +74,11 @@ const AddressAndMiniMap = styled.section`
 `;
 
 export default function PlaceDetail({
-  imageNumber, selectedPlace, copyState, seePrevImage, seeNextImage, copyAddress,
+  imageNumber, selectedPlace, copyState, bookmarks,
+  seePrevImage, seeNextImage, toggleBookmark, copyAddress,
 }) {
+  const unselectedImage = 'https://user-images.githubusercontent.com/104840243/203296933-e4508837-7023-45e9-ab5d-a745f3223bb2.png';
+  const selectedImage = 'https://user-images.githubusercontent.com/104840243/203296951-6dbc5b77-fa34-4260-bc7a-ce0b5b2f147b.png';
   const { imageSource, address, placeServices } = selectedPlace;
 
   const handlePrevImageClick = () => {
@@ -64,6 +87,10 @@ export default function PlaceDetail({
 
   const handleNextImageClick = () => {
     seeNextImage();
+  };
+
+  const handleToggleBookmarkClick = (placeId) => {
+    toggleBookmark(placeId);
   };
 
   const handleAddressCopyClick = (text) => {
@@ -92,7 +119,16 @@ export default function PlaceDetail({
           <button type="button" onClick={handleNextImageClick}>&gt;</button>
         </div>
       </section>
-      <PlaceName>{selectedPlace.name}</PlaceName>
+      <PlaceNameSection>
+        <button type="button" onClick={() => handleToggleBookmarkClick(selectedPlace.placeId)}>
+          {bookmarks.find((bookmark) => bookmark.placeId === selectedPlace.placeId) ? (
+            <img src={selectedImage} alt="" />
+          ) : (
+            <img src={unselectedImage} alt="" />
+          )}
+        </button>
+        <PlaceName>{selectedPlace.name}</PlaceName>
+      </PlaceNameSection>
       <SectionTitle>편의시설</SectionTitle>
       <Services>
         <div id="reservation">

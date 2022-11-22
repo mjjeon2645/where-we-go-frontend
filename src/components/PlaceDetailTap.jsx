@@ -34,7 +34,7 @@ const Menu = styled.div`
 `;
 
 export default function PlaceDetailTap({
-  goToPrevPage, handleBookmarkClick, goToPlaceDetail,
+  goToPrevPage, goToPlaceDetail,
   goToBlogReview, goToUserReview, size,
 }) {
   const handleBackPageClick = () => {
@@ -57,7 +57,6 @@ export default function PlaceDetailTap({
     <Container>
       <Utils>
         <button type="button" onClick={handleBackPageClick}> &lt; 뒤로가기</button>
-        <button type="button" onClick={handleBookmarkClick}> 즐겨찾기</button>
       </Utils>
       <Menu>
         <button type="button" onClick={handlePlaceDetailTapClick}>상세정보</button>

@@ -31,7 +31,6 @@ export default function NaverLoginRedirectPage() {
       navigate(`/signup/${id}`);
       return;
     }
-
     setAccessToken(accessToken);
     setUserId(id);
     navigate('/top3');
