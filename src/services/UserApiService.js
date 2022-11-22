@@ -22,7 +22,6 @@ export default class UserApiService {
   async sendNaverAuthorizationCode(code) {
     const url = `${baseUrl}/oauth/naver-token`;
     const { data } = await axios.get(url, { params: { code } });
-    console.log(data);
 
     return data;
   }
@@ -44,6 +43,26 @@ export default class UserApiService {
     const url = `${baseUrl}/users/${userId}`;
     const response = await axios.post(url, { nickname });
     return response.data;
+  }
+
+  async toggleBookmark(placeId) {
+    const url = `${baseUrl}/bookmarks/${placeId}`;
+    const response = await axios.post(url, {}, {
+      headers: {
+        Authorization: `Bearer ${this.accessToken}`,
+      },
+    });
+    return response.data.bookmarkedPlaces;
+  }
+
+  async fetchBookmarks() {
+    const url = `${baseUrl}/bookmarks`;
+    const response = await axios.get(url, {
+      headers: {
+        Authorization: `Bearer ${this.accessToken}`,
+      },
+    });
+    return response.data.bookmarkedPlaces;
   }
 }
 

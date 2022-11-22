@@ -8,6 +8,7 @@ export default class UserStore extends Store {
 
     this.nickname = '';
     this.userInformation = {};
+    this.bookmarks = [];
 
     this.errorCode = 0;
     this.errorMessage = '';
@@ -70,6 +71,34 @@ export default class UserStore extends Store {
     try {
       const data = await userApiService.requestSignUp(userId, nickname);
       this.clearError();
+      return data;
+    } catch (error) {
+      this.errorCode = error.response.data.code;
+      this.errorMessage = error.response.data.message;
+      this.publish();
+      return '';
+    }
+  }
+
+  async toggleBookmark(placeId) {
+    try {
+      const bookmarks = await userApiService.toggleBookmark(placeId);
+      this.bookmarks = bookmarks;
+      this.publish();
+      return bookmarks;
+    } catch (error) {
+      this.errorCode = error.response.data.code;
+      this.errorMessage = error.response.data.message;
+      this.publish();
+      return '';
+    }
+  }
+
+  async fetchBookmarks() {
+    try {
+      const data = await userApiService.fetchBookmarks();
+      this.bookmarks = data;
+      this.publish();
       return data;
     } catch (error) {
       this.errorCode = error.response.data.code;

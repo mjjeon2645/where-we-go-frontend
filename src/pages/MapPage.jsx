@@ -14,6 +14,7 @@ import FilterBar from '../components/FilterBar';
 import Filters from '../components/Filters';
 import FilterResultBar from '../components/FilterResultBar';
 import FilteredPlacesList from '../components/FilteredPlacesList';
+import useUserStore from '../hooks/useUserStore';
 
 const MapArea = styled.div`
   display: relative;

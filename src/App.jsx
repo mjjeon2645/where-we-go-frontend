@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { ModalProvider } from 'styled-react-modal';
 import { Reset } from 'styled-reset';
 
+import { useEffect } from 'react';
+import { useLocalStorage } from 'usehooks-ts';
 import HomePage from './pages/HomePage';
 import MapPage from './pages/MapPage';
 import TopThreePage from './pages/TopThreePage';
@@ -19,7 +21,8 @@ import LoginPage from './pages/LoginPage';
 import KakaoLoginRedirectPage from './pages/KakaoLoginRedirectPage';
 import NaverLoginRedirectPage from './pages/NaverLoginRedirectPage';
 import MyNicknameChangePage from './pages/MyNicknameChangePage';
-import SignUpPage from './pages/SignupPage';
+import SignUpPage from './pages/SignUpPage';
+import { userApiService } from './services/UserApiService';
 
 const Container = styled.div`
   background-color: #F0F2F5;
@@ -36,6 +39,12 @@ const Wrapper = styled.div`
 `;
 
 export default function App() {
+  const [accessToken] = useLocalStorage('accessToken', '');
+
+  useEffect(() => {
+    userApiService.setAccessToken(accessToken);
+  }, [accessToken]);
+
   return (
     <div>
       <Reset />

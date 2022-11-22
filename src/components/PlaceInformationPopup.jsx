@@ -11,7 +11,7 @@ const Popup = styled.div`
 
     border-radius: 8px;
     width: 280px;
-    height: 200px;
+    height: 180px;
     padding: .5em .5em;
 
     background-color: #ffffff;
@@ -49,10 +49,6 @@ const Information = styled.div`
         margin-right: 1em;
     }
 `;
-
-const handleBookmarkClick = () => {
-  // TODO. 즐겨찾기 기능 구현
-};
 
 export default function PlaceInformationPopup(
   { selectedPlace, closePopup },
@@ -105,9 +101,6 @@ export default function PlaceInformationPopup(
           </span>
         </Information>
       </a>
-      <button type="button" onClick={handleBookmarkClick}>
-        즐겨찾기
-      </button>
     </Popup>
   );
 }
