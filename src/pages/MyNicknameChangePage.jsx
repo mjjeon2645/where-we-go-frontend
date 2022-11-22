@@ -21,13 +21,18 @@ export default function MyNicknameChangePage() {
 
   const userStore = useUserStore();
 
+  const { errorMessage } = userStore;
+
   const modifyNickname = async (event) => {
     const nickname = event.target[0].value;
     const data = await userStore.changeNickname(userId, nickname);
-    navigate(`/mypage/${userId}`);
+    if (data) {
+      navigate(`/mypage/${userId}`);
+    }
   };
 
   const goPrevPage = () => {
+    userStore.clearError();
     navigate(-1);
   };
 
@@ -37,6 +42,7 @@ export default function MyNicknameChangePage() {
       <MyNicknameForm
         modifyNickname={modifyNickname}
         goPrevPage={goPrevPage}
+        errorMessage={errorMessage}
       />
     </Container>
   );

@@ -23,12 +23,15 @@ export default function SignUpPage() {
 
   const navigate = useNavigate();
 
+  const { errorMessage } = userStore;
+
   const userId = document.location.pathname.split('/')[2];
 
   const signUp = async (event) => {
     const nickname = event.target[0].value;
     const data = await userStore.requestSignUp(userId, nickname);
     if (data.accessToken) {
+      userStore.clearError();
       setAccessToken(data.accessToken);
       setUserId(userId);
       navigate('/top3');
@@ -38,7 +41,7 @@ export default function SignUpPage() {
   return (
     <Container>
       <Title> SignUp</Title>
-      <SignUpForm signUp={signUp} />
+      <SignUpForm signUp={signUp} errorMessage={errorMessage} />
     </Container>
   );
 }

@@ -8,6 +8,9 @@ export default class UserStore extends Store {
 
     this.nickname = '';
     this.userInformation = {};
+
+    this.errorCode = 0;
+    this.errorMessage = '';
   }
 
   async sendKakaoAuthorizationCode(code) {
@@ -49,20 +52,41 @@ export default class UserStore extends Store {
   }
 
   async changeNickname(userId, text) {
-    const changedNickname = await userApiService.requestChangingNickname(userId, text);
-
-    this.nickname = changedNickname;
-    this.publish();
+    try {
+      const changedNickname = await userApiService.requestChangingNickname(userId, text);
+      this.clearError();
+      this.nickname = changedNickname;
+      this.publish();
+      return changedNickname;
+    } catch (error) {
+      this.errorCode = error.response.data.code;
+      this.errorMessage = error.response.data.message;
+      this.publish();
+      return '';
+    }
   }
 
   async requestSignUp(userId, nickname) {
-    const data = await userApiService.requestSignUp(userId, nickname);
-    console.log(data);
-    return data;
+    try {
+      const data = await userApiService.requestSignUp(userId, nickname);
+      this.clearError();
+      return data;
+    } catch (error) {
+      this.errorCode = error.response.data.code;
+      this.errorMessage = error.response.data.message;
+      this.publish();
+      return '';
+    }
   }
 
   clearUserState() {
     this.nickname = '';
+    this.publish();
+  }
+
+  clearError() {
+    this.errorCode = 0;
+    this.errorMessage = '';
     this.publish();
   }
 }

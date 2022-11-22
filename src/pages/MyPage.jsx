@@ -32,6 +32,7 @@ export default function MyPage() {
   }, [userInformation.nickname]);
 
   const goToModifyNickname = () => {
+    userStore.clearError();
     navigate(`/mypage/${userId}/nicknameform`);
   };
 
