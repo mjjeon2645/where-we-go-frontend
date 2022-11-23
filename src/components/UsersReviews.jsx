@@ -34,7 +34,7 @@ export default function UsersReviews({ userReviews }) {
           {userReviews.map((userReview) => (
             <Review key={userReview.id}>
               <p>
-                <strong>봄이엄마</strong>
+                <strong>{userReview.nickname}</strong>
                 <span>
                   (방문일:
                   {' '}

@@ -25,7 +25,7 @@ export default function PlaceUserReviewPage() {
   const navigate = useNavigate();
 
   const { blogReviews } = blogReviewStore;
-  const { averageRate, userReviews } = userReviewStore;
+  const { averageRate, userReviews, myReviewAtThePlace } = userReviewStore;
 
   useEffect(() => {
     blogReviewStore.fetchBlogReviews(placeId);
@@ -34,10 +34,6 @@ export default function PlaceUserReviewPage() {
 
   const goToPrevPage = () => {
     navigate(-1);
-  };
-
-  const handleBookmarkClick = () => {
-    //
   };
 
   const goToPlaceDetail = () => {
@@ -56,11 +52,14 @@ export default function PlaceUserReviewPage() {
     navigate(`/places/${placeId}/write`);
   };
 
+  const deleteReview = async (reviewId) => {
+    await userReviewStore.deleteReview(placeId, reviewId);
+  };
+
   return (
     <div>
       <PlaceDetailTap
         goToPrevPage={goToPrevPage}
-        handleBookmarkClick={handleBookmarkClick}
         goToPlaceDetail={goToPlaceDetail}
         goToBlogReview={goToBlogReview}
         goToUserReview={goToUserReview}
@@ -68,8 +67,15 @@ export default function PlaceUserReviewPage() {
       />
       {userReviews ? (
         <Wrapper>
-          <PlaceAverageRate averageRate={averageRate} userReviews={userReviews} />
-          <MyReview goToReviewForm={goToReviewForm} />
+          <PlaceAverageRate
+            averageRate={averageRate}
+            userReviews={userReviews}
+          />
+          <MyReview
+            myReviewAtThePlace={myReviewAtThePlace}
+            goToReviewForm={goToReviewForm}
+            deleteReview={deleteReview}
+          />
           <UsersReviews userReviews={userReviews} />
         </Wrapper>
       ) : (

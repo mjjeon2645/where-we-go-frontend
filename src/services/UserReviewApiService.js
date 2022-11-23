@@ -16,13 +16,16 @@ export default class UserReviewApiService {
 
   async fetchUsersReviews(placeId) {
     const url = `${baseUrl}/user-reviews/${placeId}`;
-    const { data } = await axios.get(url);
+    const { data } = await axios.get(url, {
+      headers: {
+        Authorization: `Bearer ${this.accessToken}`,
+      },
+    });
     return data;
   }
 
   async postMyReview(placeId, dateOfVisit, rate, body) {
     const url = `${baseUrl}/user-reviews/${placeId}`;
-
     const { data } = await axios.post(url, {
       placeId, dateOfVisit, rate, body,
     }, {
@@ -32,6 +35,11 @@ export default class UserReviewApiService {
     });
 
     return data;
+  }
+
+  async deleteReview(reviewId) {
+    const url = `${baseUrl}/user-reviews/${reviewId}`;
+    await axios.delete(url);
   }
 }
 

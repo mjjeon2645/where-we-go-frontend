@@ -9,6 +9,7 @@ export default class UserReviewStore extends Store {
 
     this.averageRate = '';
     this.userReviews = [];
+    this.myReviewAtThePlace = {};
 
     this.myDateOfVisit = formatDate(new Date());
     this.myRate = 0;
@@ -16,9 +17,12 @@ export default class UserReviewStore extends Store {
   }
 
   async fetchUsersReviews(placeId) {
-    const { averageRate, userReviews } = await userReviewApiService.fetchUsersReviews(placeId);
+    const {
+      averageRate, userReviews, userReview,
+    } = await userReviewApiService.fetchUsersReviews(placeId);
     this.averageRate = averageRate;
     this.userReviews = userReviews;
+    this.myReviewAtThePlace = userReview;
     this.publish();
   }
 
@@ -69,9 +73,12 @@ export default class UserReviewStore extends Store {
 
   async postMyReview(placeId, date, rate, review) {
     await userReviewApiService.postMyReview(placeId, date, rate, review);
-
-    // TODO. publish를 해줘야하나????
     this.publish();
+  }
+
+  async deleteReview(placeId, reviewId) {
+    await userReviewApiService.deleteReview(reviewId);
+    this.fetchUsersReviews(placeId);
   }
 }
 
