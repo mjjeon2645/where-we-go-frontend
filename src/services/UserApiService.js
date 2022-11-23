@@ -64,6 +64,26 @@ export default class UserApiService {
     });
     return response.data.bookmarkedPlaces;
   }
+
+  async fetchChildren(userId) {
+    const url = `${baseUrl}/children/${userId}`;
+    const response = await axios.get(url);
+
+    return response.data.children;
+  }
+
+  async addChild(userId, birthday, gender) {
+    const url = `${baseUrl}/children/${userId}`;
+    const response = await axios.post(url, {
+      birthday, gender,
+    });
+
+    console.log(userId);
+    console.log(birthday);
+    console.log(gender);
+
+    return response;
+  }
 }
 
 export const userApiService = new UserApiService();

@@ -23,6 +23,7 @@ import NaverLoginRedirectPage from './pages/NaverLoginRedirectPage';
 import MyNicknameChangePage from './pages/MyNicknameChangePage';
 import SignUpPage from './pages/SignUpPage';
 import { userApiService } from './services/UserApiService';
+import ChildAddPage from './pages/ChildAddPage';
 
 const Container = styled.div`
   background-color: #F0F2F5;
@@ -63,6 +64,7 @@ export default function App() {
               <Route path="/top3" element={<TopThreePage />} />
               <Route path="/mypage/:id" element={<MyPage />} />
               <Route path="/mypage/:id/nicknameform" element={<MyNicknameChangePage />} />
+              <Route path="/mypage/:id/childform" element={<ChildAddPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup/:id" element={<SignUpPage />} />
               <Route path="/oauth/callback/kakao" element={<KakaoLoginRedirectPage />} />

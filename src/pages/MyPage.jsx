@@ -25,16 +25,21 @@ export default function MyPage() {
 
   const [userId] = useLocalStorage('userId', '');
 
-  const { userInformation, bookmarks } = userStore;
+  const { userInformation, bookmarks, children: userChildren } = userStore;
 
   useEffect(() => {
     userStore.fetchUserInformation(userId);
     userStore.fetchBookmarks();
+    userStore.fetchChildren(userId);
   }, [userInformation.nickname]);
 
   const goToModifyNickname = () => {
     userStore.clearError();
     navigate(`/mypage/${userId}/nicknameform`);
+  };
+
+  const goToAddChildForm = () => {
+    navigate(`/mypage/${userId}/childform`);
   };
 
   const goPlaceDetailPage = (placeId) => {
@@ -54,7 +59,7 @@ export default function MyPage() {
             userInformation={userInformation}
             goToModifyNickname={goToModifyNickname}
           />
-          <MyChildren />
+          <MyChildren userChildren={userChildren} goToAddChildForm={goToAddChildForm} />
           <MyBookmarks
             goPlaceDetailPage={goPlaceDetailPage}
             removeBookmark={removeBookmark}

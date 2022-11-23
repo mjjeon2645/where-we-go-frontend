@@ -9,6 +9,10 @@ export default class UserStore extends Store {
     this.nickname = '';
     this.userInformation = {};
     this.bookmarks = [];
+    this.children = [];
+
+    this.gender = '';
+    this.birthday = '';
 
     this.errorCode = 0;
     this.errorMessage = '';
@@ -106,6 +110,27 @@ export default class UserStore extends Store {
       this.publish();
       return '';
     }
+  }
+
+  async fetchChildren(userId) {
+    const data = await userApiService.fetchChildren(userId);
+    this.children = data;
+    this.publish();
+  }
+
+  setBirthday(birthday) {
+    this.birthday = birthday;
+  }
+
+  setGender(gender) {
+    this.gender = gender;
+  }
+
+  async addChild(userId) {
+    const children = await userApiService.addChild(userId, this.birthday, this.gender);
+    // TODO. clear state
+    this.children = children;
+    this.publish();
   }
 
   clearUserState() {
