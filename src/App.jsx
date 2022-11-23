@@ -24,6 +24,7 @@ import MyNicknameChangePage from './pages/MyNicknameChangePage';
 import SignUpPage from './pages/SignUpPage';
 import { userApiService } from './services/UserApiService';
 import ChildAddPage from './pages/ChildAddPage';
+import { userReviewApiService } from './services/UserReviewApiService';
 
 const Container = styled.div`
   background-color: #F0F2F5;
@@ -44,6 +45,7 @@ export default function App() {
 
   useEffect(() => {
     userApiService.setAccessToken(accessToken);
+    userReviewApiService.setAccessToken(accessToken);
   }, [accessToken]);
 
   return (
