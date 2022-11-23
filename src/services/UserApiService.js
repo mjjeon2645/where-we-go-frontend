@@ -77,12 +77,12 @@ export default class UserApiService {
     const response = await axios.post(url, {
       birthday, gender,
     });
+    return response.data.children;
+  }
 
-    console.log(userId);
-    console.log(birthday);
-    console.log(gender);
-
-    return response;
+  async deleteChild(userId, childId) {
+    const url = `${baseUrl}/children/${userId}`;
+    await axios.patch(url, { userId, childId });
   }
 }
 

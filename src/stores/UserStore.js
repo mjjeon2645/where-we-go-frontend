@@ -1,4 +1,5 @@
 import { userApiService } from '../services/UserApiService';
+import formatDate from '../utils/dateOfVisitFormatter';
 import Store from './Store';
 
 /* eslint-disable class-methods-use-this */
@@ -12,7 +13,7 @@ export default class UserStore extends Store {
     this.children = [];
 
     this.gender = '';
-    this.birthday = '';
+    this.birthday = formatDate(new Date());
 
     this.errorCode = 0;
     this.errorMessage = '';
@@ -126,11 +127,25 @@ export default class UserStore extends Store {
     this.gender = gender;
   }
 
+  // TODO. clear state
+
   async addChild(userId) {
-    const children = await userApiService.addChild(userId, this.birthday, this.gender);
-    // TODO. clear state
-    this.children = children;
-    this.publish();
+    try {
+      const children = await userApiService.addChild(userId, this.birthday, this.gender);
+      this.children = children;
+      this.publish();
+      return children;
+    } catch (error) {
+      this.errorCode = error.response.data.code;
+      this.errorMessage = error.response.data.message;
+      this.publish();
+      return '';
+    }
+  }
+
+  async deleteChild(userId, childId) {
+    await userApiService.deleteChild(userId, childId);
+    this.fetchChildren(userId);
   }
 
   clearUserState() {

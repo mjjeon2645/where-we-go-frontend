@@ -50,6 +50,10 @@ export default function MyPage() {
     userStore.toggleBookmark(placeId);
   };
 
+  const deleteChild = async (childId) => {
+    await userStore.deleteChild(userId, childId);
+  };
+
   return (
     <Container>
       {userInformation.length !== 0 ? (
@@ -59,7 +63,11 @@ export default function MyPage() {
             userInformation={userInformation}
             goToModifyNickname={goToModifyNickname}
           />
-          <MyChildren userChildren={userChildren} goToAddChildForm={goToAddChildForm} />
+          <MyChildren
+            userChildren={userChildren}
+            goToAddChildForm={goToAddChildForm}
+            deleteChild={deleteChild}
+          />
           <MyBookmarks
             goPlaceDetailPage={goPlaceDetailPage}
             removeBookmark={removeBookmark}

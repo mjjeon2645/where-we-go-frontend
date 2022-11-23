@@ -9,11 +9,46 @@ const Title = styled.p`
   margin-block: 1em;
 `;
 
-export default function MyChildren({ userChildren: children, goToAddChildForm }) {
-  console.log(children);
+const Column = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding-block: .8em;
+`;
 
+const List = styled.li`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
+  align-items: center;
+  text-align: center;
+  padding-block: .8em;
+
+  button {
+    background-color: #EEE;
+    border-radius: 4px;
+    border: none;
+    width: 20%;
+  }
+`;
+
+const AddButton = styled.button`
+  float: right;
+  border: none;
+  border-radius: 4px;
+  padding: .5em .7em;
+`;
+
+export default function MyChildren({ userChildren: children, goToAddChildForm, deleteChild }) {
   const handleAddChildInfoClick = () => {
     goToAddChildForm();
+  };
+
+  const handleDeleteChildClick = (childId) => {
+    deleteChild(childId);
   };
   return (
     <Container>
@@ -21,29 +56,27 @@ export default function MyChildren({ userChildren: children, goToAddChildForm })
       {children.length === 0 ? (
         <p>아이 정보가 없습니다</p>
       ) : (
-        <ul>
-          {children.map(
-            (child) => (
-              <li key={child.id}>
-                <p>{child.gender}</p>
-                <p>
-                  {child.birthday.year}
-                  년
-                </p>
-                <p>
-                  {child.birthday.month}
-                  월
-                </p>
-                <p>
-                  {child.birthday.day}
-                  일
-                </p>
-              </li>
-            ),
-          )}
-        </ul>
+        <div>
+          <Column>
+            <p>아이 성별</p>
+            <p>아이 생일</p>
+          </Column>
+          <ul>
+            {children.map(
+              (child) => (
+                <List key={child.id}>
+                  <p>{child.gender}</p>
+                  <p>{child.birthday}</p>
+                  <button type="button" onClick={() => handleDeleteChildClick(child.id)}>X</button>
+                </List>
+              ),
+            )}
+          </ul>
+        </div>
       )}
-      <button type="button" onClick={handleAddChildInfoClick}>추가</button>
+      <div>
+        <AddButton type="button" onClick={handleAddChildInfoClick}>추가</AddButton>
+      </div>
     </Container>
   );
 }

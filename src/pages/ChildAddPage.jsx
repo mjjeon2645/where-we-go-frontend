@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import Childform from '../components/ChildForm';
 import formatDate from '../utils/dateOfVisitFormatter';
 import useUserStore from '../hooks/useUserStore';
@@ -16,7 +17,10 @@ const Title = styled.p`
 export default function ChildAddPage() {
   const [date, setDate] = useState(new Date());
 
+  const navigate = useNavigate();
+
   const userStore = useUserStore();
+  const { errorMessage } = userStore;
 
   const userId = document.location.pathname.split('/')[2];
 
@@ -30,14 +34,30 @@ export default function ChildAddPage() {
     userStore.setBirthday(formattedDate);
   };
 
-  const addChild = () => {
-    userStore.addChild(userId);
+  const addChild = async () => {
+    const data = await userStore.addChild(userId);
+    if (data) {
+      userStore.clearError();
+      navigate('/mypage/userId');
+    }
+  };
+
+  const goBackPrevPage = () => {
+    userStore.clearError();
+    navigate(-1);
   };
 
   return (
     <Container>
       <Title>아이 정보 입력하기</Title>
-      <Childform date={date} setGender={setGender} setBirthday={setBirthday} addChild={addChild} />
+      <Childform
+        date={date}
+        errorMessage={errorMessage}
+        setGender={setGender}
+        setBirthday={setBirthday}
+        addChild={addChild}
+        goBackPrevPage={goBackPrevPage}
+      />
     </Container>
   );
 }
