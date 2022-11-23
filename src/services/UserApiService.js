@@ -64,6 +64,26 @@ export default class UserApiService {
     });
     return response.data.bookmarkedPlaces;
   }
+
+  async fetchChildren(userId) {
+    const url = `${baseUrl}/children/${userId}`;
+    const response = await axios.get(url);
+
+    return response.data.children;
+  }
+
+  async addChild(userId, birthday, gender) {
+    const url = `${baseUrl}/children/${userId}`;
+    const response = await axios.post(url, {
+      birthday, gender,
+    });
+    return response.data.children;
+  }
+
+  async deleteChild(userId, childId) {
+    const url = `${baseUrl}/children/${userId}`;
+    await axios.patch(url, { userId, childId });
+  }
 }
 
 export const userApiService = new UserApiService();
