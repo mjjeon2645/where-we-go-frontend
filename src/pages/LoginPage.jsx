@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import kakaoLoginConfig from '../kakaoLogin.config';
 import naverLoginConfig from '../naverLogin.config';
 
 import SkipLoginButton from '../components/SkipLoginButton';
+import LoginModal from '../components/LoginModal';
 
 const Container = styled.div`
     padding: 5em 3em 0 3em;
@@ -34,7 +36,7 @@ const Title = styled.h2`
 `;
 
 const Text = styled.div`
-    padding-block: 1em;
+    padding-block: 1.5em;
 
     p {
         margin-block: .6em;
@@ -43,6 +45,14 @@ const Text = styled.div`
 
 const LoginButtonsArea = styled.div`
     margin-top: 3em;
+    
+    div {
+      margin-block: .5em;
+    }
+
+    div:last-child {
+      margin-top: 1em;
+    }
 `;
 
 const NaverLogin = styled.a`
@@ -79,9 +89,19 @@ export default function LoginPage() {
   const naverButton = 'https://user-images.githubusercontent.com/104840243/202971376-50fc026a-014a-4518-a615-b0da84f5b58c.png';
   const kakaoButton = 'https://user-images.githubusercontent.com/104840243/202971385-ee1b510d-e434-4da4-832a-2de9ebb622a7.png';
 
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+
   const navigate = useNavigate();
 
   const skipLogin = () => {
+    setIsLoginModalOpen(!isLoginModalOpen);
+  };
+
+  const toggleModal = () => {
+    setIsLoginModalOpen(!isLoginModalOpen);
+  };
+
+  const goToMainPage = () => {
     navigate('/top3');
   };
 
@@ -116,6 +136,11 @@ export default function LoginPage() {
           </KakaoLogin>
         </div>
         <SkipLoginButton skipLogin={skipLogin} />
+        <LoginModal
+          isLoginModalOpen={isLoginModalOpen}
+          toggleModal={toggleModal}
+          goToMainPage={goToMainPage}
+        />
       </LoginButtonsArea>
     </Container>
   );

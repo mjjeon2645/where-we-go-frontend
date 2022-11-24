@@ -158,6 +158,11 @@ export default class UserStore extends Store {
     this.errorMessage = '';
     this.publish();
   }
+
+  clearAddChildState() {
+    this.gender = '';
+    this.birthday = formatDate(new Date());
+  }
 }
 
 export const userStore = new UserStore();

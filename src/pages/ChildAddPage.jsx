@@ -38,12 +38,14 @@ export default function ChildAddPage() {
     const data = await userStore.addChild(userId);
     if (data) {
       userStore.clearError();
+      userStore.clearAddChildState();
       navigate('/mypage/userId');
     }
   };
 
   const goBackPrevPage = () => {
     userStore.clearError();
+    userStore.clearAddChildState();
     navigate(-1);
   };
 

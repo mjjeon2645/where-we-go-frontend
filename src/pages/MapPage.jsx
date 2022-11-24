@@ -44,12 +44,16 @@ export default function MapPage() {
     setIsPlaceSelected(true);
   };
 
+  const { search } = document.location;
+  console.log(search);
+
   const {
     selectedPlace, sido, sigungu, category,
   } = mapStore;
 
   useEffect(() => {
     const fetchData = async () => {
+      console.log('click');
       await mapStore.fetchFilteredPlaces(sido, sigungu, category);
       const { places } = mapStore;
 
@@ -59,7 +63,7 @@ export default function MapPage() {
     fetchData();
 
     setIsPlaceSelected(false);
-  }, [filterPageOn, filteredListsPageOn]);
+  }, [filterPageOn, filteredListsPageOn, search]);
 
   const setFilteredPlaces = (sidoCondition, sigunguCondition, categoryCondition) => {
     mapStore.fetchFilteredPlaces(sidoCondition, sigunguCondition, categoryCondition);
@@ -81,8 +85,9 @@ export default function MapPage() {
     setFilterPageOn(true);
   };
 
-  const resetFilter = () => {
+  const resetFilter = async () => {
     mapStore.clearFilterState();
+    navigate('/map');
   };
 
   const goBackFromFilterPage = () => {

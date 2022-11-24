@@ -82,7 +82,11 @@ export default class UserApiService {
 
   async deleteChild(userId, childId) {
     const url = `${baseUrl}/children/${userId}`;
-    await axios.patch(url, { userId, childId });
+    await axios.delete(url, {
+      data: {
+        userId, childId,
+      },
+    });
   }
 }
 
