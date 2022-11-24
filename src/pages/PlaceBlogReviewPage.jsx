@@ -46,10 +46,6 @@ export default function PlaceBlogReviewPage() {
     navigate(-1);
   };
 
-  const handleBookmarkClick = () => {
-    //
-  };
-
   const goToPlaceDetail = () => {
     navigate(`/places/${placeId}`);
   };
@@ -66,7 +62,6 @@ export default function PlaceBlogReviewPage() {
     <Container>
       <PlaceDetailTap
         goToPrevPage={goToPrevPage}
-        handleBookmarkClick={handleBookmarkClick}
         goToPlaceDetail={goToPlaceDetail}
         goToBlogReview={goToBlogReview}
         goToUserReview={goToUserReview}

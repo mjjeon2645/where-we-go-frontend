@@ -48,7 +48,7 @@ export default function Header() {
     setAccessToken('');
     setUserId('');
     userStore.clearUserState();
-    navigate('/top3');
+    navigate('/login');
   };
 
   return (

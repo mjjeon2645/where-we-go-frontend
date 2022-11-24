@@ -61,10 +61,11 @@ export default class MapStore extends Store {
     this.publish();
   }
 
-  clearFilterState() {
+  async clearFilterState() {
     this.sido = '전체';
     this.sigungu = '';
     this.category = '전체';
+    await this.fetchFilteredPlaces(this.sido, this.sigungu, this.category);
     this.publish();
   }
 
