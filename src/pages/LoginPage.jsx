@@ -36,7 +36,7 @@ const Title = styled.h2`
 `;
 
 const Text = styled.div`
-    padding-block: 1em;
+    padding-block: 1.5em;
 
     p {
         margin-block: .6em;
@@ -45,6 +45,14 @@ const Text = styled.div`
 
 const LoginButtonsArea = styled.div`
     margin-top: 3em;
+    
+    div {
+      margin-block: .5em;
+    }
+
+    div:last-child {
+      margin-top: 1em;
+    }
 `;
 
 const NaverLogin = styled.a`
@@ -86,12 +94,15 @@ export default function LoginPage() {
   const navigate = useNavigate();
 
   const skipLogin = () => {
-    // navigate('/top3');
     setIsLoginModalOpen(!isLoginModalOpen);
   };
 
   const toggleModal = () => {
     setIsLoginModalOpen(!isLoginModalOpen);
+  };
+
+  const goToMainPage = () => {
+    navigate('/top3');
   };
 
   return (
@@ -125,7 +136,11 @@ export default function LoginPage() {
           </KakaoLogin>
         </div>
         <SkipLoginButton skipLogin={skipLogin} />
-        <LoginModal isLoginModalOpen={isLoginModalOpen} toggleModal={toggleModal} />
+        <LoginModal
+          isLoginModalOpen={isLoginModalOpen}
+          toggleModal={toggleModal}
+          goToMainPage={goToMainPage}
+        />
       </LoginButtonsArea>
     </Container>
   );
