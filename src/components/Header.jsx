@@ -2,7 +2,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useLocalStorage } from 'usehooks-ts';
 
 import styled from 'styled-components';
+import { useState } from 'react';
 import useUserStore from '../hooks/useUserStore';
+import UnauthorizedAccessModal from './UnauthorizedAccessModal';
 
 const Container = styled.header`
   width: 100%;
@@ -31,6 +33,19 @@ const List = styled.ul`
     align-items: center;
 `;
 
+const MyMenu = styled.button`
+  font-size: 1em;
+  background: none;
+  border: none;
+`;
+
+const Login = styled.button`
+  font-size: 1em;
+  color: #ff9d13;
+  background: none;
+  border: none;
+`;
+
 const Logout = styled.button`
   font-size: 1em;
   background: none;
@@ -41,8 +56,32 @@ export default function Header() {
   const [accessToken, setAccessToken] = useLocalStorage('accessToken', '');
   const [userId, setUserId] = useLocalStorage('userId', '');
 
+  const [isAccessModalOpen, setIsAccessModalOpen] = useState(false);
+
   const navigate = useNavigate();
   const userStore = useUserStore();
+
+  const toggleModal = () => {
+    setIsAccessModalOpen(!isAccessModalOpen);
+  };
+
+  const goToLogin = () => {
+    navigate('/login');
+    setAccessToken('');
+  };
+
+  const handleMyPageClick = () => {
+    if (accessToken !== 'temporaryAccessToken' && accessToken) {
+      navigate(`/mypage/${userId}`);
+      return;
+    }
+    toggleModal();
+  };
+
+  const handleLoginClick = () => {
+    setAccessToken('');
+    navigate('/login');
+  };
 
   const handleLogoutClick = () => {
     setAccessToken('');
@@ -63,11 +102,16 @@ export default function Header() {
               <Link to="/top3">Top 3</Link>
             </li>
             <li>
-              <Link to={`/mypage/${userId}`}>My메뉴</Link>
+              <MyMenu type="button" onClick={handleMyPageClick}>MyPage</MyMenu>
+              <UnauthorizedAccessModal
+                isAccessModalOpen={isAccessModalOpen}
+                toggleModal={toggleModal}
+                goToLogin={goToLogin}
+              />
             </li>
-            {!accessToken ? (
+            {!accessToken || accessToken === 'temporaryAccessToken' ? (
               <li>
-                <Link to="/login">로그인</Link>
+                <Login type="button" onClick={handleLoginClick}>로그인</Login>
               </li>
             ) : (
               <li>
