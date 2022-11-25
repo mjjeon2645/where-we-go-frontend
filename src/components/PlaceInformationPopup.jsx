@@ -36,25 +36,29 @@ const ImagesArea = styled.div`
     }
 `;
 
-const PlaceTitle = styled.h2`
-    font-size: 1.1em;
+const PlaceContentButton = styled.button`
+  background: none;
+  border: none;
+  text-align: start;
+
+  h2 {
+    font-size: 1.3em;
     font-weight: bold;
     margin: .5em 0em;
+  }
 `;
 
 const Information = styled.div`
     display: flex;
     span {
-        font-size: .7em;
+        font-size: .8em;
         margin-right: 1em;
     }
 `;
 
 export default function PlaceInformationPopup(
-  { selectedPlace, closePopup },
+  { selectedPlace, goToPlaceDetailPage, closePopup },
 ) {
-  const url = `http://localhost:8080/places/${selectedPlace.placeId}`;
-
   const date = new Date();
 
   const dayOfWeekArray = [
@@ -64,6 +68,10 @@ export default function PlaceInformationPopup(
   const dayOfWeek = dayOfWeekArray[date.getDay()];
 
   const { address, businessHours, imageSource } = selectedPlace;
+
+  const handleGoToDetailPageClick = (placeId) => {
+    goToPlaceDetailPage(placeId);
+  };
 
   const handlePlaceInformationPopupCloseClick = () => {
     closePopup();
@@ -83,10 +91,13 @@ export default function PlaceInformationPopup(
         <img src={imageSource.secondImage} alt="" />
         <img src={imageSource.thirdImage} alt="" />
       </ImagesArea>
-      <a href={url}>
-        <PlaceTitle>
+      <PlaceContentButton
+        type="button"
+        onClick={() => handleGoToDetailPageClick(selectedPlace.placeId)}
+      >
+        <h2>
           {selectedPlace.name}
-        </PlaceTitle>
+        </h2>
         <Information>
           <span>
             {address.sido}
@@ -100,7 +111,7 @@ export default function PlaceInformationPopup(
             {businessHours[dayOfWeek]}
           </span>
         </Information>
-      </a>
+      </PlaceContentButton>
     </Popup>
   );
 }

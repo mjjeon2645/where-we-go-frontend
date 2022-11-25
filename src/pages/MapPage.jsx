@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
 
+import { useLocalStorage } from 'usehooks-ts';
 import useMapStore from '../hooks/useMapStore';
 
 import { loadKakaoMap } from '../utils/KakaoMap';
@@ -14,6 +15,7 @@ import FilterBar from '../components/FilterBar';
 import Filters from '../components/Filters';
 import FilterResultBar from '../components/FilterResultBar';
 import FilteredPlacesList from '../components/FilteredPlacesList';
+import UnauthorizedAccessModal from '../components/UnauthorizedAccessModal';
 
 const MapArea = styled.div`
   display: relative;
@@ -33,6 +35,10 @@ export default function MapPage() {
 
   const [filterResultBarOn, setFilterResultBarOn] = useState(false);
 
+  const [isAccessModalOpen, setIsAccessModalOpen] = useState(false);
+
+  const [accessToken, setAccessToken] = useLocalStorage('accessToken', '');
+
   const mapStore = useMapStore();
 
   const kakaoMap = useRef(null);
@@ -45,7 +51,6 @@ export default function MapPage() {
   };
 
   const { search } = document.location;
-  console.log(search);
 
   const {
     selectedPlace, sido, sigungu, category,
@@ -53,7 +58,6 @@ export default function MapPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log('click');
       await mapStore.fetchFilteredPlaces(sido, sigungu, category);
       const { places } = mapStore;
 
@@ -114,8 +118,22 @@ export default function MapPage() {
     setFilteredListsPageOn(false);
   };
 
-  const goDetailPageOfSelectedPlace = (id) => {
-    navigate(`/places/${id}`);
+  const toggleModal = () => {
+    setIsAccessModalOpen(!isAccessModalOpen);
+  };
+
+  const goToPlaceDetailPage = (placeId) => {
+    if (accessToken && accessToken !== 'temporaryAccessToken') {
+      navigate(`/places/${placeId}`);
+      return;
+    }
+    toggleModal();
+  };
+
+  const goToLogin = () => {
+    navigate('/login');
+    setAccessToken('');
+    toggleModal();
   };
 
   const { places } = mapStore;
@@ -135,6 +153,7 @@ export default function MapPage() {
             {isPlaceSelected && (
               <PlaceInformationPopup
                 selectedPlace={selectedPlace}
+                goToPlaceDetailPage={goToPlaceDetailPage}
                 closePopup={closePopup}
               />
             )}
@@ -145,6 +164,11 @@ export default function MapPage() {
               />
             )}
           </MapArea>
+          <UnauthorizedAccessModal
+            isAccessModalOpen={isAccessModalOpen}
+            toggleModal={toggleModal}
+            goToLogin={goToLogin}
+          />
         </div>
       )
         : filterPageOn && !filteredListsPageOn ? (
@@ -159,11 +183,18 @@ export default function MapPage() {
             category={category}
           />
         ) : (
-          <FilteredPlacesList
-            places={places}
-            goBackFromPlaceListPage={goBackFromPlaceListPage}
-            goDetailPageOfSelectedPlace={goDetailPageOfSelectedPlace}
-          />
+          <div>
+            <FilteredPlacesList
+              places={places}
+              goBackFromPlaceListPage={goBackFromPlaceListPage}
+              goToPlaceDetailPage={goToPlaceDetailPage}
+            />
+            <UnauthorizedAccessModal
+              isAccessModalOpen={isAccessModalOpen}
+              toggleModal={toggleModal}
+              goToLogin={goToLogin}
+            />
+          </div>
         )}
     </div>
   );

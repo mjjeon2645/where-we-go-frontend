@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { ModalProvider } from 'styled-react-modal';
 import { Reset } from 'styled-reset';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocalStorage } from 'usehooks-ts';
 import HomePage from './pages/HomePage';
 import MapPage from './pages/MapPage';
@@ -52,29 +52,33 @@ export default function App() {
     <div>
       <Reset />
       <GlobalStyle />
-      <Header />
-      <Container>
-        <Wrapper>
-          <ModalProvider>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/map" element={<MapPage />} />
-              <Route path="places/:id" element={<PlaceDetailPage />} />
-              <Route path="places/:id/blog-review" element={<PlaceBlogReviewPage />} />
-              <Route path="places/:id/user-review" element={<PlaceUserReviewPage />} />
-              <Route path="places/:id/write" element={<WritingReviewPage />} />
-              <Route path="/top3" element={<TopThreePage />} />
-              <Route path="/mypage/:id" element={<MyPage />} />
-              <Route path="/mypage/:id/nicknameform" element={<MyNicknameChangePage />} />
-              <Route path="/mypage/:id/childform" element={<ChildAddPage />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/signup/:id" element={<SignUpPage />} />
-              <Route path="/oauth/callback/kakao" element={<KakaoLoginRedirectPage />} />
-              <Route path="/oauth/callback/naver" element={<NaverLoginRedirectPage />} />
-            </Routes>
-          </ModalProvider>
-        </Wrapper>
-      </Container>
+      <div>
+        <ModalProvider>
+          {accessToken && (
+            <Header />
+          )}
+          <Container>
+            <Wrapper>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/map" element={<MapPage />} />
+                <Route path="places/:id" element={<PlaceDetailPage />} />
+                <Route path="places/:id/blog-review" element={<PlaceBlogReviewPage />} />
+                <Route path="places/:id/user-review" element={<PlaceUserReviewPage />} />
+                <Route path="places/:id/write" element={<WritingReviewPage />} />
+                <Route path="/top3" element={<TopThreePage />} />
+                <Route path="/mypage/:id" element={<MyPage />} />
+                <Route path="/mypage/:id/nicknameform" element={<MyNicknameChangePage />} />
+                <Route path="/mypage/:id/childform" element={<ChildAddPage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/signup/:id" element={<SignUpPage />} />
+                <Route path="/oauth/callback/kakao" element={<KakaoLoginRedirectPage />} />
+                <Route path="/oauth/callback/naver" element={<NaverLoginRedirectPage />} />
+              </Routes>
+            </Wrapper>
+          </Container>
+        </ModalProvider>
+      </div>
     </div>
   );
 }

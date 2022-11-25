@@ -26,9 +26,6 @@ const Title = styled.h2`
   margin-bottom: 2em;
 `;
 
-const List = styled.ul`
-`;
-
 const Place = styled.button`
   display: grid;
   grid-template-columns: 3fr 1fr;
@@ -78,14 +75,14 @@ const ImageArea = styled.div`
 `;
 
 export default function FilteredPlacesList({
-  places, goBackFromPlaceListPage, goDetailPageOfSelectedPlace,
+  places, goBackFromPlaceListPage, goToPlaceDetailPage,
 }) {
   const handleBackFromListPageClick = () => {
     goBackFromPlaceListPage();
   };
 
   const handleOnePlaceClick = (placeId) => {
-    goDetailPageOfSelectedPlace(placeId);
+    goToPlaceDetailPage(placeId);
   };
 
   return (
@@ -102,7 +99,7 @@ export default function FilteredPlacesList({
           {places.length}
           개 장소를 찾았어요! 어디로 가볼까요?
         </Title>
-        <List>
+        <ul>
           {places.map((value) => (
             <li key={value.placeId}>
               <Place type="button" onClick={() => handleOnePlaceClick(value.placeId)}>
@@ -117,7 +114,7 @@ export default function FilteredPlacesList({
               </Place>
             </li>
           ))}
-        </List>
+        </ul>
       </Article>
     </Container>
   );

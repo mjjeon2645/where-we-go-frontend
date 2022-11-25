@@ -15,6 +15,45 @@ const TopThreePlacesSection = styled.div`
   flex-direction: column;
 `;
 
+const List = styled.li`
+  display: flex;
+  align-items: center;
+  margin-block: 1.5em;
+`;
+
+const Lanking = styled.p`
+  font-size: 1.1em;
+    font-weight: bold;
+    margin-right: 1em;
+`;
+
+const Button = styled.button`
+  background: none;
+  border: none;
+  width: 50%;
+  text-align: start;
+
+  p:first-child {
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-block: .3em;
+  }
+`;
+
+const Flag = styled.img`
+width: 7%;
+`;
+
+const Address = styled.div`
+display: flex;
+align-items: center;
+
+span {
+  color: #666666;
+  margin-left: .1em;
+}
+`;
+
 const FirstPlace = styled.section`
   margin: 3em 0 1em 0;
   display: flex;
@@ -50,12 +89,12 @@ const Location = styled.p`
   color: #858585;
 `;
 
-export default function TopThreePlaces({ topThreePlaces }) {
-  const firstPlace = topThreePlaces[0];
-  const secondPlace = topThreePlaces[1];
-  const thirdPlace = topThreePlaces[2];
+export default function TopThreePlaces({ topThreePlaces, goPlaceDetailPage }) {
+  const handleTopThreeClick = (selectedPlaceId) => {
+    goPlaceDetailPage(selectedPlaceId);
+  };
 
-  const rootUrl = 'http://localhost:8080/places/';
+  const flagIcon = 'https://user-images.githubusercontent.com/104840243/203305440-47ea3927-697c-4fc0-8523-7a2eee0c47a6.png';
 
   return (
     <Container>
@@ -64,42 +103,35 @@ export default function TopThreePlaces({ topThreePlaces }) {
           <Title>오늘은 어디가요? TOP 3</Title>
           <p>오어디 회원님들이 추천하는 장소는 어디일까요?</p>
           <TopThreePlacesSection>
-            <FirstPlace>
-              <p>1위</p>
-              <a href={rootUrl + firstPlace.placeId}>
-                <Name>{firstPlace.name}</Name>
-                <Location>
-                  {firstPlace.address.sido}
-                  {' '}
-                  {firstPlace.address.sigungu}
-                </Location>
-              </a>
-              <p>{firstPlace.averageRate}</p>
-            </FirstPlace>
-            <Others>
-              <p>2위</p>
-              <a href={rootUrl + secondPlace.placeId}>
-                <Name>{secondPlace.name}</Name>
-                <Location>
-                  {secondPlace.address.sido}
-                  {' '}
-                  {secondPlace.address.sigungu}
-                </Location>
-              </a>
-              <p>{secondPlace.averageRate}</p>
-            </Others>
-            <Others>
-              <p>3위</p>
-              <a href={rootUrl + thirdPlace.placeId}>
-                <Name>{thirdPlace.name}</Name>
-                <Location>
-                  {thirdPlace.address.sido}
-                  {' '}
-                  {thirdPlace.address.sigungu}
-                </Location>
-              </a>
-              <p>{thirdPlace.averageRate}</p>
-            </Others>
+            <ul>
+              {topThreePlaces.map((place, index) => (
+                <List key={place.placeId}>
+                  <Lanking>
+                    {index + 1}
+                    위
+                  </Lanking>
+                  <Button
+                    type="button"
+                    onClick={() => handleTopThreeClick(place.placeId)}
+                  >
+                    <p>{place.name}</p>
+                    <Address>
+                      <Flag src={flagIcon} alt="" />
+                      <span>
+                        {place.address.sido}
+                        {' '}
+                        {place.address.sigungu}
+
+                      </span>
+                    </Address>
+                  </Button>
+                  <p>
+                    {place.averageRate}
+                    점
+                  </p>
+                </List>
+              ))}
+            </ul>
           </TopThreePlacesSection>
         </div>
       ) : (
