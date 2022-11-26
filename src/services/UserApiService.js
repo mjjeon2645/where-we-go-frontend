@@ -32,23 +32,68 @@ export default class UserApiService {
     return data;
   }
 
-  async fetchUserInformation(userId) {
-    const url = `${baseUrl}/users/${userId}`;
-    const { data } = await axios.get(url);
+  async fetchUserInformation() {
+    const url = `${baseUrl}/users`;
+    const { data } = await axios.get(url, {
+      headers: {
+        Authorization: `Bearer ${this.accessToken}`,
+      },
+    });
 
     return data;
   }
 
-  async requestChangingNickname(userId, nickname) {
-    const url = `${baseUrl}/users/${userId}`;
-    const response = await axios.patch(url, { nickname });
+  async requestChangingNickname(nickname) {
+    const url = `${baseUrl}/users`;
+    const response = await axios.patch(url, { nickname }, {
+      headers: {
+        Authorization: `Bearer ${this.accessToken}`,
+      },
+    });
     return response;
   }
 
-  async requestSignUp(userId, nickname) {
-    const url = `${baseUrl}/users/${userId}`;
-    const response = await axios.post(url, { nickname });
+  async requestSignUp(nickname) {
+    const url = `${baseUrl}/users`;
+    const response = await axios.post(url, { nickname }, {
+      headers: {
+        Authorization: `Bearer ${this.accessToken}`,
+      },
+    });
     return response.data;
+  }
+
+  async fetchChildren() {
+    const url = `${baseUrl}/children`;
+    const response = await axios.get(url, {
+      headers: {
+        Authorization: `Bearer ${this.accessToken}`,
+      },
+    });
+
+    return response.data.children;
+  }
+
+  async addChild(birthday, gender) {
+    const url = `${baseUrl}/children`;
+    const response = await axios.post(url, {
+      birthday, gender,
+    }, {
+      headers: {
+        Authorization: `Bearer ${this.accessToken}`,
+      },
+    });
+    return response.data.children;
+  }
+
+  async deleteChild(childId) {
+    const url = `${baseUrl}/children`;
+    await axios.delete(url, {
+      data: { childId },
+      headers: {
+        Authorization: `Bearer ${this.accessToken}`,
+      },
+    });
   }
 
   async toggleBookmark(placeId) {
@@ -69,30 +114,6 @@ export default class UserApiService {
       },
     });
     return response.data.bookmarkedPlaces;
-  }
-
-  async fetchChildren(userId) {
-    const url = `${baseUrl}/children/${userId}`;
-    const response = await axios.get(url);
-
-    return response.data.children;
-  }
-
-  async addChild(userId, birthday, gender) {
-    const url = `${baseUrl}/children/${userId}`;
-    const response = await axios.post(url, {
-      birthday, gender,
-    });
-    return response.data.children;
-  }
-
-  async deleteChild(userId, childId) {
-    const url = `${baseUrl}/children/${userId}`;
-    await axios.delete(url, {
-      data: {
-        userId, childId,
-      },
-    });
   }
 }
 

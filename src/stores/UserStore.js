@@ -43,23 +43,23 @@ export default class UserStore extends Store {
       this.nickname = nickname;
       this.publish();
 
-      return { userId, accessToken, state };
+      return { accessToken, state };
     } catch (error) {
       return '';
     }
   }
 
-  async fetchUserInformation(userId) {
-    const information = await userApiService.fetchUserInformation(userId);
+  async fetchUserInformation() {
+    const information = await userApiService.fetchUserInformation();
 
     this.userInformation = information;
 
     this.publish();
   }
 
-  async changeNickname(userId, text) {
+  async changeNickname(text) {
     try {
-      const changedNickname = await userApiService.requestChangingNickname(userId, text);
+      const changedNickname = await userApiService.requestChangingNickname(text);
       this.clearError();
       this.nickname = changedNickname;
       this.publish();
@@ -72,9 +72,9 @@ export default class UserStore extends Store {
     }
   }
 
-  async requestSignUp(userId, nickname) {
+  async requestSignUp(nickname) {
     try {
-      const data = await userApiService.requestSignUp(userId, nickname);
+      const data = await userApiService.requestSignUp(nickname);
       this.clearError();
       return data;
     } catch (error) {
@@ -83,6 +83,41 @@ export default class UserStore extends Store {
       this.publish();
       return '';
     }
+  }
+
+  async fetchChildren() {
+    const data = await userApiService.fetchChildren();
+    this.children = data;
+    this.publish();
+  }
+
+  setBirthday(birthday) {
+    this.birthday = birthday;
+  }
+
+  setGender(gender) {
+    this.gender = gender;
+  }
+
+  // TODO. clear state
+
+  async addChild() {
+    try {
+      const children = await userApiService.addChild(this.birthday, this.gender);
+      this.children = children;
+      this.publish();
+      return children;
+    } catch (error) {
+      this.errorCode = error.response.data.code;
+      this.errorMessage = error.response.data.message;
+      this.publish();
+      return '';
+    }
+  }
+
+  async deleteChild(childId) {
+    await userApiService.deleteChild(childId);
+    this.fetchChildren();
   }
 
   async toggleBookmark(placeId) {
@@ -111,41 +146,6 @@ export default class UserStore extends Store {
       this.publish();
       return '';
     }
-  }
-
-  async fetchChildren(userId) {
-    const data = await userApiService.fetchChildren(userId);
-    this.children = data;
-    this.publish();
-  }
-
-  setBirthday(birthday) {
-    this.birthday = birthday;
-  }
-
-  setGender(gender) {
-    this.gender = gender;
-  }
-
-  // TODO. clear state
-
-  async addChild(userId) {
-    try {
-      const children = await userApiService.addChild(userId, this.birthday, this.gender);
-      this.children = children;
-      this.publish();
-      return children;
-    } catch (error) {
-      this.errorCode = error.response.data.code;
-      this.errorMessage = error.response.data.message;
-      this.publish();
-      return '';
-    }
-  }
-
-  async deleteChild(userId, childId) {
-    await userApiService.deleteChild(userId, childId);
-    this.fetchChildren(userId);
   }
 
   clearUserState() {

@@ -16,7 +16,6 @@ const Container = styled.div`
 
 export default function NaverLoginRedirectPage() {
   const [, setAccessToken] = useLocalStorage('accessToken', '');
-  const [, setUserId] = useLocalStorage('userId', '');
 
   const userStore = useUserStore();
 
@@ -26,13 +25,14 @@ export default function NaverLoginRedirectPage() {
 
   async function getLoginResult() {
     const data = await userStore.sendNaverAuthorizationCode(authorizationCode);
-    const { userId: id, accessToken, state } = data;
+    const { accessToken, state } = data;
+    setAccessToken(accessToken);
+
     if (state === 'unregistered') {
-      navigate(`/signup/${id}`);
+      navigate('/signup');
       return;
     }
-    setAccessToken(accessToken);
-    setUserId(id);
+
     navigate('/top3');
   }
 

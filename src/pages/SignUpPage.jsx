@@ -17,7 +17,6 @@ const Title = styled.h2`
 
 export default function SignUpPage() {
   const [, setAccessToken] = useLocalStorage('accessToken', '');
-  const [, setUserId] = useLocalStorage('userId', '');
 
   const userStore = useUserStore();
 
@@ -25,15 +24,12 @@ export default function SignUpPage() {
 
   const { errorMessage } = userStore;
 
-  const userId = document.location.pathname.split('/')[2];
-
   const signUp = async (event) => {
     const nickname = event.target[0].value;
-    const data = await userStore.requestSignUp(userId, nickname);
+    const data = await userStore.requestSignUp(nickname);
     if (data.accessToken) {
       userStore.clearError();
       setAccessToken(data.accessToken);
-      setUserId(userId);
       navigate('/top3');
     }
   };

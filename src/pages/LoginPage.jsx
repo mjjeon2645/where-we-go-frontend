@@ -8,9 +8,10 @@ import naverLoginConfig from '../naverLogin.config';
 
 import SkipLoginButton from '../components/SkipLoginButton';
 import LoginModal from '../components/LoginModal';
+import TrialButton from '../components/TrialButton';
 
 const Container = styled.div`
-    padding: 5em 3em 0 3em;
+    padding: 5em 3em 3em 3em;
     text-align: center;
 `;
 
@@ -95,6 +96,11 @@ export default function LoginPage() {
 
   const navigate = useNavigate();
 
+  const getTrialAccessAuth = () => {
+    setAccessToken('trial');
+    navigate('/top3');
+  };
+
   const skipLogin = () => {
     setIsLoginModalOpen(!isLoginModalOpen);
   };
@@ -104,7 +110,7 @@ export default function LoginPage() {
   };
 
   const goToMainPage = () => {
-    setAccessToken('temporaryAccessToken');
+    setAccessToken('temporary');
     navigate('/top3');
   };
 
@@ -138,6 +144,7 @@ export default function LoginPage() {
             <img id="kakao-login" src={kakaoButton} alt="" />
           </KakaoLogin>
         </div>
+        <TrialButton getTrialAccessAuth={getTrialAccessAuth} />
         <SkipLoginButton skipLogin={skipLogin} />
         <LoginModal
           isLoginModalOpen={isLoginModalOpen}

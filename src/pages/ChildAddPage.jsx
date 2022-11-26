@@ -22,8 +22,6 @@ export default function ChildAddPage() {
   const userStore = useUserStore();
   const { errorMessage } = userStore;
 
-  const userId = document.location.pathname.split('/')[2];
-
   const setGender = (gender) => {
     userStore.setGender(gender);
   };
@@ -35,11 +33,11 @@ export default function ChildAddPage() {
   };
 
   const addChild = async () => {
-    const data = await userStore.addChild(userId);
+    const data = await userStore.addChild();
     if (data) {
       userStore.clearError();
       userStore.clearAddChildState();
-      navigate('/mypage/userId');
+      navigate('/mypage');
     }
   };
 
