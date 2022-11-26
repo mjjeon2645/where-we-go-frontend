@@ -8,7 +8,7 @@ import UnauthorizedAccessModal from '../components/UnauthorizedAccessModal';
 import useTopThreeStore from '../hooks/useTopThreeStore';
 
 const Container = styled.div`
-  padding-top: 3em;
+  padding-block: 3em;
   margin-inline: 3em;
 `;
 
@@ -23,7 +23,9 @@ export default function TopThreePage() {
   const [accessToken, setAccessToken] = useLocalStorage('accessToken', '');
   const topThreeStore = useTopThreeStore();
 
-  const { topThreePlaces } = topThreeStore;
+  const {
+    topThreePlaces, youtubes, firstPlace, secondPlace, thirdPlace,
+  } = topThreeStore;
 
   const navigate = useNavigate();
 
@@ -63,7 +65,7 @@ export default function TopThreePage() {
             toggleModal={toggleModal}
             goToLogin={goToLogin}
           />
-          <TopThreeYoutubes />
+          {/* <TopThreeYoutubes youtubes={youtubes} /> */}
         </div>
       ) : (
         <p>now loading...</p>

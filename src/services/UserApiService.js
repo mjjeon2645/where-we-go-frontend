@@ -7,6 +7,12 @@ const baseUrl = config.apiBaseUrl;
 export default class UserApiService {
   constructor() {
     this.accessToken = '';
+
+    this.instance = axios.create({
+      baseURL: baseUrl,
+      timeout: 1000,
+      headers: { Authorization: `Bearer ${this.accessToken}` },
+    });
   }
 
   setAccessToken(accessToken) {
@@ -14,8 +20,8 @@ export default class UserApiService {
   }
 
   async sendKakaoAuthorizationCode(code) {
-    const url = `${baseUrl}/oauth/kakao-token`;
-    const { data } = await axios.get(url, { params: { code } });
+    const { data } = await this.instance
+      .get('/oauth/kakao-token', { params: { code } });
     return data;
   }
 

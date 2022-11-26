@@ -54,41 +54,6 @@ span {
 }
 `;
 
-const FirstPlace = styled.section`
-  margin: 3em 0 1em 0;
-  display: flex;
-  align-items: center;
-
-  p:first-child {
-    font-size: 1.4em;
-    font-weight: bold;
-    margin-right: 1em;
-  }
-`;
-
-const Others = styled.section`
-  margin-block: 1em;
-  display: flex;
-  align-items: center;
-
-  p:first-child {
-    font-size: 1.1em;
-    font-weight: bold;
-    margin-right: 1.4em;
-  }
-`;
-
-const Name = styled.p`
-  font-size: 1.1em;
-  font-weight: bold;
-`;
-
-const Location = styled.p`
-  font-size: .9em;
-  margin-top: .3em;
-  color: #858585;
-`;
-
 export default function TopThreePlaces({ topThreePlaces, goPlaceDetailPage }) {
   const handleTopThreeClick = (selectedPlaceId) => {
     goPlaceDetailPage(selectedPlaceId);
