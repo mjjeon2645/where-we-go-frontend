@@ -54,7 +54,6 @@ const Logout = styled.button`
 
 export default function Header() {
   const [accessToken, setAccessToken] = useLocalStorage('accessToken', '');
-  const [userId, setUserId] = useLocalStorage('userId', '');
 
   const [isAccessModalOpen, setIsAccessModalOpen] = useState(false);
 
@@ -72,7 +71,7 @@ export default function Header() {
 
   const handleMyPageClick = () => {
     if (accessToken !== 'temporaryAccessToken' && accessToken) {
-      navigate(`/mypage/${userId}`);
+      navigate('/mypage');
       return;
     }
     toggleModal();
@@ -85,7 +84,6 @@ export default function Header() {
 
   const handleLogoutClick = () => {
     setAccessToken('');
-    setUserId('');
     userStore.clearUserState();
     navigate('/login');
   };

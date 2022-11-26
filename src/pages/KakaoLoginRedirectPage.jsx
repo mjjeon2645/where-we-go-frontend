@@ -16,7 +16,6 @@ const Container = styled.div`
 
 export default function KakaoLoginRedirectPage() {
   const [, setAccessToken] = useLocalStorage('accessToken', '');
-  // const [, setUserId] = useLocalStorage('userId', '');
 
   const userStore = useUserStore();
 
@@ -27,13 +26,13 @@ export default function KakaoLoginRedirectPage() {
   async function getLoginResult() {
     const data = await userStore.sendKakaoAuthorizationCode(authorizationCode);
     const { accessToken, state } = data;
+    setAccessToken(accessToken);
+
     if (state === 'unregistered') {
       navigate('/signup');
       return;
     }
 
-    setAccessToken(accessToken);
-    // setUserId(id);
     navigate('/top3');
   }
 

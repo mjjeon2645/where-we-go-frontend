@@ -23,23 +23,26 @@ export default function MyPage() {
 
   const userStore = useUserStore();
 
-  const [userId] = useLocalStorage('userId', '');
-
   const { userInformation, bookmarks, children: userChildren } = userStore;
 
   useEffect(() => {
-    userStore.fetchUserInformation(userId);
+    console.log('click');
+    userStore.fetchUserInformation();
+    userStore.fetchChildren();
     userStore.fetchBookmarks();
-    userStore.fetchChildren(userId);
   }, [userInformation.nickname]);
 
   const goToModifyNickname = () => {
     userStore.clearError();
-    navigate(`/mypage/${userId}/nicknameform`);
+    navigate('/mypage/nicknameform');
   };
 
   const goToAddChildForm = () => {
-    navigate(`/mypage/${userId}/childform`);
+    navigate('/mypage/childform');
+  };
+
+  const deleteChild = async (childId) => {
+    await userStore.deleteChild(childId);
   };
 
   const goPlaceDetailPage = (placeId) => {
@@ -48,10 +51,6 @@ export default function MyPage() {
 
   const removeBookmark = (placeId) => {
     userStore.toggleBookmark(placeId);
-  };
-
-  const deleteChild = async (childId) => {
-    await userStore.deleteChild(userId, childId);
   };
 
   return (

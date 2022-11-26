@@ -70,11 +70,11 @@ export default function App() {
                 <Route path="places/:id/write" element={<WritingReviewPage />} />
                 <Route path="/top3" element={<TopThreePage />} />
                 <Route path="/video" element={<YoutubePlayerPage />} />
-                <Route path="/mypage/:id" element={<MyPage />} />
-                <Route path="/mypage/:id/nicknameform" element={<MyNicknameChangePage />} />
-                <Route path="/mypage/:id/childform" element={<ChildAddPage />} />
+                <Route path="/mypage" element={<MyPage />} />
+                <Route path="/mypage/nicknameform" element={<MyNicknameChangePage />} />
+                <Route path="/mypage/childform" element={<ChildAddPage />} />
                 <Route path="/login" element={<LoginPage />} />
-                <Route path="/signup/:id" element={<SignUpPage />} />
+                <Route path="/signup" element={<SignUpPage />} />
                 <Route path="/oauth/callback/kakao" element={<KakaoLoginRedirectPage />} />
                 <Route path="/oauth/callback/naver" element={<NaverLoginRedirectPage />} />
               </Routes>

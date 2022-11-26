@@ -25,12 +25,14 @@ export default function NaverLoginRedirectPage() {
 
   async function getLoginResult() {
     const data = await userStore.sendNaverAuthorizationCode(authorizationCode);
-    const { userId: id, accessToken, state } = data;
+    const { accessToken, state } = data;
+    setAccessToken(accessToken);
+
     if (state === 'unregistered') {
-      navigate(`/signup/${id}`);
+      navigate('/signup');
       return;
     }
-    setAccessToken(accessToken);
+
     navigate('/top3');
   }
 

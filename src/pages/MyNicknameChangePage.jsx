@@ -15,8 +15,6 @@ const Title = styled.p`
 `;
 
 export default function MyNicknameChangePage() {
-  const [userId] = useLocalStorage('userId', '');
-
   const navigate = useNavigate();
 
   const userStore = useUserStore();
@@ -25,9 +23,9 @@ export default function MyNicknameChangePage() {
 
   const modifyNickname = async (event) => {
     const nickname = event.target[0].value;
-    const data = await userStore.changeNickname(userId, nickname);
+    const data = await userStore.changeNickname(nickname);
     if (data) {
-      navigate(`/mypage/${userId}`);
+      navigate('/mypage');
     }
   };
 

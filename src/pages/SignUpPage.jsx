@@ -17,7 +17,6 @@ const Title = styled.h2`
 
 export default function SignUpPage() {
   const [, setAccessToken] = useLocalStorage('accessToken', '');
-  const [, setUserId] = useLocalStorage('userId', '');
 
   const userStore = useUserStore();
 
