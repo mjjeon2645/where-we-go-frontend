@@ -16,7 +16,6 @@ const Container = styled.div`
 
 export default function NaverLoginRedirectPage() {
   const [, setAccessToken] = useLocalStorage('accessToken', '');
-  const [, setUserId] = useLocalStorage('userId', '');
 
   const userStore = useUserStore();
 
@@ -32,7 +31,6 @@ export default function NaverLoginRedirectPage() {
       return;
     }
     setAccessToken(accessToken);
-    setUserId(id);
     navigate('/top3');
   }
 

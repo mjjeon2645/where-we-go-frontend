@@ -43,7 +43,7 @@ export default class UserStore extends Store {
       this.nickname = nickname;
       this.publish();
 
-      return { userId, accessToken, state };
+      return { accessToken, state };
     } catch (error) {
       return '';
     }
@@ -72,9 +72,9 @@ export default class UserStore extends Store {
     }
   }
 
-  async requestSignUp(userId, nickname) {
+  async requestSignUp(nickname) {
     try {
-      const data = await userApiService.requestSignUp(userId, nickname);
+      const data = await userApiService.requestSignUp(nickname);
       this.clearError();
       return data;
     } catch (error) {

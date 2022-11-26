@@ -45,9 +45,13 @@ export default class UserApiService {
     return response;
   }
 
-  async requestSignUp(userId, nickname) {
-    const url = `${baseUrl}/users/${userId}`;
-    const response = await axios.post(url, { nickname });
+  async requestSignUp(nickname) {
+    const url = `${baseUrl}/users`;
+    const response = await axios.post(url, { nickname }, {
+      headers: {
+        Authorization: `Bearer ${this.accessToken}`,
+      },
+    });
     return response.data;
   }
 
