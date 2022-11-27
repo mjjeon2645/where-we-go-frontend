@@ -9,8 +9,9 @@ export default class BlogReviewApiService {
   async fetchBlogReviews(placeId) {
     const url = `${baseUrl}/blog-reviews/${placeId}`;
     const { data } = await axios.get(url);
+    console.log(data, 'apiservice');
 
-    return data.blogReviews;
+    return data;
   }
 }
 
