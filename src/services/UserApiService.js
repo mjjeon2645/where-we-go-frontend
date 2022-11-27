@@ -22,13 +22,14 @@ export default class UserApiService {
   async sendKakaoAuthorizationCode(code) {
     const { data } = await this.instance
       .get('/oauth/kakao-token', { params: { code } });
+    console.log(data);
     return data;
   }
 
   async sendNaverAuthorizationCode(code) {
     const url = `${baseUrl}/oauth/naver-token`;
     const { data } = await axios.get(url, { params: { code } });
-
+    console.log(data);
     return data;
   }
 

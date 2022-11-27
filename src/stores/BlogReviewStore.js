@@ -12,7 +12,6 @@ export default class BlogReviewStore extends Store {
   async fetchBlogReviews(id) {
     const blogReviews = await blogReviewApiService.fetchBlogReviews(id);
     this.blogReviews = blogReviews;
-    console.log(this.blogReveiws);
     this.publish();
   }
 }

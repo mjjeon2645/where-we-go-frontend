@@ -1,13 +1,10 @@
 import styled from 'styled-components';
 
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 import { useLocalStorage } from 'usehooks-ts';
 import kakaoLoginConfig from '../kakaoLogin.config';
 import naverLoginConfig from '../naverLogin.config';
 
-import SkipLoginButton from '../components/SkipLoginButton';
-import LoginModal from '../components/LoginModal';
 import TrialButton from '../components/TrialButton';
 
 const Container = styled.div`
@@ -92,25 +89,11 @@ export default function LoginPage() {
   const kakaoButton = 'https://user-images.githubusercontent.com/104840243/202971385-ee1b510d-e434-4da4-832a-2de9ebb622a7.png';
 
   const [, setAccessToken] = useLocalStorage('accessToken', '');
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
   const navigate = useNavigate();
 
   const getTrialAccessAuth = () => {
     setAccessToken('trial');
-    navigate('/top3');
-  };
-
-  const skipLogin = () => {
-    setIsLoginModalOpen(!isLoginModalOpen);
-  };
-
-  const toggleModal = () => {
-    setIsLoginModalOpen(!isLoginModalOpen);
-  };
-
-  const goToMainPage = () => {
-    setAccessToken('temporary');
     navigate('/top3');
   };
 
@@ -145,12 +128,6 @@ export default function LoginPage() {
           </KakaoLogin>
         </div>
         <TrialButton getTrialAccessAuth={getTrialAccessAuth} />
-        <SkipLoginButton skipLogin={skipLogin} />
-        <LoginModal
-          isLoginModalOpen={isLoginModalOpen}
-          toggleModal={toggleModal}
-          goToMainPage={goToMainPage}
-        />
       </LoginButtonsArea>
     </Container>
   );

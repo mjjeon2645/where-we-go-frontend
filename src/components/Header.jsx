@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import { Link, useNavigate } from 'react-router-dom';
 import { useLocalStorage } from 'usehooks-ts';
 
@@ -37,6 +38,15 @@ const MyMenu = styled.button`
   font-size: 1em;
   background: none;
   border: none;
+`;
+
+const Trial = styled.button`
+  font-size: 1em;
+  color: #FFF;
+  background-color: #4135bb;
+  border: none;
+  border-radius: 4px;
+  padding: .5em;
 `;
 
 const Login = styled.button`
@@ -88,6 +98,11 @@ export default function Header() {
     navigate('/login');
   };
 
+  const handleStopTrialModeClick = () => {
+    setAccessToken('');
+    navigate('/login');
+  };
+
   return (
     <Container>
       <Wrapper>
@@ -107,15 +122,20 @@ export default function Header() {
                 goToLogin={goToLogin}
               />
             </li>
-            {!accessToken || accessToken === 'temporaryAccessToken' ? (
+            {accessToken === 'trial' ? (
               <li>
-                <Login type="button" onClick={handleLoginClick}>로그인</Login>
+                <Trial type="button" onClick={handleStopTrialModeClick}>⭐️체험종료⭐️</Trial>
               </li>
             ) : (
-              <li>
-                <Logout type="button" onClick={handleLogoutClick}>로그아웃</Logout>
-              </li>
-            )}
+              !accessToken ? (
+                <li>
+                  <Login type="button" onClick={handleLoginClick}>로그인</Login>
+                </li>
+              ) : (
+                <li>
+                  <Logout type="button" onClick={handleLogoutClick}>로그아웃</Logout>
+                </li>
+              ))}
           </List>
         </Navigation>
       </Wrapper>
