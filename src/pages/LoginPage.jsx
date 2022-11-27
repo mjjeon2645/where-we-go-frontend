@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 import { useNavigate } from 'react-router-dom';
 import { useLocalStorage } from 'usehooks-ts';
+import useUserStore from '../hooks/useUserStore';
 import kakaoLoginConfig from '../kakaoLogin.config';
 import naverLoginConfig from '../naverLogin.config';
 
@@ -88,12 +89,15 @@ export default function LoginPage() {
   const naverButton = 'https://user-images.githubusercontent.com/104840243/202971376-50fc026a-014a-4518-a615-b0da84f5b58c.png';
   const kakaoButton = 'https://user-images.githubusercontent.com/104840243/202971385-ee1b510d-e434-4da4-832a-2de9ebb622a7.png';
 
+  const userStore = useUserStore();
+
   const [, setAccessToken] = useLocalStorage('accessToken', '');
 
   const navigate = useNavigate();
 
-  const getTrialAccessAuth = () => {
-    setAccessToken('trial');
+  const getTrialAccessAuth = async () => {
+    const { accessToken } = await userStore.trialModeLogin('trialId', 'trialPassword');
+    setAccessToken(accessToken);
     navigate('/top3');
   };
 

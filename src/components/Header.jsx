@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import useUserStore from '../hooks/useUserStore';
 import UnauthorizedAccessModal from './UnauthorizedAccessModal';
+import config from '../config';
 
 const Container = styled.header`
   width: 100%;
@@ -80,7 +81,7 @@ export default function Header() {
   };
 
   const handleMyPageClick = () => {
-    if (accessToken !== 'temporaryAccessToken' && accessToken) {
+    if (accessToken) {
       navigate('/mypage');
       return;
     }
@@ -98,7 +99,8 @@ export default function Header() {
     navigate('/login');
   };
 
-  const handleStopTrialModeClick = () => {
+  const handleStopTrialModeClick = async () => {
+    await userStore.stopTrialMode();
     setAccessToken('');
     navigate('/login');
   };
@@ -122,7 +124,7 @@ export default function Header() {
                 goToLogin={goToLogin}
               />
             </li>
-            {accessToken === 'trial' ? (
+            {accessToken === config.trialAccessToken ? (
               <li>
                 <Trial type="button" onClick={handleStopTrialModeClick}>⭐️체험종료⭐️</Trial>
               </li>

@@ -22,15 +22,29 @@ export default class UserApiService {
   async sendKakaoAuthorizationCode(code) {
     const { data } = await this.instance
       .get('/oauth/kakao-token', { params: { code } });
-    console.log(data);
     return data;
   }
 
   async sendNaverAuthorizationCode(code) {
     const url = `${baseUrl}/oauth/naver-token`;
     const { data } = await axios.get(url, { params: { code } });
-    console.log(data);
     return data;
+  }
+
+  async trialModeLogin(trialId, password) {
+    const url = `${baseUrl}/trial-session`;
+    const { data } = await axios.post(url, { trialId, password });
+
+    return data;
+  }
+
+  async deleteTrialUser() {
+    const url = `${baseUrl}/trial-session`;
+    await axios.delete(url, {
+      headers: {
+        Authorization: `Bearer ${this.accessToken}`,
+      },
+    });
   }
 
   async fetchUserInformation() {
