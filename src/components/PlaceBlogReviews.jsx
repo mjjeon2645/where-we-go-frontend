@@ -71,7 +71,7 @@ export default function PlaceBlogReviews({ blogReviews, goToBlogWebPage }) {
         <Wrapper>
           <ul>
             {blogReviews.map((blogReview) => (
-              <li key={blogReview.id}>
+              <li key={blogReview.url}>
                 <Review type="button" onClick={() => handleToBlogWebPageClick(blogReview.url)}>
                   <ContentArea>
                     <p className="title">{blogReview.title}</p>

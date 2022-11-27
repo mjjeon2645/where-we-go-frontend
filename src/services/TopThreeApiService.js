@@ -8,7 +8,6 @@ export default class TopThreeApiService {
   async fetchTopThreePlaces() {
     const url = `${baseUrl}/top-three-places`;
     const { data } = await axios.get(url);
-    console.log(data.topThreePlaces);
     return data.topThreePlaces;
   }
 }
