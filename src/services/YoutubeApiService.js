@@ -1,33 +1,34 @@
-// /* eslint-disable class-methods-use-this */
-// import axios from 'axios';
-// import youtubeConfig from '../youtube.config';
+/* eslint-disable class-methods-use-this */
+import axios from 'axios';
+import youtubeConfig from '../youtube.config';
 
-// const baseUrl = youtubeConfig.youtubeApiBaseUrl;
-// const { apiKey } = youtubeConfig;
+const baseUrl = youtubeConfig.youtubeApiBaseUrl;
+const { apiKey } = youtubeConfig;
 
-// export default class YoutubeApiService {
-//   async fetchYoutubeData(keyword) {
-//     const url = `${baseUrl}/search`;
-//     const { data } = await axios.get(url, {
-//       params: {
-//         part: 'snippet',
-//         maxResults: 1,
-//         order: 'relevance',
-//         q: `${keyword}`,
-//         type: 'video',
-//         safeSearch: 'strict',
-//         videoEmbeddable: true,
-//         key: apiKey,
-//       },
-//       header: {
-//         'Content-Type': 'application/json',
-//         'Access-Control-Allow-Origin': '*',
-//         'Access-Control-Allow-Credentials': true,
-//       },
-//     });
+export default class YoutubeApiService {
+  async fetchYoutubeData(keyword) {
+    const url = `${baseUrl}/search`;
+    const { data } = await axios.get(url, {
+      params: {
+        part: 'snippet',
+        maxResults: 1,
+        order: 'relevance',
+        q: `${keyword}`,
+        type: 'video',
+        safeSearch: 'strict',
+        videoEmbeddable: true,
+        videoDuration: 'medium',
+        key: apiKey,
+      },
+      header: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': true,
+      },
+    });
 
-//     return data.items;
-//   }
-// }
+    return data.items[0];
+  }
+}
 
-// export const youtubeApiService = new YoutubeApiService();
+export const youtubeApiService = new YoutubeApiService();

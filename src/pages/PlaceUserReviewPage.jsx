@@ -12,6 +12,9 @@ import PlaceDetailTap from '../components/PlaceDetailTap';
 import useUserReviewStore from '../hooks/useUserReviewStore';
 import useBlogReviewStore from '../hooks/useBlogReviewStore';
 
+const Container = styled.div`
+  padding-bottom: 3em;
+`;
 const Wrapper = styled.div`
   padding-inline: 3em;
 `;
@@ -57,7 +60,7 @@ export default function PlaceUserReviewPage() {
   };
 
   return (
-    <div>
+    <Container>
       <PlaceDetailTap
         goToPrevPage={goToPrevPage}
         goToPlaceDetail={goToPlaceDetail}
@@ -81,6 +84,6 @@ export default function PlaceUserReviewPage() {
       ) : (
         <p>now loading...</p>
       )}
-    </div>
+    </Container>
   );
 }

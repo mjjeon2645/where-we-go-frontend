@@ -13,11 +13,12 @@ export default class TopThreeStore extends Store {
     this.secondPlace = {};
     this.thirdPlace = {};
 
-    this.firstPlaceYoutubeData = [];
+    this.firstPlaceYoutubeData = {};
     this.secondPlaceYoutubeData = [];
     this.thirdPlaceYoutubeData = [];
   }
 
+  // TODO. 구글 할당량 정책으로 인해 현재 영상 1개만 가져오도록 함. 추후 리팩터링 필요
   async fetchTopThreePlaces() {
     const data = await topThreeApiService.fetchTopThreePlaces();
 
@@ -33,15 +34,16 @@ export default class TopThreeStore extends Store {
     this.thirdPlace = thirdPlace;
 
     const firstPlaceYoutubeData = await this.fetchYoutubeData(firstPlace.name);
+    this.firstPlaceYoutubeData = firstPlaceYoutubeData;
 
-    const secondPlaceYoutubeData = await this.fetchYoutubeData(secondPlace.name);
-    const thirdPlaceYoutubeData = await this.fetchYoutubeData(thirdPlace.name);
+    // const secondPlaceYoutubeData = await this.fetchYoutubeData(secondPlace.name);
+    // const thirdPlaceYoutubeData = await this.fetchYoutubeData(thirdPlace.name);
 
-    this.youtubes = [
-      firstPlaceYoutubeData,
-      secondPlaceYoutubeData,
-      thirdPlaceYoutubeData,
-    ];
+    // this.youtubes = [
+    //   firstPlaceYoutubeData,
+    //   secondPlaceYoutubeData,
+    //   thirdPlaceYoutubeData,
+    // ];
 
     this.publish();
   }

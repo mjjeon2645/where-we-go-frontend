@@ -28,8 +28,23 @@ export default class UserApiService {
   async sendNaverAuthorizationCode(code) {
     const url = `${baseUrl}/oauth/naver-token`;
     const { data } = await axios.get(url, { params: { code } });
+    return data;
+  }
+
+  async trialModeLogin() {
+    const url = `${baseUrl}/trial-session`;
+    const { data } = await axios.get(url);
 
     return data;
+  }
+
+  async deleteTrialUser() {
+    const url = `${baseUrl}/trial-session`;
+    await axios.delete(url, {
+      headers: {
+        Authorization: `Bearer ${this.accessToken}`,
+      },
+    });
   }
 
   async fetchUserInformation() {

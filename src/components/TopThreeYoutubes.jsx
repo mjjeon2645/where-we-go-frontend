@@ -7,7 +7,7 @@ font-weight: bold;
 margin: .5em 0;
 `;
 
-export default function TopThreeYoutubes({ youtubes }) {
+export default function TopThreeYoutubes({ firstPlaceYoutubeData }) {
   const navigate = useNavigate();
 
   const handleYoutubeVideoClick = (videoId) => {
@@ -17,39 +17,19 @@ export default function TopThreeYoutubes({ youtubes }) {
   return (
     <article>
       <Title>Youtube로 보는 TOP 3</Title>
-      {youtubes.length ? (
-        youtubes.map((youtube, index) => (
-          <ul key={youtube[index].id.videoId}>
-            {youtube.map((video) => (
-              <li key={video.id.videoId}>
-                <p>{video.snippet.title}</p>
-                <button type="button" onClick={() => handleYoutubeVideoClick(video.id.videoId)}>
-                  <img src={video.snippet.thumbnails.medium.url} alt="" />
-                </button>
-              </li>
-            ))}
-          </ul>
-        ))
-
+      {Object.keys(firstPlaceYoutubeData).length ? (
+        <ul>
+          <li key={firstPlaceYoutubeData.id.videoId}>
+            <p>{firstPlaceYoutubeData.snippet.title}</p>
+            <p>{firstPlaceYoutubeData.snippet.description}</p>
+            <button type="button" onClick={() => handleYoutubeVideoClick(firstPlaceYoutubeData.id.videoId)}>
+              <img src={firstPlaceYoutubeData.snippet.thumbnails.medium.url} alt="" />
+            </button>
+          </li>
+        </ul>
       ) : (
         <p>now loading...</p>
       )}
     </article>
   );
 }
-
-// <Title>Youtube로 보는 TOP 3</Title>
-//       {youtubes.length ? (
-//         <ul>
-//           {youtubes.map((youtube) => (
-//             <li key={youtube.id.videoId}>
-//               <p>{youtube.snippet.title}</p>
-//               <button type="button" onClick={() => handleYoutubeVideoClick(youtube.id.videoId)}>
-//                 <img src={youtube.snippet.thumbnails.medium.url} alt="" />
-//               </button>
-//             </li>
-//           ))}
-//         </ul>
-//       ) : (
-//         <p>now loading...</p>
-//       )}

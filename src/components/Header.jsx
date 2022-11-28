@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import { Link, useNavigate } from 'react-router-dom';
 import { useLocalStorage } from 'usehooks-ts';
 
@@ -5,6 +6,7 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import useUserStore from '../hooks/useUserStore';
 import UnauthorizedAccessModal from './UnauthorizedAccessModal';
+import config from '../config';
 
 const Container = styled.header`
   width: 100%;
@@ -39,6 +41,15 @@ const MyMenu = styled.button`
   border: none;
 `;
 
+const Trial = styled.button`
+  font-size: 1em;
+  color: #FFF;
+  background-color: #4135bb;
+  border: none;
+  border-radius: 4px;
+  padding: .5em;
+`;
+
 const Login = styled.button`
   font-size: 1em;
   color: #ff9d13;
@@ -54,6 +65,7 @@ const Logout = styled.button`
 
 export default function Header() {
   const [accessToken, setAccessToken] = useLocalStorage('accessToken', '');
+  const [mode, setMode] = useLocalStorage('mode', '');
 
   const [isAccessModalOpen, setIsAccessModalOpen] = useState(false);
 
@@ -70,7 +82,7 @@ export default function Header() {
   };
 
   const handleMyPageClick = () => {
-    if (accessToken !== 'temporaryAccessToken' && accessToken) {
+    if (accessToken) {
       navigate('/mypage');
       return;
     }
@@ -85,6 +97,13 @@ export default function Header() {
   const handleLogoutClick = () => {
     setAccessToken('');
     userStore.clearUserState();
+    navigate('/login');
+  };
+
+  const handleStopTrialModeClick = async () => {
+    await userStore.stopTrialMode();
+    setAccessToken('');
+    setMode('');
     navigate('/login');
   };
 
@@ -107,15 +126,20 @@ export default function Header() {
                 goToLogin={goToLogin}
               />
             </li>
-            {!accessToken || accessToken === 'temporaryAccessToken' ? (
+            {mode === 'trial' ? (
               <li>
-                <Login type="button" onClick={handleLoginClick}>로그인</Login>
+                <Trial type="button" onClick={handleStopTrialModeClick}>⭐️체험종료⭐️</Trial>
               </li>
             ) : (
-              <li>
-                <Logout type="button" onClick={handleLogoutClick}>로그아웃</Logout>
-              </li>
-            )}
+              !accessToken ? (
+                <li>
+                  <Login type="button" onClick={handleLoginClick}>로그인</Login>
+                </li>
+              ) : (
+                <li>
+                  <Logout type="button" onClick={handleLogoutClick}>로그아웃</Logout>
+                </li>
+              ))}
           </List>
         </Navigation>
       </Wrapper>

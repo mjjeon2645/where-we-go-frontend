@@ -26,7 +26,6 @@ import { userApiService } from './services/UserApiService';
 import ChildAddPage from './pages/ChildAddPage';
 import { userReviewApiService } from './services/UserReviewApiService';
 import YoutubePlayerPage from './pages/YoutubePlayerPage';
-import { topThreeApiService } from './services/TopThreeApiService';
 
 const Container = styled.div`
   background-color: #F0F2F5;

@@ -103,7 +103,7 @@ export default function MyInformation({ userInformation, goToModifyNickname }) {
                 userInformation.authBy === 'kakao' ? (
                   <p>카카오 로그인</p>
                 ) : (
-                  <p>일반 로그인</p>
+                  <p>체험모드</p>
                 )
               )}
             </SocialLogin>

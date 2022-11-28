@@ -1,13 +1,12 @@
 import styled from 'styled-components';
 
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 import { useLocalStorage } from 'usehooks-ts';
+import { useEffect } from 'react';
+import useUserStore from '../hooks/useUserStore';
 import kakaoLoginConfig from '../kakaoLogin.config';
 import naverLoginConfig from '../naverLogin.config';
 
-import SkipLoginButton from '../components/SkipLoginButton';
-import LoginModal from '../components/LoginModal';
 import TrialButton from '../components/TrialButton';
 
 const Container = styled.div`
@@ -91,26 +90,22 @@ export default function LoginPage() {
   const naverButton = 'https://user-images.githubusercontent.com/104840243/202971376-50fc026a-014a-4518-a615-b0da84f5b58c.png';
   const kakaoButton = 'https://user-images.githubusercontent.com/104840243/202971385-ee1b510d-e434-4da4-832a-2de9ebb622a7.png';
 
+  const userStore = useUserStore();
+
   const [, setAccessToken] = useLocalStorage('accessToken', '');
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [, setMode] = useLocalStorage('mode', '');
 
   const navigate = useNavigate();
 
-  const getTrialAccessAuth = () => {
-    setAccessToken('trial');
-    navigate('/top3');
-  };
+  useEffect(() => {
+    setAccessToken('');
+    setMode('');
+  }, []);
 
-  const skipLogin = () => {
-    setIsLoginModalOpen(!isLoginModalOpen);
-  };
-
-  const toggleModal = () => {
-    setIsLoginModalOpen(!isLoginModalOpen);
-  };
-
-  const goToMainPage = () => {
-    setAccessToken('temporary');
+  const getTrialAccessAuth = async () => {
+    const { accessToken } = await userStore.trialModeLogin();
+    setAccessToken(accessToken);
+    setMode('trial');
     navigate('/top3');
   };
 
@@ -145,12 +140,6 @@ export default function LoginPage() {
           </KakaoLogin>
         </div>
         <TrialButton getTrialAccessAuth={getTrialAccessAuth} />
-        <SkipLoginButton skipLogin={skipLogin} />
-        <LoginModal
-          isLoginModalOpen={isLoginModalOpen}
-          toggleModal={toggleModal}
-          goToMainPage={goToMainPage}
-        />
       </LoginButtonsArea>
     </Container>
   );
