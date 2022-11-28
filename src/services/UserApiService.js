@@ -31,9 +31,9 @@ export default class UserApiService {
     return data;
   }
 
-  async trialModeLogin(trialId, password) {
+  async trialModeLogin() {
     const url = `${baseUrl}/trial-session`;
-    const { data } = await axios.post(url, { trialId, password });
+    const { data } = await axios.get(url);
 
     return data;
   }

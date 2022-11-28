@@ -49,11 +49,11 @@ export default class UserStore extends Store {
     }
   }
 
-  async trialModeLogin(trialId, password) {
+  async trialModeLogin() {
     try {
       const {
         accessToken, nickname, state,
-      } = await userApiService.trialModeLogin(trialId, password);
+      } = await userApiService.trialModeLogin();
 
       this.nickname = nickname;
       this.publish();

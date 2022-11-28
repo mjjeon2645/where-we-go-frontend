@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { useLocalStorage } from 'usehooks-ts';
 import TopThreePlaces from '../components/TopThreePlaces';
 import TopThreeYoutubes from '../components/TopThreeYoutubes';
-import UnauthorizedAccessModal from '../components/UnauthorizedAccessModal';
 import useTopThreeStore from '../hooks/useTopThreeStore';
 
 const Container = styled.div`
@@ -20,12 +18,9 @@ const Title = styled.h2`
 
 export default function TopThreePage() {
   const [isAccessModalOpen, setIsAccessModalOpen] = useState(false);
-  const [accessToken, setAccessToken] = useLocalStorage('accessToken', '');
   const topThreeStore = useTopThreeStore();
 
-  const {
-    topThreePlaces, youtubes, firstPlace, secondPlace, thirdPlace,
-  } = topThreeStore;
+  const { topThreePlaces, firstPlaceYoutubeData } = topThreeStore;
 
   const navigate = useNavigate();
 
@@ -37,17 +32,8 @@ export default function TopThreePage() {
     setIsAccessModalOpen(!isAccessModalOpen);
   };
 
-  const goToLogin = () => {
-    navigate('/login');
-    setAccessToken('');
-    toggleModal();
-  };
-
   const goPlaceDetailPage = (placeId) => {
-    if (accessToken && accessToken !== 'temporaryAccessToken') {
-      navigate(`/places/${placeId}`);
-      return;
-    }
+    navigate(`/places/${placeId}`);
     toggleModal();
   };
 
@@ -60,12 +46,7 @@ export default function TopThreePage() {
             topThreePlaces={topThreePlaces}
             goPlaceDetailPage={goPlaceDetailPage}
           />
-          <UnauthorizedAccessModal
-            isAccessModalOpen={isAccessModalOpen}
-            toggleModal={toggleModal}
-            goToLogin={goToLogin}
-          />
-          {/* <TopThreeYoutubes youtubes={youtubes} /> */}
+          <TopThreeYoutubes firstPlaceYoutubeData={firstPlaceYoutubeData} />
         </div>
       ) : (
         <p>now loading...</p>

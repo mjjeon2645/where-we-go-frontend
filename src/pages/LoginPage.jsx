@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 import { useNavigate } from 'react-router-dom';
 import { useLocalStorage } from 'usehooks-ts';
+import { useEffect } from 'react';
 import useUserStore from '../hooks/useUserStore';
 import kakaoLoginConfig from '../kakaoLogin.config';
 import naverLoginConfig from '../naverLogin.config';
@@ -92,12 +93,19 @@ export default function LoginPage() {
   const userStore = useUserStore();
 
   const [, setAccessToken] = useLocalStorage('accessToken', '');
+  const [, setMode] = useLocalStorage('mode', '');
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    setAccessToken('');
+    setMode('');
+  }, []);
+
   const getTrialAccessAuth = async () => {
-    const { accessToken } = await userStore.trialModeLogin('trialId', 'trialPassword');
+    const { accessToken } = await userStore.trialModeLogin();
     setAccessToken(accessToken);
+    setMode('trial');
     navigate('/top3');
   };
 

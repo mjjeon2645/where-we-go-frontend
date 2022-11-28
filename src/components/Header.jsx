@@ -65,6 +65,7 @@ const Logout = styled.button`
 
 export default function Header() {
   const [accessToken, setAccessToken] = useLocalStorage('accessToken', '');
+  const [mode, setMode] = useLocalStorage('mode', '');
 
   const [isAccessModalOpen, setIsAccessModalOpen] = useState(false);
 
@@ -102,6 +103,7 @@ export default function Header() {
   const handleStopTrialModeClick = async () => {
     await userStore.stopTrialMode();
     setAccessToken('');
+    setMode('');
     navigate('/login');
   };
 
@@ -124,7 +126,7 @@ export default function Header() {
                 goToLogin={goToLogin}
               />
             </li>
-            {accessToken === config.trialAccessToken ? (
+            {mode === 'trial' ? (
               <li>
                 <Trial type="button" onClick={handleStopTrialModeClick}>⭐️체험종료⭐️</Trial>
               </li>
