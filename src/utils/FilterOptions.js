@@ -42,6 +42,9 @@ export function loadSidoOptions() {
     {
       id: 13, en: 'jeju', ko: '제주', selected: false,
     },
+    {
+      id: 14, en: 'sejong', ko: '세종', selected: false,
+    },
   ];
 
   return sidoArray;
@@ -311,6 +314,13 @@ export function loadSigunguOptions() {
         { id: 0, name: '전체' },
         { id: 1, name: '서귀포시' },
         { id: 2, name: '제주시' },
+      ],
+    },
+    {
+      id: 14,
+      sido: '세종',
+      sigunguLists: [
+        { id: 0, name: '전체' },
       ],
     },
   ];
