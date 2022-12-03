@@ -31,7 +31,7 @@ const PlaceName = styled.p`
 `;
 
 const Flag = styled.img`
-  width: 7%;
+  width: 21px;
 `;
 
 const Address = styled.div`

@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import useUserStore from '../hooks/useUserStore';
 import UnauthorizedAccessModal from './UnauthorizedAccessModal';
-import config from '../config';
 
 const Container = styled.header`
   width: 100%;
