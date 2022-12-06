@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this */
 import { userReviewApiService } from '../services/UserReviewApiService';
-import formatDate from '../utils/dateOfVisitFormatter';
+import { formatDate, visitOfDateFormatter } from '../utils/dateOfVisitFormatter';
 import Store from './Store';
 
 export default class UserReviewStore extends Store {
@@ -11,7 +11,7 @@ export default class UserReviewStore extends Store {
     this.userReviews = [];
     this.myReviewAtThePlace = {};
 
-    this.myDateOfVisit = formatDate(new Date());
+    this.myDateOfVisit = new Date();
     this.myRate = 0;
     this.myReview = '';
   }
@@ -65,14 +65,20 @@ export default class UserReviewStore extends Store {
   }
 
   clearWritingReviewState() {
-    this.myDateOfVisit = new Date();
+    this.myDateOfVisit = '';
     this.myRate = 0;
     this.myReview = '';
     this.publish();
   }
 
   async postMyReview(placeId, date, rate, review) {
-    await userReviewApiService.postMyReview(placeId, date, rate, review);
+    if (typeof (date) === 'object') {
+      await userReviewApiService.postMyReview(placeId, formatDate(date), rate, review);
+      this.publish();
+      return;
+    }
+
+    await userReviewApiService.postMyReview(placeId, visitOfDateFormatter(date), rate, review);
     this.publish();
   }
 

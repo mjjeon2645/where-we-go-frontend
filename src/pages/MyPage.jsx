@@ -26,7 +26,6 @@ export default function MyPage() {
   const { userInformation, bookmarks, children: userChildren } = userStore;
 
   useEffect(() => {
-    console.log('click');
     userStore.fetchUserInformation();
     userStore.fetchChildren();
     userStore.fetchBookmarks();

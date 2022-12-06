@@ -1,5 +1,5 @@
 import { userApiService } from '../services/UserApiService';
-import formatDate from '../utils/dateOfVisitFormatter';
+import { formatDate } from '../utils/dateOfVisitFormatter';
 import Store from './Store';
 
 /* eslint-disable class-methods-use-this */

@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import UserReviewForm from '../components/UserReviewForm';
 import useUserReviewStore from '../hooks/useUserReviewStore';
-import formatDate from '../utils/dateOfVisitFormatter';
+import { formatDate } from '../utils/dateOfVisitFormatter';
 
 const Container = styled.div`
   padding: 3em;
