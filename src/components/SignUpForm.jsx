@@ -1,24 +1,27 @@
 import styled from 'styled-components';
 
 const Container = styled.form`
+  margin-top: 5em;
+  width: 400px;
 `;
 
 const Label = styled.label`
+  font-weight: 600;
+  color: #A0A0A0;
   display: block;
-  margin-bottom: 1em;
+  margin-bottom: .7em;
 `;
 
 const InputArea = styled.input`
   font-size: 1em;
-  padding: .4em;
-  width: 70%;
-  border-radius: 4px;
-`;
+  padding-inline: .6em;
+  width: 100%;
+  height: 60px;
+  border: ${(props) => (props.error ? '1px solid #F00' : '1px solid #A0A0A0')};
 
-const Description = styled.p`
-  font-size: .8em;
-  color: #AAA;
-  margin-top: 1em;  
+  ::placeholder {
+    color: #D8D8D8;
+  }
 `;
 
 const ErrorMessage = styled.p`
@@ -28,14 +31,21 @@ const ErrorMessage = styled.p`
 `;
 
 const SubmitButton = styled.button`
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translate(-50%, 0);
   color: #FFF;
-  font-weight: bold;
-  background-color: #ff9d13;
-  padding: .5em 1em;
-  margin-top: 5%;
-  margin-left: 50%;
+  font-weight: 600;
+  background-color: ${(props) => (props.error ? '#A0A0A0' : '#005D82')};
   border: none;
   border-radius: 8px;
+  width: 400px;
+  height: 60px;
+
+  :hover {
+   background-color: #0083B7; 
+  }
 `;
 
 export default function SignUpForm({ signUp, errorMessage }) {
@@ -46,13 +56,10 @@ export default function SignUpForm({ signUp, errorMessage }) {
 
   return (
     <Container onSubmit={handleMakingNicknameSubmit}>
-      <Label htmlFor="nickname">원하시는 닉네임을 입력해주세요.</Label>
-      <InputArea id="nickname" type="text" />
-      {errorMessage ? (<ErrorMessage>{errorMessage}</ErrorMessage>)
-        : (
-          <Description>3글자 이상 7글자 이하 한글, 영문, 숫자 가능</Description>
-        )}
-      <SubmitButton type="submit">닉네임 만들기</SubmitButton>
+      <Label htmlFor="nickname">사용하실 닉네임을 입력해주세요</Label>
+      <InputArea id="nickname" type="text" placeholder="한글, 영어, 숫자 3~7자 이내" error={errorMessage} />
+      {errorMessage && (<ErrorMessage>{errorMessage}</ErrorMessage>)}
+      <SubmitButton type="submit" error={errorMessage}>다음으로</SubmitButton>
     </Container>
   );
 }
