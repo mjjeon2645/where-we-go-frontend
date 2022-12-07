@@ -5,26 +5,19 @@ function loadZoomController(map) {
   map.addControl(zoomControl, kakao.maps.ControlPosition.Right);
 }
 
-// 인포윈도우를 표시하는 클로저를 만드는 함수입니다
+// 인포윈도우를 표시하는 클로저를 만드는 함수
 function makeOverListener(map, marker, infowindow) {
   return () => {
     infowindow.open(map, marker);
   };
 }
 
-// 인포윈도우를 닫는 클로저를 만드는 함수입니다
+// 인포윈도우를 닫는 클로저를 만드는 함수
 function makeOutListener(infowindow) {
   return () => {
     infowindow.close();
   };
 }
-
-// TODO. 마커 클릭 시 이미지 바꾸는 코드이므로 추후 클릭이벤트 추가 구현 시 활용
-// const selectedMarkerImage = new kakao.maps.MarkerImage(
-//   'https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-128.png',
-//   new kakao.maps.Size(33, 38),
-//   new kakao.maps.Point(13, 34),
-// );
 
 export function loadMarkers(places, map, makeClickListener) {
   const markers = [];
@@ -61,6 +54,16 @@ export function loadMarkers(places, map, makeClickListener) {
       'click',
       () => makeClickListener(places[i].placeId),
     );
+
+    // 마커 이미지를 기본에서 곰돌이 디자인으로 변경함
+    const markerImage = new kakao.maps.MarkerImage(
+      'https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670388197/map-marker_ekcpyx.png',
+      // new kakao.maps.Size(33, 38),
+      new kakao.maps.Size(39, 45),
+      new kakao.maps.Point(13, 34),
+    );
+
+    marker.setImage(markerImage);
 
     markers.push(marker);
   }

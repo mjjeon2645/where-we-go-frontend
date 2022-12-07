@@ -9,7 +9,7 @@ const BackButton = styled.button`
   font-size: 1em;
   background-color: #FFF;
   border: none;
-  margin: 0 .5em;
+  margin: 0 3em;
 `;
 
 const Article = styled.article`
@@ -28,50 +28,57 @@ const Title = styled.h2`
 
 const Place = styled.button`
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: 1fr 3fr;
   width: 100%;
-  height: 120px;
-  margin: 1.5em 0;
-  border: 1px solid #DDD;
+  height: 105px;
+  margin: 3em 0;
+  border: none;
   border-radius: 8px;
-  background-color: #fafafa;
+  background: none;
+`;
+
+const ImageArea = styled.div`
+  width: 160px;
+  overflow: hidden;
+  margin-top: 4px;
+
+  img {
+      width: 160px;
+      height: 100px;
+      object-fit: cover;
+  }
 `;
 
 const ContentArea = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: flex-start;
-  padding: 1em .5em;
+  margin-left: 1em;
+  height: 100%;
+  
+  .place_name {
+      font-size: 1.5em;
+      font-weight: 500;
+      padding-top: .2em;
+      text-align: left;
+  }
 
-    .place_name {
-        font-size: 1.2em;
-        font-weight: bold;
-        margin: .5em 0;
-    }
+  .address {
+    margin: .5em 0;
+    text-align: left;
+  }
 
-    .address {
-      margin: .5em 0;
-    }
-
-    .category {
-      color: #FFF;
-      border-radius: 10px;
-      background-color: #ff9900;
-      padding: 4px 10px;
-    }
-`;
-
-const ImageArea = styled.div`
-    width: 13em;
-    overflow: hidden;
-    border-radius: 10px;
-    margin-top: 4px;
-
-    img {
-        width: 13em;
-        height: 8em;
-        object-fit: cover;
-    }
+  .category {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #8F8272;
+    border-radius: 2px;
+    background-color: #E6DDD2;
+    width: 100px;
+    height: 25px;
+  }
 `;
 
 export default function FilteredPlacesList({
@@ -92,7 +99,7 @@ export default function FilteredPlacesList({
         onClick={handleBackFromListPageClick}
       >
         {' '}
-        &lt; 돌아가기
+        &lt; 뒤로가기
       </BackButton>
       <Article>
         <Title>
@@ -103,14 +110,18 @@ export default function FilteredPlacesList({
           {places.map((value) => (
             <li key={value.placeId}>
               <Place type="button" onClick={() => handleOnePlaceClick(value.placeId)}>
-                <ContentArea>
-                  <p className="place_name">{value.name}</p>
-                  <p className="address">{value.address.fullAddress}</p>
-                  <p className="category">{value.category}</p>
-                </ContentArea>
                 <ImageArea>
                   <img src={value.imageSource.firstImage} alt="" />
                 </ImageArea>
+                <ContentArea>
+                  <div>
+                    <p className="place_name">{value.name}</p>
+                    <p className="address">{value.address.fullAddress}</p>
+                  </div>
+                  <div className="category">
+                    <p>{value.category}</p>
+                  </div>
+                </ContentArea>
               </Place>
             </li>
           ))}

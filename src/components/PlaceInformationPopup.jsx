@@ -4,14 +4,14 @@ const Popup = styled.div`
     position: absolute;
     display: flex;
     flex-direction: column;
-    bottom: 10%;
+    bottom: 9%;
     left: 50%;
     transform: translate(-50%, 0);
     z-index: 10;
 
     border-radius: 8px;
-    width: 280px;
-    height: 180px;
+    width: 500px;
+    height: 250px;
     padding: .5em .5em;
 
     background-color: #ffffff;
@@ -27,11 +27,11 @@ const CloseButton = styled.button`
 const ImagesArea = styled.div`
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 
     img {
-        width: 85px;
-        height: 85px;
+        width: 150px;
+        height: 150px;
         border-radius: 3px;
     }
 `;
@@ -54,6 +54,10 @@ const Information = styled.div`
         font-size: .8em;
         margin-right: 1em;
     }
+`;
+
+const Divide = styled.span`
+  color: #D9D9D9;
 `;
 
 export default function PlaceInformationPopup(
@@ -104,9 +108,11 @@ export default function PlaceInformationPopup(
             {' '}
             {address.sigungu}
           </span>
+          <Divide>|</Divide>
           <span>
             {selectedPlace.category}
           </span>
+          <Divide>|</Divide>
           <span>
             {businessHours[dayOfWeek]}
           </span>

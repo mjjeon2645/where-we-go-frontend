@@ -20,10 +20,12 @@ import UnauthorizedAccessModal from '../components/UnauthorizedAccessModal';
 const MapArea = styled.div`
   display: relative;
   width: 100%;
-  max-width: 600px;
+  margin: 0 auto;
+  max-width: 550px;
   max-height: 900px;
   min-width: 400px;
-  min-height: 700px;
+  min-height: 900px;
+  margin-top: 2em;
 `;
 
 export default function MapPage() {
