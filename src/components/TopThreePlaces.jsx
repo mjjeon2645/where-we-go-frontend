@@ -4,12 +4,6 @@ const Container = styled.article`
   margin: 3em 0em;
 `;
 
-const Title = styled.p`
-  font-size: 1.4em;
-  font-weight: bold;
-  margin: .5em 0;
-`;
-
 const TopThreePlacesSection = styled.div`
   display: flex;
   flex-direction: column;
@@ -21,13 +15,45 @@ const List = styled.li`
   margin-block: 1.5em;
 `;
 
+const Circle = styled.div`
+  position: relative;
+  width: 56px;
+  height: 56px;
+  background-color: #E6DDD2;
+  border-radius: 50%;
+
+  img {
+    width: 39px;
+    height: 30px;
+  }
+
+  div {
+    position: absolute;
+    left: 5.3%;
+    top: 5.6%;
+    border: 1px solid #FFF;
+    background: transparent;
+    width: 51px;
+    height: 51px;
+    border-radius: 50%;
+  }
+
+  p {
+    position: absolute;
+    top: 40%;
+    width: 100%;
+    text-align: center;
+  }
+`;
+
 const Lanking = styled.p`
   font-size: 1.1em;
-    font-weight: bold;
-    margin-right: 1em;
+  font-weight: bold;
+  margin-right: 1em;
 `;
 
 const Button = styled.button`
+  margin-left: 1em;
   background: none;
   border: none;
   width: 50%;
@@ -41,17 +67,19 @@ const Button = styled.button`
 `;
 
 const Flag = styled.img`
-width: 7%;
+  width: 6px;
 `;
 
 const Address = styled.div`
-display: flex;
-align-items: center;
+  display: flex;
+  align-items: center;
 
-span {
-  color: #666666;
-  margin-left: .1em;
-}
+  span {
+    font-size: .8em;
+    color: #0E0E0E;
+    font-weight: 300;
+    margin-left: .5em;
+  }
 `;
 
 export default function TopThreePlaces({ topThreePlaces, goPlaceDetailPage }) {
@@ -65,23 +93,24 @@ export default function TopThreePlaces({ topThreePlaces, goPlaceDetailPage }) {
     <Container>
       {topThreePlaces.length ? (
         <div>
-          <Title>오늘은 어디가요? TOP 3</Title>
-          <p>오어디 회원님들이 추천하는 장소는 어디일까요?</p>
           <TopThreePlacesSection>
             <ul>
               {topThreePlaces.map((place, index) => (
                 <List key={place.placeId}>
-                  <Lanking>
-                    {index + 1}
-                    위
-                  </Lanking>
+                  <Circle>
+                    <div />
+                    <Lanking>
+                      {index + 1}
+                      위
+                    </Lanking>
+                  </Circle>
                   <Button
                     type="button"
                     onClick={() => handleTopThreeClick(place.placeId)}
                   >
                     <p>{place.name}</p>
                     <Address>
-                      <Flag src={flagIcon} alt="" />
+                      <Flag src="https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670398716/spot_hozd2n.png" alt="" />
                       <span>
                         {place.address.sido}
                         {' '}
