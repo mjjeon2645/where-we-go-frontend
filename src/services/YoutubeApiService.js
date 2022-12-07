@@ -11,7 +11,7 @@ export default class YoutubeApiService {
     const { data } = await axios.get(url, {
       params: {
         part: 'snippet',
-        maxResults: 1,
+        maxResults: 2,
         order: 'relevance',
         q: `${keyword}`,
         type: 'video',
@@ -27,7 +27,7 @@ export default class YoutubeApiService {
       },
     });
 
-    return data.items[0];
+    return data.items;
   }
 }
 
