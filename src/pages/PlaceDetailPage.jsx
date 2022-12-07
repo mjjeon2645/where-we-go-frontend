@@ -14,12 +14,12 @@ const Container = styled.div`
 `;
 
 const Wrapper = styled.article`
-  padding: 3em 3em 5em 3em;
+  padding: 3em 2em 5em 2em;
 `;
 
 const MapArea = styled.div`
-  width: 400px;
-  height: 250px;
+  width: 535px;
+  height: 280px;
 `;
 
 export default function PlaceDetailPage() {

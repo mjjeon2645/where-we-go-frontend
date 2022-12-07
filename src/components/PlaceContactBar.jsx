@@ -7,7 +7,7 @@ const Container = styled.nav`
   height: 5em;
   bottom: 0;
   width: 600px;
-  background-color: #ff9d13;
+  background-color: #005D82;
 
   div {
     display: flex;
@@ -19,7 +19,7 @@ const Container = styled.nav`
 
 const Phone = styled.button`
   font-size: 1.1em;
-  font-weight: bold;
+  font-weight: 400;
   color: #FFF;
   margin-inline: 5em;
   background: none;
@@ -28,7 +28,7 @@ const Phone = styled.button`
 
 const HomePage = styled.button`
   font-size: 1.1em;
-  font-weight: bold;
+  font-weight: 400;
   color: #FFF;
   margin-inline: 5em;
   background: none;
@@ -37,8 +37,8 @@ const HomePage = styled.button`
 
 const StyledModal = Modal.styled`
   position: relative;
-  width: 20em;
-  height: 13em;
+  width: 400px;
+  height: 228px;
   
   display: flex;
   flex-direction: column;
@@ -48,11 +48,11 @@ const StyledModal = Modal.styled`
 
   background-color: #FFF;
   border: 1px white solid;
-  border-radius: 8px;
+  border-radius: 20px;
 
   p:first-child {
-    font-size: 1.5em;
-    font-weight: bold;
+    font-size: 2em;
+    font-weight: 500;
     margin-bottom: 1.3em;
   }
 

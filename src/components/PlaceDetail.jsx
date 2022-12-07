@@ -2,11 +2,8 @@
 
 import styled from 'styled-components';
 
-const Container = styled.article`
-`;
-
 const ImageBox = styled.div`
-  width: 500px;
+  width: 535px;
   height: 300px;
   overflow: hidden;
 
@@ -31,16 +28,11 @@ const PlaceNameSection = styled.div`
     width: 35px;
     height: 35px;
   }
-
-  h2 {
-
-  }
 `;
 
 const PlaceName = styled.h2`
   font-size: 2em;
   font-weight: bold;
-  /* margin: 1em 0; */
 `;
 
 const SectionTitle = styled.p`
@@ -53,11 +45,11 @@ const Services = styled.section`
   width: 100%;
   display: flex;
   justify-content: space-around;
-  margin: 1em 0;
+  margin: 1em 0 2em 0;
 
   div {
     text-align: center;
-    padding: 0 2em;
+    padding: 0 1.6em;
   }
 
   div p {
@@ -65,12 +57,42 @@ const Services = styled.section`
   }
 `;
 
+const Unchecked = styled.div`
+  position: relative;
+
+  p {
+    font-size: .9em;
+    font-weight: 600;
+    position: absolute;
+    top: 15%;
+    left: 20%;
+  }
+`;
+
+const AddressSection = styled.div`
+  display: flex;
+  align-items: center;
+
+  span:last-child {
+    color: #005D82;
+    font-weight: 500;
+    margin-left: .5em;
+  }
+`;
+
 const Address = styled.span`
-  margin-right: 1em;
+  font-size: .9em;
+  font-weight: 300;
+  margin-right: .3em;
+`;
+
+const CopyButton = styled.button`
+  background: transparent;
+  border: none;
 `;
 
 const AddressAndMiniMap = styled.section`
-  margin: 1em 0 2em 0;
+  margin: 1em 0 1em 0;
 `;
 
 export default function PlaceDetail({
@@ -98,7 +120,7 @@ export default function PlaceDetail({
   };
 
   return (
-    <Container>
+    <article>
       <section>
         <ImageBox>
           {imageNumber === 1 ? (
@@ -133,58 +155,88 @@ export default function PlaceDetail({
       <Services>
         <div id="reservation">
           {placeServices.reservation === 'possible' ? (
-            <p>⭕️</p>
+            <div>
+              <img src="https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670417142/possible_ac5jxi.png" alt="" />
+            </div>
           ) : placeServices.reservation === 'impossible' ? (
-            <p>❌</p>
+            <div>
+              <img src="https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670417142/impossible_doab0s.png" alt="" />
+            </div>
           ) : (
-            <p>❓</p>
+            <Unchecked>
+              <img src="https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670417142/unchecked_izlb2j.png" alt="" />
+              <p>확인필요</p>
+            </Unchecked>
           )}
           <p>예약</p>
         </div>
         <div id="parking">
           {placeServices.parking === 'possible' ? (
-            <p>⭕️</p>
+            <div>
+              <img src="https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670417142/possible_ac5jxi.png" alt="" />
+            </div>
           ) : placeServices.parking === 'impossible' ? (
-            <p>❌</p>
+            <div>
+              <img src="https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670417142/impossible_doab0s.png" alt="" />
+            </div>
           ) : (
-            <p>❓</p>
+            <Unchecked>
+              <img src="https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670417142/unchecked_izlb2j.png" alt="" />
+              <p>확인필요</p>
+            </Unchecked>
           )}
           <p>주차</p>
         </div>
         <div id="outside-food">
           {placeServices.outsideFood === 'possible' ? (
-            <p>⭕️</p>
+            <div>
+              <img src="https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670417142/possible_ac5jxi.png" alt="" />
+            </div>
           ) : placeServices.outsideFood === 'impossible' ? (
-            <p>❌</p>
+            <div>
+              <img src="https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670417142/impossible_doab0s.png" alt="" />
+            </div>
           ) : (
-            <p>❓</p>
+            <Unchecked>
+              <img src="https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670417142/unchecked_izlb2j.png" alt="" />
+              <p>확인필요</p>
+            </Unchecked>
           )}
           <p>외부음식</p>
         </div>
         <div id="nursing-room">
           {placeServices.nursingRoom === 'possible' ? (
-            <p>⭕️</p>
+            <div>
+              <img src="https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670417142/possible_ac5jxi.png" alt="" />
+            </div>
           ) : placeServices.nursingRoom === 'impossible' ? (
-            <p>❌</p>
+            <div>
+              <img src="https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670417142/impossible_doab0s.png" alt="" />
+            </div>
           ) : (
-            <p>❓</p>
+            <Unchecked>
+              <img src="https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670417142/unchecked_izlb2j.png" alt="" />
+              <p>확인필요</p>
+            </Unchecked>
           )}
           <p>수유실</p>
         </div>
       </Services>
       <AddressAndMiniMap>
         <SectionTitle>주소</SectionTitle>
-        <Address>{address.fullAddress}</Address>
-        <button
-          type="button"
-          onClick={() => handleAddressCopyClick(address.fullAddress)}
-        >
-          복사하기
-        </button>
-        {copyState && (
-          <span>복사 완료!</span>
-        )}
+        <AddressSection>
+          <Address>{address.fullAddress}</Address>
+          <CopyButton
+            type="button"
+            onClick={() => handleAddressCopyClick(address.fullAddress)}
+          >
+            <img src="https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670417334/copy_umtsau.png" alt="" />
+          </CopyButton>
+          {copyState && (
+            <span>복사 완료!</span>
+          )}
+        </AddressSection>
       </AddressAndMiniMap>
-    </Container>
+    </article>
   );
 }
