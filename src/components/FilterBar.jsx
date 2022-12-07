@@ -1,36 +1,62 @@
 import styled from 'styled-components';
 
-// import FilterIcon from '../images/filter.png';
-// const FilterIcon = require('../images/filter.png');
-
 const Wrapper = styled.div`
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   height: 4em;
-  background-color: #ff9d13;
-  padding: .6em;
+  margin-top: 2em;
+  padding: 1.7em;
+`;
 
-  p {
-    font-size: 1.1em;
-    font-weight: bold;
-    color: #FFF;
-    margin-right: 1em;
+const Buttons = styled.div`
+  button {
+    margin-left: .5em;
   }
 `;
 
-const Button = styled.button`
-  background-color: #FFF;
+const FilterButton = styled.button`
+  color: #8F8272;
+  background-color: #E6DDD2;
   border: none;
-  margin-inline: .3em;
+  border-radius: 4px;
+  width: 100px;
+  height: 36px;
+
+  :hover {
+    color: #FFF;
+    background-color: #E0BA8B;
+  }
+
+  div {
+    display: flex;
+    justify-content: center;
+    
+    img {
+      margin-left: .3em;
+    }
+  }
 `;
 
-// const Image = styled.img`
-//   width: 10px;
-//   height: 10px;
-//   object-fit: cover;
-// `;
+const ResetButton = styled.button`
+  color: #8F8272;
+  background-color: #E6DDD2;
+  border: none;
+  border-radius: 4px;
+  width: 100px;
+  height: 36px;
+
+  :hover {
+    color: #FFF;
+    background-color: #E0BA8B;
+  }
+`;
+
+const Text = styled.p`
+  color: #8F8272;
+  font-weight: 600;
+`;
 
 export default function FilterBar({
   goFilterPage, resetFilter, sido, sigungu, category,
@@ -46,7 +72,7 @@ export default function FilterBar({
   return (
     <Wrapper>
       {sido && sigungu && category ? (
-        <p>
+        <Text>
           {sido}
           {' '}
           -
@@ -56,26 +82,29 @@ export default function FilterBar({
           -
           {' '}
           {category}
-        </p>
+        </Text>
       ) : (
-        <p>필터 조건을 설정해주세요</p>
+        <Text>필터 조건을 설정해주세요</Text>
       )}
-      <Button
-        name="filter"
-        type="button"
-        onClick={handleFilterPageOnClick}
-      >
-        필터
-      </Button>
-      <Button
-        name="reset-filter"
-        type="button"
-        onClick={handleFilterResetClick}
-      >
-        리셋하기
-      </Button>
+      <Buttons>
+        <FilterButton
+          name="filter"
+          type="button"
+          onClick={handleFilterPageOnClick}
+        >
+          <div>
+            필터
+            <img src="https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670389798/filter-icon_lkoce0.png" alt="" />
+          </div>
+        </FilterButton>
+        <ResetButton
+          name="reset-filter"
+          type="button"
+          onClick={handleFilterResetClick}
+        >
+          리셋하기
+        </ResetButton>
+      </Buttons>
     </Wrapper>
   );
 }
-
-{ /* <Image src="https://user-images.githubusercontent.com/104840243/199137682-691f67c0-af83-4eba-981d-f722257d2921.png" alt="" /> */ }
