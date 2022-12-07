@@ -5,14 +5,30 @@ import SignUpForm from '../components/SignUpForm';
 import useUserStore from '../hooks/useUserStore';
 
 const Container = styled.div`
-  padding: 3em 3em 0 3em;
+  padding-top: 5em;
+  width: 400px;
+  margin: 0 auto;
 `;
 
 const Title = styled.h2`
-  font-size: 2em;
-  font-weight: bold;
-  color: #ff9d13;
-  margin-bottom: 1.5em;
+  font-size: 2.3em;
+  font-weight: 600;
+  text-align: center;
+  color: #8F8272;
+  width: 400px;
+  margin: 0 auto;
+  padding-block: .6em;
+  border-bottom: 1px dashed #8F8272;
+`;
+
+const DownsideBar = styled.div`
+  position: fixed;
+  bottom: 0%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  height: 60px;
+  width: 600px;
+  background-color: #E6DDD2;
 `;
 
 export default function SignUpPage() {
@@ -36,8 +52,9 @@ export default function SignUpPage() {
 
   return (
     <Container>
-      <Title> SignUp</Title>
+      <Title> 환영합니다!</Title>
       <SignUpForm signUp={signUp} errorMessage={errorMessage} />
+      <DownsideBar />
     </Container>
   );
 }
