@@ -6,92 +6,89 @@ import { useEffect } from 'react';
 import useUserStore from '../hooks/useUserStore';
 import kakaoLoginConfig from '../kakaoLogin.config';
 import naverLoginConfig from '../naverLogin.config';
-
-import TrialButton from '../components/TrialButton';
+import LoginButtons from '../components/LoginButtons';
 
 const Container = styled.div`
-    padding: 5em 3em 3em 3em;
-    text-align: center;
+  padding: 0em 1em 0em 1em;
+  text-align: center;
+`;
+
+const Wrapper = styled.div`
+  position: absolute;
+  width: 570px;
+  height: 87vh;
+  border: 2px #E6DDD2 dashed;  
+  margin-top: .8em;
+  padding-top: 9.5em;
+`;
+
+const UpsideImage = styled.div`
+  position: fixed;
+  top: 0%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  width: 300px;
+  height: 171px;
+  z-index: 10;
+  background: url('https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670360860/main-upside_rlfjp3.png');
+`;
+
+const UpsideBar = styled.div`
+  position: fixed;
+  top: 0%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  height: 60px;
+  width: 600px;
+  background-color: #E6DDD2;
+`;
+
+const DownsideBar = styled.div`
+  position: fixed;
+  bottom: 0%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  height: 60px;
+  width: 600px;
+  background-color: #E6DDD2;
 `;
 
 const ImagesArea = styled.div`
-    display: flex;
-    justify-content: center;
-    margin: 3em 0 5em 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 3em 0 2em 0;
 `;
 
 const ImageBox = styled.div`
-    width: 150px;
-    height: 150px;
-
-    img {
-        width: 150px;
-        height: 150px;
-        object-fit: cover;
-    }
+  width: 340px;
+  height: 208px;
+  background-image: url('https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670360861/main-logo_xw5e13.png');
 `;
 
-const Title = styled.h2`
-    font-size: 2em;
-    font-weight: bold;
+const Title = styled.div`
+  width: 310px;
+  height: 41px;
+  margin-top: 5em;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `;
 
 const Text = styled.div`
-    padding-block: 1.5em;
+  font-weight: 300;
+  padding-block: 1.5em;
+  margin-bottom: 2.5em;
 
-    p {
-        margin-block: .6em;
-    }
-`;
-
-const LoginButtonsArea = styled.div`
-    margin-top: 3em;
-    
-    div {
-      margin-block: .5em;
-    }
-
-    div:last-child {
-      margin-top: 1em;
-    }
-`;
-
-const NaverLogin = styled.a`
-    overflow: hidden;
-    width: 210px;
-    border: none;
-    background-color: transparent;
-    margin-block: .5em;
-
-    img {
-        width: 200px;
-        object-fit: cover;
-    }
-`;
-
-const KakaoLogin = styled.a`
-    overflow: hidden;
-    width: 210px;
-    border: none;
-    background-color: transparent;
-    margin-block: .5em;
-
-    img {
-        width: 200px;
-        object-fit: cover;
-    }
+  p {
+      margin-block: .6em;
+  }
 `;
 
 export default function LoginPage() {
-  const image1Url = 'https://user-images.githubusercontent.com/104840243/202307825-d3db56b2-0e2f-4192-88b9-bd334f993533.jpeg';
-  const image2Url = 'https://user-images.githubusercontent.com/104840243/202307837-4d04ec6e-5fb6-4387-931e-d4a0f94551f8.jpeg';
-  const image3Url = 'https://user-images.githubusercontent.com/104840243/202307841-af59dc47-cc70-4630-b137-a13d20d3d56e.jpeg';
-
-  const naverButton = 'https://user-images.githubusercontent.com/104840243/202971376-50fc026a-014a-4518-a615-b0da84f5b58c.png';
-  const kakaoButton = 'https://user-images.githubusercontent.com/104840243/202971385-ee1b510d-e434-4da4-832a-2de9ebb622a7.png';
-
-  const userStore = useUserStore();
-
   const [, setAccessToken] = useLocalStorage('accessToken', '');
   const [, setMode] = useLocalStorage('mode', '');
 
@@ -102,6 +99,13 @@ export default function LoginPage() {
     setMode('');
   }, []);
 
+  const userStore = useUserStore();
+
+  const title = 'https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670362656/main-text-color_cnjdhg.png';
+
+  const naverRedirectUrl = naverLoginConfig.naverAuthUrl;
+  const kakaoRedirectUrl = kakaoLoginConfig.kakaoAuthUrl;
+
   const getTrialAccessAuth = async () => {
     const { accessToken } = await userStore.trialModeLogin();
     setAccessToken(accessToken);
@@ -111,36 +115,27 @@ export default function LoginPage() {
 
   return (
     <Container>
-      <ImagesArea>
-        <ImageBox>
-          <img src={image1Url} alt="" />
-        </ImageBox>
-        <ImageBox>
-          <img src={image2Url} alt="" />
-        </ImageBox>
-        <ImageBox>
-          <img src={image3Url} alt="" />
-        </ImageBox>
-      </ImagesArea>
-      <Title>아빠! 오늘은 어디가요?</Title>
-      <Text>
-        <p>사랑스러운 우리 아이를 위해</p>
-        <p>기억에 남을 멋진 장소를 추천해 드릴게요.</p>
-        <p>이제 넉넉한 마음만 준비하세요 :&#41;</p>
-      </Text>
-      <LoginButtonsArea>
-        <div>
-          <NaverLogin href={naverLoginConfig.naverAuthUrl}>
-            <img id="naver-login" src={naverButton} alt="" />
-          </NaverLogin>
-        </div>
-        <div>
-          <KakaoLogin href={kakaoLoginConfig.kakaoAuthUrl}>
-            <img id="kakao-login" src={kakaoButton} alt="" />
-          </KakaoLogin>
-        </div>
-        <TrialButton getTrialAccessAuth={getTrialAccessAuth} />
-      </LoginButtonsArea>
+      <UpsideImage />
+      <UpsideBar />
+      <Wrapper>
+        <ImagesArea>
+          <ImageBox />
+          <Title>
+            <img src={title} alt="아빠 오늘은 어디가요" />
+          </Title>
+        </ImagesArea>
+        <Text>
+          <p>사랑스러운 우리 아이를 위해</p>
+          <p>기억에 남을 멋진 장소를 추천해 드릴게요.</p>
+          <p>이제 넉넉한 마음만 준비하세요 :&#41;</p>
+        </Text>
+        <LoginButtons
+          naverUrl={naverRedirectUrl}
+          kakaoUrl={kakaoRedirectUrl}
+          getTrialAccessAuth={getTrialAccessAuth}
+        />
+      </Wrapper>
+      <DownsideBar />
     </Container>
   );
 }

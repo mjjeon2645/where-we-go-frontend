@@ -76,7 +76,7 @@ export default function Header() {
   };
 
   const goToLogin = () => {
-    navigate('/login');
+    navigate('/');
     setAccessToken('');
   };
 
@@ -90,20 +90,20 @@ export default function Header() {
 
   const handleLoginClick = () => {
     setAccessToken('');
-    navigate('/login');
+    navigate('/');
   };
 
   const handleLogoutClick = () => {
     setAccessToken('');
     userStore.clearUserState();
-    navigate('/login');
+    navigate('/');
   };
 
   const handleStopTrialModeClick = async () => {
     await userStore.stopTrialMode();
     setAccessToken('');
     setMode('');
-    navigate('/login');
+    navigate('/');
   };
 
   return (

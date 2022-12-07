@@ -4,9 +4,8 @@ import styled from 'styled-components';
 import { ModalProvider } from 'styled-react-modal';
 import { Reset } from 'styled-reset';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useLocalStorage } from 'usehooks-ts';
-import HomePage from './pages/HomePage';
 import MapPage from './pages/MapPage';
 import TopThreePage from './pages/TopThreePage';
 import MyPage from './pages/MyPage';
@@ -61,7 +60,7 @@ export default function App() {
           <Container>
             <Wrapper>
               <Routes>
-                <Route path="/" element={<HomePage />} />
+                <Route path="/" element={<LoginPage />} />
                 <Route path="/map" element={<MapPage />} />
                 <Route path="places/:id" element={<PlaceDetailPage />} />
                 <Route path="places/:id/blog-review" element={<PlaceBlogReviewPage />} />
@@ -72,7 +71,6 @@ export default function App() {
                 <Route path="/mypage" element={<MyPage />} />
                 <Route path="/mypage/nicknameform" element={<MyNicknameChangePage />} />
                 <Route path="/mypage/childform" element={<ChildAddPage />} />
-                <Route path="/login" element={<LoginPage />} />
                 <Route path="/signup" element={<SignUpPage />} />
                 <Route path="/oauth/callback/kakao" element={<KakaoLoginRedirectPage />} />
                 <Route path="/oauth/callback/naver" element={<NaverLoginRedirectPage />} />
