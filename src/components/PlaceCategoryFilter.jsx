@@ -8,14 +8,11 @@ const Container = styled.article`
 const Title = styled.h2`
   font-size: 1.3em;
   font-weight: bold;
-  margin-bottom: 1em;
 `;
 
 const CategorySection = styled.section`
-  background-color: #f6f6f6;
-  padding: 1em;
+  padding-block: 1em;
   margin: 1em 0;
-  border-radius: 8px;
 
   ul {
     display: grid;
@@ -24,12 +21,19 @@ const CategorySection = styled.section`
 `;
 
 const CategoryOption = styled.button`
-  background-color: #FFF;
-  border: 1px solid #DDD;
-  border-radius: 15px;
-  padding: .6em 3em;
-  margin: .3em 1em;
-  width: 90%;
+  font-size: .8em;
+  color: ${(props) => (props.selected ? '#FFF' : '#8F8272')};
+  background-color: ${(props) => (props.selected ? '#F9C193' : '#E6DDD2')};
+  border: none;
+  border-radius: 4px;
+  height: 50px;
+  width: 165px;
+  margin: 1em .5em;
+
+  :hover {
+    color: #FFF;
+    background-color: #E0BA8B;
+  }
 `;
 
 export default function PlaceCagetoryFilter({ onCategoryClick, category }) {
@@ -50,7 +54,7 @@ export default function PlaceCagetoryFilter({ onCategoryClick, category }) {
                 className="category"
                 type="button"
                 onClick={() => handlePlaceCategoryClick(value)}
-                style={category === value.category ? { color: '#FFF', background: '#FFA200' } : { backgroundColor: '#FFF' }}
+                selected={category === value.category}
               >
                 {value.category}
               </CategoryOption>

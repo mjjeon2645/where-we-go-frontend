@@ -12,11 +12,14 @@ const Title = styled.h2`
   margin-bottom: 1em;
 `;
 
+const SidoTitle = styled.p`
+  padding-left: 1em;
+  margin-bottom: 1em;  
+`;
+
 const SidoSection = styled.section`
-  background-color: #f6f6f6;
-  padding: 1em;
+  padding-block: 1em;
   margin: 1em 0;
-  border-radius: 8px;
 `;
 
 const SidoList = styled.ul`
@@ -24,11 +27,24 @@ const SidoList = styled.ul`
     grid-template-columns: 1fr 1fr 1fr;
 `;
 
+const SidoOption = styled.button`
+  color: ${(props) => (props.selected ? '#FFF' : '#8F8272')};
+  background-color: ${(props) => (props.selected ? '#F9C193' : '#E6DDD2')};
+  border: none;
+  border-radius: 4px;
+  width: 153px;
+  height: 50px;
+  margin: .5em 1em;
+
+  :hover {
+    color: #FFF;
+    background-color: #E0BA8B;
+  }
+`;
+
 const SigunguSection = styled.section`
-  background-color: #f6f6f6;
   padding: 1em;
   margin: 1em 0;
-  border-radius: 8px;
 
   select {
     margin-left: 2em;
@@ -36,16 +52,6 @@ const SigunguSection = styled.section`
     padding: .5em;
     border-radius: 4px;
   }
-`;
-
-const SidoOption = styled.button`
-  background-color: #FFF;
-  border: 1px solid #DDD;
-  border-radius: 15px;
-  padding: .6em 3em;
-  margin: .3em 1em;
-
-  
 `;
 
 export default function PlaceLocationFilter({
@@ -68,7 +74,7 @@ export default function PlaceLocationFilter({
     <Container>
       <Title>어디로 갈까요?</Title>
       <SidoSection>
-        <p>시/도</p>
+        <SidoTitle>시/도</SidoTitle>
         <SidoList>
           {sidoArray.map((value) => (
             <li key={value.id}>
@@ -77,7 +83,7 @@ export default function PlaceLocationFilter({
                 value={value.ko}
                 onClick={() => handleSidoChange(value)}
                 isSelected={value.selected}
-                style={sido === value.ko ? { color: '#FFF', background: '#FFA200' } : { backgroundColor: '#FFF' }}
+                selected={sido === value.ko}
               >
                 {value.ko}
               </SidoOption>

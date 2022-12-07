@@ -3,6 +3,7 @@ import PlaceLocationFilter from './PlaceLocationFilter';
 import PlaceCategoryFilter from './PlaceCategoryFilter';
 
 const Wrapper = styled.article`
+  padding-inline: 1.1em;
   padding-bottom: 5em;
 `;
 
@@ -15,13 +16,20 @@ const BackButton = styled.button`
 `;
 
 const FilterButton = styled.button`
+  font-size: 1em;
+  font-weight: 500;
   color: #FFF;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   display: block;
-  padding: 1em 5em;
+  width: 534px;
+  height: 60px;
   margin: auto;
-  background-color: #ffae00;
+  background-color: #005D82;
+
+  :hover {
+   background-color: #0083B7; 
+  }
 `;
 
 export default function Filters({
@@ -54,7 +62,7 @@ export default function Filters({
 
   return (
     <Wrapper>
-      <BackButton type="button" onClick={handleBackClick}> &lt; 돌아가기</BackButton>
+      <BackButton type="button" onClick={handleBackClick}> &lt; 뒤로가기</BackButton>
       <form id="filter" onSubmit={handleSubmit}>
         <PlaceLocationFilter
           setSido={setSido}

@@ -8,8 +8,10 @@ import useUserStore from '../hooks/useUserStore';
 import UnauthorizedAccessModal from './UnauthorizedAccessModal';
 
 const Container = styled.header`
-  width: 100%;
+  width: 600px;
   position: fixed;
+  left: 50%;
+  transform: translate(-50%, 0);
   z-index: 100;
   background-color: #FFF;
   border-bottom: 1px solid #EEE;
