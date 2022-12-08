@@ -10,7 +10,7 @@ const Container = styled.div`
   p {
     font-size: 1.3em;
     font-weight: bold;
-    color: #ff9d13;
+    color: #8F8272;
   }
 `;
 

@@ -4,63 +4,73 @@ import DatePicker from 'react-datepicker';
 import { addDays } from 'date-fns';
 import styled from 'styled-components';
 
+const Form = styled.form`
+  margin-top: 3em;  
+`;
+
 const GenderSection = styled.section`
   padding-block: 1em;
 `;
+
 const Label = styled.label`
-  font-size: 1em;
-  font-weight: bold;
+  color: #A0A0A0;
+  font-weight: 400;
   display: block;
   margin-bottom: .5em;
 `;
 
 const Select = styled.select`
-  font-size: 1em;
-  padding: .5em .3em;
-  border-radius: 4px;
-  width: 30%;
+  width: 15em;
+  height: 3em;
+  padding: .5em;
+  border: 1px solid #A0A0A0;
 `;
 
 const BirthdaySection = styled.section`
-  padding-block: 1em;
+  margin-top: 2em;
 `;
 
 const BirthdayLabel = styled.p`
-  font-size: 1em;
-  font-weight: bold;
+  color: #A0A0A0;
+  font-weight: 400;
   margin-bottom: .5em;
 `;
 
 const BDatePicker = styled(DatePicker)`
-  font-size: 1em;
+  width: 15em;
+  height: 3em;
   padding: .5em;
-  border-radius: 4px;
+  border: 1px solid #A0A0A0;
 `;
 
 const Error = styled.p`
+  font-size: .9em;
   color: #ff0000;
+  margin-top: 1em;
 `;
 
 const Buttons = styled.div`
-  text-align: right;
-  margin-top: 2em;
-  margin-right: 8.5em;
-
-  button {
-    font-size: .9em;
-    padding: .5em 1em;
-    border: none;
-    border-radius: 8px;
-    margin-inline: 1em;
-  }
+  position: absolute;
+  bottom: 20%;
+  display: flex;
+  flex-direction: column;
 
   button:first-child {
     color: #FFF;
-    background-color: #ff9d13;
+    background-color: #A0A0A0;
+    width: 400px;
+    height: 60px;
+    border-radius: 8px;
+    border: none;
+    margin-bottom: 2em;
   }
 
   button:last-child {
-    background-color: #f7f7f7;
+    background-color: transparent;
+    border: none;
+    width: 200px;
+    margin: 0 auto;
+
   }
 `;
 
@@ -86,9 +96,9 @@ export default function Childform({
   };
 
   return (
-    <form onSubmit={handleChildAddSubmit}>
+    <Form onSubmit={handleChildAddSubmit}>
       <GenderSection>
-        <Label htmlFor="gender">성별을 선택해주세요</Label>
+        <Label htmlFor="gender">성별을 선택해주세요.</Label>
         <Select id="gender" onChange={handleGenderChange}>
           <option selected disabled hidden>선택</option>
           <option>왕자님</option>
@@ -97,7 +107,7 @@ export default function Childform({
         </Select>
       </GenderSection>
       <BirthdaySection>
-        <BirthdayLabel>생일(또는 예정일)을 입력해주세요</BirthdayLabel>
+        <BirthdayLabel>생일(또는 예정일)을 입력해주세요.</BirthdayLabel>
         <BDatePicker
           selected={date}
           onChange={handleSetDate}
@@ -113,6 +123,6 @@ export default function Childform({
         <button type="submit">완료</button>
         <button type="button" onClick={handleCancelClick}>취소</button>
       </Buttons>
-    </form>
+    </Form>
   );
 }

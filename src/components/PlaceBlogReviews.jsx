@@ -34,6 +34,10 @@ const ContentArea = styled.div`
     .author {
       color: #AAA;
     }
+
+    p {
+      text-align: left;
+    }
 `;
 
 const ImageArea = styled.div`

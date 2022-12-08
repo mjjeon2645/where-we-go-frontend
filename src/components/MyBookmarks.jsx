@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Container = styled.article`
-  margin-block: 3em;
+  margin: 3em 2em;
 `;
 const Title = styled.p`
   font-size: 1.2em;
@@ -9,12 +9,17 @@ const Title = styled.p`
   margin-block: 2em;
 `;
 
+const NoBookmarkMessage = styled.p`
+  font-weight: 300;
+  text-align: center;
+  color: #0e0e0e50;
+`;
+
 const PlaceList = styled.li`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-block: 1.5em;
-  padding-inline: 1em;
+  margin-block: 2em;
 `;
 
 const Place = styled.button`
@@ -31,7 +36,7 @@ const PlaceName = styled.p`
 `;
 
 const Flag = styled.img`
-  width: 21px;
+  width: 10px;
 `;
 
 const Address = styled.div`
@@ -39,20 +44,23 @@ const Address = styled.div`
   align-items: center;
 
   span {
-    color: #666666;
+    color: #0E0E0E;
     margin-left: .1em;
   }
 `;
 
 const DeleteButton = styled.button`
-  background-color: #EEE;
+  float: right;
   border: none;
+  width: 8em;
+  height: 3em;
   border-radius: 4px;
-  padding: .3em 1em;
+  color: #8F8272;
+  background-color: #E6DDD2;
 `;
 
 export default function MyBookmarks({ goPlaceDetailPage, removeBookmark, bookmarks }) {
-  const flagIcon = 'https://user-images.githubusercontent.com/104840243/203305440-47ea3927-697c-4fc0-8523-7a2eee0c47a6.png';
+  const flagIcon = 'https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670398716/spot_hozd2n.png';
 
   const handlePlaceDetailClick = (placeId) => {
     goPlaceDetailPage(placeId);
@@ -66,7 +74,7 @@ export default function MyBookmarks({ goPlaceDetailPage, removeBookmark, bookmar
     <Container>
       <Title>즐겨찾기</Title>
       {bookmarks.length === 0 ? (
-        <p>즐겨찾기 한 장소가 없습니다</p>
+        <NoBookmarkMessage>즐겨찾기 한 장소가 없습니다</NoBookmarkMessage>
       ) : (
         <ul>
           {bookmarks.map((bookmark) => (
@@ -86,7 +94,7 @@ export default function MyBookmarks({ goPlaceDetailPage, removeBookmark, bookmar
                 id={bookmark.placeId}
                 onClick={() => handleBookmarkDeleteClick(bookmark.placeId)}
               >
-                X
+                삭제
               </DeleteButton>
             </PlaceList>
           ))}
