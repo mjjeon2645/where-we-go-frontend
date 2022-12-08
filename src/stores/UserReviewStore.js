@@ -14,6 +14,9 @@ export default class UserReviewStore extends Store {
     this.myDateOfVisit = new Date();
     this.myRate = 0;
     this.myReview = '';
+
+    this.error = '';
+    this.errorMessage = '';
   }
 
   async fetchUsersReviews(placeId) {
@@ -85,6 +88,29 @@ export default class UserReviewStore extends Store {
   async deleteReview(placeId, reviewId) {
     await userReviewApiService.deleteReview(reviewId);
     this.fetchUsersReviews(placeId);
+  }
+
+  setError(errorState, errorMessage) {
+    this.errorState = errorState;
+    this.errorMessage = errorMessage;
+    this.publish();
+  }
+
+  clearError() {
+    this.errorState = '';
+    this.errorMessage = '';
+  }
+
+  get isDateOfVisitEmpty() {
+    return this.errorState === 'dateOfVisit';
+  }
+
+  get isRateEmpty() {
+    return this.errorState === 'rate';
+  }
+
+  get isReviewEmpty() {
+    return this.errorState === 'review';
   }
 }
 

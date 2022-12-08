@@ -12,17 +12,7 @@ const Container = styled.div`
 `;
 
 const Wrapper = styled.article`
-  padding-top: 3em;
-`;
-
-const Title = styled.h2`
-  font-size: 1.5em;
-  font-weight: bold;
-  padding-left: 2em;
-
-  strong {
-    color: #08ce5b;
-  }
+  padding-top: 1em;
 `;
 
 export default function PlaceBlogReviewPage() {
@@ -69,11 +59,6 @@ export default function PlaceBlogReviewPage() {
       />
       {blogReviews ? (
         <Wrapper>
-          <Title>
-            <strong>네이버</strong>
-            {' '}
-            블로그 리뷰
-          </Title>
           <PlaceBlogReviews
             blogReviews={blogReviews}
             goToBlogWebPage={goToBlogWebPage}

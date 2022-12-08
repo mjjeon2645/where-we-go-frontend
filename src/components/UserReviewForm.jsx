@@ -6,79 +6,123 @@ import styled from 'styled-components';
 
 const DateOfVisitSection = styled.div`
   display: flex;
-  align-items: center;
-  padding-block: .7em;
+  flex-direction: column;
+  padding-block: 1.5em;
 
-  p {
+  p:first-child {
+    color: #A0A0A0;
+    font-weight: 400;
     width: 80px;
-    font-weight: bold;
+    margin-bottom: .5em;
+  }
+
+  input {
+    width: 200px;
+    height: 3.5em;
+    border: 1px #A0A0A0 solid;
+    padding-inline: 1em;
   }
 `;
 
 const RateSection = styled.div`
   display: flex;
-  align-items: center;
-  padding-block: .7em;
+  flex-direction: column;
+  padding-block: 1.5em;
 
   label {
+    color: #A0A0A0;
+    font-weight: 400;
     width: 70px;
-    font-weight: bold;
+    margin-bottom: .5em;
+  }
+
+  select {
+    width: 200px;
+    height: 40px;
+    padding-inline: .5em;
+    border: 1px #A0A0A0 solid;
   }
 `;
 
 const WritingSection = styled.div`
   display: flex;
   flex-direction: column;
-  padding-block: .7em;
+  padding-block: 1.5em;
 
   label {
-    font-weight: bold;
+    color: #A0A0A0;
+    font-weight: 400;
     margin-bottom: .5em;
   }
 
-  textarea {
-    width: 70%;
-    resize: none;
+  input {
+    width: 100%;
+    height: 3.5em;
+    border: 1px #A0A0A0 solid;
+    padding-inline: 1em;
+
+    ::placeholder {
+      color: #D8D8D8
+    }
   }
 
-  p {
-    font-size: .9em;
-    margin-top: .5em;
+  span {
+    font-size: .8em;
+    font-weight: 300;
+    color: #A0A0A0;
+    width: 100%;
+    margin-top: .8em;
     text-align: right;
-    margin-right: 11em;
   }
 `;
 
 const Buttons = styled.div`
-  text-align: right;
-  margin-top: 1em;
-  margin-right: 8.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3em;
 
   button {
-    font-size: .9em;
-    padding: .5em 1em;
+    font-size: .8em;
+    padding-block: 1.3em;
     border: none;
     border-radius: 8px;
-    margin-inline: 1em;
   }
 
   button:first-child {
     color: #FFF;
-    background-color: #ff9d13;
+    width: 100%;
+    background-color: #005D82;
+
+    :hover {
+      background-color: #0083B7;
+    }
   }
 
   button:last-child {
-    background-color: #f7f7f7;
+    width: 150px;
+    font-weight: 300;
+    background-color: #FFF;
   }
 `;
 
 const Message = styled.p`
+  color: #A0A0A0;
+  font-weight: 300;
   margin-top: 3em;
   font-size: .8em;
 `;
 
+const Error = styled.p`
+  font-size: .9em;
+  color: #ff0000;
+  margin-top: .7em;
+`;
+
 export default function UserReviewForm({
   writeReview, setDateOfVisit, setRate, setMyReview, cancelWriting, startDate, myReview,
+  errorMessage, isDateOfVisitEmpty, isRateEmpty, isReviewEmpty,
 }) {
   const handleUserReviewSubmit = (event) => {
     event.preventDefault();
@@ -116,6 +160,9 @@ export default function UserReviewForm({
             maxDate={addDays(new Date(), 0)}
             dateFormat="yyyy-MM-dd"
           />
+          {isDateOfVisitEmpty && (
+            <Error>{errorMessage}</Error>
+          )}
         </DateOfVisitSection>
         <RateSection>
           <label htmlFor="rate-select">평점</label>
@@ -127,30 +174,34 @@ export default function UserReviewForm({
             <option>⭐️⭐️</option>
             <option>⭐️</option>
           </select>
+          {isRateEmpty && (
+            <Error>{errorMessage}</Error>
+          )}
         </RateSection>
         <WritingSection>
           <label htmlFor="input-review">한 줄 리뷰</label>
-          <textarea
+          <input
             id="input-review"
             placeholder="최소 10자 이상 적어주세요"
-            cols="30"
-            rows="5"
             minLength="10"
             maxLength="50"
             onChange={handleReviewChange}
           />
-          <p>
+          <span>
             {myReview.length || 0}
             {' '}
             / 50자
-          </p>
+          </span>
+          {isReviewEmpty && (
+            <Error>{errorMessage}</Error>
+          )}
         </WritingSection>
         <Buttons>
           <button type="submit">등록하기</button>
           <button type="button" onClick={handleCancelWritingClick}>취소하기</button>
         </Buttons>
       </form>
-      <Message>욕설이나 악의적 리뷰는 관리자에 의해 가림처리 될 수 있습니다.</Message>
+      <Message>· 욕설이나 악의적 리뷰는 관리자에 의해 가림처리 될 수 있습니다.</Message>
     </div>
   );
 }

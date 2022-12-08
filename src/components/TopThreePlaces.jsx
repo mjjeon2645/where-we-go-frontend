@@ -87,7 +87,7 @@ export default function TopThreePlaces({ topThreePlaces, goPlaceDetailPage }) {
     goPlaceDetailPage(selectedPlaceId);
   };
 
-  const flagIcon = 'https://user-images.githubusercontent.com/104840243/203305440-47ea3927-697c-4fc0-8523-7a2eee0c47a6.png';
+  console.log(topThreePlaces);
 
   return (
     <Container>
@@ -121,7 +121,6 @@ export default function TopThreePlaces({ topThreePlaces, goPlaceDetailPage }) {
                   </Button>
                   <p>
                     {place.averageRate}
-                    점
                   </p>
                 </List>
               ))}

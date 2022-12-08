@@ -9,11 +9,11 @@ import useUserReviewStore from '../hooks/useUserReviewStore';
 import { formatDate } from '../utils/dateOfVisitFormatter';
 
 const Container = styled.div`
-  padding: 3em;
+  padding: 4em 2em;
 `;
 
 const Title = styled.h2`
-  font-size: 1.3em;
+  font-size: 1.2em;
   font-weight: bold;
   margin-bottom: 2em;
 `;
@@ -24,28 +24,32 @@ export default function WritingReviewPage() {
   const navigate = useNavigate();
 
   const userReviewStore = useUserReviewStore();
-  const { myDateOfVisit, myRate, myReview } = userReviewStore;
+  const {
+    myDateOfVisit, myRate, myReview, errorMessage,
+    isDateOfVisitEmpty, isRateEmpty, isReviewEmpty,
+  } = userReviewStore;
 
   const placeId = document.location.pathname.split('/')[2];
 
   const writeReview = async () => {
     if (!myDateOfVisit) {
-      alert('방문일을 선택해주세요!');
+      userReviewStore.setError('dateOfVisit', '방문일을 선택해주세요');
       return;
     }
 
     if (!myRate) {
-      alert('평점을 선택해주세요!');
+      userReviewStore.setError('rate', '평점을 선택해주세요');
       return;
     }
 
     if (!myReview) {
-      alert('리뷰를 10자 이상 적어주세요!');
+      userReviewStore.setError('review', '리뷰를 10자 이상 작성해주세요');
       return;
     }
 
     await userReviewStore.postMyReview(placeId, myDateOfVisit, myRate, myReview);
     userReviewStore.clearWritingReviewState();
+    userReviewStore.clearError();
     navigate(`/places/${placeId}/user-review`);
   };
 
@@ -79,6 +83,10 @@ export default function WritingReviewPage() {
         cancelWriting={cancelWriting}
         startDate={startDate}
         myReview={myReview}
+        errorMessage={errorMessage}
+        isDateOfVisitEmpty={isDateOfVisitEmpty}
+        isRateEmpty={isRateEmpty}
+        isReviewEmpty={isReviewEmpty}
       />
     </Container>
   );

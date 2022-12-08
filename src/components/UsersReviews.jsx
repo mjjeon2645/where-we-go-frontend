@@ -1,14 +1,17 @@
 import styled from 'styled-components';
 
 const Title = styled.p`
-  font-size: 1.3em;
-  font-weight: bold;
+  color: #005D82;
+  font-size: 1.2em;
+  font-weight: 700;
   margin-top: 2em;
-  margin-bottom: .8em;
+  margin-bottom: 1.5em;
 `;
 
 const Review = styled.li`
   margin-bottom: 1em;
+  border-bottom: 1px solid #F3F3F3;
+  padding-bottom: 1.5em;
 
   strong {
     font-weight: bold;
@@ -16,13 +19,19 @@ const Review = styled.li`
 
   span {
     display: inline-block;
-    color: #494949;
     margin-block: .5em;
   }
 `;
 
 const Body = styled.p`
   font-size: .9em;
+  font-weight: 300;
+  line-height: 1.3em;
+`;
+
+const NoReviewMessage = styled.div`
+    font-weight: 300;
+    line-height: 1.2em;
 `;
 
 export default function UsersReviews({ userReviews }) {
@@ -33,21 +42,25 @@ export default function UsersReviews({ userReviews }) {
         <ul>
           {userReviews.map((userReview) => (
             <Review key={userReview.id}>
-              <p>
-                <strong>{userReview.nickname}</strong>
-                <span>
-                  (방문일:
-                  {' '}
-                  {userReview.dateOfVisit}
-                  )
-                </span>
-              </p>
+              <strong>
+                {userReview.nickname}
+                {' '}
+              </strong>
+              <span>
+                (방문일:
+                {' '}
+                {userReview.dateOfVisit}
+                )
+              </span>
               <Body>{userReview.body}</Body>
             </Review>
           ))}
         </ul>
       ) : (
-        <p>아직 리뷰가 없어요🥲 회원님들의 소중한 추억을 공유해주세요</p>
+        <NoReviewMessage>
+          <p>아직 리뷰가 없어요🥲</p>
+          <p>회원님들의 소중한 추억을 공유해주세요</p>
+        </NoReviewMessage>
       )}
     </div>
   );

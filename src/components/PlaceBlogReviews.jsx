@@ -1,29 +1,24 @@
 import styled from 'styled-components';
 
-const Container = styled.div`
-  padding: 3em 0;
-`;
-
 const Wrapper = styled.article`
-  padding: 0 3em;    
+  padding: 0 2em;    
 `;
 
 const Review = styled.button`
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: 1fr 3fr;
   width: 100%;
   height: 120px;
-  margin: 1.5em 0;
-  border: 1px solid #DDD;
-  border-radius: 8px;
-  background-color: #fafafa;
+  margin: 3em 0;
+  border: none;
+  background-color: #FFF;
 `;
 
 const ContentArea = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 1em .5em;
+  padding: 0em .5em;
 
     .title {
       text-align: left;
@@ -42,14 +37,15 @@ const ContentArea = styled.div`
 `;
 
 const ImageArea = styled.div`
-    width: 13em;
+    width: 120px;
+    height: 120px;
     overflow: hidden;
     border-radius: 10px;
     margin-top: 4px;
 
     img {
-        width: 13em;
-        height: 8em;
+        width: 120px;
+        height: 120px;
         object-fit: cover;
     }
 `;
@@ -66,13 +62,16 @@ export default function PlaceBlogReviews({ blogReviews, goToBlogWebPage }) {
   };
 
   return (
-    <Container>
+    <div>
       {blogReviews.length !== 0 ? (
         <Wrapper>
           <ul>
             {blogReviews.map((blogReview) => (
               <li key={blogReview.url}>
                 <Review type="button" onClick={() => handleToBlogWebPageClick(blogReview.url)}>
+                  <ImageArea>
+                    <img src={blogReview.imageSource} alt="" />
+                  </ImageArea>
                   <ContentArea>
                     <p className="title">{blogReview.title}</p>
                     <p className="date">{blogReview.date}</p>
@@ -82,9 +81,7 @@ export default function PlaceBlogReviews({ blogReviews, goToBlogWebPage }) {
                       {blogReview.author}
                     </p>
                   </ContentArea>
-                  <ImageArea>
-                    <img src={blogReview.imageSource} alt="" />
-                  </ImageArea>
+
                 </Review>
               </li>
             ))}
@@ -93,6 +90,6 @@ export default function PlaceBlogReviews({ blogReviews, goToBlogWebPage }) {
       ) : (
         <NoneMessage>등록된 리뷰가 없습니다 😓</NoneMessage>
       )}
-    </Container>
+    </div>
   );
 }

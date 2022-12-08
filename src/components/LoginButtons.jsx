@@ -22,6 +22,16 @@ const LoginButtonsArea = styled.div`
   }
 `;
 
+const ButtonSet = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .trial {
+    width: 58px;
+  }
+`;
+
 const KakaoLoginImage = styled.div`
   display: inline-block;
   width: 56px;
@@ -39,8 +49,8 @@ const NaverLoginImage = styled.div`
 `;
 
 const TrialLoginImage = styled.button`
-  width: 56px;
-  height: 56px;
+  width: 58px;
+  height: 58px;
   border-radius: 50%;
   border: none;
   background-color: #E6DDD2;
@@ -52,12 +62,6 @@ const Heart = styled.div`
   width: 24px;
   height: 21px;
   background: url('https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670367409/Vector_zpgqtw.png') no-repeat;
-`;
-
-const ButtonSet = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 `;
 
 export default function LoginButtons({ naverUrl, kakaoUrl, getTrialAccessAuth }) {
@@ -82,10 +86,12 @@ export default function LoginButtons({ naverUrl, kakaoUrl, getTrialAccessAuth })
           <p>네이버</p>
         </ButtonSet>
         <ButtonSet>
-          <TrialLoginImage type="button" onClick={handleTrialClick}>
-            <Heart />
-          </TrialLoginImage>
-          <p>둘러보기</p>
+          <div className="trial">
+            <TrialLoginImage type="button" onClick={handleTrialClick}>
+              <Heart />
+            </TrialLoginImage>
+            <p>둘러보기</p>
+          </div>
         </ButtonSet>
       </LoginButtonsArea>
     </div>
