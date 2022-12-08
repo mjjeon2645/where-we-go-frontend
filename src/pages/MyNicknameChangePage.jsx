@@ -1,17 +1,33 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { useLocalStorage } from 'usehooks-ts';
 import MyNicknameForm from '../components/MyNicknameForm';
 import useUserStore from '../hooks/useUserStore';
 
 const Container = styled.div`
-    padding: 3em 3em 1em 3em;
+  padding-top: 5em;
+  width: 400px;
+  margin: 0 auto;
 `;
 
-const Title = styled.p`
-    font-size: 2em;
-    font-weight: bold;
-    margin-bottom: 2em;
+const Title = styled.h2`
+  font-size: 2.3em;
+  font-weight: 600;
+  text-align: center;
+  color: #8F8272;
+  width: 400px;
+  margin: 0 auto;
+  padding-block: .6em;
+  border-bottom: 1px dashed #8F8272;
+`;
+
+const DownsideBar = styled.div`
+  position: fixed;
+  bottom: 0%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  height: 60px;
+  width: 600px;
+  background-color: #E6DDD2;
 `;
 
 export default function MyNicknameChangePage() {
@@ -42,6 +58,7 @@ export default function MyNicknameChangePage() {
         goPrevPage={goPrevPage}
         errorMessage={errorMessage}
       />
+      <DownsideBar />
     </Container>
   );
 }

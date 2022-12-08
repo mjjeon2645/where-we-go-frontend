@@ -1,21 +1,24 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { useLocalStorage } from 'usehooks-ts';
 import MyBookmarks from '../components/MyBookmarks';
 import MyChildren from '../components/MyChildren';
 import MyInformation from '../components/MyInformation';
 import useUserStore from '../hooks/useUserStore';
 
 const Container = styled.div`
-  padding: 3em;
+  padding-block: 3em;
 `;
 
-const Title = styled.h2`
-  font-size: 2em;
-  font-weight: bold;
-  color: #ff9d13;
-  margin-bottom: 1.5em;
+// const Title = styled.h2`
+//   font-size: 1.2em;
+//   font-weight: 700;
+//   margin-bottom: 1.5em;
+// `;
+
+const DivisionLine = styled.div`
+  border-top: 1px solid #00000005;
+  border-bottom: 1px solid #00000005;
 `;
 
 export default function MyPage() {
@@ -56,16 +59,18 @@ export default function MyPage() {
     <Container>
       {userInformation.length !== 0 ? (
         <div>
-          <Title>MyPage</Title>
+          {/* <Title>마이페이지</Title> */}
           <MyInformation
             userInformation={userInformation}
             goToModifyNickname={goToModifyNickname}
           />
-          <MyChildren
-            userChildren={userChildren}
-            goToAddChildForm={goToAddChildForm}
-            deleteChild={deleteChild}
-          />
+          <DivisionLine>
+            <MyChildren
+              userChildren={userChildren}
+              goToAddChildForm={goToAddChildForm}
+              deleteChild={deleteChild}
+            />
+          </DivisionLine>
           <MyBookmarks
             goPlaceDetailPage={goPlaceDetailPage}
             removeBookmark={removeBookmark}

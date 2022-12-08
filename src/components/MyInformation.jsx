@@ -2,6 +2,10 @@
 
 import styled from 'styled-components';
 
+const Container = styled.div`
+  margin-bottom: 1em;  
+`;
+
 const Title = styled.p`
   font-size: 1.2em;
   font-weight: bold;
@@ -9,7 +13,7 @@ const Title = styled.p`
 `;
 
 const Wrapper = styled.article`
-  padding-inline: 1em;
+  padding-inline: 2em;
 `;
 
 const Nickname = styled.section`
@@ -17,20 +21,23 @@ const Nickname = styled.section`
   justify-content: space-between;
   align-items: center;
   padding-block: 1.2em;
-  border-top: 1px solid #EEE;
+  height: 5em;
 
   p:first-child {
-    font-weight: bold;
+    font-weight: 500;
   }
 
   span {
-    color: #6c6c6c;
+    color: #0E0E0E;
+    font-weight: 300;
   }
 `;
 
 const NicknameModifyButton = styled.button`
-  background-color: #EEE;
-  padding: .3em .5em;
+  color: #8F8272;
+  background-color: #E6DDD2;
+  width: 8em;
+  height: 3em;
   margin-left: 1em;
   border-radius: 4px;
   border: none;
@@ -41,14 +48,15 @@ const Email = styled.section`
   justify-content: space-between;
   align-items: center;
   padding-block: 1.2em;
-  border-block: 1px solid #EEE;
+  height: 5em;
 
   p:first-child {
-    font-weight: bold;
+    font-weight: 500;
   }
 
   p:last-child {
-    color: #6c6c6c;
+    color: #0E0E0E;
+    font-weight: 300;
   }
 `;
 
@@ -57,14 +65,15 @@ const SocialLogin = styled.section`
   justify-content: space-between;
   align-items: center;
   padding-block: 1.2em;
-  border-bottom: 1px solid #EEE;
+  height: 5em;
 
   p:first-child {
-    font-weight: bold;
+    font-weight: 500;
   }
 
   p:last-child {
-    color: #6c6c6c;
+    color: #0E0E0E;
+    font-weight: 300;
   }  
 `;
 
@@ -74,44 +83,42 @@ export default function MyInformation({ userInformation, goToModifyNickname }) {
   };
 
   return (
-    <div>
+    <Container>
       {userInformation.length !== 0 ? (
-        <>
+        <Wrapper>
           <Title>내 정보</Title>
-          <Wrapper>
-            <Nickname>
-              <p>닉네임</p>
-              <div>
-                <span>{userInformation.nickname}</span>
-                <NicknameModifyButton
-                  type="button"
-                  onClick={handleNicknameChangeClick}
-                >
-                  변경
-                </NicknameModifyButton>
-              </div>
-            </Nickname>
-            <Email>
-              <p>이메일</p>
-              <p>{userInformation.email}</p>
-            </Email>
-            <SocialLogin>
-              <p>소셜 로그인 정보</p>
-              {userInformation.authBy === 'naver' ? (
-                <p>네이버 로그인</p>
+          <Nickname>
+            <p>닉네임</p>
+            <div>
+              <span>{userInformation.nickname}</span>
+              <NicknameModifyButton
+                type="button"
+                onClick={handleNicknameChangeClick}
+              >
+                변경
+              </NicknameModifyButton>
+            </div>
+          </Nickname>
+          <Email>
+            <p>이메일</p>
+            <p>{userInformation.email}</p>
+          </Email>
+          <SocialLogin>
+            <p>소셜 로그인 정보</p>
+            {userInformation.authBy === 'naver' ? (
+              <p>네이버 로그인</p>
+            ) : (
+              userInformation.authBy === 'kakao' ? (
+                <p>카카오 로그인</p>
               ) : (
-                userInformation.authBy === 'kakao' ? (
-                  <p>카카오 로그인</p>
-                ) : (
-                  <p>체험모드</p>
-                )
-              )}
-            </SocialLogin>
-          </Wrapper>
-        </>
+                <p>체험모드</p>
+              )
+            )}
+          </SocialLogin>
+        </Wrapper>
       ) : (
         <p>now loading...</p>
       )}
-    </div>
+    </Container>
   );
 }

@@ -87,8 +87,6 @@ export default function TopThreePlaces({ topThreePlaces, goPlaceDetailPage }) {
     goPlaceDetailPage(selectedPlaceId);
   };
 
-  console.log(topThreePlaces);
-
   return (
     <Container>
       {topThreePlaces.length ? (
