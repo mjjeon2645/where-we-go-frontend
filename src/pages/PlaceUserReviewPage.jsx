@@ -16,7 +16,7 @@ const Container = styled.div`
   padding-bottom: 3em;
 `;
 const Wrapper = styled.div`
-  padding-inline: 3em;
+  padding-inline: 2em;
 `;
 
 export default function PlaceUserReviewPage() {

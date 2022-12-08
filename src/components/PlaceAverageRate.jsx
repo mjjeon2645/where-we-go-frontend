@@ -4,28 +4,47 @@ const Container = styled.div`
   width: 100%;
   text-align: center;
   margin-top: 5em;
+  line-height: 1.8em;
 
   p:first-child {
-    font-weight: bold;
+    font-size: 1.4em;
+    font-weight: 700;
   }
 
   p:last-child {
-    color: #494949;
+    font-size: .9em;
+    font-weight: 400;
+    color: #0E0E0E;
   }
+`;
+
+const StarSection = styled.div`
+  width: 375px;
+  height: 90px;
+  background-color: #F3F3F3;
+  margin: 0 auto;
+`;
+
+const RateSection = styled.div`
+  margin-top: 1em;
 `;
 
 export default function PlaceAverageRate({ averageRate, userReviews }) {
   return (
     <Container>
-      <p>
-        {averageRate}
-        {' '}
-        / 5점
-      </p>
-      <p>
-        {userReviews.length}
-        명 참여
-      </p>
+      <StarSection />
+      <RateSection>
+        <p>
+          {averageRate}
+          {' '}
+          / 5.0
+        </p>
+        <p>
+          &#40;
+          {userReviews.length}
+          명 참여&#41;
+        </p>
+      </RateSection>
     </Container>
   );
 }

@@ -87,6 +87,8 @@ export default function TopThreePlaces({ topThreePlaces, goPlaceDetailPage }) {
     goPlaceDetailPage(selectedPlaceId);
   };
 
+  console.log(topThreePlaces);
+
   return (
     <Container>
       {topThreePlaces.length ? (
@@ -119,7 +121,6 @@ export default function TopThreePlaces({ topThreePlaces, goPlaceDetailPage }) {
                   </Button>
                   <p>
                     {place.averageRate}
-                    점
                   </p>
                 </List>
               ))}

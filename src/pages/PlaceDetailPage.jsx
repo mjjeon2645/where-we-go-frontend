@@ -14,7 +14,11 @@ const Container = styled.div`
 `;
 
 const Wrapper = styled.article`
-  padding: 3em 2em 5em 2em;
+  padding: 0em 0em 5em 0em;
+`;
+
+const MiniMapWrapper = styled.div`
+  margin-left: 2em;
 `;
 
 const MapArea = styled.div`
@@ -124,7 +128,9 @@ export default function PlaceDetailPage() {
               toggleBookmark={toggleBookmark}
               copyAddress={copyAddress}
             />
-            <MapArea ref={kakaoMap} />
+            <MiniMapWrapper>
+              <MapArea ref={kakaoMap} />
+            </MiniMapWrapper>
           </Wrapper>
           <PlaceContactBar
             contact={contact}

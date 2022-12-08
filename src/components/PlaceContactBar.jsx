@@ -44,16 +44,21 @@ const StyledModal = Modal.styled`
   flex-direction: column;
   align-items: center;
 
-  padding-block: 3.5em;
+  padding-block: 4.5em;
 
   background-color: #FFF;
   border: 1px white solid;
   border-radius: 20px;
 
   p:first-child {
-    font-size: 2em;
+    font-size: 2.3em;
     font-weight: 500;
-    margin-bottom: 1.3em;
+    margin-bottom: .7em;
+  }
+
+  p:nth-child(2) {
+    font-size: 1.5em;
+    font-weight: 400;
   }
 
   button {
@@ -85,7 +90,7 @@ export default function PlaceContactBar({
   return (
     <Container>
       <div>
-        <Phone type="button" onClick={handlePlaceContactClick}>연락하기</Phone>
+        <Phone type="button" onClick={handlePlaceContactClick}>연락처 안내</Phone>
         <HomePage
           type="button"
           onClick={() => handlePlaceHompageOpenClick(contact.homepage)}
