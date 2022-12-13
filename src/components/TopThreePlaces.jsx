@@ -82,6 +82,10 @@ const Address = styled.div`
   }
 `;
 
+const Star = styled.div`
+  margin-left: 1em;
+`;
+
 export default function TopThreePlaces({ topThreePlaces, goPlaceDetailPage }) {
   const handleTopThreeClick = (selectedPlaceId) => {
     goPlaceDetailPage(selectedPlaceId);
@@ -113,13 +117,15 @@ export default function TopThreePlaces({ topThreePlaces, goPlaceDetailPage }) {
                         {place.address.sido}
                         {' '}
                         {place.address.sigungu}
-
                       </span>
                     </Address>
                   </Button>
                   <p>
                     {place.averageRate}
                   </p>
+                  <Star>
+                    <img src="https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670803879/stars_iuqgvl.png" alt="" />
+                  </Star>
                 </List>
               ))}
             </ul>

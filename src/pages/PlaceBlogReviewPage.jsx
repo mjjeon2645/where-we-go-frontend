@@ -9,6 +9,7 @@ import PlaceDetailTap from '../components/PlaceDetailTap';
 import useBlogReviewStore from '../hooks/useBlogReviewStore';
 
 const Container = styled.div`
+  padding-bottom: 3em;
 `;
 
 const Wrapper = styled.article`

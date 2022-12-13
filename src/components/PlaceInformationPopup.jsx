@@ -29,10 +29,16 @@ const ImagesArea = styled.div`
     display: flex;
     justify-content: space-around;
 
+    div {
+      width: 150px;
+      height: 150px;
+      border-radius: 3px;
+    }
+
     img {
-        width: 150px;
-        height: 150px;
-        border-radius: 3px;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 `;
 
@@ -51,7 +57,7 @@ const PlaceContentButton = styled.button`
 const Information = styled.div`
     display: flex;
     span {
-        font-size: .8em;
+        font-size: 1em;
         margin-right: 1em;
     }
 `;
@@ -91,9 +97,15 @@ export default function PlaceInformationPopup(
         X
       </CloseButton>
       <ImagesArea>
-        <img src={imageSource.firstImage} alt="" />
-        <img src={imageSource.secondImage} alt="" />
-        <img src={imageSource.thirdImage} alt="" />
+        <div>
+          <img src={imageSource.firstImage} alt="" />
+        </div>
+        <div>
+          <img src={imageSource.secondImage} alt="" />
+        </div>
+        <div>
+          <img src={imageSource.thirdImage} alt="" />
+        </div>
       </ImagesArea>
       <PlaceContentButton
         type="button"

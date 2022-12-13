@@ -21,7 +21,6 @@ const Container = styled.div`
 const StarSection = styled.div`
   width: 375px;
   height: 90px;
-  background-color: #F3F3F3;
   margin: 0 auto;
 `;
 
@@ -32,7 +31,9 @@ const RateSection = styled.div`
 export default function PlaceAverageRate({ averageRate, userReviews }) {
   return (
     <Container>
-      <StarSection />
+      <StarSection>
+        <img src="https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670804740/large-star_nmvtui.png" alt="" />
+      </StarSection>
       <RateSection>
         <p>
           {averageRate}
