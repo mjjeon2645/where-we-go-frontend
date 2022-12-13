@@ -3,13 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import YoutubePlayer from '../components/YoutubePlayer';
 
 const Container = styled.div`
-  padding-top: 3em;  
+  padding-top: 3em;
 `;
 
-const Title = styled.p`
-  font-size: 1.4em;
-  font-weight: bold;
-  margin: .5em 0;
+const BackButton = styled.button`
+  color: #AAA;
+  font-size: 1em;
+  background-color: #FFF;
+  border: none;
+  margin: 0em .5em 3em .5em;
 `;
 
 export default function YoutubePlayerPage() {
@@ -29,8 +31,7 @@ export default function YoutubePlayerPage() {
 
   return (
     <Container>
-      <button type="button" onClick={handleBackPageClick}> &lt; 뒤로가기</button>
-      <Title>Youtube로 보는 TOP 3</Title>
+      <BackButton type="button" onClick={handleBackPageClick}> &lt; 뒤로가기</BackButton>
       <div>
         <YoutubePlayer videoId={videoId} options={options} />
       </div>

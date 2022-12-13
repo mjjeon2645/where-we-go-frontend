@@ -13,7 +13,7 @@ const Container = styled.header`
   left: 50%;
   transform: translate(-50%, 0);
   z-index: 100;
-  background-color: #FFF;
+  background-color: #E6DDD2;
   border-bottom: 1px solid #EEE;
 `;
 
@@ -32,7 +32,7 @@ const Navigation = styled.nav`
 const List = styled.ul`
     height: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
 `;
 

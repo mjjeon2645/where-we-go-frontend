@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 
 const Container = styled.article`
-  margin-block: 3em;
+  margin-block: 3em 0em;
   min-height: 10em;
   padding-inline: 2em;
 `;
+
 const Title = styled.p`
   font-size: 1.2em;
   font-weight: bold;
@@ -30,27 +31,32 @@ const Column = styled.div`
 
 const List = styled.li`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 2fr 3fr 1fr;
   width: 100%;
   align-items: center;
   text-align: center;
   padding-block: .8em;
-
-  button {
-    background-color: #EEE;
-    border-radius: 4px;
-    border: none;
-    width: 20%;
-  }
 `;
 
 const AddButton = styled.button`
-  float: right;
   border: none;
   width: 8em;
   height: 3em;
   border-radius: 4px;
-  margin-top: 3em;
+  margin-block: 3em;
+  color: #8F8272;
+  background-color: #E6DDD2;
+`;
+
+const ButtonArea = styled.div`
+  text-align: right;
+`;
+
+const DeleteButton = styled.button`
+  border: none;
+  width: 8em;
+  height: 3em;
+  border-radius: 4px;
   color: #8F8272;
   background-color: #E6DDD2;
 `;
@@ -70,26 +76,22 @@ export default function MyChildren({ userChildren: children, goToAddChildForm, d
         <NoChildrenMessage>아이 정보가 없습니다</NoChildrenMessage>
       ) : (
         <div>
-          <Column>
-            <p>아이 성별</p>
-            <p>아이 생일</p>
-          </Column>
           <ul>
             {children.map(
               (child) => (
                 <List key={child.id}>
                   <p>{child.gender}</p>
                   <p>{child.birthday}</p>
-                  <button type="button" onClick={() => handleDeleteChildClick(child.id)}>X</button>
+                  <DeleteButton type="button" onClick={() => handleDeleteChildClick(child.id)}>삭제</DeleteButton>
                 </List>
               ),
             )}
           </ul>
         </div>
       )}
-      <div>
+      <ButtonArea>
         <AddButton type="button" onClick={handleAddChildInfoClick}>추가</AddButton>
-      </div>
+      </ButtonArea>
     </Container>
   );
 }
