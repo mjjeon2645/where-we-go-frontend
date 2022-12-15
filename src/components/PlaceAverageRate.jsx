@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import PlaceStarIcons from './PlaceStarIcons';
 
 const Container = styled.div`
   width: 100%;
@@ -19,9 +20,14 @@ const Container = styled.div`
 `;
 
 const StarSection = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 375px;
   height: 90px;
   margin: 0 auto;
+  background-color: #F3F3F3;
+  border-radius: 4px;
 `;
 
 const RateSection = styled.div`
@@ -32,7 +38,7 @@ export default function PlaceAverageRate({ averageRate, userReviews }) {
   return (
     <Container>
       <StarSection>
-        <img src="https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670804740/large-star_nmvtui.png" alt="" />
+        <PlaceStarIcons rate={averageRate} />
       </StarSection>
       <RateSection>
         <p>

@@ -37,9 +37,9 @@ const List = styled.ul`
 
 const EachList = styled.li`
   a {
-    color: ${(props) => (props.children.props.islocated ? '#005D82' : '#A0A0A0')};
+    color: ${(props) => (props.children.props.islocated === 'true' ? '#005D82' : '#A0A0A0')};
     font-weight: 700;
-    border-bottom: ${(props) => (props.children.props.islocated ? '4px solid #005D82' : 'none')};
+    border-bottom: ${(props) => (props.children.props.islocated === 'true' ? '4px solid #005D82' : 'none')};
     padding-block: 1.2em;
   }
 `;
@@ -102,17 +102,17 @@ export default function Header() {
           <List>
             <EachList>
               <Link
-                islocated={location.pathname.includes('map') || location.pathname.includes('places')}
+                islocated={location.pathname.includes('map').toString() || location.pathname.includes('places').toString()}
                 to="/map"
               >
                 장소 검색
               </Link>
             </EachList>
             <EachList>
-              <Link islocated={location.pathname.includes('top3')} to="/top3">Top 3</Link>
+              <Link islocated={location.pathname.includes('top3').toString()} to="/top3">Top 3</Link>
             </EachList>
             <EachList>
-              <Link islocated={location.pathname.includes('mypage')} to="/mypage">MyPage</Link>
+              <Link islocated={location.pathname.includes('mypage').toString()} to="/mypage">MyPage</Link>
             </EachList>
             {mode === 'trial' ? (
               <li>
