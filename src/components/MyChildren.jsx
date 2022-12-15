@@ -19,16 +19,6 @@ const NoChildrenMessage = styled.p`
   margin-top: 3em;
 `;
 
-const Column = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  width: 100%;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  padding-block: .8em;
-`;
-
 const List = styled.li`
   display: grid;
   grid-template-columns: 2fr 3fr 1fr;

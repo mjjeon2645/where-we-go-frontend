@@ -1,5 +1,4 @@
 /* eslint-disable no-nested-ternary */
-
 import styled from 'styled-components';
 
 const Container = styled.div`

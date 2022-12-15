@@ -35,8 +35,9 @@ const PlaceName = styled.p`
   margin-bottom: .3em;
 `;
 
-const Flag = styled.img`
-  width: 10px;
+const Pin = styled.img`
+  width: 12px;
+  margin-right: .5em;
 `;
 
 const Address = styled.div`
@@ -60,7 +61,7 @@ const DeleteButton = styled.button`
 `;
 
 export default function MyBookmarks({ goPlaceDetailPage, removeBookmark, bookmarks }) {
-  const flagIcon = 'https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670398716/spot_hozd2n.png';
+  const pinIcon = 'https://res.cloudinary.com/ds7ujh0mf/image/upload/v1671092044/pin-image_ilfekw.png';
 
   const handlePlaceDetailClick = (placeId) => {
     goPlaceDetailPage(placeId);
@@ -85,7 +86,7 @@ export default function MyBookmarks({ goPlaceDetailPage, removeBookmark, bookmar
               >
                 <PlaceName>{bookmark.name}</PlaceName>
                 <Address>
-                  <Flag src={flagIcon} alt="" />
+                  <Pin src={pinIcon} alt="" />
                   <span>{bookmark.address}</span>
                 </Address>
               </Place>

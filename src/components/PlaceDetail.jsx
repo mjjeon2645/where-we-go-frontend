@@ -1,5 +1,4 @@
 /* eslint-disable no-nested-ternary */
-
 import styled from 'styled-components';
 
 const ImageBox = styled.div`
@@ -49,8 +48,9 @@ const PlaceNameSection = styled.div`
   }
 
   img {
-    width: 35px;
-    height: 35px;
+    width: 25px;
+    height: 30px;
+    margin-right: .8em;
   }
 `;
 
@@ -113,6 +113,10 @@ const Address = styled.span`
 const CopyButton = styled.button`
   background: transparent;
   border: none;
+
+  img {
+    width: 15px;
+  }
 `;
 
 const AddressAndMiniMap = styled.section`
@@ -127,8 +131,12 @@ export default function PlaceDetail({
   imageNumber, selectedPlace, copyState, bookmarks,
   seePrevImage, seeNextImage, toggleBookmark, copyAddress,
 }) {
-  const unBookmarked = 'https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670452425/bookmark-gray_hemeha.png';
-  const bookmarked = 'https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670452425/bookmark-color_vvuvt0.png';
+  const unBookmarked = 'https://res.cloudinary.com/ds7ujh0mf/image/upload/v1671091108/bookmarked-orange_ojguje.png';
+  const bookmarked = 'https://res.cloudinary.com/ds7ujh0mf/image/upload/v1671091152/unbookmarked-orange_rxg24k.png';
+
+  const possibleIcon = 'https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670417142/possible_ac5jxi.png';
+  const impossibleIcon = 'https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670417142/impossible_doab0s.png';
+  const uncheckedIcon = 'https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670417142/unchecked_izlb2j.png';
 
   const { imageSource, address, placeServices } = selectedPlace;
 
@@ -186,15 +194,15 @@ export default function PlaceDetail({
           <div id="reservation">
             {placeServices.reservation === 'possible' ? (
               <div>
-                <img src="https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670417142/possible_ac5jxi.png" alt="" />
+                <img src={possibleIcon} alt="" />
               </div>
             ) : placeServices.reservation === 'impossible' ? (
               <div>
-                <img src="https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670417142/impossible_doab0s.png" alt="" />
+                <img src={impossibleIcon} alt="" />
               </div>
             ) : (
               <Unchecked>
-                <img src="https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670417142/unchecked_izlb2j.png" alt="" />
+                <img src={uncheckedIcon} alt="" />
                 <p>확인필요</p>
               </Unchecked>
             )}
@@ -203,15 +211,15 @@ export default function PlaceDetail({
           <div id="parking">
             {placeServices.parking === 'possible' ? (
               <div>
-                <img src="https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670417142/possible_ac5jxi.png" alt="" />
+                <img src={possibleIcon} alt="" />
               </div>
             ) : placeServices.parking === 'impossible' ? (
               <div>
-                <img src="https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670417142/impossible_doab0s.png" alt="" />
+                <img src={impossibleIcon} alt="" />
               </div>
             ) : (
               <Unchecked>
-                <img src="https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670417142/unchecked_izlb2j.png" alt="" />
+                <img src={uncheckedIcon} alt="" />
                 <p>확인필요</p>
               </Unchecked>
             )}
@@ -220,15 +228,15 @@ export default function PlaceDetail({
           <div id="outside-food">
             {placeServices.outsideFood === 'possible' ? (
               <div>
-                <img src="https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670417142/possible_ac5jxi.png" alt="" />
+                <img src={possibleIcon} alt="" />
               </div>
             ) : placeServices.outsideFood === 'impossible' ? (
               <div>
-                <img src="https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670417142/impossible_doab0s.png" alt="" />
+                <img src={impossibleIcon} alt="" />
               </div>
             ) : (
               <Unchecked>
-                <img src="https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670417142/unchecked_izlb2j.png" alt="" />
+                <img src={uncheckedIcon} alt="" />
                 <p>확인필요</p>
               </Unchecked>
             )}
@@ -237,15 +245,15 @@ export default function PlaceDetail({
           <div id="nursing-room">
             {placeServices.nursingRoom === 'possible' ? (
               <div>
-                <img src="https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670417142/possible_ac5jxi.png" alt="" />
+                <img src={possibleIcon} alt="" />
               </div>
             ) : placeServices.nursingRoom === 'impossible' ? (
               <div>
-                <img src="https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670417142/impossible_doab0s.png" alt="" />
+                <img src={impossibleIcon} alt="" />
               </div>
             ) : (
               <Unchecked>
-                <img src="https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670417142/unchecked_izlb2j.png" alt="" />
+                <img src={uncheckedIcon} alt="" />
                 <p>확인필요</p>
               </Unchecked>
             )}
@@ -260,7 +268,7 @@ export default function PlaceDetail({
               type="button"
               onClick={() => handleAddressCopyClick(address.fullAddress)}
             >
-              <img src="https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670417334/copy_umtsau.png" alt="" />
+              <img src={uncheckedIcon} alt="" />
             </CopyButton>
             {copyState && (
               <span>복사 완료!</span>

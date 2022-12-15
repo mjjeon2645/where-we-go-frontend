@@ -67,8 +67,8 @@ const Button = styled.button`
   }
 `;
 
-const Flag = styled.img`
-  width: 6px;
+const Pin = styled.img`
+  width: 10px;
 `;
 
 const Address = styled.div`
@@ -120,7 +120,7 @@ export default function TopThreePlaces({ topThreePlaces, goPlaceDetailPage }) {
                   >
                     <p>{place.name}</p>
                     <Address>
-                      <Flag src="https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670398716/spot_hozd2n.png" alt="" />
+                      <Pin src="https://res.cloudinary.com/ds7ujh0mf/image/upload/v1671092044/pin-image_ilfekw.png" alt="" />
                       <span>
                         {place.address.sido}
                         {' '}

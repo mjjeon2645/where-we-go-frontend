@@ -11,22 +11,11 @@ const Container = styled.nav`
   }
 `;
 
-// const Utils = styled.div`
-//   display: flex;
-//   justify-content: space-between;
-//   margin-bottom: 1em;
-
-//   button {
-//     background: none;
-//   }
-// `;
-
 const Menu = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 1em;
   padding-inline: 3em;
-  /* border-bottom: 1px #ECECEC solid; */
 
   button {
     font-size: 1em;
@@ -37,10 +26,6 @@ const Menu = styled.div`
 export default function PlaceDetailTap({
   goToPlaceDetail, goToBlogReview, goToUserReview, size,
 }) {
-  // const handleBackPageClick = () => {
-  //   goToPrevPage();
-  // };
-
   const handlePlaceDetailTapClick = () => {
     goToPlaceDetail();
   };
@@ -55,9 +40,6 @@ export default function PlaceDetailTap({
 
   return (
     <Container>
-      {/* <Utils>
-        <button type="button" onClick={handleBackPageClick}> &lt; 뒤로가기</button>
-      </Utils> */}
       <Menu>
         <button type="button" onClick={handlePlaceDetailTapClick}>상세정보</button>
         <button type="button" onClick={handleBlogReviewTapClick}>
