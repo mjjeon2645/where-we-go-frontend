@@ -1,11 +1,10 @@
 /* eslint-disable no-nested-ternary */
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useLocalStorage } from 'usehooks-ts';
 
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useUserStore from '../hooks/useUserStore';
-import UnauthorizedAccessModal from './UnauthorizedAccessModal';
 
 const Container = styled.header`
   width: 600px;
@@ -23,23 +22,26 @@ const Wrapper = styled.div`
 `;
 
 const Navigation = styled.nav`
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 4em;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 4em;
 `;
 
 const List = styled.ul`
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
-const MyMenu = styled.button`
-  font-size: 1em;
-  background: none;
-  border: none;
+const EachList = styled.li`
+  a {
+    color: ${(props) => (props.children.props.islocated ? '#005D82' : '#A0A0A0')};
+    font-weight: 700;
+    border-bottom: ${(props) => (props.children.props.islocated ? '4px solid #005D82' : 'none')};
+    padding-block: 1.2em;
+  }
 `;
 
 const Trial = styled.button`
@@ -60,35 +62,20 @@ const Login = styled.button`
 
 const Logout = styled.button`
   font-size: 1em;
+  color: #A0A0A0;
   background: none;
   border: none;
+  font-weight: 700;
 `;
 
 export default function Header() {
   const [accessToken, setAccessToken] = useLocalStorage('accessToken', '');
   const [mode, setMode] = useLocalStorage('mode', '');
 
-  const [isAccessModalOpen, setIsAccessModalOpen] = useState(false);
+  const location = useLocation();
 
   const navigate = useNavigate();
   const userStore = useUserStore();
-
-  const toggleModal = () => {
-    setIsAccessModalOpen(!isAccessModalOpen);
-  };
-
-  const goToLogin = () => {
-    navigate('/');
-    setAccessToken('');
-  };
-
-  const handleMyPageClick = () => {
-    if (accessToken) {
-      navigate('/mypage');
-      return;
-    }
-    toggleModal();
-  };
 
   const handleLoginClick = () => {
     setAccessToken('');
@@ -113,20 +100,20 @@ export default function Header() {
       <Wrapper>
         <Navigation>
           <List>
-            <li>
-              <Link to="/map">장소 검색</Link>
-            </li>
-            <li>
-              <Link to="/top3">Top 3</Link>
-            </li>
-            <li>
-              <MyMenu type="button" onClick={handleMyPageClick}>MyPage</MyMenu>
-              <UnauthorizedAccessModal
-                isAccessModalOpen={isAccessModalOpen}
-                toggleModal={toggleModal}
-                goToLogin={goToLogin}
-              />
-            </li>
+            <EachList>
+              <Link
+                islocated={location.pathname.includes('map') || location.pathname.includes('places')}
+                to="/map"
+              >
+                장소 검색
+              </Link>
+            </EachList>
+            <EachList>
+              <Link islocated={location.pathname.includes('top3')} to="/top3">Top 3</Link>
+            </EachList>
+            <EachList>
+              <Link islocated={location.pathname.includes('mypage')} to="/mypage">MyPage</Link>
+            </EachList>
             {mode === 'trial' ? (
               <li>
                 <Trial type="button" onClick={handleStopTrialModeClick}>⭐️체험종료⭐️</Trial>
