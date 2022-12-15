@@ -48,6 +48,7 @@ export default function PlaceDetailPage() {
   useEffect(() => {
     const fetchData = async () => {
       await mapStore.fetchSelectedPlaceDetail(placeId);
+      mapStore.resetImageNumber();
       await blogReviewStore.fetchBlogReviews(placeId);
       await userReviewStore.fetchUsersReviews(placeId);
       await userStore.fetchBookmarks();

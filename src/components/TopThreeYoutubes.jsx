@@ -10,10 +10,6 @@ font-weight: bold;
 margin: 1em 0;
 `;
 
-const Videos = styled.ul`
-  
-`;
-
 const List = styled.li`
   width: 250px;
   display: inline;
@@ -21,8 +17,6 @@ const List = styled.li`
 `;
 
 const Button = styled.button`
-  /* width: 250px;
-  height: 140px; */
   border: none;
   background: transparent;
 
@@ -52,7 +46,7 @@ export default function TopThreeYoutubes({ youtubes }) {
     <Container>
       <Title>Youtube로 보는 TOP 3</Title>
       {youtubes.length ? (
-        <Videos>
+        <ul>
           {youtubes.map((youtube) => (
             <List key={youtube.id.videoId}>
               <Button type="button" onClick={() => handleYoutubeVideoClick(youtube.id.videoId)}>
@@ -61,7 +55,7 @@ export default function TopThreeYoutubes({ youtubes }) {
               </Button>
             </List>
           ))}
-        </Videos>
+        </ul>
       ) : (
         <p>now loading...</p>
       )}

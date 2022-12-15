@@ -34,6 +34,7 @@ const FilterButton = styled.button`
     justify-content: center;
     
     img {
+      width: 15px;
       margin-left: .3em;
     }
   }
@@ -94,7 +95,7 @@ export default function FilterBar({
         >
           <div>
             필터
-            <img src="https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670389798/filter-icon_lkoce0.png" alt="" />
+            <img src="https://res.cloudinary.com/ds7ujh0mf/image/upload/v1671092376/filter-image_hmmegp.png" alt="" />
           </div>
         </FilterButton>
         <ResetButton

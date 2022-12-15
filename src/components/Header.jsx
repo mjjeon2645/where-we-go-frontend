@@ -3,7 +3,6 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useLocalStorage } from 'usehooks-ts';
 
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
 import useUserStore from '../hooks/useUserStore';
 
 const Container = styled.header`
@@ -102,7 +101,7 @@ export default function Header() {
           <List>
             <EachList>
               <Link
-                islocated={location.pathname.includes('map').toString() || location.pathname.includes('places').toString()}
+                islocated={(location.pathname.includes('map') || location.pathname.includes('places')).toString()}
                 to="/map"
               >
                 장소 검색

@@ -106,6 +106,10 @@ export default class MapStore extends Store {
     this.copyState = false;
     this.publish();
   }
+
+  resetImageNumber() {
+    this.imageNumber = 1;
+  }
 }
 
 export const mapStore = new MapStore();
