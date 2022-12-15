@@ -10,12 +10,6 @@ const Container = styled.div`
   padding-block: 3em;
 `;
 
-// const Title = styled.h2`
-//   font-size: 1.2em;
-//   font-weight: 700;
-//   margin-bottom: 1.5em;
-// `;
-
 const DivisionLine = styled.div`
   border-top: 1px solid #00000005;
   border-bottom: 1px solid #00000005;
@@ -59,7 +53,6 @@ export default function MyPage() {
     <Container>
       {userInformation.length !== 0 ? (
         <div>
-          {/* <Title>마이페이지</Title> */}
           <MyInformation
             userInformation={userInformation}
             goToModifyNickname={goToModifyNickname}
