@@ -61,7 +61,6 @@ export default function TopThreeYoutubes({ youtubes }) {
               </Button>
             </List>
           ))}
-
         </Videos>
       ) : (
         <p>now loading...</p>

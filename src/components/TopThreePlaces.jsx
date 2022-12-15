@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import TopThreeStarIcons from './TopThreeStarIcons';
 
 const Container = styled.article`
   margin: 3em 0em;
@@ -83,7 +84,14 @@ const Address = styled.div`
 `;
 
 const Star = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-left: 1em;
+  background-color: #F3F3F3;
+  width: 100px;
+  height: 24px;
+  border-radius: 4px;
 `;
 
 export default function TopThreePlaces({ topThreePlaces, goPlaceDetailPage }) {
@@ -124,7 +132,7 @@ export default function TopThreePlaces({ topThreePlaces, goPlaceDetailPage }) {
                     {place.averageRate}
                   </p>
                   <Star>
-                    <img src="https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670803879/stars_iuqgvl.png" alt="" />
+                    <TopThreeStarIcons rate={place.averageRate} />
                   </Star>
                 </List>
               ))}
