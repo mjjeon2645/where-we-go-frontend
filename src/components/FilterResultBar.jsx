@@ -50,7 +50,7 @@ export default function FilterResultBar(
             type="button"
             disabled
           >
-            조건에 맞는 장소가 없습니다
+            조건에 맞는 장소가 없습니다.
           </WithoutResult>
         ) : (
           <WithResult

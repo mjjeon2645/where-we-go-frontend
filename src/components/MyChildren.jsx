@@ -72,7 +72,13 @@ export default function MyChildren({ userChildren: children, goToAddChildForm, d
                 <List key={child.id}>
                   <p>{child.gender}</p>
                   <p>{child.birthday}</p>
-                  <DeleteButton type="button" onClick={() => handleDeleteChildClick(child.id)}>삭제</DeleteButton>
+                  <DeleteButton
+                    type="button"
+                    data-testid={child.id}
+                    onClick={() => handleDeleteChildClick(child.id)}
+                  >
+                    삭제
+                  </DeleteButton>
                 </List>
               ),
             )}

@@ -5,7 +5,7 @@ import FilteredPlacesList from './FilteredPlacesList';
 let places;
 
 const goBackFromPlaceListPage = jest.fn();
-const goDetailPageOfSelectedPlace = jest.fn();
+const goToPlaceDetailPage = jest.fn();
 
 const context = describe;
 
@@ -14,7 +14,7 @@ describe('FilteredPlacesList', () => {
     render(<FilteredPlacesList
       places={places}
       goBackFromPlaceListPage={goBackFromPlaceListPage}
-      goDetailPageOfSelectedPlace={goDetailPageOfSelectedPlace}
+      goToPlaceDetailPage={goToPlaceDetailPage}
     />);
   }
 
@@ -67,11 +67,11 @@ describe('FilteredPlacesList', () => {
       screen.getByText('경기도 가평군 설악면 미사리 320-1');
       screen.getByText('숙박/캠핑');
 
-      fireEvent.click(screen.getByRole('button', { name: /돌아가기/ }));
+      fireEvent.click(screen.getByRole('button', { name: /뒤로가기/ }));
       expect(goBackFromPlaceListPage).toBeCalled();
 
       fireEvent.click(screen.getByText('과천 서울랜드'));
-      expect(goDetailPageOfSelectedPlace).toBeCalled();
+      expect(goToPlaceDetailPage).toBeCalled();
     });
   });
 });

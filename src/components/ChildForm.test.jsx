@@ -81,4 +81,14 @@ describe('ChildForm', () => {
       screen.getByText('모든 항목을 정확히 입력해주세요!');
     });
   });
+
+  context('A user clicks a cancel button', () => {
+    it('calls a function to go to prev page', async () => {
+      renderChildForm();
+
+      fireEvent.click(screen.getByText('취소'));
+
+      expect(goBackPrevPage).toBeCalled();
+    });
+  });
 });

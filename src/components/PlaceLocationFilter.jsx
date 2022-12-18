@@ -92,7 +92,7 @@ export default function PlaceLocationFilter({
         </SidoList>
       </SidoSection>
       <SigunguSection>
-        <label htmlFor="filter">시/군/구</label>
+        <label htmlFor="filter" aria-label="filter">시/군/구</label>
         <select id="filter" onChange={handleSigunguChange}>
           <option selected={sigungu === ''} disabled hidden>선택</option>
           {sigunguArray.find((value) => value.sido === sido)
