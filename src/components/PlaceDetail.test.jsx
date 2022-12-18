@@ -1,13 +1,18 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import {
+  fireEvent, render, screen, waitFor,
+} from '@testing-library/react';
 import PlaceDetail from './PlaceDetail';
 
 const context = describe;
 
 let imageNumber;
 let selectedPlace;
+let copyState;
+let bookmarks;
 
 const seePrevImage = jest.fn();
 const seeNextImage = jest.fn();
+const toggleBookmark = jest.fn();
 const copyAddress = jest.fn();
 
 describe('PlaceDetail', () => {
@@ -15,8 +20,11 @@ describe('PlaceDetail', () => {
     render(<PlaceDetail
       imageNumber={imageNumber}
       selectedPlace={selectedPlace}
+      copyState={copyState}
+      bookmarks={bookmarks}
       seePrevImage={seePrevImage}
       seeNextImage={seeNextImage}
+      toggleBookmark={toggleBookmark}
       copyAddress={copyAddress}
     />);
   }
@@ -45,6 +53,11 @@ describe('PlaceDetail', () => {
           nursingRoom: 'unchecked',
         },
       };
+
+      bookmarks = [
+        { placeId: 1, name: 'KINTEX 뽀로로파크', address: '경기도 고양시 일산서구 송포동 1396-43' },
+        { placeId: 3, name: '에코유 캠핑장', address: '경기 동두천시 천보산로359번길 57' },
+      ];
     });
 
     it('renders PlaceDetail', () => {
@@ -63,11 +76,15 @@ describe('PlaceDetail', () => {
   });
 
   context('A user clicks copy button', () => {
-    it('copies address on clipboard', () => {
+    it('copies address on clipboard', async () => {
       renderPlaceDetail();
 
-      fireEvent.click(screen.getByText('복사하기'));
+      fireEvent.click(screen.getByTestId('copy-button'));
       expect(copyAddress).toBeCalled();
+      screen.findByText('복사 완료!');
+
+      fireEvent.click(screen.getByTestId('bookmark-button'));
+      expect(toggleBookmark);
     });
   });
 

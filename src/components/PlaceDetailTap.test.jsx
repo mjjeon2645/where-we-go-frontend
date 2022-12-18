@@ -3,8 +3,6 @@ import PlaceDetailTap from './PlaceDetailTap';
 
 const context = describe;
 
-const goToPrevPage = jest.fn();
-const handleBookmarkClick = jest.fn();
 const goToPlaceDetail = jest.fn();
 const goToBlogReview = jest.fn();
 const goToUserReview = jest.fn();
@@ -14,8 +12,6 @@ let blogReviews;
 describe('PlaceDetailTap', () => {
   function renderPlaceDetailTap() {
     render(<PlaceDetailTap
-      goToPrevPage={goToPrevPage}
-      handleBookmarkClick={handleBookmarkClick}
       goToPlaceDetail={goToPlaceDetail}
       goToBlogReview={goToBlogReview}
       goToUserReview={goToUserReview}
@@ -51,9 +47,6 @@ describe('PlaceDetailTap', () => {
 
     it('renders PlaceDetailTap top on the page', () => {
       renderPlaceDetailTap();
-
-      fireEvent.click(screen.getByText(/뒤로가기/));
-      expect(goToPrevPage).toBeCalled();
 
       fireEvent.click(screen.getByText('상세정보'));
       expect(goToPlaceDetail).toBeCalled();

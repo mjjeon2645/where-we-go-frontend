@@ -1,6 +1,4 @@
-import {
-  fireEvent, getByLabelText, render, screen,
-} from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 import UserReviewForm from './UserReviewForm';
 
@@ -21,6 +19,10 @@ const cancelWriting = jest.fn();
 
 let startDate;
 let myReview;
+let errorMessage;
+let isDateOfVisitEmpty;
+let isRateEmpty;
+let isReviewEmpty;
 
 describe('UserReviewForm', () => {
   function renderUserReviewForm() {
@@ -32,6 +34,10 @@ describe('UserReviewForm', () => {
       cancelWriting={cancelWriting}
       startDate={startDate}
       myReview={myReview}
+      errorMessage={errorMessage}
+      isDateOfVisitEmpty={isDateOfVisitEmpty}
+      isRateEmpty={isRateEmpty}
+      isReviewEmpty={isReviewEmpty}
     />);
   }
 
@@ -49,7 +55,7 @@ describe('UserReviewForm', () => {
       screen.getByText('한 줄 리뷰');
       screen.getByText(/50자/);
       screen.getByText('등록하기');
-      screen.getByText('욕설이나 악의적 리뷰는 관리자에 의해 가림처리 될 수 있습니다.');
+      screen.getByText('· 욕설이나 악의적 리뷰는 관리자에 의해 가림처리 될 수 있습니다.');
     });
   });
 
@@ -57,13 +63,13 @@ describe('UserReviewForm', () => {
     it('register the review', () => {
       renderUserReviewForm();
 
-      fireEvent.change(getByLabelText('평점'), {
+      fireEvent.change(screen.getByLabelText('평점'), {
         target: { value: '⭐️⭐️⭐️⭐️' },
       });
 
       expect(setRate).toBeCalledWith('⭐️⭐️⭐️⭐️');
 
-      fireEvent.change(getByLabelText('한 줄 리뷰'), {
+      fireEvent.change(screen.getByLabelText('한 줄 리뷰'), {
         target: { value: '이렇게 재밌는 곳은 정말 처음이예요!' },
       });
       expect(setMyReview).toBeCalledWith('이렇게 재밌는 곳은 정말 처음이예요!');

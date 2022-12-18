@@ -32,8 +32,8 @@ describe('PlaceAverageRate', () => {
     it('renders page with PlaceAverageRate of 3.5 rate, 2 reviews', () => {
       renderPlaceAverageRate();
 
-      screen.getByText('3.5 / 5점');
-      screen.getByText('2명 참여');
+      screen.getByText('3.5 / 5.0');
+      screen.getByText('(2명 참여)');
     });
   });
 });

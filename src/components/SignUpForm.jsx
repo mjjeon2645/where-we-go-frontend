@@ -57,7 +57,12 @@ export default function SignUpForm({ signUp, errorMessage }) {
   return (
     <Container onSubmit={handleMakingNicknameSubmit}>
       <Label htmlFor="nickname">사용하실 닉네임을 입력해주세요</Label>
-      <InputArea id="nickname" type="text" placeholder="한글, 영어, 숫자 3~7자 이내" error={errorMessage} />
+      <InputArea
+        id="nickname"
+        type="text"
+        placeholder="한글, 영어, 숫자 3~7자 이내"
+        error={errorMessage}
+      />
       {errorMessage && (<ErrorMessage>{errorMessage}</ErrorMessage>)}
       <SubmitButton type="submit" error={errorMessage}>다음으로</SubmitButton>
     </Container>

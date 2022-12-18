@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 import TopThreePlaces from './TopThreePlaces';
 
@@ -6,10 +6,13 @@ const context = describe;
 
 let topThreePlaces;
 
+const goPlaceDetailPage = jest.fn();
+
 describe('TopThreePlaces', () => {
   function renderTopThreePlaces() {
     render(<TopThreePlaces
       topThreePlaces={topThreePlaces}
+      goPlaceDetailPage={goPlaceDetailPage}
     />);
   }
 
@@ -59,8 +62,6 @@ describe('TopThreePlaces', () => {
     it('renders TopThreePlaces', () => {
       renderTopThreePlaces();
 
-      screen.getByText('오늘은 어디가요? TOP 3');
-      screen.getByText('오어디 회원님들이 추천하는 장소는 어디일까요?');
       screen.getByText('1위');
       screen.getByText('과천 서울랜드');
       screen.getByText('경기 과천시');
@@ -71,6 +72,10 @@ describe('TopThreePlaces', () => {
       screen.getByText('3위');
       screen.getByText('킹덤키즈풀빌라');
       screen.getByText('4.07');
+
+      fireEvent.click(screen.getByText('과천 서울랜드'));
+
+      expect(goPlaceDetailPage).toBeCalledWith(4);
     });
   });
 });
