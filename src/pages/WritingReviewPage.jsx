@@ -1,11 +1,13 @@
 import { useState } from 'react';
 
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
 
 import UserReviewForm from '../components/UserReviewForm';
+
 import useUserReviewStore from '../hooks/useUserReviewStore';
+
 import { formatDate } from '../utils/dateOfVisitFormatter';
 
 const Container = styled.div`
@@ -22,14 +24,16 @@ export default function WritingReviewPage() {
   const [startDate, setStartDate] = useState(new Date());
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const userReviewStore = useUserReviewStore();
+
   const {
     myDateOfVisit, myRate, myReview, errorMessage,
     isDateOfVisitEmpty, isRateEmpty, isReviewEmpty,
   } = userReviewStore;
 
-  const placeId = document.location.pathname.split('/')[2];
+  const placeId = location.pathname.split('/')[2];
 
   const writeReview = async () => {
     if (!myDateOfVisit) {

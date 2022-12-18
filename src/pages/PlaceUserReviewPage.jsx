@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
 
@@ -23,9 +23,10 @@ export default function PlaceUserReviewPage() {
   const blogReviewStore = useBlogReviewStore();
   const userReviewStore = useUserReviewStore();
 
-  const placeId = document.location.pathname.split('/')[2];
-
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const placeId = location.pathname.split('/')[2];
 
   const { blogReviews } = blogReviewStore;
   const { averageRate, userReviews, myReviewAtThePlace } = userReviewStore;

@@ -87,7 +87,7 @@ export default function LoginButtons({ naverUrl, kakaoUrl, getTrialAccessAuth })
         </ButtonSet>
         <ButtonSet>
           <div className="trial">
-            <TrialLoginImage type="button" onClick={handleTrialClick}>
+            <TrialLoginImage type="button" data-testid="trial-button" onClick={handleTrialClick}>
               <Heart />
             </TrialLoginImage>
             <p>둘러보기</p>

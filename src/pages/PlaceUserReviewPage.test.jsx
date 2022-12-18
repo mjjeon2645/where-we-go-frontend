@@ -1,25 +1,37 @@
-import { render, waitFor } from '@testing-library/react';
+import {
+  fireEvent, render, screen, waitFor,
+} from '@testing-library/react';
 import PlaceUserReviewPage from './PlaceUserReviewPage';
 
 const navigate = jest.fn();
+let location;
 
 jest.mock('react-router-dom', () => ({
   useNavigate() {
     return navigate;
   },
+  useLocation: () => location,
 }));
 
 let averageRate;
 let userReviews;
+let myReviewAtThePlace;
+
 const fetchUsersReviews = jest.fn();
+const deleteReview = jest.fn();
+
 jest.mock('../hooks/useUserReviewStore', () => () => ({
   averageRate,
   userReviews,
+  myReviewAtThePlace,
   fetchUsersReviews,
+  deleteReview,
 }));
 
 let blogReviews;
+
 const fetchBlogReviews = jest.fn();
+
 jest.mock('../hooks/useBlogReviewStore', () => () => ({
   blogReviews,
   fetchBlogReviews,
@@ -34,6 +46,10 @@ describe('PlaceUserReviewPage', () => {
 
   context('A user clicks user review tap with reviews', () => {
     beforeEach(() => {
+      location = {
+        pathname: '/places/4',
+      };
+
       averageRate = 4.5;
 
       userReviews = [
@@ -52,15 +68,28 @@ describe('PlaceUserReviewPage', () => {
           body: '너무 재미있었어요!',
         },
       ];
+
+      myReviewAtThePlace = {
+        id: 10,
+        nickname: '민지룽룽',
+        rate: 5,
+        dateOfVisit: '2022-10-21',
+        body: '여기 좋아요~!!',
+      };
     });
 
     it('renders place user review page', async () => {
       renderPlaceUserReviewPage();
 
       await waitFor(() => {
-        expect(fetchUsersReviews).toBeCalled();
-        expect(fetchBlogReviews).toBeCalled();
+        expect(fetchUsersReviews).toBeCalledWith('4');
+        expect(fetchBlogReviews).toBeCalledWith('4');
+        expect(fetchUsersReviews).toBeCalledWith('4');
       });
+
+      fireEvent.click(screen.getByText('삭제하기'));
+
+      expect(deleteReview).toBeCalledWith('4', 10);
     });
   });
 });

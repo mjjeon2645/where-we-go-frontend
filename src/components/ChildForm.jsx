@@ -108,7 +108,7 @@ export default function Childform({
         </Select>
       </GenderSection>
       <BirthdaySection>
-        <BirthdayLabel htmlFor="date-picker">생일(또는 예정일)을 입력해주세요.</BirthdayLabel>
+        <BirthdayLabel htmlFor="date-picker" data-testid="date-picker">생일(또는 예정일)을 입력해주세요.</BirthdayLabel>
         <BDatePicker
           id="date-picker"
           selected={date}

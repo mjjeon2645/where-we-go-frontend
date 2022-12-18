@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+
 import TopThreePlaces from '../components/TopThreePlaces';
 import TopThreeYoutubes from '../components/TopThreeYoutubes';
+
 import useTopThreeStore from '../hooks/useTopThreeStore';
 
 const Container = styled.div`

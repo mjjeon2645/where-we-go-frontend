@@ -1,17 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+
 import PlaceContactBar from '../components/PlaceContactBar';
 import PlaceDetail from '../components/PlaceDetail';
 import PlaceDetailTap from '../components/PlaceDetailTap';
+
 import useBlogReviewStore from '../hooks/useBlogReviewStore';
 import useMapStore from '../hooks/useMapStore';
 import useUserReviewStore from '../hooks/useUserReviewStore';
 import useUserStore from '../hooks/useUserStore';
-import { loadMiniKakaoMap } from '../utils/KakaoMap';
 
-const Container = styled.div`
-`;
+import { loadMiniKakaoMap } from '../utils/KakaoMap';
 
 const Wrapper = styled.article`
   padding: 0em 0em 5em 0em;
@@ -30,13 +30,14 @@ export default function PlaceDetailPage() {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const mapStore = useMapStore();
   const blogReviewStore = useBlogReviewStore();
   const userReviewStore = useUserReviewStore();
   const userStore = useUserStore();
 
-  const placeId = document.location.pathname.split('/')[2];
+  const placeId = location.pathname.split('/')[2];
 
   const kakaoMap = useRef(null);
 
@@ -108,7 +109,7 @@ export default function PlaceDetailPage() {
   };
 
   return (
-    <Container>
+    <div>
       {selectedPlace && imageSource ? (
         <div>
           <PlaceDetailTap
@@ -144,6 +145,6 @@ export default function PlaceDetailPage() {
       ) : (
         <p>now loading...</p>
       )}
-    </Container>
+    </div>
   );
 }
