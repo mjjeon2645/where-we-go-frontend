@@ -10,10 +10,15 @@ jest.mock('react-router-dom', () => ({
   }),
 }));
 
+let errorMessage;
+
 const requestSignUp = jest.fn();
+const clearError = jest.fn();
 
 jest.mock('../hooks/useUserStore', () => () => ({
+  errorMessage,
   requestSignUp,
+  clearError,
 }));
 
 describe('SignUpPage', () => {
@@ -25,7 +30,7 @@ describe('SignUpPage', () => {
     it('renders sigupPage', () => {
       renderSignupPage();
 
-      screen.getByText('SignUp');
+      screen.getByText('환영합니다!');
     });
   });
 });

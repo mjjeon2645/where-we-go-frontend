@@ -30,10 +30,11 @@ const BirthdaySection = styled.section`
   margin-top: 2em;
 `;
 
-const BirthdayLabel = styled.p`
+const BirthdayLabel = styled.label`
+  display: inline-block;
   color: #A0A0A0;
   font-weight: 400;
-  margin-bottom: .5em;
+  margin-bottom: .7em;
 `;
 
 const BDatePicker = styled(DatePicker)`
@@ -107,8 +108,9 @@ export default function Childform({
         </Select>
       </GenderSection>
       <BirthdaySection>
-        <BirthdayLabel>생일(또는 예정일)을 입력해주세요.</BirthdayLabel>
+        <BirthdayLabel htmlFor="date-picker" data-testid="date-picker">생일(또는 예정일)을 입력해주세요.</BirthdayLabel>
         <BDatePicker
+          id="date-picker"
           selected={date}
           onChange={handleSetDate}
           locale={ko}

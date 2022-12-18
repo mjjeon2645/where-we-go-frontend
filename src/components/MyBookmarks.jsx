@@ -93,6 +93,7 @@ export default function MyBookmarks({ goPlaceDetailPage, removeBookmark, bookmar
               <DeleteButton
                 type="button"
                 id={bookmark.placeId}
+                data-testid={bookmark.placeId}
                 onClick={() => handleBookmarkDeleteClick(bookmark.placeId)}
               >
                 삭제

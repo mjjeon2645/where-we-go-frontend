@@ -4,6 +4,8 @@ import Header from './Header';
 
 const navigate = jest.fn();
 
+let location;
+
 jest.mock('react-router-dom', () => ({
   Link({ to, children }) {
     return (
@@ -12,26 +14,33 @@ jest.mock('react-router-dom', () => ({
       </a>
     );
   },
-  useNavigate() {
-    return navigate;
-  },
+  useNavigate: () => navigate,
+  useLocation: () => location,
 }));
 
 const clearUserState = jest.fn();
+const stopTrialMode = jest.fn();
 
 jest.mock('../hooks/useUserStore', () => () => ({
   clearUserState,
+  stopTrialMode,
 }));
 
 const context = describe;
 
 describe('Header', () => {
   context('a user access the homepage', () => {
+    beforeEach(() => {
+      location = {
+        pathname: '',
+      };
+    });
+
     it('renders with header', () => {
       render(<Header />);
       screen.getByText('장소 검색');
       screen.getByText('Top 3');
-      screen.getByText('My메뉴');
+      screen.getByText('MyPage');
       screen.getByText('로그인');
     });
   });
@@ -58,7 +67,7 @@ describe('Header', () => {
       fireEvent.click(screen.getByText('로그아웃'));
 
       expect(clearUserState).toBeCalled();
-      expect(navigate).toBeCalledWith('/top3');
+      expect(navigate).toBeCalledWith('/');
     });
   });
 });

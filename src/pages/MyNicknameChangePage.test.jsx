@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import MyNicknameChangePage from './MyNicknameChangePage';
 
 const context = describe;
@@ -9,7 +9,8 @@ jest.mock('react-router-dom', () => ({
   useNavigate: () => navigate,
 }));
 
-const changeNickName = jest.fn();
+let data;
+const changeNickName = jest.fn(() => data);
 
 jest.mock('../hooks/useUserStore', () => () => ({
   changeNickName,
@@ -21,6 +22,10 @@ describe('MyNicknameChangePage', () => {
   }
 
   context('A user clicks nickname change button', () => {
+    beforeEach(() => {
+      data = 'data';
+    });
+
     it('renders nickname change page', () => {
       renderMyNicknameChangePage();
 

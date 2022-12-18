@@ -131,12 +131,14 @@ export default function PlaceDetail({
   imageNumber, selectedPlace, copyState, bookmarks,
   seePrevImage, seeNextImage, toggleBookmark, copyAddress,
 }) {
-  const unBookmarked = 'https://res.cloudinary.com/ds7ujh0mf/image/upload/v1671091108/bookmarked-orange_ojguje.png';
-  const bookmarked = 'https://res.cloudinary.com/ds7ujh0mf/image/upload/v1671091152/unbookmarked-orange_rxg24k.png';
+  const unBookmarked = 'https://res.cloudinary.com/ds7ujh0mf/image/upload/v1671091152/unbookmarked-orange_rxg24k.png';
+  const bookmarked = 'https://res.cloudinary.com/ds7ujh0mf/image/upload/v1671091108/bookmarked-orange_ojguje.png';
 
   const possibleIcon = 'https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670417142/possible_ac5jxi.png';
   const impossibleIcon = 'https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670417142/impossible_doab0s.png';
   const uncheckedIcon = 'https://res.cloudinary.com/ds7ujh0mf/image/upload/v1670417142/unchecked_izlb2j.png';
+
+  const copyButton = 'https://res.cloudinary.com/ds7ujh0mf/image/upload/v1671092239/copy-image_mracpj.png';
 
   const { imageSource, address, placeServices } = selectedPlace;
 
@@ -180,7 +182,11 @@ export default function PlaceDetail({
       </section>
       <ContentSection>
         <PlaceNameSection>
-          <button type="button" onClick={() => handleToggleBookmarkClick(selectedPlace.placeId)}>
+          <button
+            type="button"
+            data-testid="bookmark-button"
+            onClick={() => handleToggleBookmarkClick(selectedPlace.placeId)}
+          >
             {bookmarks.find((bookmark) => bookmark.placeId === selectedPlace.placeId) ? (
               <img src={bookmarked} alt="" />
             ) : (
@@ -268,7 +274,7 @@ export default function PlaceDetail({
               type="button"
               onClick={() => handleAddressCopyClick(address.fullAddress)}
             >
-              <img src={uncheckedIcon} alt="" />
+              <img src={copyButton} alt="" data-testid="copy-button" />
             </CopyButton>
             {copyState && (
               <span>복사 완료!</span>

@@ -49,7 +49,10 @@ export default function TopThreeYoutubes({ youtubes }) {
         <ul>
           {youtubes.map((youtube) => (
             <List key={youtube.id.videoId}>
-              <Button type="button" onClick={() => handleYoutubeVideoClick(youtube.id.videoId)}>
+              <Button
+                type="button"
+                onClick={() => handleYoutubeVideoClick(youtube.id.videoId)}
+              >
                 <img src={youtube.snippet.thumbnails.medium.url} alt="" />
                 <VideoTitle>{youtube.snippet.title}</VideoTitle>
               </Button>

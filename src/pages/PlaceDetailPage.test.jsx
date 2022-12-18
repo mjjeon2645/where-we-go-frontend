@@ -3,14 +3,16 @@ import PlaceDetailPage from './PlaceDetailPage';
 
 const context = describe;
 
-const navigate = jest.fn();
-
 jest.mock('../utils/KakaoMap');
+
+const navigate = jest.fn();
+let location;
 
 jest.mock('react-router-dom', () => ({
   useNavigate() {
     return navigate;
   },
+  useLocation: () => location,
 }));
 
 let blogReviews;
@@ -22,19 +24,42 @@ jest.mock('../hooks/useBlogReviewStore', () => () => ({
 }));
 
 let selectedPlace;
+let imageNumber;
+let copyState;
 let contact;
 const fetchSelectedPlaceDetail = jest.fn();
+const resetImageNumber = jest.fn();
+const decreaseImageNumber = jest.fn();
+const increaseImageNumber = jest.fn();
+const setCopyState = jest.fn();
 
 jest.mock('../hooks/useMapStore', () => () => ({
   selectedPlace,
+  imageNumber,
+  copyState,
   contact,
   fetchSelectedPlaceDetail,
+  resetImageNumber,
+  decreaseImageNumber,
+  increaseImageNumber,
+  setCopyState,
 }));
 
 const fetchUsersReviews = jest.fn();
 
 jest.mock('../hooks/useUserReviewStore', () => () => ({
   fetchUsersReviews,
+}));
+
+let bookmarks;
+
+const fetchBookmarks = jest.fn();
+const toggleBookmark = jest.fn();
+
+jest.mock('../hooks/useUserStore', () => () => ({
+  bookmarks,
+  fetchBookmarks,
+  toggleBookmark,
 }));
 
 describe('PlaceDetailPage', () => {
@@ -44,6 +69,10 @@ describe('PlaceDetailPage', () => {
 
   context('User click the place information popup', () => {
     beforeEach(() => {
+      location = {
+        pathname: '/places/5',
+      };
+
       selectedPlace = {
         imageSource: {
           firstImage: '',
@@ -63,12 +92,15 @@ describe('PlaceDetailPage', () => {
           fullAddress: '서울시',
         },
       };
+
+      bookmarks = [];
     });
 
     it('render PlaceDetailPage', () => {
       renderPlaceDetailPage();
 
-      screen.getByText(/뒤로가기/);
+      expect(fetchSelectedPlaceDetail).toBeCalledWith('5');
+
       screen.getByText('상세정보');
       screen.getByText(/블로그 리뷰/);
       screen.getByText('평점/리뷰');
@@ -78,7 +110,7 @@ describe('PlaceDetailPage', () => {
       screen.getByText('외부음식');
       screen.getByText('수유실');
       screen.getByText('주소');
-      screen.getByText('연락하기');
+      screen.getByText('연락처 안내');
       screen.getByText('홈페이지');
     });
   });

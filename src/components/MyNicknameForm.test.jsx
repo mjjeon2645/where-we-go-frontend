@@ -19,7 +19,6 @@ describe('MyNicknameForm', () => {
       renderMyNicknameForm();
 
       screen.getByText('원하시는 닉네임을 입력해주세요.');
-      screen.getByText('3글자 이상 7글자 이하 한글, 영문, 숫자 가능');
       screen.getByText('변경');
       screen.getByText('취소');
     });
@@ -36,6 +35,16 @@ describe('MyNicknameForm', () => {
       fireEvent.click(screen.getByText('변경'));
 
       expect(modifyNickname).toBeCalled();
+    });
+  });
+
+  context('a new clicks a cancel button', () => {
+    it('calls a goPrevPage function', () => {
+      renderMyNicknameForm();
+
+      fireEvent.click(screen.getByText('취소'));
+
+      expect(goPrevPage).toBeCalled();
     });
   });
 });

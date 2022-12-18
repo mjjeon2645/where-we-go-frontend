@@ -7,11 +7,13 @@ const context = describe;
 let selectedPlace;
 
 const closePopup = jest.fn();
+const goToPlaceDetailPage = jest.fn();
 
 describe('PlaceInformationPopup', () => {
   function renderPlaceInformationPopup() {
     render(<PlaceInformationPopup
       selectedPlace={selectedPlace}
+      goToPlaceDetailPage={goToPlaceDetailPage}
       closePopup={closePopup}
     />);
   }
@@ -54,6 +56,10 @@ describe('PlaceInformationPopup', () => {
       screen.getByText('강원도 양양군');
       screen.getByText('숙박/캠핑');
       screen.getByText('연중무휴');
+
+      fireEvent.click(screen.getByTestId('content-button'));
+
+      expect(goToPlaceDetailPage).toBeCalledWith(3);
     });
   });
 

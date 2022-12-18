@@ -109,6 +109,7 @@ export default function PlaceInformationPopup(
       </ImagesArea>
       <PlaceContentButton
         type="button"
+        data-testid="content-button"
         onClick={() => handleGoToDetailPageClick(selectedPlace.placeId)}
       >
         <h2>
