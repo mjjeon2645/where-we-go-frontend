@@ -60,7 +60,7 @@ export default class UserApiService {
 
   async requestChangingNickname(nickname) {
     const url = `${baseUrl}/users`;
-    const response = await axios.patch(url, { nickname }, {
+    const response = await axios.post(url, { nickname }, {
       headers: {
         Authorization: `Bearer ${this.accessToken}`,
       },
@@ -69,7 +69,7 @@ export default class UserApiService {
   }
 
   async requestSignUp(nickname) {
-    const url = `${baseUrl}/users`;
+    const url = `${baseUrl}/users/sign-up`;
     const response = await axios.post(url, { nickname }, {
       headers: {
         Authorization: `Bearer ${this.accessToken}`,
