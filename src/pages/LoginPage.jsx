@@ -9,14 +9,14 @@ import naverLoginConfig from '../naverLogin.config';
 import LoginButtons from '../components/LoginButtons';
 
 const Container = styled.div`
-  padding: 0em 1em 0em 1em;
+  padding-inline: 1em;
   text-align: center;
 `;
 
 const Wrapper = styled.div`
   position: absolute;
   width: 570px;
-  height: 87vh;
+  height: 1000px;
   border: 2px #E6DDD2 dashed;  
   margin-top: .8em;
   padding-top: 9.5em;
