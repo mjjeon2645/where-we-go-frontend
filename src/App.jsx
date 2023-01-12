@@ -27,16 +27,14 @@ import { userReviewApiService } from './services/UserReviewApiService';
 import YoutubePlayerPage from './pages/YoutubePlayerPage';
 
 const Container = styled.div`
-  background-color: #F0F2F5;
   padding-inline: calc((100% - 600px) / 2);
   padding-bottom: 3em;
+  min-height: 100vh;
 `;
 
 const Wrapper = styled.div`
-  min-height: 100vh;
-  width: 100%;
-  height: 100%;
   padding-top: 4em;
+  height: 1400px;
   background-color: #ffffff;
 `;
 

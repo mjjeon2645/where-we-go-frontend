@@ -17,6 +17,10 @@ ul {
 button {
     cursor: pointer;
 }
+
+body {
+    background-color: #F0F2F5;
+}
 `;
 
 export default GlobalStyle;
