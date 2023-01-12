@@ -146,8 +146,24 @@ const server = setupServer(
       ],
     }),
   )),
+
+  rest.get(`${baseUrl}/oauth/kakao-token`, async (request, response, context) => {
+    const code = request.url.searchParams.get('code');
+
+    if (code === 'success') {
+      return response(
+        context.status(200),
+        context.json({
+          userId: 'angel2645',
+          accessToken: 'accessToken',
+          nickname: '민지룽룽',
+          state: 'registered',
+        }),
+      );
+    }
+
+    return context.status(400);
+  }),
 );
 
 export default server;
-
-//

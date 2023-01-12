@@ -10,5 +10,3 @@ export function formatDate(date) {
 export function visitOfDateFormatter(date) {
   return date.slice(0, 10);
 }
-// TODO: Delete This!
-export const xxx = '';

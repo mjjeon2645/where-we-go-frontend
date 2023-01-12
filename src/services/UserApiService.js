@@ -10,7 +10,7 @@ export default class UserApiService {
 
     this.instance = axios.create({
       baseURL: baseUrl,
-      timeout: 1000,
+      timeout: 10000,
       headers: { Authorization: `Bearer ${this.accessToken}` },
     });
   }
