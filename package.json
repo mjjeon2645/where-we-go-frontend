@@ -2,11 +2,11 @@
   "name": "where-we-go-frontend",
   "version": "1.0.0",
   "description": "the first project for portfolio",
-  "main": "index.js",
   "scripts": {
     "start": "parcel index.html --port 8080",
     "test": "jest",
     "watch:test": "jest --watchAll",
+    "build": "rimraf dist && parcel build index.html --public-url /",
     "codeceptjs": "codeceptjs run --steps",
     "codeceptjs:headless": "HEADLESS=true codeceptjs run --steps",
     "codeceptjs:ui": "codecept-ui --app"
